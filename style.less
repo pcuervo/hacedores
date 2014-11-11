@@ -82,6 +82,17 @@ figure {margin: 0;}
   font-style: normal;
 }
 
+@font-face {
+	font-family: 'hacedores';
+	src:url('fonts/hacedores.eot');
+	src:url('fonts/hacedores.eot?#iefix') format('embedded-opentype'),
+		url('fonts/hacedores.woff') format('woff'),
+		url('fonts/hacedores.ttf') format('truetype'),
+		url('fonts/hacedores.svg#hacedores') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
 /*** VARIABLES ***/
 @claro: 	#fff;
 @primary: 	#a7a9ab;
@@ -280,6 +291,31 @@ h1 a{ color: inherit; text-decoration: none; }
 h2{ .font(1.6em, 1, 'trade 20'); color: @primary; }
 h3{ .font(1.4em, 1, 'trade 18'); color: @secondary; }
 
+//Hacedores Icons
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'hacedores';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-icon_gubia:before {
+	content: "\e600";
+}
+.icon-icon_tornillo:before {
+	content: "\e601";
+}
+.icon-icon_zanahoria:before {
+	content: "\e602";
+}
+
 //Colores
 .body-informacion{
 	h1{ color: @informacion; }
@@ -291,7 +327,7 @@ h3{ .font(1.4em, 1, 'trade 18'); color: @secondary; }
 	h1{ color: @programacion; }
 }
 
-p, a, li, span{
+h3, p, a, li, span{
 	&.informacion{ color: @informacion; }
 	&.perfiles{ color: @perfiles; }
 	&.programacion{ color: @programacion; }
@@ -300,7 +336,18 @@ p, a, li, span{
 }
 
 a{
-	&:hover{ opacity: .5; .transition; cursor: pointer; }
+	&:hover{ opacity: .5; cursor: pointer; }
+}
+
+.menu{  padding: 10px; .transition;
+		a{ padding-top: 10px; }
+		h3{ margin: 0; }
+		&:hover{ opacity: 1; .transition; 
+				 h3,i{ color: @claro; }
+				 &.informacion{ background-color: @informacion; }
+				 &.perfiles{ background-color: @perfiles; }
+				 &.programacion{ background-color: @programacion; }
+		}
 }
 
 .nombre-seccion{ 
