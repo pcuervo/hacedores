@@ -217,7 +217,7 @@ figure {margin: 0;}
 .middle{ vertical-align: middle; }
 .bottom{ vertical-align: bottom; }
 
-.columna{ margin: 0 1%; float: left;
+.columna{ margin: 1%; float: left;
 	&.xmall-1{ width: 6.3%; }
 	&.xmall-2{ width: 14.6%; }
 	&.xmall-3{ width: 22.9%; }
@@ -273,9 +273,8 @@ body{ background: #fff; .font; }
 //Headers
 h1,
 h2,
-h3{ margin: 0; }
-h2,
-h3{ margin-bottom: @unidad; text-transform: uppercase; }
+{ margin: 0; }
+h2{ margin-bottom: @unidad; text-transform: uppercase; }
 h1{ text-transform: uppercase; .font(1.8em, 1, 'trade 20'); }
 h1 a{ color: inherit; text-decoration: none; }
 h2{ .font(1.6em, 1, 'trade 20'); color: @primary; }
@@ -300,6 +299,46 @@ p, a, li, span{
 	&.secondary{ color: @secondary; }
 }
 
+a{
+	&:hover{ opacity: .5; .transition; cursor: pointer; }
+}
+
+.nombre-seccion{ 
+	position: relative;
+	h3{ margin: 0 15px 0 0; padding: 1%; vertical-align: middle; display: inline-block; }
+}
+
+.icon-gif{ width: 15% !important; height: auto; vertical-align: middle; display: inline-block; }
+
+.icon{
+	text-align: center;
+	&.informacion{ color: @informacion; }
+	&.perfiles{ color: @perfiles; }
+	&.programacion{ color: @programacion; }
+	&:before{ text-align: center; }
+}
+
+.horarios{
+	padding: 0; margin-top: 0; position: relative; top: 80px; background-color: green; 
+	.hora{
+		width: 100%; margin: 0; border-bottom: 1px solid @primary; position: relative; top: 0;
+		&.diez{ background-color: orange; }
+		&.once{  background-color: red; }
+		&.doce{  background-color: blue; }
+		&.una{  background-color: red; }
+		&.dos{  background-color: blue; }
+		&.tres{  background-color: red; }
+		&.cuatro{  background-color: blue; }
+		&.cinco{  background-color: red; }
+		&.seis{  background-color: blue; }
+		h3{ margin: 0; height: 50px; }
+	}
+}
+
+.programa-dia{ padding: 20px; margin-top: 0; position: relative; background-color: #000; line-height: 1.5; height: 60px; }
+.sabado, .domingo{ min-height: 20px; position: relative; margin: 0; }
+.evento{ width: 100%; background-color: red; color: #fff; position: relative; }
+
 //Cycle
 .cycle-slideshow{}
 .cycle-slideshow a{ display: block; width: 100%; height: auto;  }
@@ -317,7 +356,7 @@ nav{
 /* min-width 321px */
 @media only screen and (min-width: 25em) {
 	//Framework
-	.columna{
+	.columna{ margin: 0 1%; float: left;
 		&.small-1{ width: 6.3%; }
 		&.small-2{ width: 14.6%; }
 		&.small-3{ width: 22.9%; }
@@ -353,7 +392,7 @@ nav{
 /* min-width 641px, medium screens */
 @media only screen and (min-width: 40.063em) {
 	//Framework
-	.columna{
+	.columna{ margin: 0 1%; float: left;
 		&.medium-1{ width: 6.3%; }
 		&.medium-2{ width: 14.6%; }
 		&.medium-3{ width: 22.9%; }
@@ -384,6 +423,8 @@ nav{
 	.medium{ display: block; }
 	.no-medium{ display: none; }
 	//========================//
+
+	.icon-gif{ width:20% !important; height: auto; vertical-align: middle; display: inline-block; }
 }
 
 /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */

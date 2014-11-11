@@ -30,4 +30,9 @@
 
 	});
 
+	$(document).ready(function(){
+    // Target your .container, .wrapper, .post, etc.
+    $("#thing-with-videos").fitVids();
+  });
+
 })(jQuery);
