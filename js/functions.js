@@ -31,8 +31,12 @@
 	});
 
 	$(document).ready(function(){
-    // Target your .container, .wrapper, .post, etc.
-    $("#thing-with-videos").fitVids();
-  });
+	    // Target your .container, .wrapper, .post, etc.
+	    $("#thing-with-videos").fitVids();
+	});
+
+	$(document).ready(function() {
+	    $("#menu-movil").mmenu();
+	});
 
 })(jQuery);

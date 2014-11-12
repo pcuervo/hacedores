@@ -4,7 +4,7 @@
 		<title>Hacedores CDMX</title>
 		<link rel="shortcut icon" href="images/favicon.ico">
 		<link rel="stylesheet" href="style.css">
-		<link rel="stylesheet" href="http://i.icomoon.io/public/temp/c38c967ab2/UntitledProject2/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 		<meta name="description" content="">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,22 +18,48 @@
 		<div class="container">
 			<header>
 				<div class="[ width clearfix ]">
-					<div class="[ columna medium-3 ]">
+					<div class="[ columna xmall-10 medium-4 ]">
 						<h1><a href="#">Hacedores CDMX</a></h1>
+						<div class="[ clearfix ] [ nombre-seccion ]">
+							<!-- <img class="icon-gif" src="images/icon-blue.gif" alt=""> <h3>Programación</h3> -->
+						</div>
 					</div>
-					<nav class="[ columna medium-5 ] [ right ]">
-						<div class="[ inline-block middle ]">
-							<a class="[ informacion ]" href="informacion.html"><h2>Información</h2>
-							<i class="[ icon-icon_zanahoria ] [ icon informacion ] [ center block ]"></i></a>
-						</div>
-						<div class="[ inline-block middle ]">
-							<a class="[ perfiles ]" href="perfiles.html"><h2>Perfiles</h2>
-							<i class="[ icon-icon_tornillo ] [ icon perfiles ] [ center block ]"></i></a>
-						</div>
-						<div class="[ inline-block middle ]">
-							<a class="[ programacion ]" href="programacion.html"><h2>Programación</h2>
-							<i class="[ icon-icon_gubia ] [ icon programacion ] [ center block ]"></i></a>
-						</div>
+					<nav id="menu-movil" class="[ no-medium ]">
+					   	<ul>
+					   		<li class="[ clearfix ]">
+					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu informacion ]" href="informacion.html">
+									<h3 class="[ informacion ]">Información</h3>
+									<i class="[ icon-icon_zanahoria ] [ icon informacion ] [ center block ]"></i>
+								</a>
+					      	</li>
+					      	<li class="[ clearfix ]">
+					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu perfiles ]" href="perfiles.html">
+									<h3 class="[ perfiles ]">Perfiles</h3>
+									<i class="[ icon-icon_tornillo ] [ icon perfiles ] [ center block ]"></i>
+								</a>
+					      	</li>
+					      	<li class="[ clearfix ]">
+					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu programacion ]" href="programacion.html">
+									<h3 class="[ programacion ]">Programación</h3>
+									<i class="[ icon-icon_gubia ] [ icon programacion ] [ center block ]"></i>
+								</a>
+							</li>
+					   	</ul>
+					</nav><!-- MENU MOVIL -->
+					<nav class="[ columna xmall-2 medium-7 large-5 ] [ right ]">
+						<a class="[ no-medium ] [ programacion ] [ right ]" href="#menu-movil"><i class="fa fa-bars fa-2x"></i></a>
+						<a class="[ no-xmall medium ] [ inline-block middle ] [ menu programacion ] [ right ]">
+							<h3 class="[ programacion ]">Programación</h3>
+							<i class="[ icon-icon_gubia ] [ icon programacion ] [ center block ]"></i>
+						</a>
+						<a class="[ no-xmall medium ] [ inline-block middle ] [ menu perfiles ] [ right ]">
+							<h3 class="[ perfiles ]">Perfiles</h3>
+							<i class="[ icon-icon_tornillo ] [ icon perfiles ] [ center block ]"></i>
+						</a>
+						<a class="[ no-xmall medium ] [ inline-block middle ] [ menu informacion ] [ right ]" href="informacion.html">
+							<h3 class="[ informacion ]">Información</h3>
+							<i class="[ icon-icon_zanahoria ] [ icon informacion ] [ center block ]"></i>
+						</a>
 					</nav>
 				</div><!-- width -->
 			</header>
@@ -89,6 +115,10 @@
 			</div><!-- main -->
 		</div><!-- container -->
 		<footer>
+			<div class="width">
+				<a href=""><img src="images/logo-hacedores-cdmx.png" alt=""></a>
+				<a href=""><img src="images/logo-laboratorio-ciudad.png" alt=""></a>
+			</div>
 		</footer>
 	</body>
 	<script src="js/jquery.min.js"></script>
