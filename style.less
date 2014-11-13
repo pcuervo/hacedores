@@ -306,6 +306,16 @@ h3{ .font(1.4em, 1, 'trade 18'); color: @secondary; }
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-icon_switch:before {
+	content: "\e603";
+}
+.icon-icon_clavo:before {
+	content: "\e604";
+}
+.icon-icon_led:before {
+	content: "\e605";
+}
+
 .icon-icon_gubia:before {
 	content: "\e600";
 }
@@ -384,6 +394,11 @@ a{
 	&.perfiles{ color: @perfiles; }
 	&.programacion{ color: @programacion; }
 	&:before{ text-align: center; }
+}
+
+.detalles{
+	i{ font-size: 2.2em; margin-bottom: 10px; }
+	h2,h3,p,i{ text-align: center; }
 }
 
 .espacios{ 
@@ -499,6 +514,10 @@ footer{ background-color: @claro; padding: 15px; }
 	//========================//
 
 	.icon-gif{ width:20% !important; height: auto; vertical-align: middle; display: inline-block; }
+
+	// .detalles{
+	// 	h3,p,i{ text-align: left; }
+	// }
 }
 
 /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
