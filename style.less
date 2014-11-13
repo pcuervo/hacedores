@@ -95,8 +95,8 @@ figure {margin: 0;}
 
 /*** VARIABLES ***/
 @claro: 	#fff;
-@primary: 	#a7a9ab;
-@secondary: #bbbdc0;
+@primary: 	#666;
+@secondary: #777;
 @informacion:	#14868a;
 @perfiles:		#bd545c;
 @programacion:	#4f6190;
@@ -335,6 +335,12 @@ h2,h3, p, a, li, span{
 	&.secondary{ color: @secondary; }
 }
 
+hr{ border: solid 1px;
+	&.informacion{ border-color: @informacion; }
+	&.perfiles{ border-color: @perfiles; }
+	&.programacion{ border-color: @programacion; }
+}
+
 a{
 	&:hover{ opacity: 1; cursor: pointer; }
 }
@@ -381,11 +387,22 @@ a{
 }
 
 .espacios{ 
-		   h2{ color: @programacion; }
+	   h2, h3{ 
+			&.informacion{ color: @informacion; }
+	   		&.perfiles{ color: @perfiles; }
+			&.programacion{ color: @programacion; }
+	   }
 }
 
 .actividades-contenedor{ padding: 0 30px 20px 20px; border: solid 1px @programacion;
-						 h3{ padding-bottom: 10px; color: @programacion; border-bottom: 1px solid @programacion; }
+						 &.informacion{ border-color: @informacion; }
+				   		 &.perfiles{ border-color: @perfiles; }
+						 &.programacion{ border-color: @programacion; }
+						 h3{ padding-bottom: 10px; color: @programacion; border-bottom: 1px solid @programacion;
+							 &.informacion{ border-color: @informacion; }
+					   		 &.perfiles{ border-color: @perfiles; }
+							 &.programacion{ border-color: @programacion; }
+						 }
 }
 .actividades{ margin: 0; list-style: none;
 			  li{ margin-bottom: 15px; }
