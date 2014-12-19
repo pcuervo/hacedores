@@ -9,6 +9,14 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="cleartype" content="on">
+		<script>
+  		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  		ga('create', 'UA-56741529-1', 'auto');
+  		ga('send', 'pageview');
+		</script>
 		<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	</head>
 	<body class="[ body-informacion ]">
@@ -18,13 +26,14 @@
 		<div class="container">
 			<header>
 				<div class="[ width clearfix ]">
-					<div class="[ columna xmall-10 medium-4 ]">
-						<h1><a href="#">Hacedores CDMX</a></h1>
-						<div class="[ clearfix ] [ nombre-seccion ]">
-							<!-- <img class="icon-gif" src="images/icon-blue.gif" alt=""> <h3>Programación</h3> -->
-						</div>
+					<div class="[ columna xmall-6 medium-4 ]">
+						<h1><a href="index.html">Hacedores CDMX</a></h1>
+						
 					</div>
-					<nav id="menu-movil" class="[ no-medium ]">
+					<div class="[ columna xmall-4 small-3 medium-2 large-2 ]">
+						<a href="http://labplc.mx/" target="_blank"><img src="images/logo-laboratorio-ciudad.png" alt=""></a>
+					</div>
+					<nav id="menu-movil" class="[ no-large ]">
 					   	<ul>
 					   		<li class="[ clearfix ]">
 					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu informacion ]" href="informacion.html">
@@ -46,17 +55,17 @@
 							</li>
 					   	</ul>
 					</nav><!-- MENU MOVIL -->
-					<nav class="[ columna xmall-2 medium-7 large-5 ] [ right ]">
-						<a class="[ no-medium ] [ programacion ] [ right ]" href="#menu-movil"><i class="fa fa-bars fa-2x"></i></a>
-						<a class="[ no-xmall medium ] [ inline-block middle ] [ menu programacion ] [ right ]" href="programacion.html">
+					<nav class="[ columna xmall-2 medium-5 large-5 ] [ right ]">
+						<a class="[ no-large ] [ programacion ] [ right ]" href="#menu-movil"><i class="fa fa-bars fa-2x"></i></a>
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu programacion ] [ right ]" href="programacion.html">
 							<h3 class="[ programacion ]">Programación</h3>
 							<i class="[ icon-icon_gubia ] [ icon programacion ] [ center block ]"></i>
 						</a>
-						<a class="[ no-xmall medium ] [ inline-block middle ] [ menu perfiles ] [ right ]" href="perfiles.html">
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu perfiles ] [ right ]" href="perfiles.html">
 							<h3 class="[ perfiles ]">Perfiles</h3>
 							<i class="[ icon-icon_tornillo ] [ icon perfiles ] [ center block ]"></i>
 						</a>
-						<a class="[ no-xmall medium ] [ inline-block middle ] [ menu informacion ] [ right ]" href="informacion.html">
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu informacion ] [ right ]" href="informacion.html">
 							<h3 class="[ informacion ]">Información</h3>
 							<i class="[ icon-icon_zanahoria ] [ icon informacion ] [ center block ]"></i>
 						</a>
@@ -64,17 +73,17 @@
 				</div><!-- width -->
 			</header>
 			<div class="[ main ]">
-				<div class="[ width ]">
-					<section class="[ cycle-slideshow ] [ margin-bottom-big ] [ columna xmall-12 no-medium ]"
+				<div class="[ width clearfix ]">
+					<section class="[ cycle-slideshow ] [ margin-bottom-big ] [ no-medium ]"
 						data-cycle-slides="a"
 						data-cycle-fx="scrollHorz"
 						data-cycle-swipe="true"
 						data-cycle-timeout="4500">
-						<a href="#"><img src="images/slide-xmall-1.gif" alt=""></a>
-						<a href="#"><img src="images/slide-xmall-2.gif" alt=""></a>
-						<a href="#"><img src="images/slide-xmall-3.gif" alt=""></a>
+						<a href="informacion.html"><img src="images/slide-xmall-1.gif" alt=""></a>
+						<a href="perfiles.html"><img src="images/slide-xmall-2.gif" alt=""></a>
+						<a href="programacion.html"><img src="images/slide-xmall-3.gif" alt=""></a>
 					</section><!-- cycle-slideshow -->
-					<section class="[ cycle-slideshow ] [ margin-bottom-big ] [ columna xmall-12 medium ]"
+					<section class="[ cycle-slideshow ] [ margin-bottom-big ] [ medium ]"
 						data-cycle-slides="a"
 						data-cycle-fx="scrollHorz"
 						data-cycle-swipe="true"
@@ -86,40 +95,38 @@
 					</section><!-- cycle-slideshow -->
 					<section class="[ clearfix ]">
 						<div class="[ post ] [ margin-bottom-medium ] [ columna xmall-12 small-6 medium-3 ]">
-							<img class="[ margin-bottom-small ]" src="images/01-sulca.jpg" alt="Algo">
-							<h2>Sulca</h2>
-							<h3>Categoría</h3>
-							<p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+							<a href="01-sulca.html"><img class="[ margin-bottom-small ]" src="images/01-sulca.jpg" alt="Sulca"></a>
+							<a href="01-sulca.html"><h2>Sulca</h2></a>
+							<p>Hacedor, aficionado de la electrónica e inventor de más de 200 proyectos.</p>
 						</div><!-- post -->
 						<div class="[ post ] [ margin-bottom-medium ] [ columna xmall-12 small-6 medium-3 ]">
-							<img class="[ margin-bottom-small ]" src="images/02-nails.jpg" alt="Algo">
-							<h2>Nails</h2>
-							<h3>Categoría</h3>
-							<p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+							<a href="02-nails.html"><img class="[ margin-bottom-small ]" src="images/02-nails.jpg" alt="Nails"></a>
+							<a href="02-nails.html"><h2>Nails</h2></a>
+							<p>Jorge Mejía hace posible acoplar lentes analógicos con cámaras digitales.</p>
 						</div><!-- post -->
 						<div class="[ post ] [ margin-bottom-medium ] [ columna xmall-12 small-6 medium-3 ]">
-							<img class="[ margin-bottom-small ]" src="images/03-edwina.jpg" alt="Algo">
-							<h2>Edwina</h2>
-							<h3>Categoría</h3>
-							<p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+							<a href="03-edwina.html"><img class="[ margin-bottom-small ]" src="images/03-edwina.jpg" alt="Edwina"></a>
+							<a href="03-edwina.html"><h2>Edwina</h2></a>
+							<p>"Siento que el tener poder creativo y el darle poder creativo a la gente hace que la innovación en verdad suceda".</p>
 						</div><!-- post -->
 						<div class="[ post ] [ margin-bottom-medium ] [ columna xmall-12 small-6 medium-3 ]">
-							<img class="[ margin-bottom-small ]" src="images/04-barbara.jpg" alt="Algo">
-							<h2>Bárbara</h2>
-							<h3>Categoría</h3>
-							<p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+							<a href="04-barbara.html"><img class="[ margin-bottom-small ]" src="images/04-barbara.jpg" alt="Bárbara"></a>
+							<a href="04-barbara.html"><h2>Bárbara</h2></a>
+							<p>Bárbara Icaza usa materiales de desecho para crear nueva artesanía.</p>
 						</div><!-- post -->
 					</section>
 				</div><!-- width -->
 			</div><!-- main -->
 		</div><!-- container -->
 		<footer class="[ clearfix ]">
-			<div class="columna xmall-8 medium-4 clearfix right">
-				<div class="columna xmall-6 right">
-					<a href=""><img src="images/logo-hacedores-cdmx.png" alt=""></a>
-				</div>
-				<div class="columna xmall-6 right">
-					<a href=""><img src="images/logo-laboratorio-ciudad.png" alt=""></a>
+			<div class="width clearfix">
+				<div class="columna xmall-8 medium-6 clearfix right">
+					<div class="columna xmall-6 medium-4 large-3 right">
+						<a href=""><img src="images/logo-hacedores-cdmx.png" alt=""></a>
+					</div>
+					<div class="columna xmall-6 medium-4 large-3 right">
+						<a href="http://labplc.mx/" target="_blank"><img src="images/logo-laboratorio-ciudad.png" alt=""></a>
+					</div>
 				</div>
 			</div>
 		</footer>
