@@ -97,9 +97,11 @@ figure {margin: 0;}
 @claro: 	#fff;
 @primary: 	#666;
 @secondary: #777;
-@informacion:	#14868a;
+@informacion:	#bbbbbb;
 @perfiles:		#bd545c;
 @programacion:	#4f6190;
+@recursos:		#14868a;
+@eventos:		#fff200;
 @twitter: 		#2aa8df;
 @facebook: 		#3c5a97;
 @pinterest: 	#c92027;
@@ -211,7 +213,7 @@ figure {margin: 0;}
 
 //layout
 .container{ min-width: 300px; }
-.width{ width: 90%; min-width: 300px; max-width: 1025px; margin: 0 auto @unidad auto; }
+.width{ width: 90%; min-width: 300px; max-width: 1025px; margin: 0 auto @unidad auto; z-index: 1; }
 .full{ width: 100%;
   //img{ width: 100%; height: auto; }
 }
@@ -306,6 +308,10 @@ h3{ .font(1.4em, 1, 'trade 18'); color: @secondary; }
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-icon_clavo2:before {
+	content: "\e606";
+}
+
 .icon-icon_switch:before {
 	content: "\e603";
 }
@@ -341,6 +347,7 @@ h2,h3, p, a, li, span{
 	&.informacion{ color: @informacion; }
 	&.perfiles{ color: @perfiles; }
 	&.programacion{ color: @programacion; }
+	&.recursos{ color: @recursos; }
 	&.primary{ color: @primary; }
 	&.secondary{ color: @secondary; }
 }
@@ -355,6 +362,13 @@ a{
 	&:hover{ opacity: 1; cursor: pointer; }
 }
 
+.user{
+	p{ margin: 10px 23px; }
+	span{ margin: 10px; 
+		&:hover{ text-decoration: underline; cursor: pointer; }
+	}
+}
+
 #menu-movil{ 
 	ul{ padding: 0;
 		li a{ height: 160px; color: @claro; border-bottom: 0;
@@ -363,9 +377,10 @@ a{
 				 	&:hover{ opacity: 1; }
 				 }
 				 h3, i{ color: @claro; }
-				 &.informacion{ background-color: @informacion; }
+				 &.informacion{ background-color: #bbbbbb; }
 				 &.perfiles{ background-color: @perfiles; }
 				 &.programacion{ background-color: @programacion; }
+				 &.recursos{ background-color: @recursos; }
 		}
 	}
 }
@@ -378,8 +393,10 @@ a{
 				 &.informacion{ background-color: @informacion; }
 				 &.perfiles{ background-color: @perfiles; }
 				 &.programacion{ background-color: @programacion; }
+				 &.recursos{ background-color: @recursos; }
 		}
 }
+
 
 .nombre-seccion{ 
 	position: relative;
@@ -393,6 +410,7 @@ a{
 	&.informacion{ color: @informacion; }
 	&.perfiles{ color: @perfiles; }
 	&.programacion{ color: @programacion; }
+	&.recursos{ color: @recursos; }
 	&:before{ text-align: center; }
 }
 
@@ -406,17 +424,54 @@ a{
 			&.informacion{ color: @informacion; }
 	   		&.perfiles{ color: @perfiles; }
 			&.programacion{ color: @programacion; }
+			&.recursos{ color: @recursos; }
 	   }
+}
+
+.eventos-home{ height:400px; border: 1px solid @informacion; padding: 20px; overflow-y: scroll; overflow-x: hidden; }
+
+.form-user{ 
+	border: 1px solid @informacion;
+	padding: 15px;
+	color: @primary;
+	.forma-hacedor{ display: none; }
+	.forma-proyecto{ display: none; }
+	.forma-espacio{ display: none; }
+	.forma-evento{ display: none; }
+
+	.radioform{ display: inline-block; width: 40%; margin-bottom: 15px; }
+	.campo{ margin-bottom: 20px; }
+	label{ margin-bottom: 10px; }
+	input[type="radio"]{ margin-left: 15px; height: 15px; width: 15px; border: solid 1px @informacion; -webkit-appearance: none; cursor: pointer;
+			&:focus{ outline-color: rgba(255, 255, 255, 1); }
+			&.hacedor:checked{ background-color: @perfiles; outline-color: rgba(255,255,255,1); }
+			&.proyecto:checked{ background-color: @programacion; outline-color: rgba(255,255,255,1); }
+			&.espacio:checked{ background-color: @recursos; outline-color: rgba(255,255,255,1); }
+			&.evento:checked{ background-color: @eventos; outline-color: rgba(255,255,255,1); }
+	}
+	input[type="date"]{ width: 70%; box-shadow: none; border: solid 1px @primary; height: 30px; padding: 5px; }
+	input[type="text"], select, input[type="email"], input[type="url"]{ width: 70%; height: 30px; padding: 5px; border: 1px solid @primary; border-radius: 0; -webkit-appearance: none;}
+	select{ background-image: url("images/select.png"); background-position: right; background-repeat: no-repeat; }
+	textarea{ border: 1px solid @primary; width: 70%; -webkit-appearance: none; }
+	p{ font-size: 12px; margin-top: 10px;}
+	.guardar{
+		color: #fff;
+		border: none;
+		padding: 15px;
+		background-color: @primary;
+	}
 }
 
 .actividades-contenedor{ padding: 0 30px 20px 20px; border: solid 1px @programacion;
 						 &.informacion{ border-color: @informacion; }
 				   		 &.perfiles{ border-color: @perfiles; }
 						 &.programacion{ border-color: @programacion; }
+						 &.recursos{ border-color: @recursos; }
 						 h3{ padding-bottom: 10px; color: @programacion; border-bottom: 1px solid @programacion;
 							 &.informacion{ border-color: @informacion; }
 					   		 &.perfiles{ border-color: @perfiles; }
 							 &.programacion{ border-color: @programacion; }
+							 &.recursos{ border-color: @recursos; }
 						 }
 }
 .actividades{ margin: 0; list-style: none;
@@ -432,7 +487,7 @@ a{
 .cycle-slideshow a{ display: block; width: 100%; height: auto;  }
 .cycle-slideshow img{ display: block; width: 100%; height: auto; }
 /*** HEADER ***/
-header{ padding: (@unidad*2) 0; }
+header{ padding: @unidad*2 0; }
 nav{
 	h2{ margin: 0 1%; }
 }
@@ -518,6 +573,7 @@ footer{ background-color: @claro; padding: 15px; }
 	// .detalles{
 	// 	h3,p,i{ text-align: left; }
 	// }
+	
 }
 
 /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
@@ -565,6 +621,10 @@ footer{ background-color: @claro; padding: 15px; }
 	.no-large{ display: none; }
 
 	//========================//
+
+	.form-user{
+		.radioform{ display: inline-block; width: 24%; }
+	}
 }
 
  /* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
@@ -729,7 +789,7 @@ footer{ background-color: @claro; padding: 15px; }
     .mm-menu > .mm-list:after {
       content: '';
       display: block;
-      height: 40px; }
+      height: 0; }
 
 .mm-panel > .mm-list {
   margin-left: -20px;
@@ -1159,8 +1219,21 @@ html.mm-opening .mm-slideout {
 			text-align: right;
 		}
 			
+		.modal{ width: 100%; height: 100vh; background-color: red; z-index: 99999; }
 
-
+		.google-maps {
+        position: relative;
+        padding-bottom: 75%; // This is the aspect ratio
+        height: 0;
+        overflow: hidden;
+    }
+    .google-maps iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+    }
 
 
 

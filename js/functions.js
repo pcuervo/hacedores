@@ -253,4 +253,10 @@
 		});
 
 	});
+
+	$('.trigger').on('click', function() {
+	    $('.content').hide('fade');
+	    $('.' + $(this).data('rel')).show('fade');
+	    console.log('holaalita');
+	});
 })(jQuery);
