@@ -259,4 +259,16 @@
 	    $('.' + $(this).data('rel')).show('fade');
 	    console.log('holaalita');
 	});
+
+	/*MODAL ENTRAR*/
+	$('.js-abrir-modal').on('click', function(){
+		$('div').removeClass('mm-slideout');
+		$('.modal').css('display','inline-block');
+		console.log('la chingada');
+	});
+	$('.js-cerrar-modal').on('click', function(){
+		$('.modal').css('display','none');
+		$('div').addClass('mm-slideout');
+		console.log('la chingada');
+	});
 })(jQuery);

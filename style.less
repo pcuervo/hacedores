@@ -363,7 +363,7 @@ a{
 }
 
 .user{
-	p{ margin: 10px 23px; }
+	p{ padding: 10px 23px; margin-right: 23px; border: 1px solid @primary; }
 	span{ margin: 10px; 
 		&:hover{ text-decoration: underline; cursor: pointer; }
 	}
@@ -371,12 +371,15 @@ a{
 
 #menu-movil{ 
 	ul{ padding: 0;
-		li a{ height: 160px; color: @claro; border-bottom: 0;
-				 h3{ margin-top: 40px; }
+		li a{ height: 140px; color: @claro; border-bottom: 0;
+				 h3{ margin-top: 30px; cursor: pointer; }
 				 i{
 				 	&:hover{ opacity: 1; }
 				 }
 				 h3, i{ color: @claro; }
+				 &.entrar{ background-color: #000; height: 80px; 
+				 			h3{ margin-top: 20px; }
+				 }
 				 &.informacion{ background-color: #bbbbbb; }
 				 &.perfiles{ background-color: @perfiles; }
 				 &.programacion{ background-color: @programacion; }
@@ -397,6 +400,7 @@ a{
 		}
 }
 
+.login-entrar{ cursor: pointer; }
 
 .nombre-seccion{ 
 	position: relative;
@@ -429,6 +433,12 @@ a{
 }
 
 /* MAPA */
+	
+	.mapa-link{ 
+		color: @perfiles;
+		display: inline;
+		&:hover{ color: @informacion; text-decoration: underline; .transition }
+	}
 	.google-maps {
         position: relative;
         padding-bottom: 300px; // This is the aspect ratio
@@ -443,22 +453,34 @@ a{
         height: 100% !important;
     }
     .menu-container{ padding: 0; }
-    .menu-mapa{ width: 25%; height: 300px; padding: 20px; overflow-y: scroll; overflow-x: hidden; position: relative; background-color: #fff; border: 1px solid @primary; z-index: 9; }
+    .menu-mapa{ 
+    	width: 25%; 
+    	height: 300px; 
+    	padding: 20px; 
+    	overflow-y: scroll; 
+    	overflow-x: hidden; 
+    	position: relative; 
+    	background-color: #fff; 
+    	border: 1px solid @primary; 
+    	z-index: 9; 
+    	&.mapa-pagina{ width: 100%; height: 200px; }
+    }
     .menu-titulos{ 
     	list-style: none;
     	margin: 0;
     	text-transform: uppercase;
     	li{
     		margin-bottom: 15px;
+    		font-size: 14px;
     		&:hover{ text-decoration: underline; cursor: pointer; }
     		&.hacedores{ color: @perfiles; }
     		&.proyectos{ color: @programacion; }
     		&.espacios{ color: @recursos; }
-    		&.eventos{ color: @eventos; }
+    		&.eventos{ color: @primary; }
     	}
 
     	.submenu-mapa{  
-    			list-style: none; margin: 5px 10px; color: @informacion; display: none;
+    			list-style: none; margin: 5px 10px; color: @informacion; display: none; text-transform: none;
     		}
     }
 /**/
@@ -469,12 +491,12 @@ a{
 	border: 1px solid @informacion;
 	padding: 15px;
 	color: @primary;
-	.forma-hacedor{ display: none; }
+	.forma-hacedor{ display: inline-block; }
 	.forma-proyecto{ display: none; }
 	.forma-espacio{ display: none; }
 	.forma-evento{ display: none; }
 
-	.radioform{ display: inline-block; width: 40%; margin-bottom: 15px; }
+	.radioform{ display: inline-block; width: 45%; margin-bottom: 15px; }
 	.campo{ margin-bottom: 20px; }
 	label{ margin-bottom: 10px; }
 	input[type="radio"]{ margin-left: 15px; height: 15px; width: 15px; border: solid 1px @informacion; -webkit-appearance: none; cursor: pointer;
@@ -517,6 +539,44 @@ a{
 .galeria{ margin: 0; list-style: none; }
 
 
+/*MODAL LOGIN*/
+
+.modal
+	{
+		display: none;
+		background-color: rgba( 0, 0, 0, .9 );
+		position: fixed;
+		z-index: 9998;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	.login-container{
+		height: 80%; width: auto; padding: 20px; min-width: 280px; background-color: #fff;
+		.cerrar-modal{ cursor: pointer; margin-bottom: 10px; }
+		.modal-contenido{ height: 90%; overflow-x: hidden; overflow-y: scroll; }
+		button{ width: 100%; height: 50px; margin-bottom: 10px; text-align: center; padding-left: 0; font-size: 18px; border: none; color: #fff; cursor: pointer;
+				i{ margin-right: 10px; }
+				&.sesion-facebook{ background-color: @facebook; }
+				&.sesion-twitter{ background-color: @twitter; }
+				&.sesion-gplus{ background-color: @gplus; }
+				&:hover{ opacity: .8; .transition }
+		}
+		&.form-user{ 
+			input{ width: 100%; }
+		}
+		a:visited{ color: @primary }
+		.center-full
+
+	}
+
+
+
+/*==========*/
+
+
 //Cycle
 .cycle-slideshow{}
 .cycle-slideshow a{ display: block; width: 100%; height: auto;  }
@@ -526,6 +586,8 @@ header{ padding: @unidad*2 0; }
 nav{
 	h2{ margin: 0 1%; }
 }
+
+
 
 /*** FOOTER ***/
 footer{ background-color: @claro; padding: 15px; }
@@ -656,6 +718,12 @@ footer{ background-color: @claro; padding: 15px; }
 	.no-large{ display: none; }
 
 	//========================//
+
+	.login-container{
+		height: auto; width: auto; padding: 20px; min-width: 280px; background-color: #fff;
+		.cerrar-modal{ cursor: pointer; margin-bottom: 10px; }
+		.modal-contenido{ height: auto; }
+	}
 
 	.form-user{
 		.radioform{ display: inline-block; width: 24%; }
@@ -1156,6 +1224,7 @@ html.mm-opening .mm-slideout {
 			left: 0;
 		}
 
+		
 
 		/* "CLOSE" BUTTON */
 
@@ -1253,10 +1322,7 @@ html.mm-opening .mm-slideout {
 			right: 2%; /* 40 */
 			text-align: right;
 		}
-			
-		.modal{ width: 100%; height: 100vh; background-color: red; z-index: 99999; }
 
-	
-
+		
 
 
