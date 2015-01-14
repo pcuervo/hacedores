@@ -26,19 +26,17 @@
 			});
 			return result;
 		}
-
-
 	});
 
 	/* VIDEO RESPONSIVE */
 	$(document).ready(function(){
-	    // Target your .container, .wrapper, .post, etc.
-	    $("#thing-with-videos").fitVids();
+		// Target your .container, .wrapper, .post, etc.
+		$("#thing-with-videos").fitVids();
 	});
 
 	/* MENU MOVIL */
 	$(document).ready(function() {
-	    $("#menu-movil").mmenu();
+		$("#menu-movil").mmenu();
 	});
 
 	/* LIGHTBOX */
@@ -257,18 +255,15 @@
 	$('.trigger').on('click', function() {
 	    $('.content').hide('fade');
 	    $('.' + $(this).data('rel')).show('fade');
-	    console.log('holaalita');
 	});
 
 	/*MODAL ENTRAR*/
 	$('.js-abrir-modal').on('click', function(){
 		$('div').removeClass('mm-slideout');
 		$('.modal').css('display','inline-block');
-		console.log('la chingada');
 	});
 	$('.js-cerrar-modal').on('click', function(){
 		$('.modal').css('display','none');
 		$('div').addClass('mm-slideout');
-		console.log('la chingada');
 	});
 })(jQuery);
