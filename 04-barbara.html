@@ -26,50 +26,65 @@
 		<div class="container">
 			<header>
 				<div class="[ width clearfix ]">
-					<div class="[ columna xmall-6 medium-4 ]">
-						<h1><a href="index.html">Hacedores CDMX</a></h1>
-						<div class="[ clearfix ] [ nombre-seccion ]">
-							<img class="icon-gif" src="images/icon-red.gif" alt=""> <h3>Información</h3>
-						</div>
+					<div class="[ columna xmall-12 ] [ no-xmall no-small no-medium large ] [ user ]">				
+						<p class="[ right ] [ login-entrar ]"><span class="[ js-abrir-modal ]">Entrar</span></p>
+					</div>
+					<div class="[ columna xmall-6 medium-3 ]">
+						<h1><a href="index.html">Hacedores CDMX</a></h1>	
 					</div>
 					<div class="[ columna xmall-4 small-3 medium-2 large-2 ]">
 						<a href="http://labplc.mx/" target="_blank"><img src="images/logo-laboratorio-ciudad.png" alt=""></a>
 					</div>
-					<nav id="menu-movil" class="[ no-medium ]">
+					<nav id="menu-movil" class="[ no-large ]">
 					   	<ul>
+					   		<li class="[ clearfix ]">	
+					   			<a class="[ no-xmall medium ] [ inline-block middle ] [ menu entrar ] [ js-abrir-modal ]">			
+									<h3><span class="">Entrar</span></h3>
+								</a>
+							</li>
 					   		<li class="[ clearfix ]">
 					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu informacion ]" href="informacion.html">
 									<h3 class="[ informacion ]">Información</h3>
-									<i class="[ icon-icon_zanahoria ] [ icon informacion ] [ center block ]"></i>
+									<i class="[ icon-icon_clavo2 ] [ icon informacion ] [ center block ]"></i>
 								</a>
 					      	</li>
 					      	<li class="[ clearfix ]">
 					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu perfiles ]" href="perfiles.html">
-									<h3 class="[ perfiles ]">Perfiles</h3>
-									<i class="[ icon-icon_tornillo ] [ icon perfiles ] [ center block ]"></i>
+									<h3 class="[ perfiles ]">Hacedores</h3>
+									<i class="[ icon-icon_zanahoria ] [ icon perfiles ] [ center block ]"></i>
 								</a>
 					      	</li>
 					      	<li class="[ clearfix ]">
 					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu programacion ]" href="programacion.html">
-									<h3 class="[ programacion ]">Programación</h3>
+									<h3 class="[ programacion ]">Proyectos</h3>
 									<i class="[ icon-icon_gubia ] [ icon programacion ] [ center block ]"></i>
+								</a>
+							</li>
+							<li class="[ clearfix ]">
+					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu recursos ]" href="programacion.html">
+									<h3 class="[ recursos ]">Espacios/Recuros</h3>
+									<i class="[ icon-icon_tornillo ] [ icon recursos ] [ center block ]"></i>
 								</a>
 							</li>
 					   	</ul>
 					</nav><!-- MENU MOVIL -->
-					<nav class="[ columna xmall-2 medium-2 large-5 ] [ right ]">
-						<a class="[ no-large ] [ perfiles ] [ right ]" href="#menu-movil"><i class="fa fa-bars fa-2x"></i></a>
-						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu programacion ] [ right ]" href="programacion.html">
-							<h3 class="[ programacion ]">Programación</h3>
+					<nav class="[ columna xmall-2 medium-7 large-7 ] [ right ]">
+						<a class="[ no-large ] [ informacion ] [ right ]" href="#menu-movil"><i class="fa fa-bars fa-2x"></i></a>
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu recursos ] [ right ]" href="programacion.html">
+							<h3 class="[ recursos ]">Espacios/Recursos</h3>
+							<i class="[ icon-icon_gubia ] [ icon recursos ] [ center block ]"></i>
+						</a>
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu programacion ] [ right ]" href="informacion.html">
+							<h3 class="[ programacion ]">Proyectos</h3>
 							<i class="[ icon-icon_gubia ] [ icon programacion ] [ center block ]"></i>
 						</a>
 						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu perfiles ] [ right ]" href="perfiles.html">
-							<h3 class="[ perfiles ]">Perfiles</h3>
-							<i class="[ icon-icon_tornillo ] [ icon perfiles ] [ center block ]"></i>
+							<h3 class="[ perfiles ]">Hacedores</h3>
+							<i class="[ icon-icon_zanahoria ] [ icon perfiles ] [ center block ]"></i>
 						</a>
 						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu informacion ] [ right ]" href="informacion.html">
 							<h3 class="[ informacion ]">Información</h3>
-							<i class="[ icon-icon_zanahoria ] [ icon informacion ] [ center block ]"></i>
+							<i class="[ icon-icon_clavo2 ] [ icon informacion ] [ center block ]"></i>
 						</a>
 					</nav>
 				</div><!-- width -->
@@ -109,13 +124,45 @@
 				</div><!-- width -->
 			</div><!-- main -->
 		</div><!-- container -->
+		<div class="[ modal ]">
+			<div class="[ login-container ] [ form-user ]">
+				<h4 class="[ right ] [ js-cerrar-modal ] [ cerrar-modal ]">Cerrar X</h4>
+				<div class="clear"></div>
+				<div class="[ modal-contenido ]">
+					<div>
+						<h3>Inicia sesión con:</h3>
+						<button class="[ sesion-facebook ]"><i class="[ fa fa-facebook ]"></i> Facebook</button>
+						<button class="[ sesion-twitter ]"><i class="[ fa fa-twitter ]"></i>Twitter</button>
+						<button class="[ sesion-gplus ]"><i class="[ fa fa-google-plus ]"></i>Google+</button>
+					</div>
+					<div>
+						<h3>Inicia sesión con tu correo</h3>
+						<form class="login-user">
+							<div class="campo">
+								<label for="usuario-correo" class="[ columna xmall-12 ]">Correo electrónico</label>
+								<input type="email" id="usuario-correo">
+							</div>
+							<div class="campo">
+								<label for="usuario-password" class="[ columna xmall-12 ]">Contraseña</label>
+								<input type="text" id="usuario-password">
+								<p>¿Olvidaste tu contraseña? <a href="">click aquí</a></p>
+							</div>
+							<button>Entrar</button>
+							<p>¿No estás registrado aún? <a href="registro.html">Click aquí</a></p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 		<footer class="[ clearfix ]">
 			<div class="width clearfix">
 				<div class="columna xmall-8 medium-6 clearfix right">
 					<div class="columna xmall-6 medium-4 large-3 right">
-						<a href=""><img src="images/logo-hacedores-cdmx.png" alt=""></a>
+						<a href="#"><p>Aviso de Privacidad</p></a>
+						<a href=""><img src="images/logo-instructables.png" alt=""></a>
 					</div>
 					<div class="columna xmall-6 medium-4 large-3 right">
+						<a href="#" target="_blank"><p>Términos y Condiciones</p></a>
 						<a href="http://labplc.mx/" target="_blank"><img src="images/logo-laboratorio-ciudad.png" alt=""></a>
 					</div>
 				</div>

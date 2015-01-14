@@ -26,8 +26,8 @@
 		<div class="container">
 			<header>
 				<div class="[ width clearfix ]">
-					<div class="[ columna xmall-12 ] [ no-xmall no-small medium ] [ user ]">				
-						<p class="[ right ] [  ]"><span>Entrar</span> / <span>Registro</span></p>
+					<div class="[ columna xmall-12 ] [ no-xmall no-small no-medium large ] [ user ]">				
+						<p class="[ right ] [ login-entrar ]"><span class="[ js-abrir-modal ]">Entrar</span></p>
 					</div>
 					<div class="[ columna xmall-6 medium-3 ]">
 						<h1><a href="index.html">Hacedores CDMX</a></h1>	
@@ -37,6 +37,11 @@
 					</div>
 					<nav id="menu-movil" class="[ no-large ]">
 					   	<ul>
+					   		<li class="[ clearfix ]">	
+					   			<a class="[ no-xmall medium ] [ inline-block middle ] [ menu entrar ] [ js-abrir-modal ]">			
+									<h3><span class="">Entrar</span></h3>
+								</a>
+							</li>
 					   		<li class="[ clearfix ]">
 					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu informacion ]" href="informacion.html">
 									<h3 class="[ informacion ]">Información</h3>
@@ -114,7 +119,7 @@
 	    					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7098.94326104394!2d78.0430654485247!3d27.172909818538997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1385710909804" width="600" height="300" frameborder="0" style="border:0"></iframe>
 						</div>
 					</section><!-- mapa -->
-					<div class="[ columna xmall-12 medium-3 ]">
+					<div class="[ columna xmall-12 medium-3 large-3 ]">
 						<h2>Edmundo Sulca</h2>
 					</div>
 					<div class="[ columna xmall-12 medium-6 ] [ clearfix ]">
@@ -147,6 +152,36 @@
 				</div><!-- width -->
 			</div><!-- main -->
 		</div><!-- container -->
+		<div class="[ modal ]">
+			<div class="[ login-container ] [ form-user ]">
+				<h4 class="[ right ] [ js-cerrar-modal ] [ cerrar-modal ]">Cerrar X</h4>
+				<div class="clear"></div>
+				<div class="[ modal-contenido ]">
+					<div>
+						<h3>Inicia sesión con:</h3>
+						<button class="[ sesion-facebook ]"><i class="[ fa fa-facebook ]"></i> Facebook</button>
+						<button class="[ sesion-twitter ]"><i class="[ fa fa-twitter ]"></i>Twitter</button>
+						<button class="[ sesion-gplus ]"><i class="[ fa fa-google-plus ]"></i>Google+</button>
+					</div>
+					<div>
+						<h3>Inicia sesión con tu correo</h3>
+						<form class="login-user">
+							<div class="campo">
+								<label for="usuario-correo" class="[ columna xmall-12 ]">Correo electrónico</label>
+								<input type="email" id="usuario-correo">
+							</div>
+							<div class="campo">
+								<label for="usuario-password" class="[ columna xmall-12 ]">Contraseña</label>
+								<input type="text" id="usuario-password">
+								<p>¿Olvidaste tu contraseña? <a href="">click aquí</a></p>
+							</div>
+							<button>Entrar</button>
+							<p>¿No estás registrado aún? <a href="registro.html">Click aquí</a></p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 		<footer class="[ clearfix ]">
 			<div class="width clearfix">
 				<div class="columna xmall-8 medium-6 clearfix right">
