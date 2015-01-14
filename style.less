@@ -339,8 +339,11 @@ h3{ .font(1.4em, 1, 'trade 18'); color: @secondary; }
 .body-perfiles{
 	h1{ color: @perfiles; }
 }
-.body-programacion{
+.body-proyectos{
 	h1{ color: @programacion; }
+}
+.body-espacios{
+	h1{ color: @recursos; }
 }
 
 h2,h3, p, a, li, span{
@@ -485,7 +488,25 @@ a{
     }
 /**/
 
-.eventos-home{ height:400px; border: 1px solid @informacion; padding: 20px; overflow-y: scroll; overflow-x: hidden; }
+.side-proyecto{
+	a{ color: @primary; }
+	a:hover{ text-decoration: underline; }
+	a:visited{ color: @primary; }
+}
+
+.eventos-home{ 
+	height:400px; 
+	border: 1px solid @informacion; 
+	padding: 20px; 
+	overflow-y: scroll; 
+	overflow-x: hidden; 
+	a{ color: @primary; }
+	a:hover{ text-decoration: underline; }
+	a:visited{ color: @primary; }
+}
+.redes-eventos{
+	a{ margin: 0 10px; }
+}
 .registro-usuarios{ 
 input:checked{ background-color: @perfiles; }
 }
