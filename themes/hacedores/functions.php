@@ -2,7 +2,9 @@
 
 
 // DEFINIR LOS PATHS A LOS DIRECTORIOS DE JAVASCRIPT Y CSS ///////////////////////////
-
+	define('EMAIL_INVALIDO', -2);
+	define('PASSWORD_INVALIDO', -3);
+	define('PASSWORD_DIFERENTE', -4);
 
 
 	define( 'JSPATH', get_template_directory_uri() . '/js/' );
@@ -245,3 +247,127 @@
 			OR isset($query->post_title) AND preg_match("/$string/i", remove_accents(str_replace(' ', '-', $query->post_title) ) ) )
 			echo 'active';
 	}
+
+	/**
+	 * Logera un usuario
+	 * @param  string  $password 
+	 * @param string  $email
+	 * @return integer
+	 */
+	function site_login_post($username, $password){
+
+		$logged_in = login_user($username, $password);
+
+		if($logged_in == '1'){
+			return 1;
+		}elseif ($logged_in == '-1') {
+			return -1;
+		} else
+			return 0;
+	}// site_login
+
+	/**
+	 * Registra un usuario nuevo
+	 * @param  string  $password 
+	 * @param string  $email
+	 * @return array
+	 */
+	function register_user_new($data){
+		$is_valid = validate_user_data();
+		switch ($is_valid) {
+			case EMAIL_INVALIDO:
+				return array("error" => "Email inválido"); 
+				break;
+			case PASSWORD_INVALIDO:
+				return array("error" => "Password inválido"); 
+				break;
+			case PASSWORD_DIFERENTE:
+				return array("error" => "Passwords diferentes"); 
+				break;
+			default:
+				// Create wp_user
+				$username =  $data['email'];
+				$password =  $data['password'];
+				$email =  $data['email'];
+
+				$userdata = array(
+				    'user_login'  	=> $username,
+				    'user_pass'   	=> $password, 
+				    'user_email'	=> $email,
+				    'role'			=> 'editor',
+				);
+
+				$user_id = wp_insert_user( $userdata ) ;
+
+				
+				if(is_wp_error($user_id)){
+					return array("wp-error" => $user_id->get_error_codes());
+					die();
+				}
+			
+				//TODO
+				//$mail_status = welcome_email($email);
+
+				$msg = array(
+					"success" => "Usuario registrado",
+					"error"	  => 0
+					);
+			
+				return $msg; 
+
+		}// switch
+	} // register_user
+
+	/**
+	 * Valida que los datos del usuario ha registrar sean correctos.
+	 * @return 1 si no hay errores, -1 username vacío, -2 email vacío, -3 password inválido, -4 passwords no son iguales
+	 */
+	function validate_user_data(){
+		if($_POST['email'] == '')
+			return EMAIL_INVALIDO; 
+
+		if($_POST['password'] == '' || $_POST['password_confirmation'] == '' )
+			return PASSWORD_INVALIDO; 
+
+		if($_POST['password'] != $_POST['password_confirmation'])
+			return PASSWORD_DIFERENTE; 
+
+		return 1;
+	}// validate_user_data
+
+function posts_for_current_author($query) {
+
+	if($query->is_admin) {
+		global $user_ID;
+		$query->set('author',  $user_ID);
+	}
+	return $query;
+}
+add_filter('pre_get_posts', 'posts_for_current_author');
+
+//Set a custom role for a new user
+function oa_social_login_set_new_user_role ($user_role)
+{
+  //This is an example for a custom setting with one role
+  $user_role = 'editor';
+ 
+  //The new user will be created with this role
+  return $user_role;
+}
+ 
+//This filter is applied to the roles of new users
+add_filter('oa_social_login_filter_new_user_role', 'oa_social_login_set_new_user_role');
+
+//Use a custom CSS file with Social Login
+function oa_social_login_set_custom_css($css_theme_uri)
+{
+  //Replace the URL by an URL to your own CSS file
+  $css_theme_uri = 'http://public.oneallcdn.com/css/api/socialize/themes/buildin/connect/large-v1.css';
+   
+  //Done
+  return $css_theme_uri;
+}
+  
+add_filter('oa_social_login_default_css', 'oa_social_login_set_custom_css');
+add_filter('oa_social_login_widget_css', 'oa_social_login_set_custom_css');
+add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
