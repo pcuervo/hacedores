@@ -10,7 +10,6 @@
 
 		// AUTORES
 		/*if( ! taxonomy_exists('autores')){
-
 			$labels = array(
 				'name'              => 'Autores',
 				'singular_name'     => 'Autor',
@@ -35,8 +34,8 @@
 
 			register_taxonomy( 'autor', 'libro', $args );
 		}*/
-		
-		
+
+
 		// TERMS
 		/*if ( ! term_exists( 'Carlos Fuentes', 'autor' ) ){
 			wp_insert_term( 'Carlos Fuentes', 'autor' );

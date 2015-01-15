@@ -105,12 +105,16 @@
 
 		// add_image_size( 'size_name', 200, 200, true );
 
-		// cambiar el tamaño del thumbnail
-		/*
-		update_option( 'thumbnail_size_h', 100 );
-		update_option( 'thumbnail_size_w', 200 );
-		update_option( 'thumbnail_crop', false );
-		*/
+		// cambiar el tamaño Thumbnail
+		update_option( 'thumbnail_size_h', 150 );
+		update_option( 'thumbnail_size_w', 150 );
+		update_option( 'thumbnail_crop', true );
+
+		// cambiar el tamaño Medium
+		update_option( 'medium_size_h', 235 );
+		update_option( 'medium_size_w', 235 );
+		update_option( 'medium_crop', true );
+
 	}
 
 
@@ -120,17 +124,10 @@
 
 
 	require_once('inc/post-types.php');
-
-
 	require_once('inc/metaboxes.php');
-
-
 	require_once('inc/taxonomies.php');
-
-
+	require_once('inc/categories.php');
 	require_once('inc/pages.php');
-
-
 	require_once('inc/users.php');
 
 

@@ -7,7 +7,7 @@
 		$queryInformacion = new WP_Query( $args );
 		if ( $queryInformacion->have_posts() ) : while ( $queryInformacion->have_posts() ) : $queryInformacion->the_post(); ?>
 			<section class="[ columna xmall-12 medium-9 ] [ ]">
-				<?php the_post_thumbnail('large', array('class' => '[ margin-bottom-medium ]')); ?>
+				<?php the_post_thumbnail('full', array('class' => '[ margin-bottom-medium ]')); ?>
 				<div class="[ clearfix ]">
 					<div class="[ columna xmall-12 medium-3 ] [ detalles ]">
 						<h2>Detalles</h2>
