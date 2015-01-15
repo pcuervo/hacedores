@@ -4,15 +4,10 @@
 // DEFINIR LOS PATHS A LOS DIRECTORIOS DE JAVASCRIPT Y CSS ///////////////////////////
 
 
-
 	define( 'JSPATH', get_template_directory_uri() . '/js/' );
-
 	define( 'CSSPATH', get_template_directory_uri() . '/css/' );
-
 	define( 'THEMEPATH', get_template_directory_uri() . '/' );
-
 	define( 'SITEURL', site_url('/') );
-
 
 
 // FRONT END SCRIPTS AND STYLES //////////////////////////////////////////////////////
@@ -119,7 +114,7 @@
 
 
 
-// POST TYPES, METABOXES, TAXONOMIES AND CUSTOM PAGES ////////////////////////////////
+// POST TYPES, METABOXES, TAXONOMIES, CATEGORIES AND CUSTOM PAGES ////////////////////////////////
 
 
 
@@ -137,12 +132,9 @@
 
 
 	add_action( 'pre_get_posts', function($query){
-
 		if ( $query->is_main_query() and ! is_admin() ) {
-
 		}
 		return $query;
-
 	});
 
 
@@ -242,3 +234,26 @@
 			OR isset($query->post_title) AND preg_match("/$string/i", remove_accents(str_replace(' ', '-', $query->post_title) ) ) )
 			echo 'active';
 	}
+
+	/**
+	 * Devuelve la url del video de acuerdo al host.
+	 * @param string $advisor_data
+	 * @return int $advisor_id or FALSE
+	 */
+	function get_video_src($url, $host){
+		if($url == '-')
+			return 0;
+		if($host == 'vimeo'){
+			$id = (int) substr(parse_url($url, PHP_URL_PATH), 1);
+			return '//player.vimeo.com/video/'.$id;
+		}
+
+		$id = explode('v=', $url)[1];
+		$ampersand_position = strpos($id, '&');
+		if( $ampersand_position > 0 )
+			$id = substr($id, $ampersand_position);
+
+		parse_str( parse_url( $url, PHP_URL_QUERY ), $url_array );
+		$id = $url_array['v'];
+		return '//www.youtube.com/embed/'.$id;
+	}// get_video_src

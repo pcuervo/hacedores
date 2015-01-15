@@ -39,11 +39,22 @@
 				?>
 			</ul>
 		</div>
-		<div class="[ clearfix ] [ margin-bottom-medium ]">
-			<div class="[ margin-bottom-medium ]" id="thing-with-videos">
-				<iframe src="https://player.vimeo.com/video/102849181" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+		<?php
+		$videoProyecto = get_post_meta($post->ID, '_video2_meta', true);
+		if (strpos($videoProyecto,'youtube') !== false) {
+			$videoHost = 'youtube';
+		}
+		if (strpos($videoProyecto,'vimeo') !== false) {
+			$videoHost = 'vimeo';
+		}
+		$video_src = get_video_src($videoProyecto, $videoHost);
+		if( $video_src ){ ?>
+			<div class="[ clearfix ] [ margin-bottom-medium ]">
+				<div class="[ margin-bottom-medium ]" id="thing-with-videos">
+					<iframe src="<?php echo $video_src ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				</div>
 			</div>
-		</div>
+		<?php } ?>
 	</div>
 	<?php get_sidebar(); ?>
 <?php get_footer(); ?>
