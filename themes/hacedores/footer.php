@@ -47,7 +47,4 @@
 		</footer>
 		<?php wp_footer(); ?>
 	</body>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/plugins.js"></script>
-	<script src="js/functions.js"></script>
 </html>

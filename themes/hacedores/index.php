@@ -21,4 +21,5 @@
 			<p>Bárbara Icaza usa materiales de desecho para crear nueva artesanía.</p>
 		</div><!-- post -->
 	</section>
+	<?php get_sidebar(); ?>
 <?php get_footer(); ?>

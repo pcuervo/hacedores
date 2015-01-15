@@ -76,11 +76,11 @@
 					</nav><!-- MENU MOVIL -->
 					<nav class="[ columna xmall-2 medium-7 large-7 ] [ right ]">
 						<a class="[ no-large ] [ informacion ] [ right ]" href="#menu-movil"><i class="fa fa-bars fa-2x"></i></a>
-						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu recursos ] [ right ]" href="<?php echo site_url('recurso'); ?>">
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu recursos ] [ right ]" href="<?php echo site_url('recursos'); ?>">
 							<h3 class="[ recursos ]">Espacios/Recursos</h3>
 							<i class="[ icon-icon_gubia ] [ icon recursos ] [ center block ]"></i>
 						</a>
-						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu programacion ] [ right ]" href="<?php echo site_url('proyecto'); ?>">
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu programacion ] [ right ]" href="<?php echo site_url('proyectos'); ?>">
 							<h3 class="[ programacion ]">Proyectos</h3>
 							<i class="[ icon-icon_gubia ] [ icon programacion ] [ center block ]"></i>
 						</a>
