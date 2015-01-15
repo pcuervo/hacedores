@@ -6,15 +6,10 @@
 	define('PASSWORD_INVALIDO', -3);
 	define('PASSWORD_DIFERENTE', -4);
 
-
 	define( 'JSPATH', get_template_directory_uri() . '/js/' );
-
 	define( 'CSSPATH', get_template_directory_uri() . '/css/' );
-
 	define( 'THEMEPATH', get_template_directory_uri() . '/' );
-
 	define( 'SITEURL', site_url('/') );
-
 
 
 // FRONT END SCRIPTS AND STYLES //////////////////////////////////////////////////////
@@ -107,32 +102,29 @@
 
 		// add_image_size( 'size_name', 200, 200, true );
 
-		// cambiar el tamaño del thumbnail
-		/*
-		update_option( 'thumbnail_size_h', 100 );
-		update_option( 'thumbnail_size_w', 200 );
-		update_option( 'thumbnail_crop', false );
-		*/
+		// cambiar el tamaño Thumbnail
+		update_option( 'thumbnail_size_h', 150 );
+		update_option( 'thumbnail_size_w', 150 );
+		update_option( 'thumbnail_crop', true );
+
+		// cambiar el tamaño Medium
+		update_option( 'medium_size_h', 235 );
+		update_option( 'medium_size_w', 235 );
+		update_option( 'medium_crop', true );
+
 	}
 
 
 
-// POST TYPES, METABOXES, TAXONOMIES AND CUSTOM PAGES ////////////////////////////////
+// POST TYPES, METABOXES, TAXONOMIES, CATEGORIES AND CUSTOM PAGES ////////////////////////////////
 
 
 
 	require_once('inc/post-types.php');
-
-
 	require_once('inc/metaboxes.php');
-
-
 	require_once('inc/taxonomies.php');
-
-
+	require_once('inc/categories.php');
 	require_once('inc/pages.php');
-
-
 	require_once('inc/users.php');
 
 
@@ -142,12 +134,9 @@
 
 
 	add_action( 'pre_get_posts', function($query){
-
 		if ( $query->is_main_query() and ! is_admin() ) {
-
 		}
 		return $query;
-
 	});
 
 
@@ -249,6 +238,7 @@
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Logera un usuario
 	 * @param  string  $password 
 	 * @param string  $email
@@ -371,3 +361,25 @@ function oa_social_login_set_custom_css($css_theme_uri)
 add_filter('oa_social_login_default_css', 'oa_social_login_set_custom_css');
 add_filter('oa_social_login_widget_css', 'oa_social_login_set_custom_css');
 add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
+
+	 /* Devuelve la url del video de acuerdo al host.
+	 * @param string $advisor_data
+	 * @return int $advisor_id or FALSE
+	 */
+	function get_video_src($url, $host){
+		if($url == '-')
+			return 0;
+		if($host == 'vimeo'){
+			$id = (int) substr(parse_url($url, PHP_URL_PATH), 1);
+			return '//player.vimeo.com/video/'.$id;
+		}
+
+		$id = explode('v=', $url)[1];
+		$ampersand_position = strpos($id, '&');
+		if( $ampersand_position > 0 )
+			$id = substr($id, $ampersand_position);
+
+		parse_str( parse_url( $url, PHP_URL_QUERY ), $url_array );
+		$id = $url_array['v'];
+		return '//www.youtube.com/embed/'.$id;
+	}// get_video_src

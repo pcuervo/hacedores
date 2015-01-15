@@ -31,7 +31,7 @@
 						<p class="[ right ] [ login-entrar ]"><span class="[ js-abrir-modal ]">Entrar</span></p>
 					</div>
 					<div class="[ columna xmall-6 medium-3 ]">
-						<h1><a href="index.html">Hacedores CDMX</a></h1>
+						<h1><a href="<?php echo site_url(); ?>">Hacedores CDMX</a></h1>
 					</div>
 					<div class="[ columna xmall-4 small-3 medium-2 large-2 ]">
 						<a href="http://labplc.mx/" target="_blank"><img src="<?php echo THEMEPATH; ?>images/logo-laboratorio-ciudad.png" alt=""></a>
@@ -76,19 +76,19 @@
 					</nav><!-- MENU MOVIL -->
 					<nav class="[ columna xmall-2 medium-7 large-7 ] [ right ]">
 						<a class="[ no-large ] [ informacion ] [ right ]" href="#menu-movil"><i class="fa fa-bars fa-2x"></i></a>
-						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu recursos ] [ right ]" href="espacios.html">
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu recursos ] [ right ]" href="<?php echo site_url('recursos'); ?>">
 							<h3 class="[ recursos ]">Espacios/Recursos</h3>
 							<i class="[ icon-icon_gubia ] [ icon recursos ] [ center block ]"></i>
 						</a>
-						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu programacion ] [ right ]" href="proyectos.html">
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu programacion ] [ right ]" href="<?php echo site_url('proyectos'); ?>">
 							<h3 class="[ programacion ]">Proyectos</h3>
 							<i class="[ icon-icon_gubia ] [ icon programacion ] [ center block ]"></i>
 						</a>
-						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu perfiles ] [ right ]" href="hacedores.html">
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu perfiles ] [ right ]" href="<?php echo site_url('hacedores'); ?>">
 							<h3 class="[ perfiles ]">Hacedores</h3>
 							<i class="[ icon-icon_zanahoria ] [ icon perfiles ] [ center block ]"></i>
 						</a>
-						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu informacion ] [ right ]" href="informacion.html">
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu informacion ] [ right ]" href="<?php echo site_url('informacion'); ?>">
 							<h3 class="[ informacion ]">Información</h3>
 							<i class="[ icon-icon_clavo2 ] [ icon informacion ] [ center block ]"></i>
 						</a>
@@ -97,3 +97,30 @@
 			</header>
 			<div class="[ main ]">
 				<div class="[ width clearfix ]">
+					<section class="[ mapa ] [ margin-bottom-big ] ">
+						<div class="[ google-maps ] [ no-xmall medium ]">
+							<div class="[ menu-container ]">
+								<div class="[ menu-mapa ]">
+									<ul class="[ menu-titulos ]">
+										<li class="[ hacedores ] [ trigger ]" data-rel="sub-hacedores">Hacedores</li>
+											<ul class="[ submenu-mapa ] [ sub-hacedores ] [ content ]">
+												<li>No disponible</li>
+											</ul>
+										<li class="[ proyectos ] [ trigger ]" data-rel="sub-proyectos">Proyectos</li>
+											<ul class="[ submenu-mapa ] [ sub-proyectos ] [  content ]">
+												<li>No disponible</li>
+											</ul>
+										<li class="[ espacios ] [ trigger ]" data-rel="sub-espacios">Espacios / Recursos</li>
+											<ul class="[ submenu-mapa ] [ sub-espacios ] [ content ]">
+												<li>No disponible</li>
+											</ul>
+										<li class="[ eventos ] [ trigger ]" data-rel="sub-eventos">Eventos</li>
+											<ul class="[ submenu-mapa ] [ sub-eventos ] [ content ]">
+												<li>No disponible</li>
+											</ul>
+									</ul>
+								</div>
+							</div>
+							<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7098.94326104394!2d78.0430654485247!3d27.172909818538997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1385710909804" width="600" height="300" frameborder="0" style="border:0"></iframe>
+						</div>
+					</section><!-- mapa -->
