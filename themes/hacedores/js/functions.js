@@ -12,8 +12,6 @@
 			return regExp.test(email);
 		};
 
-
-
 		/**
 		 * Regresa todos los valores de un formulario como un associative array
 		 */
@@ -267,3 +265,56 @@
 		$('div').addClass('mm-slideout');
 	});
 })(jQuery);
+
+var $=jQuery.noConflict();
+/* FUNCIONES PARA GOOGLE MAPS */
+function creaMapa(set_coordenadas){
+	// Estilos mapa
+	console.log(set_coordenadas['hacedores']);
+	// Jalar coordenadas de areas de atención
+	var locations = [];
+	$.each(set_coordenadas['hacedores'], function(i, coordenadas){
+		var latLon = [];
+		latLon.push(coordenadas.lat);
+		latLon.push(coordenadas.lon);
+		locations.push(latLon);
+	});
+
+	// Crea Mapa
+	var map = new google.maps.Map(document.getElementById('mapa'), {
+		zoom: 15,
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		mapTypeControl: false,
+		streetViewControl: false,
+		panControl: false,
+		scrollwheel: false
+	});
+
+	var marker;
+	var markers = new Array();
+	for (var i = 0; i < locations.length; i++) {
+		marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+			map: map,
+		});
+		markers.push(marker);
+	}
+	autoCenter();
+
+	// Autocentrar el mapa dependiendo de los marcadores
+	function autoCenter() {
+		//  Crea un nuevo limite
+		var bounds = new google.maps.LatLngBounds();
+
+		//  Itera todos los marcadores
+		$.each(markers, function (index, marker) {
+			bounds.extend(marker.position);
+		});
+		//  Mete los límites en el mapa
+		map.fitBounds(bounds);
+		var listener = google.maps.event.addListener(map, "idle", function() {
+		if (map.getZoom() > 17) map.setZoom(17);
+			google.maps.event.removeListener(listener);
+		});
+	} // autoCenter
+}// crearMapa

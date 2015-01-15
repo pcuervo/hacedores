@@ -220,6 +220,8 @@ figure {margin: 0;}
 .margin-bottom-medium{ margin-bottom: (@unidad*2) !important; }
 .margin-bottom-big{ margin-bottom: (@unidad*4) !important; }
 
+.relative { position: relative; }
+
 //layout
 .container{ min-width: 300px; }
 .width{ width: 90%; min-width: 300px; max-width: 1025px; margin: 0 auto @unidad auto; z-index: 1; }
@@ -451,18 +453,12 @@ a{
 		display: inline;
 		&:hover{ color: @informacion; text-decoration: underline; .transition }
 	}
-	.google-maps {
-        position: relative;
-        padding-bottom: 300px; // This is the aspect ratio
-        height: 0;
-        overflow: hidden;
-    }
-    .google-maps iframe {
+    #mapa {
         position: absolute;
         top: 0;
         left: 0;
         width: 100% !important;
-        height: 100% !important;
+        height: 300px !important;
     }
     .menu-container{ padding: 0; }
     .menu-mapa{
