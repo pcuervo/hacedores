@@ -7,10 +7,10 @@
 
 	add_action('add_meta_boxes', function(){
 
-		add_meta_box( 'detalles', 'Detalles', 'metabox_detalles', 'informacion', 'side', 'high' );
-		add_meta_box( 'informacion_recurso', 'Información recurso', 'metabox_informacion_recurso', 'recurso', 'side', 'high' );
-		add_meta_box( 'informacion_proyecto', 'Información proyecto', 'metabox_informacion_proyecto', 'proyecto', 'side', 'high' );
-		add_meta_box( 'informacion_evento', 'Información evento', 'metabox_informacion_evento', 'evento', 'side', 'high' );
+		add_meta_box( 'detalles', 'Detalles', 'metabox_detalles', 'informacion', 'advanced', 'high' );
+		add_meta_box( 'informacion_recurso', 'Información recurso', 'metabox_informacion_recurso', 'recurso', 'advanced', 'high' );
+		add_meta_box( 'informacion_proyecto', 'Información proyecto', 'metabox_informacion_proyecto', 'proyecto', 'advanced', 'high' );
+		add_meta_box( 'informacion_evento', 'Información evento', 'metabox_informacion_evento', 'evento', 'advanced', 'high' );
 
 	});
 
