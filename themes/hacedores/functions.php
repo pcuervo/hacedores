@@ -1,5 +1,10 @@
 <?php
 
+wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
+		false,
+		array( '#222', '#333', '#0074a2', '#2ea2cc' ),
+		array( 'base' => '#999', 'focus' => '#2ea2cc', 'current' => '#fff' )
+	);
 
 // DEFINIR LOS PATHS A LOS DIRECTORIOS DE JAVASCRIPT Y CSS ///////////////////////////
 

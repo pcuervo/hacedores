@@ -27,8 +27,8 @@
 		<div class="container">
 			<header>
 				<div class="[ width clearfix ]">
-					<div class="[ columna xmall-12 ] [ no-xmall no-small no-medium large ] [ user ]">
-						<p class="[ right ] [ login-entrar ]"><span class="[ js-abrir-modal ]">Entrar</span></p>
+					<div class="[ columna xmall-12 ] [ no-xmall no-small no-medium large ] [ user ] [ js-abrir-modal ]">
+						<p class="[ right ] [ login-entrar ]"><span>Entrar</span></p>
 					</div>
 					<div class="[ columna xmall-6 medium-3 ]">
 						<h1><a href="<?php echo site_url(); ?>">Hacedores CDMX</a></h1>
@@ -44,31 +44,31 @@
 								</a>
 							</li>
 					   		<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu informacion ]" href="informacion.html">
+					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu informacion ]" href="<?php echo site_url('recursos'); ?>">
 									<h3 class="[ informacion ]">Información</h3>
 									<i class="[ icon-icon_clavo2 ] [ icon informacion ] [ center block ]"></i>
 								</a>
 					      	</li>
 					      	<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu perfiles ]" href="hacedores.html">
+					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu perfiles ]" href="<?php echo site_url('proyectos'); ?>">
 									<h3 class="[ perfiles ]">Hacedores</h3>
 									<i class="[ icon-icon_zanahoria ] [ icon perfiles ] [ center block ]"></i>
 								</a>
 					      	</li>
 					      	<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu programacion ]" href="proyectos.html">
+					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu programacion ]" href="<?php echo site_url('hacedores'); ?>">
 									<h3 class="[ programacion ]">Proyectos</h3>
 									<i class="[ icon-icon_gubia ] [ icon programacion ] [ center block ]"></i>
 								</a>
 							</li>
 							<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu recursos ]" href="espacios.html">
+					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu recursos ]" href="<?php echo site_url('informacion'); ?>">
 									<h3 class="[ recursos ]">Espacios/Recuros</h3>
 									<i class="[ icon-icon_tornillo ] [ icon recursos ] [ center block ]"></i>
 								</a>
 							</li>
 							<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu entrar ]" href="mapa-hacedores.html">
+					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu entrar ]" href="<?php echo site_url('mapa-hacedores'); ?>">
 									<h3 class="[ recursos ]">Ver Mapa de Hacedores</h3>
 								</a>
 							</li>
