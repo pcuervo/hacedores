@@ -238,7 +238,6 @@
 	}
 
 	/**
-<<<<<<< HEAD
 	 * Logera un usuario
 	 * @param  string  $password 
 	 * @param string  $email
@@ -255,6 +254,25 @@
 		} else
 			return 0;
 	}// site_login
+	
+	/**
+	 * Loggear al usuario a la plataforma.
+	 * @param string $username, string $password
+	 * @return boolean
+	 */
+	function login_user($username, $password){
+		$creds = array();
+		$creds['user_login'] = $username;
+		$creds['user_password'] = $password;
+		$creds['remember'] = true;
+		
+		$user = wp_signon( $creds, false );
+		
+		if ( is_wp_error($user) ){
+			return $user->get_error_message();
+		}
+		return 1;
+	}// login_user
 
 	/**
 	 * Registra un usuario nuevo
@@ -266,13 +284,13 @@
 		$is_valid = validate_user_data();
 		switch ($is_valid) {
 			case EMAIL_INVALIDO:
-				return array("error" => "Email inválido"); 
+				return array("msj" => "Email inválido", "error" => true); 
 				break;
 			case PASSWORD_INVALIDO:
-				return array("error" => "Password inválido"); 
+				return array("msj" => "Password inválido", "error" => true); 
 				break;
 			case PASSWORD_DIFERENTE:
-				return array("error" => "Passwords diferentes"); 
+				return array("msj" => "Passwords diferentes", "error" => true); 
 				break;
 			default:
 				// Create wp_user
@@ -291,17 +309,17 @@
 
 				
 				if(is_wp_error($user_id)){
-					return array("wp-error" => $user_id->get_error_codes());
+					return array("msj" => $user_id->get_error_codes(), "error" => true);
 					die();
 				}
 			
 				//TODO
 				//$mail_status = welcome_email($email);
-
+				login_user($username, $password);
 				$msg = array(
-					"success" => "Usuario registrado",
-					"error"	  => 0
-					);
+					"msj" => "Usuario registrado",
+					"error"	  => false
+				);
 			
 				return $msg; 
 
@@ -325,11 +343,34 @@
 		return 1;
 	}// validate_user_data
 
-function posts_for_current_author($query) {
+/**
+ * Obtener el rol del usuario.
+ * @return $role
+ */
+function get_current_user_role(){
+	if ( is_user_logged_in() ) {
+		global $wpdb;
 
-	if($query->is_admin) {
-		global $user_ID;
-		$query->set('author',  $user_ID);
+		$user = get_userdata( get_current_user_id() );
+		$capabilities = $user->{$wpdb->prefix . 'capabilities'};
+
+		if ( !isset( $wp_roles ) )
+				$wp_roles = new WP_Roles();
+
+		foreach ( $wp_roles->role_names as $role => $name ) :
+				if ( array_key_exists( $role, $capabilities ) )
+						return $role;
+		endforeach;
+	}
+}// get_current_user_role
+
+function posts_for_current_author($query) {
+	$role = get_current_user_role();
+	if($role != 'administrator'){
+		if($query->is_admin) {
+			global $user_ID;
+			$query->set('author',  $user_ID);
+		}
 	}
 	return $query;
 }

@@ -8,23 +8,24 @@
 				<div class="[ modal-contenido ]">
 					<div>
 						<h3>Inicia sesión con:</h3>
-						<button class="[ sesion-facebook ]"><i class="[ fa fa-facebook ]"></i> Facebook</button>
+						<?php do_action('oa_social_login'); ?>
+						<!-- <button class="[ sesion-facebook ]"><i class="[ fa fa-facebook ]"></i> Facebook</button>
 						<button class="[ sesion-twitter ]"><i class="[ fa fa-twitter ]"></i>Twitter</button>
-						<button class="[ sesion-gplus ]"><i class="[ fa fa-google-plus ]"></i>Google+</button>
+						<button class="[ sesion-gplus ]"><i class="[ fa fa-google-plus ]"></i>Google+</button> -->
 					</div>
 					<div>
 						<h3>Inicia sesión con tu correo</h3>
-						<form class="login-user">
+						<form name="registro" method="post" action="<?php echo site_url('login'); ?>">
 							<div class="campo">
 								<label for="usuario-correo" class="[ columna xmall-12 ]">Correo electrónico</label>
-								<input type="email" id="usuario-correo">
+								<input name="email" type="email" id="email-hacedor">
 							</div>
 							<div class="campo">
 								<label for="usuario-password" class="[ columna xmall-12 ]">Contraseña</label>
-								<input type="text" id="usuario-password">
+								<input name="password" type="password" id="password">
 								<p>¿Olvidaste tu contraseña? <a href="">click aquí</a></p>
 							</div>
-							<button>Entrar</button>
+							<input type="submit" name="submit" value="Registrarse">
 							<p>¿No estás registrado aún? <a href="registro.html">Click aquí</a></p>
 						</form>
 					</div>

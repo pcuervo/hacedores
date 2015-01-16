@@ -28,7 +28,12 @@
 			<header>
 				<div class="[ width clearfix ]">
 					<div class="[ columna xmall-12 ] [ no-xmall no-small no-medium large ] [ user ]">
-						<p class="[ right ] [ login-entrar ]"><span class="[ js-abrir-modal ]">Entrar</span></p>
+						<?php if ( !is_user_logged_in() ) { ?>
+							<p class="[ right ] [ login-entrar ]"><span class="[ js-abrir-modal ]">Entrar</span></p>
+						  <a class="" href="registro">Registrarse</a>
+						<?php } else { ?>
+							<a class="" href="<?php echo  esc_url( wp_logout_url(site_url()) ); ?>">Salir</a>
+						<?php } ?>
 					</div>
 					<div class="[ columna xmall-6 medium-3 ]">
 						<h1><a href="<?php echo site_url(); ?>">Hacedores CDMX</a></h1>
@@ -38,11 +43,13 @@
 					</div>
 					<nav id="menu-movil" class="[ no-large ]">
 					   	<ul>
+								<?php if ( !is_user_logged_in() ) { ?>
 					   		<li class="[ clearfix ]">
 					   			<a class="[ no-xmall medium ] [ inline-block middle ] [ menu entrar ] [ js-abrir-modal ]">
-									<h3><span class="">Entrar</span></h3>
-								</a>
-							</li>
+										<h3><span class="">Entrar</span></h3>
+									</a>
+								</li>
+								<?php } ?>
 					   		<li class="[ clearfix ]">
 					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu informacion ]" href="informacion.html">
 									<h3 class="[ informacion ]">Información</h3>
