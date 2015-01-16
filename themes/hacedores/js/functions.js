@@ -264,6 +264,9 @@
 		$('.modal').css('display','none');
 		$('div').addClass('mm-slideout');
 	});
+
+	/*PAGINATION CALL*/
+	
 })(jQuery);
 
 var $=jQuery.noConflict();
