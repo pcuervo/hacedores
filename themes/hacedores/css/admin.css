@@ -71,13 +71,30 @@ a{ color: #bd545c; }
 }
 
 #adminmenu a{ color: #58585b; }
+#adminmenu .wp-submenu a{ color: #58585b; }
+
+#adminmenu .wp-submenu a:focus, #adminmenu .wp-submenu a:hover, #adminmenu a:hover, #adminmenu li.menu-top>a:focus{
+	color: #727477;
+}
+
+.view-switch a.current:before{
+	color: #bd545c;
+}
 
 #adminmenu .wp-has-current-submenu .wp-submenu,
 #adminmenu .wp-has-current-submenu .wp-submenu.sub-open,
 #adminmenu .wp-has-current-submenu.opensub .wp-submenu,
 #adminmenu a.wp-has-current-submenu:focus+.wp-submenu,
 .no-js li.wp-has-current-submenu:hover .wp-submenu{
-	background: #939597;
+	background: #b0b0b5;
+}
+
+#adminmenu li.menu-top:hover, #adminmenu li.opensub>a.menu-top, #adminmenu li>a.menu-top:focus{
+	background: #fff100;
+	color: #727477;
+}
+#adminmenu li:hover div.wp-menu-image:before{
+	color: #727477;
 }
 
 #adminmenu .wp-has-current-submenu .wp-submenu .wp-submenu-head, #adminmenu .wp-menu-arrow, #adminmenu .wp-menu-arrow div, #adminmenu li.current a.menu-top, #adminmenu li.wp-has-current-submenu a.wp-has-current-submenu, .folded #adminmenu li.current.menu-top, .folded #adminmenu li.wp-has-current-submenu{
@@ -87,4 +104,27 @@ a{ color: #bd545c; }
 
 #adminmenu div.wp-menu-image:before{
 	color: #fff100;
+}
+
+/*------------------------------------*\
+    #ADMIN BAR
+\*------------------------------------*/
+/*#wpadminbar .ab-icon,*/
+/*#wpadminbar .ab-item:before,*/
+/*#wpadminbar > #wp-toolbar > #wp-admin-bar-root-default .ab-icon*/
+
+#wpadminbar #wp-admin-bar-wp-logo .ab-item .ab-icon:before{
+	content: '' !important;
+}
+#wp-admin-bar-wp-logo{
+	background: url('../images/icon-medidor-gray.png') center center !important;
+	background-position: 0 0;
+	background-size: 10px 10px;
+}
+#wpadminbar > #wp-toolbar > #wp-admin-bar-root-default .ab-icon {
+	background: url('../images/icon-medidor-gray.png') !important;
+	background-position: 0 0;
+}
+#wpadminbar #wp-admin-bar-wp-logo.hover > .ab-item .ab-icon {
+	background-position: 0 0;
 }
