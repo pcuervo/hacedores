@@ -244,7 +244,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 
 	/**
 	 * Logera un usuario
-	 * @param  string  $password 
+	 * @param  string  $password
 	 * @param string  $email
 	 * @return integer
 	 */
@@ -259,7 +259,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 		} else
 			return 0;
 	}// site_login
-	
+
 	/**
 	 * Loggear al usuario a la plataforma.
 	 * @param string $username, string $password
@@ -270,9 +270,9 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 		$creds['user_login'] = $username;
 		$creds['user_password'] = $password;
 		$creds['remember'] = true;
-		
+
 		$user = wp_signon( $creds, false );
-		
+
 		if ( is_wp_error($user) ){
 			return $user->get_error_message();
 		}
@@ -281,7 +281,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 
 	/**
 	 * Registra un usuario nuevo
-	 * @param  string  $password 
+	 * @param  string  $password
 	 * @param string  $email
 	 * @return array
 	 */
@@ -289,13 +289,13 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 		$is_valid = validate_user_data();
 		switch ($is_valid) {
 			case EMAIL_INVALIDO:
-				return array("msj" => "Email inválido", "error" => true); 
+				return array("msj" => "Email inválido", "error" => true);
 				break;
 			case PASSWORD_INVALIDO:
-				return array("msj" => "Password inválido", "error" => true); 
+				return array("msj" => "Password inválido", "error" => true);
 				break;
 			case PASSWORD_DIFERENTE:
-				return array("msj" => "Passwords diferentes", "error" => true); 
+				return array("msj" => "Passwords diferentes", "error" => true);
 				break;
 			default:
 				// Create wp_user
@@ -305,19 +305,19 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 
 				$userdata = array(
 				    'user_login'  	=> $username,
-				    'user_pass'   	=> $password, 
+				    'user_pass'   	=> $password,
 				    'user_email'	=> $email,
 				    'role'			=> 'editor',
 				);
 
 				$user_id = wp_insert_user( $userdata ) ;
 
-				
+
 				if(is_wp_error($user_id)){
 					return array("msj" => $user_id->get_error_codes(), "error" => true);
 					die();
 				}
-			
+
 				//TODO
 				//$mail_status = welcome_email($email);
 				login_user($username, $password);
@@ -325,8 +325,8 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 					"msj" => "Usuario registrado",
 					"error"	  => false
 				);
-			
-				return $msg; 
+
+				return $msg;
 
 		}// switch
 	} // register_user
@@ -337,13 +337,13 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 	 */
 	function validate_user_data(){
 		if($_POST['email'] == '')
-			return EMAIL_INVALIDO; 
+			return EMAIL_INVALIDO;
 
 		if($_POST['password'] == '' || $_POST['password_confirmation'] == '' )
-			return PASSWORD_INVALIDO; 
+			return PASSWORD_INVALIDO;
 
 		if($_POST['password'] != $_POST['password_confirmation'])
-			return PASSWORD_DIFERENTE; 
+			return PASSWORD_DIFERENTE;
 
 		return 1;
 	}// validate_user_data
@@ -386,11 +386,11 @@ function oa_social_login_set_new_user_role ($user_role)
 {
   //This is an example for a custom setting with one role
   $user_role = 'editor';
- 
+
   //The new user will be created with this role
   return $user_role;
 }
- 
+
 //This filter is applied to the roles of new users
 add_filter('oa_social_login_filter_new_user_role', 'oa_social_login_set_new_user_role');
 
@@ -399,11 +399,11 @@ function oa_social_login_set_custom_css($css_theme_uri)
 {
   //Replace the URL by an URL to your own CSS file
   $css_theme_uri = 'http://public.oneallcdn.com/css/api/socialize/themes/buildin/connect/large-v1.css';
-   
+
   //Done
   return $css_theme_uri;
 }
-  
+
 add_filter('oa_social_login_default_css', 'oa_social_login_set_custom_css');
 add_filter('oa_social_login_widget_css', 'oa_social_login_set_custom_css');
 add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
@@ -430,6 +430,11 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 		return '//www.youtube.com/embed/'.$id;
 	}// get_video_src
 
+	function get_avatar_url($get_avatar){
+		preg_match("/src='(.*?)'/i", $get_avatar, $matches);
+		return $matches[1];
+	}
+
 
 	// FRONT END SCRIPTS FOOTER //////////////////////////////////////////////////////
 	function footerScripts() {
@@ -454,7 +459,7 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 		                });
 		            }(jQuery));
 		        </script>
-    		<?php }  
+    		<?php }
     	}
     }
     add_action( 'wp_footer', 'footerScripts', 21 );

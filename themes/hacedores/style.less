@@ -277,8 +277,23 @@ figure {margin: 0;}
 a{ text-decoration: none; }
 p{ margin-bottom: 1em; .font(1em, 1.4em); color: @secondary; }
 
+//Botones
+.boton, button{
+	margin: 0 5px;
+	padding: 10px 23px; border: 1px solid @primary;
+	color: @primary;
+	cursor: pointer;
+	&:hover{
+		color: inherit;
+		text-decoration: underline;
+		cursor: pointer;
+	}
+}
+
 //caracteristicas
+.text-left{ text-align: left; }
 .text-center{ text-align: center; }
+.text-right{ text-align: right; }
 
 //Media Queries
 .small{ display: none; }
@@ -508,14 +523,14 @@ a{
 	a:hover{ text-decoration: underline; }
 	a:visited{ color: @primary; }
 }
-.eventos-titulo{ 
-	background-color: @eventos; 
+.eventos-titulo{
+	background-color: @eventos;
 	padding: 20px;
 	h2{ margin: 0; }
 }
-.eventos-contenido{ 
+.eventos-contenido{
 	height: 320px;
-	padding: 20px; 
+	padding: 20px;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
@@ -703,7 +718,9 @@ footer{ background-color: @claro; padding: 15px; }
 		&.medium-11{ width: 91.3%; }
 		&.medium-12{ width: 100%; }
 	}
-	.medium{ display: block; }
+	.medium{ display: block;
+		&.inline-block{ display: inline-block; }
+	}
 	.no-medium{ display: none; }
 	//========================//
 

@@ -20,7 +20,6 @@
 		<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 		<?php wp_head(); ?>
 	</head>
-
 	<body>
 		<!--[if lt IE 9]>
 			<p class="chromeframe">Estás usando una versión <strong>vieja</strong> de tu explorador. Por favor <a href="http://browsehappy.com/" target="_blank"> actualiza tu explorador</a> para tener una experiencia completa.</p>
@@ -28,12 +27,16 @@
 		<div class="container">
 			<header>
 				<div class="[ width clearfix ]">
+					<div class="[ columna xmall-12 ][ no-xmall no-small no-medium large ][ text-right ][ margin-bottom-small ]">
 						<?php if ( !is_user_logged_in() ) { ?>
-					 <div class="[ columna xmall-12 ] [ no-xmall no-small no-medium large ] [ user ] [ js-abrir-modal ]">
-							<p class="[ right ] [ login-entrar ]"><span class="[ js-abrir-modal ]">Entrar</span></p>
-						  <a class="" href="registro">Registrarse</a>
+							<a class="[ boton ][ inline-block ][ login-entrar ][ js-abrir-modal ]">Entrar</a>
+							<a href="registro" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
+								Registrarse
+							</a>
 						<?php } else { ?>
-							<a class="" href="<?php echo  esc_url( wp_logout_url(site_url()) ); ?>">Salir</a>
+							<a href="<?php echo  esc_url( wp_logout_url(site_url()) ); ?>" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
+								Salir
+							</a>
 						<?php } ?>
 					</div>
 					<div class="[ columna xmall-6 medium-3 ]">
@@ -43,44 +46,44 @@
 						<a href="http://labplc.mx/" target="_blank"><img src="<?php echo THEMEPATH; ?>images/logo-laboratorio-ciudad.png" alt=""></a>
 					</div>
 					<nav id="menu-movil" class="[ no-large ]">
-					   	<ul>
-								<?php if ( !is_user_logged_in() ) { ?>
-					   		<li class="[ clearfix ]">
-					   			<a class="[ no-xmall medium ] [ inline-block middle ] [ menu entrar ] [ js-abrir-modal ]">
+						<ul>
+							<?php if ( ! is_user_logged_in() ) { ?>
+								<li class="[ clearfix ]">
+									<a class="[ no-xmall medium ] [ inline-block middle ] [ menu entrar ] [ js-abrir-modal ]">
 										<h3><span class="">Entrar</span></h3>
 									</a>
 								</li>
-								<?php } ?>
-					   		<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu informacion ]" href="<?php echo site_url('recursos'); ?>">
+							<?php } ?>
+							<li class="[ clearfix ]">
+								<a class="[ no-xmall medium ] [ inline-block middle ] [ menu informacion ]" href="<?php echo site_url('recursos'); ?>">
 									<h3 class="[ informacion ]">Información</h3>
 									<i class="[ icon-icon_clavo2 ] [ icon informacion ] [ center block ]"></i>
 								</a>
-					      	</li>
-					      	<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu perfiles ]" href="<?php echo site_url('proyectos'); ?>">
+							</li>
+							<li class="[ clearfix ]">
+								<a class="[ no-xmall medium ] [ inline-block middle ] [ menu perfiles ]" href="<?php echo site_url('proyectos'); ?>">
 									<h3 class="[ perfiles ]">Hacedores</h3>
 									<i class="[ icon-icon_zanahoria ] [ icon perfiles ] [ center block ]"></i>
 								</a>
-					      	</li>
-					      	<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu programacion ]" href="<?php echo site_url('hacedores'); ?>">
+							</li>
+							<li class="[ clearfix ]">
+								<a class="[ no-xmall medium ] [ inline-block middle ] [ menu programacion ]" href="<?php echo site_url('hacedores'); ?>">
 									<h3 class="[ programacion ]">Proyectos</h3>
 									<i class="[ icon-icon_gubia ] [ icon programacion ] [ center block ]"></i>
 								</a>
 							</li>
 							<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu recursos ]" href="<?php echo site_url('informacion'); ?>">
+								<a class="[ no-xmall medium ] [ inline-block middle ] [ menu recursos ]" href="<?php echo site_url('informacion'); ?>">
 									<h3 class="[ recursos ]">Espacios/Recuros</h3>
 									<i class="[ icon-icon_tornillo ] [ icon recursos ] [ center block ]"></i>
 								</a>
 							</li>
 							<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu entrar ]" href="<?php echo site_url('mapa-hacedores'); ?>">
+								<a class="[ no-xmall medium ] [ inline-block middle ] [ menu entrar ]" href="<?php echo site_url('mapa-hacedores'); ?>">
 									<h3 class="[ recursos ]">Ver Mapa de Hacedores</h3>
 								</a>
 							</li>
-					   	</ul>
+						</ul>
 					</nav><!-- MENU MOVIL -->
 					<nav class="[ columna xmall-2 medium-7 large-7 ] [ right ]">
 						<a class="[ no-large ] [ informacion ] [ right ]" href="#menu-movil"><i class="fa fa-bars fa-2x"></i></a>
