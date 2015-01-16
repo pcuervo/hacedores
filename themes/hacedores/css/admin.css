@@ -117,9 +117,8 @@ a{ color: #bd545c; }
 	content: '' !important;
 }
 #wp-admin-bar-wp-logo{
-	background: url('../images/icon-medidor-gray.png') center center !important;
-	background-position: 0 0;
-	background-size: 10px 10px;
+	background: url('../images/icon-lab-gray.png') center center no-repeat !important;
+	background-size: 24px !important;
 }
 #wpadminbar > #wp-toolbar > #wp-admin-bar-root-default .ab-icon {
 	background: url('../images/icon-medidor-gray.png') !important;
