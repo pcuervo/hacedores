@@ -1,0 +1,130 @@
+/*** FONTFACE ***/
+
+@font-face {
+  font-family: 'trade medium';
+  src:  url('../fonts/trade-medium.eot');
+  src:  url('../fonts/trade-medium.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/trade-medium.woff') format('woff'),
+		url('../fonts/trade-medium.ttf') format('truetype'),
+		url('../fonts/trade-medium.svg#trade-medium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'trade 20';
+  src:  url('../fonts/trade-20.eot');
+  src:  url('../fonts/trade-20.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/trade-20.woff') format('woff'),
+		url('../fonts/trade-20.ttf') format('truetype'),
+		url('../fonts/trade-20.svg#trade-20') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'trade 18';
+  src:  url('../fonts/trade-18.eot');
+  src:  url('../fonts/trade-18.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/trade-18.woff') format('woff'),
+		url('../fonts/trade-18.ttf') format('truetype'),
+		url('../fonts/trade-18.svg#trade-18') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+	font-family: 'hacedores';
+	src:url('../fonts/hacedores.eot');
+	src:url('../fonts/hacedores.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/hacedores.woff') format('woff'),
+		url('../fonts/hacedores.ttf') format('truetype'),
+		url('../fonts/hacedores.svg#hacedores') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/*------------------------------------*\
+    #GENERAL
+\*------------------------------------*/
+html , body , .wrap {
+    background : #fff ;
+    font-family: 'trade medium';
+}
+
+a{ color: #bd545c; }
+
+
+
+
+/*------------------------------------*\
+    #SIDEBAR
+\*------------------------------------*/
+#adminmenu, #adminmenu .wp-submenu,
+#adminmenuback, #adminmenuwrap{
+	background: #fff;
+	border-right: 1px solid #939597;
+
+}
+#adminmenuwrap{
+	border-bottom: 1px solid #939597;
+}
+
+#adminmenu a{ color: #58585b; }
+#adminmenu .wp-submenu a{ color: #58585b; }
+
+#adminmenu .wp-submenu a:focus, #adminmenu .wp-submenu a:hover, #adminmenu a:hover, #adminmenu li.menu-top>a:focus{
+	color: #727477;
+}
+
+.view-switch a.current:before{
+	color: #bd545c;
+}
+
+#adminmenu .wp-has-current-submenu .wp-submenu,
+#adminmenu .wp-has-current-submenu .wp-submenu.sub-open,
+#adminmenu .wp-has-current-submenu.opensub .wp-submenu,
+#adminmenu a.wp-has-current-submenu:focus+.wp-submenu,
+.no-js li.wp-has-current-submenu:hover .wp-submenu{
+	background: #b0b0b5;
+}
+
+#adminmenu li.menu-top:hover, #adminmenu li.opensub>a.menu-top, #adminmenu li>a.menu-top:focus{
+	background: #fff100;
+	color: #727477;
+}
+#adminmenu li:hover div.wp-menu-image:before{
+	color: #727477;
+}
+
+#adminmenu .wp-has-current-submenu .wp-submenu .wp-submenu-head, #adminmenu .wp-menu-arrow, #adminmenu .wp-menu-arrow div, #adminmenu li.current a.menu-top, #adminmenu li.wp-has-current-submenu a.wp-has-current-submenu, .folded #adminmenu li.current.menu-top, .folded #adminmenu li.wp-has-current-submenu{
+	background: #fff100;
+	color: #727477;
+}
+
+#adminmenu div.wp-menu-image:before{
+	color: #fff100;
+}
+
+/*------------------------------------*\
+    #ADMIN BAR
+\*------------------------------------*/
+/*#wpadminbar .ab-icon,*/
+/*#wpadminbar .ab-item:before,*/
+/*#wpadminbar > #wp-toolbar > #wp-admin-bar-root-default .ab-icon*/
+
+#wpadminbar #wp-admin-bar-wp-logo .ab-item .ab-icon:before{
+	content: '' !important;
+}
+#wp-admin-bar-wp-logo{
+	background: url('../images/icon-medidor-gray.png') center center !important;
+	background-position: 0 0;
+	background-size: 10px 10px;
+}
+#wpadminbar > #wp-toolbar > #wp-admin-bar-root-default .ab-icon {
+	background: url('../images/icon-medidor-gray.png') !important;
+	background-position: 0 0;
+}
+#wpadminbar #wp-admin-bar-wp-logo.hover > .ab-item .ab-icon {
+	background-position: 0 0;
+}

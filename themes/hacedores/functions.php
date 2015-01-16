@@ -1,5 +1,10 @@
 <?php
 
+wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
+		false,
+		array( '#222', '#333', '#0074a2', '#2ea2cc' ),
+		array( 'base' => '#999', 'focus' => '#2ea2cc', 'current' => '#fff' )
+	);
 
 // DEFINIR LOS PATHS A LOS DIRECTORIOS DE JAVASCRIPT Y CSS ///////////////////////////
 	define('EMAIL_INVALIDO', -2);
@@ -424,3 +429,32 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 		$id = $url_array['v'];
 		return '//www.youtube.com/embed/'.$id;
 	}// get_video_src
+
+
+	// FRONT END SCRIPTS FOOTER //////////////////////////////////////////////////////
+	function footerScripts() {
+		if( wp_script_is( 'functions', 'done' ) ) {
+			if ( is_home() ) { ?>
+				<script type="text/javascript">
+					(function( $ ) {
+						"use strict";
+						$(function(){
+							//On load
+							var set_coordenadas = {};
+							set_coordenadas['hacedores'] = [];
+							set_coordenadas['hacedores'].push({
+								lat: 12345,
+								lon: 12344
+							})
+							set_coordenadas['hacedores'].push({
+								lat: 12349,
+								lon: 12341
+							})
+							creaMapa(set_coordenadas);
+		                });
+		            }(jQuery));
+		        </script>
+    		<?php }  
+    	}
+    }
+    add_action( 'wp_footer', 'footerScripts', 21 );

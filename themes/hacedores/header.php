@@ -16,6 +16,7 @@
 			ga('create', 'UA-56741529-1', 'auto');
 			ga('send', 'pageview');
 		</script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 		<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 		<?php wp_head(); ?>
 	</head>
@@ -27,8 +28,8 @@
 		<div class="container">
 			<header>
 				<div class="[ width clearfix ]">
-					<div class="[ columna xmall-12 ] [ no-xmall no-small no-medium large ] [ user ]">
 						<?php if ( !is_user_logged_in() ) { ?>
+					 <div class="[ columna xmall-12 ] [ no-xmall no-small no-medium large ] [ user ] [ js-abrir-modal ]">
 							<p class="[ right ] [ login-entrar ]"><span class="[ js-abrir-modal ]">Entrar</span></p>
 						  <a class="" href="registro">Registrarse</a>
 						<?php } else { ?>
@@ -51,31 +52,31 @@
 								</li>
 								<?php } ?>
 					   		<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu informacion ]" href="informacion.html">
+					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu informacion ]" href="<?php echo site_url('recursos'); ?>">
 									<h3 class="[ informacion ]">Información</h3>
 									<i class="[ icon-icon_clavo2 ] [ icon informacion ] [ center block ]"></i>
 								</a>
 					      	</li>
 					      	<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu perfiles ]" href="hacedores.html">
+					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu perfiles ]" href="<?php echo site_url('proyectos'); ?>">
 									<h3 class="[ perfiles ]">Hacedores</h3>
 									<i class="[ icon-icon_zanahoria ] [ icon perfiles ] [ center block ]"></i>
 								</a>
 					      	</li>
 					      	<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu programacion ]" href="proyectos.html">
+					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu programacion ]" href="<?php echo site_url('hacedores'); ?>">
 									<h3 class="[ programacion ]">Proyectos</h3>
 									<i class="[ icon-icon_gubia ] [ icon programacion ] [ center block ]"></i>
 								</a>
 							</li>
 							<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu recursos ]" href="espacios.html">
+					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu recursos ]" href="<?php echo site_url('informacion'); ?>">
 									<h3 class="[ recursos ]">Espacios/Recuros</h3>
 									<i class="[ icon-icon_tornillo ] [ icon recursos ] [ center block ]"></i>
 								</a>
 							</li>
 							<li class="[ clearfix ]">
-					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu entrar ]" href="mapa-hacedores.html">
+					      		<a class="[ no-xmall medium ] [ inline-block middle ] [ menu entrar ]" href="<?php echo site_url('mapa-hacedores'); ?>">
 									<h3 class="[ recursos ]">Ver Mapa de Hacedores</h3>
 								</a>
 							</li>
@@ -104,8 +105,8 @@
 			</header>
 			<div class="[ main ]">
 				<div class="[ width clearfix ]">
-					<section class="[ mapa ] [ margin-bottom-big ] ">
-						<div class="[ google-maps ] [ no-xmall medium ]">
+					<section class="[ mapa ] [ margin-bottom-big ] [ relative ]">
+						<div class="[ no-xmall medium ]">
 							<div class="[ menu-container ]">
 								<div class="[ menu-mapa ]">
 									<ul class="[ menu-titulos ]">
@@ -128,6 +129,6 @@
 									</ul>
 								</div>
 							</div>
-							<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7098.94326104394!2d78.0430654485247!3d27.172909818538997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1385710909804" width="600" height="300" frameborder="0" style="border:0"></iframe>
+							<div id="mapa"></div>
 						</div>
 					</section><!-- mapa -->
