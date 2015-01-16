@@ -8,10 +8,6 @@
 			header("Location: ".site_url()."/dashboard");
 			die();
 		}
-		elseif (site_login_post($username, $password)==-1) {
-			header("Location: ".site_url()."?login=paused");
-			die();	
-		}
 		else{
 			header("Location: ".site_url());
 			die();
@@ -26,7 +22,7 @@
 					<div class="[ columna xmall-12 medium-8 large-8 ] [ margin-bottom-medium ] [ clearfix ] [ form-user ]">
 						<form name="registro" method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 							<div class="[ registro-usuarios ] [ content ]">
-								<h3>REGISTRO PARA USUARIOS</h3>
+								<h3>Login para el usuario</h3>
 								<div class="campo">
 									<label for="email-hacedor" class="[ columna xmall-12 ]">Correo electrónico</label>
 									<input name="email" type="email" id="email-hacedor">

@@ -2,7 +2,12 @@
 	if(isset($_POST['submit'])) 
 	{ 
 		$response = register_user_new($_POST);
-		var_dump($response);
+		if (!$response['error']){
+			$location = site_url().'/wp-admin/profile.php';
+			wp_redirect( $location );
+		}else{
+			echo $response['msj'];
+		}
 	}
 ?>
 <?php  get_header(); ?>
