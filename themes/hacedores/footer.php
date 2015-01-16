@@ -47,4 +47,10 @@
 		</footer>
 		<?php wp_footer(); ?>
 	</body>
+	<script>
+		(function($){
+
+		$('.first-container').simplePagination();
+		})(jQuery);
+	</script>
 </html>

@@ -1063,6 +1063,12 @@ a:hover {
   margin: 0;
   list-style: none;
 }
+.pagination-controls div {
+  display: inline-block;
+}
+.pagination-controls a {
+  color: #666666;
+}
 /*MODAL LOGIN*/
 .modal {
   display: none;
