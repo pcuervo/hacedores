@@ -493,7 +493,7 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 							$('li.hacedores').on('click', function(){
 								filtraMarkerCategoria('hacedores', markers, mapa);
 							});
-							$('li.hacedores').on('click', function(){
+							$('li.a').on('click', function(){
 								filtraMarkerSubCategoria('hacedores', 'a', markers, mapa);
 							});
 							$('li.eventos').on('click', function(){
