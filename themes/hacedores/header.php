@@ -35,6 +35,9 @@
 							</a>
 						<?php } else { ?>
 							<a href="<?php echo  esc_url( wp_logout_url(site_url()) ); ?>" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
+								Mi cuenta
+							</a>
+							<a href="<?php echo  esc_url( wp_logout_url(site_url()) ); ?>" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
 								Salir
 							</a>
 						<?php } ?>
