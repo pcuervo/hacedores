@@ -118,7 +118,8 @@
 									<ul class="[ menu-titulos ]">
 										<li class="[ hacedores ] [ trigger ]" data-rel="sub-hacedores">Hacedores</li>
 											<ul class="[ submenu-mapa ] [ sub-hacedores ] [ content ]">
-												<li>No disponible</li>
+													<li class="[ a ]">a</li>
+													<li class="[ b ]">b</li>
 											</ul>
 										<li class="[ proyectos ] [ trigger ]" data-rel="sub-proyectos">Proyectos</li>
 											<ul class="[ submenu-mapa ] [ sub-proyectos ] [  content ]">
