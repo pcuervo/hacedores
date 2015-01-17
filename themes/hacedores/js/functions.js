@@ -271,18 +271,7 @@
 
 var $=jQuery.noConflict();
 /* FUNCIONES PARA GOOGLE MAPS */
-function creaMapa(set_coordenadas){
-	// Estilos mapa
-	console.log(set_coordenadas['hacedores']);
-	// Jalar coordenadas de areas de atención
-	var locations = [];
-	$.each(set_coordenadas['hacedores'], function(i, coordenadas){
-		var latLon = [];
-		latLon.push(coordenadas.lat);
-		latLon.push(coordenadas.lon);
-		locations.push(latLon);
-	});
-
+function creaMapa(){
 	// Crea Mapa
 	var map = new google.maps.Map(document.getElementById('mapa'), {
 		zoom: 15,
@@ -290,34 +279,99 @@ function creaMapa(set_coordenadas){
 		mapTypeControl: false,
 		streetViewControl: false,
 		panControl: false,
-		scrollwheel: false
+		scrollwheel: false,
+		zoomControlOptions: {
+			position: google.maps.ControlPosition.RIGHT_BOTTOM
+		}
 	});
 
+	return map;
+}// crearMapa
+
+function dameMarkers(categoria, subcategorias, mapa){
 	var marker;
 	var markers = new Array();
-	for (var i = 0; i < locations.length; i++) {
+	ubicaciones = [];
+
+	$.each(subcategorias, function(i, subcategoria){
+		$.each(subcategoria, function(j, coordenadas){
+			var latLon = [];
+			latLon.push(i);
+			latLon.push(coordenadas.lat);
+			latLon.push(coordenadas.lon);
+			ubicaciones.push(latLon);
+		});
+	});
+
+	icon = dameIconPath(categoria);
+	for (var i = 0; i < ubicaciones.length; i++) {
 		marker = new google.maps.Marker({
-			position: new google.maps.LatLng(locations[i][0], locations[i][1]),
-			map: map,
+			position: new google.maps.LatLng(ubicaciones[i][1], ubicaciones[i][2]),
+			map: mapa,
+			icon: icon,
+			category: categoria,
+			subcategory: ubicaciones[i][0]
 		});
 		markers.push(marker);
 	}
-	autoCenter();
+	return markers;
+}// agregaMarkers
 
-	// Autocentrar el mapa dependiendo de los marcadores
-	function autoCenter() {
-		//  Crea un nuevo limite
-		var bounds = new google.maps.LatLngBounds();
+function filtraMarkerCategoria(categoria, markers, mapa){
+	//console.log(markers);
+	var filteredResult = markers.filter(function(obj) {
+    	return (obj.category == categoria)
+   	});
+	console.log(filteredResult);
+	$.each(markers, function (index, marker) {
+		marker.setVisible(false);
+	});
+	$.each(filteredResult, function (index, marker) {
+		marker.setVisible(true);
+	});
+	autoCenter(mapa, markers);
+}
 
-		//  Itera todos los marcadores
-		$.each(markers, function (index, marker) {
-			bounds.extend(marker.position);
-		});
-		//  Mete los límites en el mapa
-		map.fitBounds(bounds);
-		var listener = google.maps.event.addListener(map, "idle", function() {
-		if (map.getZoom() > 17) map.setZoom(17);
-			google.maps.event.removeListener(listener);
-		});
-	} // autoCenter
-}// crearMapa
+function filtraMarkerSubCategoria(categoria, subcategoria, markers, mapa){
+	//console.log(markers);
+	var filteredResult = markers.filter(function(obj) {
+    	return (obj.subcategory == subcategoria && obj.category == categoria)
+   	});
+	console.log(filteredResult);
+	$.each(markers, function (index, marker) {
+		marker.setVisible(false);
+	});
+	$.each(filteredResult, function (index, marker) {
+		marker.setVisible(true);
+	});
+	autoCenter(mapa, markers);
+}
+
+// Autocentrar el mapa dependiendo de los marcadores
+function autoCenter(map, markers) {
+	//  Crea un nuevo limite
+	var bounds = new google.maps.LatLngBounds();
+
+	//  Itera todos los marcadores
+	$.each(markers, function (index, marker) {
+		bounds.extend(marker.position);
+	});
+	//  Mete los límites en el mapa
+	map.fitBounds(bounds);
+	var listener = google.maps.event.addListener(map, "idle", function() {
+	if (map.getZoom() > 17) map.setZoom(17);
+		google.maps.event.removeListener(listener);
+	});
+} // autoCenter
+
+function dameIconPath(categoria){
+	switch(categoria){
+		case 'hacedores':
+			icon_path = theme_path + 'marker-hacedores.png';
+			break;
+		case 'eventos':
+			icon_path = theme_path + 'marker-eventos.png';
+			break;
+	}
+	return icon_path;
+}

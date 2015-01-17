@@ -10,7 +10,6 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 	define('EMAIL_INVALIDO', -2);
 	define('PASSWORD_INVALIDO', -3);
 	define('PASSWORD_DIFERENTE', -4);
-
 	define( 'JSPATH', get_template_directory_uri() . '/js/' );
 	define( 'CSSPATH', get_template_directory_uri() . '/css/' );
 	define( 'THEMEPATH', get_template_directory_uri() . '/' );
@@ -29,6 +28,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 
 		// localize scripts
 		wp_localize_script( 'functions', 'ajax_url', admin_url('admin-ajax.php') );
+		wp_localize_script( 'functions', 'theme_path', THEMEPATH.'images/' );
 
 		// styles
 		wp_enqueue_style( 'styles', get_stylesheet_uri() );
@@ -445,17 +445,61 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 						"use strict";
 						$(function(){
 							//On load
-							var set_coordenadas = {};
-							set_coordenadas['hacedores'] = [];
-							set_coordenadas['hacedores'].push({
-								lat: 12345,
-								lon: 12344
-							})
-							set_coordenadas['hacedores'].push({
-								lat: 12349,
-								lon: 12341
-							})
-							creaMapa(set_coordenadas);
+							var categorias_mapa = {};
+							categorias_mapa['hacedores'] = {};						
+							categorias_mapa['proyectos'] = {};						
+							categorias_mapa['espacios'] = {};						
+							categorias_mapa['eventos'] = {};						
+
+							categorias_mapa['hacedores']['a'] = []; 
+							categorias_mapa['hacedores']['b'] = []; 
+							categorias_mapa['hacedores']['a'].push({
+								lat: 19.403510, 
+								lon: -99.174334
+							});
+							categorias_mapa['hacedores']['a'].push({
+								lat: 19.409510, 
+								lon: -99.174334
+							});
+							categorias_mapa['hacedores']['b'].push({
+								lat: 19.403510, 
+								lon: -99.179334
+							});
+							categorias_mapa['hacedores']['b'].push({
+								lat: 19.409510, 
+								lon: -99.179334
+							});
+							categorias_mapa['eventos']['a'] = []; 
+							categorias_mapa['eventos']['b'] = []; 
+							categorias_mapa['eventos']['a'].push({
+								lat: 19.405510, 
+								lon: -99.189334
+							});
+							categorias_mapa['eventos']['b'].push({
+								lat: 19.401510, 
+								lon: -99.179334
+							});
+							// categorias_mapa['proyectos'] = ['a', 'b', 'c']; 
+							// categorias_mapa['espacios'] = ['a', 'b', 'c']; 
+							// categorias_mapa['eventos'] = ['a', 'b', 'c']; 
+
+							var mapa = creaMapa();
+							var markers_hacedores = dameMarkers('hacedores',categorias_mapa['hacedores'], mapa);
+							console.log(markers_hacedores);
+							var markers_eventos = dameMarkers('eventos',categorias_mapa['eventos'], mapa);
+							var markers = markers_hacedores.concat(markers_eventos);
+							autoCenter(mapa, markers);
+
+							$('li.hacedores').on('click', function(){
+								filtraMarkerCategoria('hacedores', markers, mapa);
+							});
+							$('li.hacedores').on('click', function(){
+								filtraMarkerSubCategoria('hacedores', 'a', markers, mapa);
+							});
+							$('li.eventos').on('click', function(){
+								filtraMarkerCategoria('eventos', markers, mapa);
+							});
+
 		                });
 		            }(jQuery));
 		        </script>
