@@ -381,6 +381,21 @@ function posts_for_current_author($query) {
 }
 add_filter('pre_get_posts', 'posts_for_current_author');
 
+function remove_menus(){
+	$role = get_current_user_role();
+	remove_menu_page( 'edit.php' ); //Posts
+	if($role != 'administrator'){
+		remove_menu_page( 'edit.php?post_type=page' );    //Pages
+		remove_menu_page( 'edit-comments.php' );          //Comments
+		remove_menu_page( 'tools.php' );                  //Tools
+		remove_menu_page( 'upload.php' );                 //Media
+		remove_menu_page( 'edit.php?post_type=informacion' );//Informacion
+		remove_menu_page( 'index.php' );                  //Dashboard
+	}
+	
+}
+add_action( 'admin_menu', 'remove_menus' );
+
 //Set a custom role for a new user
 function oa_social_login_set_new_user_role ($user_role)
 {
@@ -462,4 +477,254 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
     		<?php }
     	}
     }
-    add_action( 'wp_footer', 'footerScripts', 21 );
+add_action( 'wp_footer', 'footerScripts', 21 );
+
+//CAMPOS EXTRA PERFIL
+ function fb_add_custom_user_profile_fields( $user ) {
+?>
+	<?php wp_enqueue_media(); ?>
+	<h3><?php _e('Informacion extra de tu perfil', 'your_phone'); ?></h3>
+	
+	<table class="form-table">
+		<tr>
+			<th>
+				<label for="user_categories"><?php _e('Categoria', 'your_category'); ?>
+			</label></th>
+			<td>
+				<?php
+                $data =   get_user_meta( $user->ID, 'user_categories', false );
+                $args = array( 'hide_empty' =>0, 'taxonomy'=> 'category');
+                $categories=  get_categories($args);
+                if ($categories){
+                    foreach ( $categories as $category ){ 
+											  $selected = '';
+												if(count($data) > 0){
+													if(in_array($category->term_id,(array)$data[0])) {
+															$selected = 'checked="checked""';
+													}
+												}
+                        echo '<input name="user_categories[]" value="'.$category->term_id.'" '.$selected.' type="checkbox"/>'.$category->name.'<br/>';
+                    }
+                }
+            ?>
+				<span class="description"><?php _e('Ingresa tu categoria.', 'your_category'); ?></span>
+			</td>
+		</tr>
+	</table>
+
+	<table class="form-table">
+		<tr>
+			<th>
+				<label for="celular"><?php _e('Telefono', 'your_phone'); ?>
+			</label></th>
+			<td>
+				<input type="text" name="celular" id="celular" value="<?php echo esc_attr( get_the_author_meta( 'celular', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description"><?php _e('Ingersa tu celular.', 'your_phone'); ?></span>
+			</td>
+		</tr>
+	</table>
+
+	<table class="form-table">
+		<tr>
+			<th>
+				<label for="direccion"><?php _e('Direccion', 'your_adress'); ?>
+			</label></th>
+			<td>
+				<input type="text" name="direccion" id="direccion" value="<?php echo esc_attr( get_the_author_meta( 'direccion', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description"><?php _e('Ingersa tu direccion.', 'your_adress'); ?></span>
+			</td>
+		</tr>
+	</table>
+
+	<table class="form-table">
+		<tr>
+			<th>
+				<label for="liga_instructable"><?php _e('Liga Instructable', 'your_liga'); ?>
+			</label></th>
+			<td>
+				<input type="text" name="liga_instructable" id="liga_instructable" value="<?php echo esc_attr( get_the_author_meta( 'liga_instructable', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description"><?php _e('Ingersa tu liga,', 'your_liga'); ?></span>
+			</td>
+		</tr>
+	</table>
+
+	<table class="form-table">
+		<tr>
+			<th>
+				<label for="liga_video"><?php _e('Liga Video', 'your_video'); ?>
+			</label></th>
+			<td>
+				<input type="text" name="liga_video" id="liga_video" value="<?php echo esc_attr( get_the_author_meta( 'liga_video', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description"><?php _e('**El video debe ser redireccionado por medio de una liga de Youtube o Vimeo', 'your_video'); ?></span>
+			</td>
+		</tr>
+	</table>
+
+<table class="form-table">
+ 
+		<tr>
+				<th><label for="user_meta_image"><?php _e( 'Imagen pricnipal', 'textdomain' ); ?></label></th>
+				<td>
+						<!-- Outputs the image after save -->
+						<img src="<?php echo esc_url( get_the_author_meta( 'user_profile_img', $user->ID ) ); ?>" style="width:150px;"><br />
+						<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
+						<input type="text" name="user_profile_img" id="user_profile_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_profile_img', $user->ID ) ); ?>" class="regular-text" />
+						<!-- Outputs the save button -->
+						<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
+						<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
+				</td>
+		</tr>
+
+</table><!-- end form-table -->
+
+<table class="form-table">
+ 
+		<tr>
+				<th><label for="user_meta_image"><?php _e( 'Imagen 1', 'textdomain' ); ?></label></th>
+				<td>
+						<!-- Outputs the image after save -->
+						<img src="<?php echo esc_url( get_the_author_meta( 'user_uno_img', $user->ID ) ); ?>" style="width:150px;"><br />
+						<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
+						<input type="text" name="user_uno_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_uno_img', $user->ID ) ); ?>" class="regular-text" />
+						<!-- Outputs the save button -->
+						<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
+						<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
+				</td>
+		</tr>
+
+</table><!-- end form-table -->
+
+<table class="form-table">
+ 
+		<tr>
+				<th><label for="user_meta_image"><?php _e( 'Imagen 2', 'textdomain' ); ?></label></th>
+				<td>
+						<!-- Outputs the image after save -->
+						<img src="<?php echo esc_url( get_the_author_meta( 'user_dos_img', $user->ID ) ); ?>" style="width:150px;"><br />
+						<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
+						<input type="text" name="user_dos_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_dos_img', $user->ID ) ); ?>" class="regular-text" />
+						<!-- Outputs the save button -->
+						<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
+						<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
+				</td>
+		</tr>
+
+</table><!-- end form-table -->
+
+<table class="form-table">
+ 
+		<tr>
+				<th><label for="user_meta_image"><?php _e( 'Imagen 3', 'textdomain' ); ?></label></th>
+				<td>
+						<!-- Outputs the image after save -->
+						<img src="<?php echo esc_url( get_the_author_meta( 'user_tres_img', $user->ID ) ); ?>" style="width:150px;"><br />
+						<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
+						<input type="text" name="user_tres_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_tres_img', $user->ID ) ); ?>" class="regular-text" />
+						<!-- Outputs the save button -->
+						<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
+						<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
+				</td>
+		</tr>
+
+</table><!-- end form-table -->
+
+<table class="form-table">
+ 
+		<tr>
+				<th><label for="user_meta_image"><?php _e( 'Imagen 4', 'textdomain' ); ?></label></th>
+				<td>
+						<!-- Outputs the image after save -->
+						<img src="<?php echo esc_url( get_the_author_meta( 'user_cuatro_img', $user->ID ) ); ?>" style="width:150px;"><br />
+						<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
+						<input type="text" name="user_cuatro_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_cuatro_img', $user->ID ) ); ?>" class="regular-text" />
+						<!-- Outputs the save button -->
+						<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
+						<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
+				</td>
+		</tr>
+
+</table><!-- end form-table -->
+
+
+
+<?php 
+}
+
+function fb_save_custom_user_profile_fields( $user_id ) {
+	
+	if ( !current_user_can( 'edit_user', $user_id ) )
+		return FALSE;
+	
+	update_user_meta( $user_id, 'celular', $_POST['celular'] );
+	update_user_meta( $user_id, 'user_categories', $_POST['user_categories']);
+	update_user_meta( $user_id, 'direccion', $_POST['direccion']);
+	update_user_meta( $user_id, 'liga_instructable', $_POST['liga_instructable']);
+	update_user_meta( $user_id, 'user_profile_img', $_POST['user_profile_img'] );
+	
+	update_user_meta( $user_id, 'user_uno_img', $_POST['user_uno_img'] );
+	update_user_meta( $user_id, 'user_dos_img', $_POST['user_dos_img'] );
+	update_user_meta( $user_id, 'user_tres_img', $_POST['user_tres_img'] );
+	update_user_meta( $user_id, 'user_cuatro_img', $_POST['user_cuatro_img'] );
+}
+
+add_action( 'show_user_profile', 'fb_add_custom_user_profile_fields' );
+add_action( 'edit_user_profile', 'fb_add_custom_user_profile_fields' );
+
+add_action( 'personal_options_update', 'fb_save_custom_user_profile_fields' );
+add_action( 'edit_user_profile_update', 'fb_save_custom_user_profile_fields' );
+
+/**
+ * Return an ID of an attachment by searching the database with the file URL.
+ *
+ * First checks to see if the $url is pointing to a file that exists in
+ * the wp-content directory. If so, then we search the database for a
+ * partial match consisting of the remaining path AFTER the wp-content
+ * directory. Finally, if a match is found the attachment ID will be
+ * returned.
+ *
+ * http://frankiejarrett.com/get-an-attachment-id-by-url-in-wordpress/
+ *
+ * @return {int} $attachment
+ */
+function get_attachment_image_by_url( $url ) {
+ 
+    // Split the $url into two parts with the wp-content directory as the separator.
+    $parse_url  = explode( parse_url( WP_CONTENT_URL, PHP_URL_PATH ), $url );
+ 
+    // Get the host of the current site and the host of the $url, ignoring www.
+    $this_host = str_ireplace( 'www.', '', parse_url( home_url(), PHP_URL_HOST ) );
+    $file_host = str_ireplace( 'www.', '', parse_url( $url, PHP_URL_HOST ) );
+ 
+    // Return nothing if there aren't any $url parts or if the current host and $url host do not match.
+    if ( !isset( $parse_url[1] ) || empty( $parse_url[1] ) || ( $this_host != $file_host ) ) {
+        return;
+    }
+ 
+    // Now we're going to quickly search the DB for any attachment GUID with a partial path match.
+    // Example: /uploads/2013/05/test-image.jpg
+    global $wpdb;
+ 
+    $prefix     = $wpdb->prefix;
+    $attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM " . $prefix . "posts WHERE guid RLIKE %s;", $parse_url[1] ) );
+ 
+    // Returns null if no attachment is found.
+    return $attachment[0];
+}
+
+/*
+ * Retrieve the appropriate image size
+ */
+function get_additional_user_meta_thumb() {
+ 
+    $attachment_url = esc_url( get_the_author_meta( 'user_meta_image', $post->post_author ) );
+ 
+     // grabs the id from the URL using Frankie Jarretts function
+    $attachment_id = get_attachment_image_by_url( $attachment_url );
+ 
+    // retrieve the thumbnail size of our image
+    $image_thumb = wp_get_attachment_image_src( $attachment_id, 'thumbnail' );
+ 
+    // return the image thumbnail
+    return $image_thumb[0];
+ 
+}

@@ -265,7 +265,8 @@
 		$('div').addClass('mm-slideout');
 	});
 
-	/*PAGINATION CALL*/
+	// Uploading files
+
 	
 })(jQuery);
 
@@ -321,3 +322,46 @@ function creaMapa(set_coordenadas){
 		});
 	} // autoCenter
 }// crearMapa
+
+function get_attachment_image_by_url( $url ) {
+ 
+    // Split the $url into two parts with the wp-content directory as the separator.
+    $parse_url  = explode( parse_url( WP_CONTENT_URL, PHP_URL_PATH ), $url );
+ 
+    // Get the host of the current site and the host of the $url, ignoring www.
+    $this_host = str_ireplace( 'www.', '', parse_url( home_url(), PHP_URL_HOST ) );
+    $file_host = str_ireplace( 'www.', '', parse_url( $url, PHP_URL_HOST ) );
+ 
+    // Return nothing if there aren't any $url parts or if the current host and $url host do not match.
+    if ( !isset( $parse_url[1] ) || empty( $parse_url[1] ) || ( $this_host != $file_host ) ) {
+        return;
+    }
+ 
+    // Now we're going to quickly search the DB for any attachment GUID with a partial path match.
+    // Example: /uploads/2013/05/test-image.jpg
+    global $wpdb;
+ 
+    $prefix     = $wpdb->prefix;
+    $attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM " . $prefix . "posts WHERE guid RLIKE %s;", $parse_url[1] ) );
+ 
+    // Returns null if no attachment is found.
+    return $attachment[0];
+}// FIN get_attachment_image_by_url
+
+/*
+ * Retrieve the appropriate image size
+ */
+function get_additional_user_meta_thumb() {
+ 
+    $attachment_url = esc_url( get_the_author_meta( 'user_meta_image', $post->post_author ) );
+ 
+     // grabs the id from the URL using Frankie Jarretts function
+    $attachment_id = get_attachment_image_by_url( $attachment_url );
+ 
+    // retrieve the thumbnail size of our image
+    $image_thumb = wp_get_attachment_image_src( $attachment_id, 'thumbnail' );
+ 
+    // return the image thumbnail
+    return $image_thumb[0];
+ 
+}// FIN get_additional_user_meta_thumb
