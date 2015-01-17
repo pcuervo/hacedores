@@ -446,42 +446,49 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 						$(function(){
 							//On load
 							var categorias_mapa = {};
-							categorias_mapa['hacedores'] = {};						
-							categorias_mapa['proyectos'] = {};						
-							categorias_mapa['espacios'] = {};						
-							categorias_mapa['eventos'] = {};						
+							categorias_mapa['hacedores'] = {};
+							categorias_mapa['proyectos'] = {};
+							categorias_mapa['espacios'] = {};
+							categorias_mapa['eventos'] = {};
 
-							categorias_mapa['hacedores']['a'] = []; 
-							categorias_mapa['hacedores']['b'] = []; 
-							categorias_mapa['hacedores']['a'].push({
-								lat: 19.403510, 
-								lon: -99.174334
-							});
-							categorias_mapa['hacedores']['a'].push({
-								lat: 19.409510, 
-								lon: -99.174334
-							});
-							categorias_mapa['hacedores']['b'].push({
-								lat: 19.403510, 
-								lon: -99.179334
-							});
-							categorias_mapa['hacedores']['b'].push({
-								lat: 19.409510, 
-								lon: -99.179334
-							});
-							categorias_mapa['eventos']['a'] = []; 
-							categorias_mapa['eventos']['b'] = []; 
-							categorias_mapa['eventos']['a'].push({
-								lat: 19.405510, 
-								lon: -99.189334
-							});
-							categorias_mapa['eventos']['b'].push({
-								lat: 19.401510, 
-								lon: -99.179334
-							});
-							// categorias_mapa['proyectos'] = ['a', 'b', 'c']; 
-							// categorias_mapa['espacios'] = ['a', 'b', 'c']; 
-							// categorias_mapa['eventos'] = ['a', 'b', 'c']; 
+							/*------------------------------------*\
+							    #TYPES
+							\*------------------------------------*/
+								/*------------------------------------*\
+								    #CATEGORIAS
+								\*------------------------------------*/
+									/*------------------------------------*\
+									    #MARKERS
+									\*------------------------------------*/
+								categorias_mapa['hacedores']['a'] = [];
+									categorias_mapa['hacedores']['a'].push({
+										lat: 19.403510,
+										lon: -99.174334
+									});
+									categorias_mapa['hacedores']['a'].push({
+										lat: 19.409510,
+										lon: -99.174334
+									});
+
+								categorias_mapa['hacedores']['b'] = [];
+									categorias_mapa['hacedores']['b'].push({
+										lat: 19.403510,
+										lon: -99.179334
+									});
+									categorias_mapa['hacedores']['b'].push({
+										lat: 19.409510,
+										lon: -99.179334
+									});
+								categorias_mapa['eventos']['a'] = [];
+								categorias_mapa['eventos']['b'] = [];
+								categorias_mapa['eventos']['a'].push({
+									lat: 19.405510,
+									lon: -99.189334
+								});
+								categorias_mapa['eventos']['b'].push({
+									lat: 19.401510,
+									lon: -99.179334
+								});
 
 							var mapa = creaMapa();
 							var markers_hacedores = dameMarkers('hacedores',categorias_mapa['hacedores'], mapa);
@@ -493,16 +500,15 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 							$('li.hacedores').on('click', function(){
 								filtraMarkerCategoria('hacedores', markers, mapa);
 							});
-							$('li.hacedores').on('click', function(){
+							$('li.a').on('click', function(){
 								filtraMarkerSubCategoria('hacedores', 'a', markers, mapa);
 							});
 							$('li.eventos').on('click', function(){
 								filtraMarkerCategoria('eventos', markers, mapa);
 							});
-
-		                });
-		            }(jQuery));
-		        </script>
+						});
+					}(jQuery));
+				</script>
     		<?php }
     	}
     }

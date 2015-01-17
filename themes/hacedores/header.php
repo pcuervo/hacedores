@@ -118,20 +118,80 @@
 									<ul class="[ menu-titulos ]">
 										<li class="[ hacedores ] [ trigger ]" data-rel="sub-hacedores">Hacedores</li>
 											<ul class="[ submenu-mapa ] [ sub-hacedores ] [ content ]">
-													<li class="[ a ]">a</li>
-													<li class="[ b ]">b</li>
+												<li class="[ a ]">a</li>
+												<li class="[ b ]">b</li>
 											</ul>
 										<li class="[ proyectos ] [ trigger ]" data-rel="sub-proyectos">Proyectos</li>
-											<ul class="[ submenu-mapa ] [ sub-proyectos ] [  content ]">
-												<li>No disponible</li>
+											<ul class="[ submenu-mapa ] [ sub-proyectos ] [ content ]">
+												<?php
+													$customPostTaxonomies = get_object_taxonomies('proyecto');
+													if(count($customPostTaxonomies) > 0){
+														foreach($customPostTaxonomies as $tax){
+															$args = array(
+																'orderby' 		=> 'name',
+																'show_count' 	=> 0,
+																'pad_counts' 	=> 0,
+																'hierarchical' 	=> 1,
+																'taxonomy' 		=> $tax,
+																'exclude' 		=> 1
+															);
+															$customPostCategories = get_categories( $args );
+															foreach ($customPostCategories as $customPostCategory) {
+																$customPostCategoryName = $customPostCategory->name;
+																$customPostCategorySlug = $customPostCategory->slug; ?>
+																<li class="[ <?php echo $customPostCategorySlug; ?> ]"><?php echo $customPostCategoryName; ?></li>
+															<?php }
+														}
+													}
+												?>
 											</ul>
 										<li class="[ espacios ] [ trigger ]" data-rel="sub-espacios">Espacios / Recursos</li>
 											<ul class="[ submenu-mapa ] [ sub-espacios ] [ content ]">
-												<li>No disponible</li>
+												<?php
+													$customPostTaxonomies = get_object_taxonomies('recurso');
+													if(count($customPostTaxonomies) > 0){
+														foreach($customPostTaxonomies as $tax){
+															$args = array(
+																'orderby' 		=> 'name',
+																'show_count' 	=> 0,
+																'pad_counts' 	=> 0,
+																'hierarchical' 	=> 1,
+																'taxonomy' 		=> $tax,
+																'exclude' 		=> 1
+															);
+															$customPostCategories = get_categories( $args );
+															foreach ($customPostCategories as $customPostCategory) {
+																$customPostCategoryName = $customPostCategory->name;
+																$customPostCategorySlug = $customPostCategory->slug; ?>
+																<li class="[ <?php echo $customPostCategorySlug; ?> ]"><?php echo $customPostCategoryName; ?></li>
+															<?php }
+														}
+													}
+												?>
 											</ul>
 										<li class="[ eventos ] [ trigger ]" data-rel="sub-eventos">Eventos</li>
 											<ul class="[ submenu-mapa ] [ sub-eventos ] [ content ]">
-												<li>No disponible</li>
+												<?php
+													$customPostTaxonomies = get_object_taxonomies('evento');
+													if(count($customPostTaxonomies) > 0){
+														foreach($customPostTaxonomies as $tax){
+															$args = array(
+																'orderby' 		=> 'name',
+																'show_count' 	=> 0,
+																'pad_counts' 	=> 0,
+																'hierarchical' 	=> 1,
+																'taxonomy' 		=> $tax,
+																'exclude' 		=> 1
+															);
+															$customPostCategories = get_categories( $args );
+															foreach ($customPostCategories as $customPostCategory) {
+																$customPostCategoryName = $customPostCategory->name;
+																$customPostCategorySlug = $customPostCategory->slug; ?>
+																<li class="[ <?php echo $customPostCategorySlug; ?> ]"><?php echo $customPostCategoryName; ?></li>
+															<?php }
+														}
+													}
+												?>
 											</ul>
 									</ul>
 								</div>

@@ -266,7 +266,7 @@
 	});
 
 	/*PAGINATION CALL*/
-	
+
 })(jQuery);
 
 var $=jQuery.noConflict();
@@ -303,7 +303,7 @@ function dameMarkers(categoria, subcategorias, mapa){
 		});
 	});
 
-	icon = dameIconPath(categoria);
+	var icon = dameIconPath(categoria);
 	for (var i = 0; i < ubicaciones.length; i++) {
 		marker = new google.maps.Marker({
 			position: new google.maps.LatLng(ubicaciones[i][1], ubicaciones[i][2]),
