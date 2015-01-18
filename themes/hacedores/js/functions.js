@@ -303,7 +303,7 @@ function dameMarkers(categoria, subcategorias, mapa){
 		});
 	});
 
-	var icon = dameIconPath(categoria);
+	icon = dameIconPath(categoria);
 	for (var i = 0; i < ubicaciones.length; i++) {
 		marker = new google.maps.Marker({
 			position: new google.maps.LatLng(ubicaciones[i][1], ubicaciones[i][2]),
