@@ -14,7 +14,11 @@
 					if ( $queryProyecto->have_posts() ) : while ( $queryProyecto->have_posts() ) : $queryProyecto->the_post(); ?>
 						<div class="[ post ] [ margin-bottom-medium ] [ columna xmall-12 small-6 medium-3 ]">
 							<a href="<?php the_permalink(); ?>">
-								<?php the_post_thumbnail('medium', array('class' => '[ margin-bottom-medium ]')); ?>
+								<?php if ( has_post_thumbnail() ) { ?>
+									<?php the_post_thumbnail('medium', array('class' => '[ margin-bottom-medium ]')); ?>
+								<?php } else { $userAvatar = THEMEPATH.'images/default-recursos.png';?>
+									<img class="[ margin-bottom-small ]" src="<?php echo $userAvatar; ?>" alt="<?php the_title(); ?>">
+								<?php } ?>
 							</a>
 							<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
 							<?php the_content(); ?>
