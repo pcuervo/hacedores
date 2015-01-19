@@ -512,72 +512,16 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 		if( wp_script_is( 'functions', 'done' ) ) {
 			if ( is_home() ) { ?>
 				<script type="text/javascript">
-					(function( $ ) {
-						"use strict";
-						$(function(){
-
-							var mapa = creaMapa();
-							var categorias_mapa = {};
-							var markers = [];
-							// Agrega todos los marcadores al mapa
-							$.each(arrayMapa, function(categoria, subcategorias){
-								categorias_mapa[categoria] = {};		
-								$.each(subcategorias, function(i, subcategoria){
-									if(typeof subcategoria != 'object') return true;
-
-									categorias_mapa[categoria][subcategoria] = []; 
-									categorias_mapa[categoria][subcategoria].push({
-										titulo: subcategoria[0],
-										lat: subcategoria[1],
-										lon: subcategoria[2],
-										slug: subcategoria[3]
-									});
-								});		
-								var current_markers = dameMarkers(categoria,categorias_mapa[categoria], mapa);
-								markers = markers.concat(current_markers);
-							});
-
-							// Muestra todos los marcadores centrados en el mapa
-							autoCenter(mapa, markers);
-
-							// Agrega los filtros para cada categoría y subcategoría
-							$.each(arrayMapa, function(categoria, subcategorias){
-								$('li.'+categoria).on('click', function(){
-									filtraMarkerCategoria(categoria, markers, mapa);
-								});	
-								
-								$.each(subcategorias, function(i, subcategoria){
-									if(typeof subcategoria != 'object') return true;
-									
-									$('ul.sub-'+categoria+' li.'+subcategoria[3]).on('click', function(){
-										filtraMarkerSubCategoria(categoria, subcategoria[3], markers, mapa);
-									});	
-								});
-							});
-							//var markers_recursos = dameMarkers('recurso',categorias_mapa['recurso'], mapa);
-							//console.log(markers_hacedores);
-							//var markers_eventos = dameMarkers('eventos',categorias_mapa['eventos'], mapa);
-							//var markers = markers_recursos;
-							
-							
-							
-						
-						
-							
-
-							
-							// $('li.eventos').on('click', function(){
-							// 	filtraMarkerCategoria('eventos', markers, mapa);
-							// });
-							// $('li.espacios').on('click', function(){
-							// 	filtraMarkerCategoria('recurso', markers, mapa);
-							// });
-						});
-					}(jQuery));
+					var mapa = creaMapa();
+					var markers = creaMarkers(mapa);
+					// Muestra todos los marcadores centrados en el mapa
+					autoCenter(mapa, markers);
+					// Agrega los filtros para cada categoría y subcategoría
+					agregaFiltrosMarkers(mapa, markers);
 				</script>
     		<?php }
-    	}
-    }
+    	} // home
+    }// footerScripts
 add_action( 'wp_footer', 'footerScripts', 21 );
 
 //CAMPOS EXTRA PERFIL
