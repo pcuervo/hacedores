@@ -288,6 +288,47 @@ function creaMapa(){
 	return map;
 }// crearMapa
 
+function creaMarkers(mapa){
+	var categorias_mapa = {};
+	var markers = [];
+	// Agrega todos los marcadores al mapa
+	$.each(arrayMapa, function(categoria, subcategorias){
+		categorias_mapa[categoria] = {};		
+		$.each(subcategorias, function(i, subcategoria){
+			if(typeof subcategoria != 'object') return true;
+
+			categorias_mapa[categoria][subcategoria] = []; 
+			categorias_mapa[categoria][subcategoria].push({
+				titulo: subcategoria[0],
+				lat: subcategoria[1],
+				lon: subcategoria[2],
+				slug: subcategoria[3]
+			});
+		});		
+		var current_markers = dameMarkers(categoria,categorias_mapa[categoria], mapa);
+		markers = markers.concat(current_markers);
+	});
+	return markers;
+}// creaMarkers
+
+function agregaFiltrosMarkers(mapa, markers){
+	$.each(arrayMapa, function(categoria, subcategorias){
+
+		$('li.'+categoria).on('click', function(){
+			filtraMarkerCategoria(categoria, markers, mapa);
+		});	
+		
+		$.each(subcategorias, function(i, subcategoria){
+			if(typeof subcategoria != 'object') return true;
+			
+			$('ul.sub-'+categoria+' li.'+subcategoria[3]).on('click', function(){
+				filtraMarkerSubCategoria(categoria, subcategoria[3], markers, mapa);
+			});	
+		});
+
+	});
+}// agregaFiltrosMarkers
+
 function dameMarkers(categoria, subcategorias, mapa){
 	if(isEmpty(subcategorias)) return new Array();
 
@@ -301,7 +342,7 @@ function dameMarkers(categoria, subcategorias, mapa){
 	$.each(subcategorias, function(i, subcategoria){
 		$.each(subcategoria, function(j, coordenadas){
 			var latLon = [];
-			var contenidoInfoWindow ='<h3>'+coordenadas.titulo+'</h3><p>' + coordenadas.url + '</p>';
+			var contenidoInfoWindow ='<h3>'+coordenadas.titulo+'</h3>';
 			latLon.push(i);
 			latLon.push(coordenadas.lat);
 			latLon.push(coordenadas.lon);
@@ -338,10 +379,12 @@ function filtraMarkerCategoria(categoria, markers, mapa){
 	$.each(markers, function (index, marker) {
 		marker.setVisible(false);
 	});
+	var visible_markers = [];
 	$.each(filteredResult, function (index, marker) {
 		marker.setVisible(true);
+		visible_markers.push(marker);
 	});
-	autoCenter(mapa, markers);
+	autoCenter(mapa, visible_markers);
 }
 
 function filtraMarkerSubCategoria(categoria, subcategoria, markers, mapa){
@@ -351,13 +394,16 @@ function filtraMarkerSubCategoria(categoria, subcategoria, markers, mapa){
 	$.each(markers, function (index, marker) {
 		marker.setVisible(false);
 	});
+	var visible_markers = [];
 	$.each(filteredResult, function (index, marker) {
 		marker.setVisible(true);
+		visible_markers.push(marker);
 	});
-	autoCenter(mapa, markers);
-}
+	autoCenter(mapa, visible_markers);
+}// filtraMarkerSubCategoria
 
 function autoCenter(map, markers) {
+	console.log('autocentering...');
 	//  Crea un nuevo limite
 	var bounds = new google.maps.LatLngBounds();
 
@@ -378,7 +424,7 @@ function dameIconPath(categoria){
 		case 'hacedores':
 			icon_path = theme_path + 'marker-hacedores.png';
 			break;
-		case 'eventos':
+		case 'evento':
 			icon_path = theme_path + 'marker-eventos.png';
 			break;
 		case 'recurso':
