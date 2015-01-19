@@ -133,7 +133,8 @@
 																'pad_counts' 	=> 0,
 																'hierarchical' 	=> 1,
 																'taxonomy' 		=> $tax,
-																'exclude' 		=> 1
+																'exclude' 		=> 1,
+																'hide_empty' 	=> 1
 															);
 															$customPostCategories = get_categories( $args );
 															foreach ($customPostCategories as $customPostCategory) {
@@ -157,7 +158,8 @@
 																'pad_counts' 	=> 0,
 																'hierarchical' 	=> 1,
 																'taxonomy' 		=> $tax,
-																'exclude' 		=> 1
+																'exclude' 		=> 1,
+																'hide_empty' 	=> 1
 															);
 															$customPostCategories = get_categories( $args );
 															foreach ($customPostCategories as $customPostCategory) {
@@ -182,7 +184,7 @@
 																'hierarchical' 	=> 1,
 																'taxonomy' 		=> $tax,
 																'exclude' 		=> 1,
-																'hide_empty' 	=> 0
+																'hide_empty' 	=> 1
 															);
 															$customPostCategories = get_categories( $args );
 															foreach ($customPostCategories as $customPostCategory) {

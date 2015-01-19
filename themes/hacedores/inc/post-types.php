@@ -6,7 +6,6 @@
 
 	add_action('init', function(){
 
-
 		// Proyectos
 		$labels = array(
 			'name'          => 'Proyectos',
@@ -34,7 +33,7 @@
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => 6,
-			'taxonomies'         => array( 'category' ),
+			'taxonomies'         => array( 'category-proyectos' ),
 			'supports'           => array( 'title', 'editor', 'thumbnail' )
 		);
 		register_post_type( 'proyecto', $args );
@@ -66,7 +65,7 @@
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => 6,
-			'taxonomies'         => array( 'category' ),
+			'taxonomies'         => array( 'category-recursos' ),
 			'supports'           => array( 'title', 'editor', 'thumbnail' )
 		);
 		register_post_type( 'recurso', $args );
@@ -98,7 +97,7 @@
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => 6,
-			'taxonomies'         => array( 'category' ),
+			'taxonomies'         => array( 'category-eventos' ),
 			'supports'           => array( 'title', 'editor', 'thumbnail' )
 		);
 		register_post_type( 'evento', $args );
@@ -133,5 +132,4 @@
 			'supports'           => array( 'title', 'editor', 'thumbnail' )
 		);
 		register_post_type( 'informacion', $args );
-
 	});
