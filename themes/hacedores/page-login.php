@@ -9,8 +9,7 @@
 			die();
 		}
 		else{
-			header("Location: ".site_url());
-			die();
+			echo "Usuario y/o contraseña invalida";
 		}
 	}
 ?>
