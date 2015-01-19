@@ -50,8 +50,7 @@
 	</body>
 	<script>
 		(function($){
-
-		$('.first-container').simplePagination();
+			$('.first-container').simplePagination();
 		})(jQuery);
 	</script>
 </html>
