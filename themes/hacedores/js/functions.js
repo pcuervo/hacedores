@@ -313,7 +313,7 @@ function creaMarkers(mapa){
 
 function agregaFiltrosMarkers(mapa, markers){
 	$.each(arrayMapa, function(categoria, subcategorias){
-		
+
 		$('li.'+categoria).on('click', function(){
 			filtraMarkerCategoria(categoria, markers, mapa);
 		});	
@@ -379,10 +379,12 @@ function filtraMarkerCategoria(categoria, markers, mapa){
 	$.each(markers, function (index, marker) {
 		marker.setVisible(false);
 	});
+	var visible_markers = [];
 	$.each(filteredResult, function (index, marker) {
 		marker.setVisible(true);
+		visible_markers.push(marker);
 	});
-	autoCenter(mapa, markers);
+	autoCenter(mapa, visible_markers);
 }
 
 function filtraMarkerSubCategoria(categoria, subcategoria, markers, mapa){
@@ -392,13 +394,16 @@ function filtraMarkerSubCategoria(categoria, subcategoria, markers, mapa){
 	$.each(markers, function (index, marker) {
 		marker.setVisible(false);
 	});
+	var visible_markers = [];
 	$.each(filteredResult, function (index, marker) {
 		marker.setVisible(true);
+		visible_markers.push(marker);
 	});
-	autoCenter(mapa, markers);
-}
+	autoCenter(mapa, visible_markers);
+}// filtraMarkerSubCategoria
 
 function autoCenter(map, markers) {
+	console.log('autocentering...');
 	//  Crea un nuevo limite
 	var bounds = new google.maps.LatLngBounds();
 
