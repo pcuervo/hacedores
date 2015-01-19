@@ -6,13 +6,13 @@
 			$location = site_url().'/wp-admin/profile.php';
 			wp_redirect( $location );
 		}else{
-			echo $response['msj'];
+			echo "El correo ya ha sido registrado";
 		}
 	}
 ?>
 <?php  get_header(); ?>
 <div class="container">
-			<?php do_action('oa_social_login'); ?>
+	<?php do_action('oa_social_login'); ?>		
 			<div class="[ main ]">
 				<div class="[ width clearfix ]">
 					<div class="[ columna xmall-12 medium-8 large-8 ] [ margin-bottom-medium ] [ clearfix ] [ form-user ]">
