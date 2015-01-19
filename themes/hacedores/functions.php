@@ -593,19 +593,39 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</td>
 		</tr>
 	</table>
-
 	<table class="form-table">
 		<tr>
 			<th>
-				<label for="direccion"><?php _e('Direccion', 'your_adress'); ?>
-			</label></th>
+				<label for="direccion"><?php _e('Direccion', 'your_adress'); ?></label>
+			</th>
 			<td>
 				<input type="text" name="direccion" id="direccion" value="<?php echo esc_attr( get_the_author_meta( 'direccion', $user->ID ) ); ?>" class="regular-text" /><br />
 				<span class="description"><?php _e('Ingersa tu direccion.', 'your_adress'); ?></span>
 			</td>
 		</tr>
 	</table>
-
+	<table class="form-table">
+		<tr>
+			<th>
+				<label for="latitud"><?php _e('Latitud', 'latitud'); ?></label>
+			</th>
+			<td>
+				<input type="text" name="latitud" id="latitud" value="<?php echo esc_attr( get_the_author_meta( 'latitud', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description"><?php _e('Ingersa tu latitud.', 'your_adress'); ?></span>
+			</td>
+		</tr>
+	</table>
+	<table class="form-table">
+		<tr>
+			<th>
+				<label for="longitud"><?php _e('Longitud', 'longitud'); ?></label>
+			</th>
+			<td>
+				<input type="text" name="longitud" id="longitud" value="<?php echo esc_attr( get_the_author_meta( 'longitud', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description"><?php _e('Ingersa tu longitud.', 'your_adress'); ?></span>
+			</td>
+		</tr>
+	</table>
 	<table class="form-table">
 		<tr>
 			<th>
@@ -617,12 +637,11 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</td>
 		</tr>
 	</table>
-
 	<table class="form-table">
 		<tr>
 			<th>
-				<label for="liga_video"><?php _e('Liga Video', 'your_video'); ?>
-			</label></th>
+				<label for="liga_video"><?php _e('Liga Video', 'your_video'); ?></label>
+			</th>
 			<td>
 				<input type="text" name="liga_video" id="liga_video" value="<?php echo esc_attr( get_the_author_meta( 'liga_video', $user->ID ) ); ?>" class="regular-text" /><br />
 				<span class="description"><?php _e('**El video debe ser redireccionado por medio de una liga de Youtube o Vimeo', 'your_video'); ?></span>
@@ -724,12 +743,14 @@ function fb_save_custom_user_profile_fields( $user_id ) {
 
 	if ( !current_user_can( 'edit_user', $user_id ) )
 		return FALSE;
-	
+
 	if( isset($_POST['user_categories']) ){
 		update_user_meta( $user_id, 'user_categories', $_POST['user_categories']);
 	}
 	update_user_meta( $user_id, 'celular', $_POST['celular'] );
 	update_user_meta( $user_id, 'direccion', $_POST['direccion']);
+	update_user_meta( $user_id, 'latitud', $_POST['latitud']);
+	update_user_meta( $user_id, 'longitud', $_POST['longitud']);
 	update_user_meta( $user_id, 'liga_instructable', $_POST['liga_instructable']);
 	update_user_meta( $user_id, 'liga_video', $_POST['liga_video']);
 	update_user_meta( $user_id, 'user_profile_img', $_POST['user_profile_img'] );
