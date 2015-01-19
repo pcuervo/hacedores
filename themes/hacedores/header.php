@@ -163,8 +163,7 @@
 															<?php }
 														}
 													}
-												}
-											?>
+												?>
 											</ul>
 										<?php } ?>
 										<?php if ( is_home() || get_post_type() == 'recurso' ) { ?>
@@ -191,8 +190,7 @@
 															<?php }
 														}
 													}
-												}
-											?>
+												?>
 											</ul>
 										<?php } ?>
 										<?php if ( is_home() || get_post_type() == 'evento' ) { ?>
@@ -219,7 +217,6 @@
 															<?php }
 														}
 													}
-												}
 												?>
 											</ul>
 										<?php } ?>
