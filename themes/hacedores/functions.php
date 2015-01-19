@@ -54,7 +54,8 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 							'pad_counts' 	=> 0,
 							'hierarchical' 	=> 1,
 							'taxonomy' 		=> $tax,
-							'exclude' 		=> 1
+							'exclude' 		=> 1,
+							'hide_empty'	=> 1
 						);
 						$customPostCategories = get_categories( $args );
 						foreach ($customPostCategories as $customPostCategory) {
@@ -521,6 +522,7 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 				<script type="text/javascript">
 					var mapa = creaMapa();
 					var markers = creaMarkers(mapa, infoMapaTodos);
+					console.log(infoMapaTodos);
 					// Muestra todos los marcadores centrados en el mapa
 					autoCenter(mapa, markers);
 					// Agrega los filtros para cada categoría y subcategoría
