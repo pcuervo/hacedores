@@ -4,11 +4,10 @@
 			<div>
 				<div class="[ pagination-container ]">
 					<?php
-					//$paged = ( get_query_var('page') ) ? get_query_var('page') : 1;
 					$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 					$args = array(
 						'post_type' 		=> 'proyecto',
-						'posts_per_page' 	=> 1,
+						'posts_per_page' 	=> 8,
 						'paged' 			=> $paged
 					);
 					$queryProyecto = new WP_Query( $args );
@@ -33,10 +32,8 @@
 							'total' => $wp_query->max_num_pages
 						) );
 					?>
-					<!-- <div class="simple-pagination-previous"></div>
-					<div class="simple-pagination-page-numbers"></div>
-					<div class="simple-pagination-next"></div> -->
 				</div>
 			</div>
+		</div>
 	</section>
 <?php get_footer(); ?>
