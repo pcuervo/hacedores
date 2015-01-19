@@ -289,6 +289,8 @@ function creaMapa(){
 }// crearMapa
 
 function dameMarkers(categoria, subcategorias, mapa){
+	if(isEmpty(subcategorias)) return new Array();
+
 	var marker;
 	var markers = new Array();
 	ubicaciones = [];
@@ -304,19 +306,19 @@ function dameMarkers(categoria, subcategorias, mapa){
 			latLon.push(coordenadas.lat);
 			latLon.push(coordenadas.lon);
 			latLon.push(contenidoInfoWindow);
+			latLon.push(coordenadas.slug);
 			ubicaciones.push(latLon);
 		});
 	});
-	console.log(ubicaciones);
 
-	icon = dameIconPath(categoria);
+	var icon = dameIconPath(categoria);
 	for (var i = 0; i < ubicaciones.length; i++) {
 		marker = new google.maps.Marker({
 			position: new google.maps.LatLng(ubicaciones[i][1], ubicaciones[i][2]),
 			map: mapa,
 			icon: icon,
 			category: categoria,
-			subcategory: ubicaciones[i][0]
+			subcategory: ubicaciones[i][4]
 		});
 		markers.push(marker);
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -355,7 +357,6 @@ function filtraMarkerSubCategoria(categoria, subcategoria, markers, mapa){
 	autoCenter(mapa, markers);
 }
 
-// Autocentrar el mapa dependiendo de los marcadores
 function autoCenter(map, markers) {
 	//  Crea un nuevo limite
 	var bounds = new google.maps.LatLngBounds();
@@ -380,6 +381,34 @@ function dameIconPath(categoria){
 		case 'eventos':
 			icon_path = theme_path + 'marker-eventos.png';
 			break;
+		case 'recurso':
+			icon_path = theme_path + 'marker-espacios.png';
+			break;
+		case 'proyecto':
+			icon_path = theme_path + 'marker-proyectos.png';
+			break;
 	}
 	return icon_path;
+}// dameIconPath
+
+function isEmpty(obj) {
+	// Speed up calls to hasOwnProperty
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+    // null and undefined are "empty"
+    if (obj == null) return true;
+
+    // Assume if it has a length property with a non-zero value
+    // that that property is correct.
+    if (obj.length > 0)    return false;
+    if (obj.length === 0)  return true;
+
+    // Otherwise, does it have any properties of its own?
+    // Note that this doesn't handle
+    // toString and valueOf enumeration bugs in IE < 9
+    for (var key in obj) {
+        if (hasOwnProperty.call(obj, key)) return false;
+    }
+
+    return true;
 }

@@ -42,7 +42,6 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 		$queryProyecto = queryProyecto();
 		//wp_localize_script('functions', 'queryProyecto', $queryProyecto );
 
-
 		function arrayMapa(){
 			$arrayMapa = array();
 			$postTypes = array('proyecto', 'evento', 'recurso');
@@ -67,22 +66,20 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 								'posts_per_page' 	=> -1,
 								'category_name'		=> $customPostCategorySlug
 							);
-							$queryPosts = new WP_Query( $args ); ?>
-							<h3><?php echo $postType; ?></h3>
-							<h4><?php echo $customPostCategoryName; ?></h4>
-							<ul>
-								<?php
-								$arrayMapa[$postType][] = $customPostCategoryName;
-								if ( $queryPosts->have_posts() ) : while ( $queryPosts->have_posts() ) : $queryPosts->the_post(); ?>
-									<li><em><?php the_title(); ?></em></li>
-									<?php $arrayMapa[$postType][$customPostCategoryName][] = get_the_title(); ?>
-								<?php endwhile; endif; wp_reset_query(); ?>
-							</ul>
+							$queryPosts = new WP_Query( $args ); 
+							$arrayMapa[$postType][] = $customPostCategoryName;
+							if ( $queryPosts->have_posts() ) : while ( $queryPosts->have_posts() ) : $queryPosts->the_post(); 
+								$lat = get_post_meta( get_the_ID(), '_lat_'.$postType.'_meta', true  ); 
+								$lon = get_post_meta( get_the_ID(), '_lon_'.$postType.'_meta', true  ); 
+								$arrayMapa[$postType][$customPostCategoryName][] = get_the_title(); 
+								$arrayMapa[$postType][$customPostCategoryName][] = $lat; 
+								$arrayMapa[$postType][$customPostCategoryName][] = $lon; 
+								$arrayMapa[$postType][$customPostCategoryName][] = $customPostCategorySlug; 
+							endwhile; endif; wp_reset_query(); ?>
 						<?php }
 					}
 				}
 			}
-
 			return $arrayMapa;
 		}
 		$arrayMapa = arrayMapa();
@@ -518,72 +515,63 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 					(function( $ ) {
 						"use strict";
 						$(function(){
-							//On load
-							var categorias_mapa = {};
-							categorias_mapa['hacedores'] = {};						
-							categorias_mapa['proyectos'] = {};						
-							categorias_mapa['espacios'] = {};						
-							categorias_mapa['eventos'] = {};						
-
-							categorias_mapa['hacedores']['a'] = []; 
-							categorias_mapa['hacedores']['b'] = []; 
-							categorias_mapa['hacedores']['a'].push({
-								lat: 19.403510, 
-								lon: -99.174334,
-								titulo: 'yo si',
-								url: 'link'
-							});
-							categorias_mapa['hacedores']['a'].push({
-								lat: 19.409510, 
-								lon: -99.174334,
-								titulo: 'yo si',
-								url: 'link'
-							});
-							categorias_mapa['hacedores']['b'].push({
-								lat: 19.403510, 
-								lon: -99.179334,
-								titulo: 'yo si',
-								url: 'link'
-							});
-							categorias_mapa['hacedores']['b'].push({
-								lat: 19.409510, 
-								lon: -99.179334,
-								titulo: 'yo si',
-								url: 'link'
-							});
-							categorias_mapa['eventos']['a'] = []; 
-							categorias_mapa['eventos']['b'] = []; 
-							categorias_mapa['eventos']['a'].push({
-								lat: 19.405510, 
-								lon: -99.189334,
-								titulo: 'yo si',
-								url: 'link'
-							});
-							categorias_mapa['eventos']['b'].push({
-								lat: 19.401510, 
-								lon: -99.179334,
-								titulo: 'yo si',
-								url: 'link'
-							});
-							// categorias_mapa['proyectos'] = ['a', 'b', 'c']; 
-							// categorias_mapa['espacios'] = ['a', 'b', 'c']; 
-							// categorias_mapa['eventos'] = ['a', 'b', 'c']; 
 
 							var mapa = creaMapa();
-							var markers_hacedores = dameMarkers('hacedores',categorias_mapa['hacedores'], mapa);
-							var markers_eventos = dameMarkers('eventos',categorias_mapa['eventos'], mapa);
-							var markers = markers_hacedores.concat(markers_eventos);
+							var categorias_mapa = {};
+							var markers = [];
+							// Agrega todos los marcadores al mapa
+							$.each(arrayMapa, function(categoria, subcategorias){
+								categorias_mapa[categoria] = {};		
+								$.each(subcategorias, function(i, subcategoria){
+									if(typeof subcategoria != 'object') return true;
+
+									categorias_mapa[categoria][subcategoria] = []; 
+									categorias_mapa[categoria][subcategoria].push({
+										titulo: subcategoria[0],
+										lat: subcategoria[1],
+										lon: subcategoria[2],
+										slug: subcategoria[3]
+									});
+								});		
+								var current_markers = dameMarkers(categoria,categorias_mapa[categoria], mapa);
+								markers = markers.concat(current_markers);
+							});
+
+							// Muestra todos los marcadores centrados en el mapa
 							autoCenter(mapa, markers);
 
-							$('li.hacedores').on('click', function(){
-								filtraMarkerCategoria('hacedores', markers, mapa);
+							// Agrega los filtros para cada categoría y subcategoría
+							$.each(arrayMapa, function(categoria, subcategorias){
+								$('li.'+categoria).on('click', function(){
+									filtraMarkerCategoria(categoria, markers, mapa);
+								});	
+								
+								$.each(subcategorias, function(i, subcategoria){
+									if(typeof subcategoria != 'object') return true;
+									
+									$('ul.sub-'+categoria+' li.'+subcategoria[3]).on('click', function(){
+										filtraMarkerSubCategoria(categoria, subcategoria[3], markers, mapa);
+									});	
+								});
 							});
-							$('li.a').on('click', function(){
-								filtraMarkerSubCategoria('hacedores', 'a', markers, mapa);
-							});
-							$('li.eventos').on('click', function(){
-								filtraMarkerCategoria('eventos', markers, mapa);
-							});
+							//var markers_recursos = dameMarkers('recurso',categorias_mapa['recurso'], mapa);
+							//console.log(markers_hacedores);
+							//var markers_eventos = dameMarkers('eventos',categorias_mapa['eventos'], mapa);
+							//var markers = markers_recursos;
+							
+							
+							
+						
+						
+							
+
+							
+							// $('li.eventos').on('click', function(){
+							// 	filtraMarkerCategoria('eventos', markers, mapa);
+							// });
+							// $('li.espacios').on('click', function(){
+							// 	filtraMarkerCategoria('recurso', markers, mapa);
+							// });
 						});
 					}(jQuery));
 				</script>

@@ -38,114 +38,137 @@ echo <<<END
 	<input type="text" class="widefat" id="fechas" name="_fechas_meta" value="$fechas" />
 
 END;
-
 	}
 
 	function metabox_informacion_recurso($post){
-		$direccion 		= get_post_meta($post->ID, '_direccion2_meta', true);
-		$telefono 		= get_post_meta($post->ID, '_telefono_meta', true);
-		$email 			= get_post_meta($post->ID, '_email_meta', true);
-		$web 			= get_post_meta($post->ID, '_web_meta', true);
-		$instructables 	= get_post_meta($post->ID, '_instructables_meta', true);
-		$video 			= get_post_meta($post->ID, '_video_meta', true);
+		$direccion 		= get_post_meta($post->ID, '_direccion_recurso_meta', true);
+		$telefono 		= get_post_meta($post->ID, '_telefono_recurso_meta', true);
+		$email 			= get_post_meta($post->ID, '_email_recurso_meta', true);
+		$web 			= get_post_meta($post->ID, '_web_recurso_meta', true);
+		$instructables 	= get_post_meta($post->ID, '_instructables_recurso_meta', true);
+		$video 			= get_post_meta($post->ID, '_video_recurso_meta', true);
+		$lat 	 		= get_post_meta($post->ID, '_lat_recurso_meta', true);
+		$lon 			= get_post_meta($post->ID, '_lon_recurso_meta', true);
 
-		wp_nonce_field(__FILE__, '_direccion2_meta_nonce');
-		wp_nonce_field(__FILE__, '_telefono_meta_nonce');
-		wp_nonce_field(__FILE__, '_email_meta_nonce');
-		wp_nonce_field(__FILE__, '_web_meta_nonce');
-		wp_nonce_field(__FILE__, '_instructables_meta_nonce');
-		wp_nonce_field(__FILE__, '_video_meta_nonce');
+		wp_nonce_field(__FILE__, '_direccion_recurso_meta_nonce');
+		wp_nonce_field(__FILE__, '_telefono_recurso_meta_nonce');
+		wp_nonce_field(__FILE__, '_email_recurso_meta_nonce');
+		wp_nonce_field(__FILE__, '_web_recurso_meta_nonce');
+		wp_nonce_field(__FILE__, '_instructables_recurso_meta_nonce');
+		wp_nonce_field(__FILE__, '_video_recurso_meta_nonce');
+		wp_nonce_field(__FILE__, '_lat_recurso_meta_nonce');
+		wp_nonce_field(__FILE__, '_lon_recurso_meta_nonce');
 
 echo <<<END
 
 	<label>Dirección:</label>
-	<input type="text" class="widefat" id="direccion" name="_direccion2_meta" value="$direccion" />
+	<input type="text" class="widefat" id="direccion" name="_direccion_recurso_meta" value="$direccion" />
 	<label>Teléfono:</label>
-	<input type="text" class="widefat" id="telefono" name="_telefono_meta" value="$telefono" />
+	<input type="text" class="widefat" id="telefono" name="_telefono_recurso_meta" value="$telefono" />
 	<label>E-mail:</label>
-	<input type="text" class="widefat" id="email" name="_email_meta" value="$email" />
+	<input type="text" class="widefat" id="email" name="_email_recurso_meta" value="$email" />
 	<label>Sitio Web:</label>
-	<input type="text" class="widefat" id="web" name="_web_meta" value="$web" />
+	<input type="text" class="widefat" id="web" name="_web_recurso_meta" value="$web" />
 	<label>URL instructables:</label>
-	<input type="text" class="widefat" id="instructables" name="_instructables_meta" value="$instructables" />
+	<input type="text" class="widefat" id="instructables" name="_instructables_recurso_meta" value="$instructables" />
 	<label>URL video:</label>
-	<input type="text" class="widefat" id="video" name="_video_meta" value="$video" />
+	<input type="text" class="widefat" id="video" name="_video_recurso_meta" value="$video" />
+	<label>Latitud:</label>
+	<input type="text" class="widefat" id="lat_recurso" name="_lat_recurso_meta" value="$lat 	" 	/>
+	<label>Longitud:</label>
+	<input type="text" class="widefat" id="lon_recurso" name="_lon_recurso_meta" value="$lon" />
 
 END;
 
 	}
 
 	function metabox_informacion_proyecto($post){
-		$direccion 		= get_post_meta($post->ID, '_direccion3_meta', true);
-		$telefono 		= get_post_meta($post->ID, '_telefono2_meta', true);
-		$email 			= get_post_meta($post->ID, '_email2_meta', true);
-		$web 			= get_post_meta($post->ID, '_web2_meta', true);
-		$instructables 	= get_post_meta($post->ID, '_instructables2_meta', true);
-		$video 			= get_post_meta($post->ID, '_video2_meta', true);
+		$direccion 		= get_post_meta($post->ID, '_direccion_proyecto_meta', true);
+		$telefono 		= get_post_meta($post->ID, '_telefono_proyecto_meta', true);
+		$email 			= get_post_meta($post->ID, '_email_proyecto_meta', true);
+		$web 			= get_post_meta($post->ID, '_web_proyecto_meta', true);
+		$instructables 	= get_post_meta($post->ID, '_instructables_proyecto_meta', true);
+		$video 			= get_post_meta($post->ID, '_video_proyecto_meta', true);
+		$lat 	 		= get_post_meta($post->ID, '_lat_proyecto_meta', true);
+		$lon 			= get_post_meta($post->ID, '_lon_proyecto_meta', true);
 
-		wp_nonce_field(__FILE__, '_direccion3_meta_nonce');
-		wp_nonce_field(__FILE__, '_telefono2_meta_nonce');
-		wp_nonce_field(__FILE__, '_email2_meta_nonce');
-		wp_nonce_field(__FILE__, '_web2_meta_nonce');
-		wp_nonce_field(__FILE__, '_instructables2_meta_nonce');
-		wp_nonce_field(__FILE__, '_video2_meta_nonce');
+		wp_nonce_field(__FILE__, '_direccion_proyecto_meta_nonce');
+		wp_nonce_field(__FILE__, '_telefono_proyecto_meta_nonce');
+		wp_nonce_field(__FILE__, '_email_proyecto_meta_nonce');
+		wp_nonce_field(__FILE__, '_web_proyecto_meta_nonce');
+		wp_nonce_field(__FILE__, '_instructables_proyecto_meta_nonce');
+		wp_nonce_field(__FILE__, '_video_proyecto_meta_nonce');
+		wp_nonce_field(__FILE__, '_lat_proyecto_meta_nonce');
+		wp_nonce_field(__FILE__, '_lon_proyecto_meta_nonce');
 
 echo <<<END
 
 	<label>Dirección:</label>
-	<input type="text" class="widefat" id="direccion" name="_direccion3_meta" value="$direccion" />
+	<input type="text" class="widefat" id="direccion" name="_direccion_proyecto_meta" value="$direccion" />
 	<label>Teléfono:</label>
-	<input type="text" class="widefat" id="telefono" name="_telefono2_meta" value="$telefono" />
+	<input type="text" class="widefat" id="telefono" name="_telefono_proyecto_meta" value="$telefono" />
 	<label>E-mail:</label>
-	<input type="text" class="widefat" id="email" name="_email2_meta" value="$email" />
+	<input type="text" class="widefat" id="email" name="_email_proyecto_meta" value="$email" />
 	<label>Sitio Web:</label>
-	<input type="text" class="widefat" id="web" name="_web2_meta" value="$web" />
+	<input type="text" class="widefat" id="web" name="_web_proyecto_meta" value="$web" />
 	<label>URL instructables:</label>
-	<input type="text" class="widefat" id="instructables" name="_instructables2_meta" value="$instructables" />
+	<input type="text" class="widefat" id="instructables" name="_instructables_proyecto_meta" value="$instructables" />
 	<label>URL video:</label>
-	<input type="text" class="widefat" id="video" name="_video2_meta" value="$video" />
+	<input type="text" class="widefat" id="video" name="_video_proyecto_meta" value="$video" />
+	<label>Latitud:</label>
+	<input type="text" class="widefat" id="lat_proyecto" name="_lat_proyecto_meta" value="$lat" />
+	<label>Longitud:</label>
+	<input type="text" class="widefat" id="lon_proyecto" name="_lon_proyecto_meta" value="$lon" />
 
 END;
 
 	}
 
 function metabox_informacion_evento($post){
-	$direccion 		= get_post_meta($post->ID, '_direccion4_meta', true);
-	$dia 			= get_post_meta($post->ID, '_dia_meta', true);
-	$hora 			= get_post_meta($post->ID, '_hora_meta', true);
-	$telefono 		= get_post_meta($post->ID, '_telefono3_meta', true);
-	$contacto 		= get_post_meta($post->ID, '_contacto_meta', true);
-	$web 			= get_post_meta($post->ID, '_web3_meta', true);
-	$facebook 		= get_post_meta($post->ID, '_facebook_meta', true);
-	$twitter 		= get_post_meta($post->ID, '_twitter_meta', true);
+	$direccion 		= get_post_meta($post->ID, '_direccion_evento_meta', true);
+	$dia 			= get_post_meta($post->ID, '_dia_evento_meta', true);
+	$hora 			= get_post_meta($post->ID, '_hora_evento_meta', true);
+	$telefono 		= get_post_meta($post->ID, '_telefono_evento_meta', true);
+	$contacto 		= get_post_meta($post->ID, '_contacto_evento_meta', true);
+	$web 			= get_post_meta($post->ID, '_web_evento_meta', true);
+	$facebook 		= get_post_meta($post->ID, '_facebook_evento_meta', true);
+	$twitter 		= get_post_meta($post->ID, '_twitter_evento_meta', true);
+	$lat 	 		= get_post_meta($post->ID, '_lat_evento_meta', true);
+	$lon 			= get_post_meta($post->ID, '_lon_evento_meta', true);
 
-	wp_nonce_field(__FILE__, '_direccion4_meta_nonce');
-	wp_nonce_field(__FILE__, '_dia_meta_nonce');
-	wp_nonce_field(__FILE__, '_hora_meta_nonce');
-	wp_nonce_field(__FILE__, '_telefono3_meta_nonce');
-	wp_nonce_field(__FILE__, '_contacto_meta_nonce');
-	wp_nonce_field(__FILE__, '_web3_meta_nonce');
-	wp_nonce_field(__FILE__, '_facebook_meta_nonce');
-	wp_nonce_field(__FILE__, '_twitter_meta_nonce');
+	wp_nonce_field(__FILE__, '_direccion_evento_meta_nonce');
+	wp_nonce_field(__FILE__, '_dia_evento_meta_nonce');
+	wp_nonce_field(__FILE__, '_hora_evento_meta_nonce');
+	wp_nonce_field(__FILE__, '_telefono_evento_meta_nonce');
+	wp_nonce_field(__FILE__, '_contacto_evento_meta_nonce');
+	wp_nonce_field(__FILE__, '_web_evento_meta_nonce');
+	wp_nonce_field(__FILE__, '_facebook_evento_meta_nonce');
+	wp_nonce_field(__FILE__, '_twitter_evento_meta_nonce');
+	wp_nonce_field(__FILE__, '_lat_evento_meta_nonce');
+	wp_nonce_field(__FILE__, '_lon_evento_meta_nonce');
 
 echo <<<END
 
 	<label>Dirección:</label>
-	<input type="text" class="widefat" id="direccion" name="_direccion4_meta" value="$direccion" />
+	<input type="text" class="widefat" id="direccion" name="_direccion_evento_meta" value="$direccion" />
 	<label>Día:</label>
-	<input type="text" class="widefat" id="dia" name="_dia_meta" value="$dia" />
+	<input type="text" class="widefat" id="dia" name="_dia_evento_meta" value="$dia" />
 	<label>Hora:</label>
-	<input type="text" class="widefat" id="hora" name="_hora_meta" value="$hora" />
+	<input type="text" class="widefat" id="hora" name="_hora_evento_meta" value="$hora" />
 	<label>Teléfono:</label>
-	<input type="text" class="widefat" id="telefono" name="_telefono3_meta" value="$telefono" />
+	<input type="text" class="widefat" id="telefono" name="_telefono_evento_meta" value="$telefono" />
 	<label>Contacto:</label>
-	<input type="text" class="widefat" id="contacto" name="_contacto_meta" value="$contacto" />
+	<input type="text" class="widefat" id="contacto" name="_contacto_evento_meta" value="$contacto" />
 	<label>Sitio web:</label>
-	<input type="text" class="widefat" id="web" name="_web3_meta" value="$web" />
+	<input type="text" class="widefat" id="web" name="_web_evento_meta" value="$web" />
 	<label>Facebook:</label>
-	<input type="text" class="widefat" id="facebook" name="_facebook_meta" value="$facebook" />
+	<input type="text" class="widefat" id="facebook" name="_facebook_evento_meta" value="$facebook" />
 	<label>Twitter:</label>
-	<input type="text" class="widefat" id="twitter" name="_twitter_meta" value="$twitter" />
+	<input type="text" class="widefat" id="twitter" name="_twitter_evento_meta" value="$twitter" />
+	<label>Latitud:</label>
+	<input type="text" class="widefat" id="lat_recurso" name="_lat_evento_meta" value="$lat 	" 	/>
+	<label>Longitud:</label>
+	<input type="text" class="widefat" id="lon_recurso" name="_lon_evento_meta" value="$lon" />
 
 END;
 
@@ -187,73 +210,91 @@ END;
 		/*------------------------------------*\
 		    #RECURSO
 		\*------------------------------------*/
-		if ( isset($_POST['_direccion2_meta']) and check_admin_referer(__FILE__, '_direccion2_meta_nonce') ){
-			update_post_meta($post_id, '_direccion2_meta', $_POST['_direccion2_meta']);
+		if ( isset($_POST['_direccion_recurso_meta']) and check_admin_referer(__FILE__, '_direccion_recurso_meta_nonce') ){
+			update_post_meta($post_id, '_direccion_recurso_meta', $_POST['_direccion_recurso_meta']);
 		}
-		if ( isset($_POST['_telefono_meta']) and check_admin_referer(__FILE__, '_telefono_meta_nonce') ){
-			update_post_meta($post_id, '_telefono_meta', $_POST['_telefono_meta']);
+		if ( isset($_POST['_telefono_recurso_meta']) and check_admin_referer(__FILE__, '_telefono_recurso_meta_nonce') ){
+			update_post_meta($post_id, '_telefono_recurso_meta', $_POST['_telefono_recurso_meta']);
 		}
-		if ( isset($_POST['_email_meta']) and check_admin_referer(__FILE__, '_email_meta_nonce') ){
-			update_post_meta($post_id, '_email_meta', $_POST['_email_meta']);
+		if ( isset($_POST['_email_recurso_meta']) and check_admin_referer(__FILE__, '_email_recurso_meta_nonce') ){
+			update_post_meta($post_id, '_email_recurso_meta', $_POST['_email_recurso_meta']);
 		}
-		if ( isset($_POST['_web_meta']) and check_admin_referer(__FILE__, '_web_meta_nonce') ){
-			update_post_meta($post_id, '_web_meta', $_POST['_web_meta']);
+		if ( isset($_POST['_web_recurso_meta']) and check_admin_referer(__FILE__, '_web_recurso_meta_nonce') ){
+			update_post_meta($post_id, '_web_recurso_meta', $_POST['_web_recurso_meta']);
 		}
-		if ( isset($_POST['_instructables_meta']) and check_admin_referer(__FILE__, '_instructables_meta_nonce') ){
-			update_post_meta($post_id, '_instructables_meta', $_POST['_instructables_meta']);
+		if ( isset($_POST['_instructables_recurso_meta']) and check_admin_referer(__FILE__, '_instructables_recurso_meta_nonce') ){
+			update_post_meta($post_id, '_instructables_recurso_meta', $_POST['_instructables_recurso_meta']);
 		}
-		if ( isset($_POST['_video_meta']) and check_admin_referer(__FILE__, '_video_meta_nonce') ){
-			update_post_meta($post_id, '_video_meta', $_POST['_video_meta']);
+		if ( isset($_POST['_video_recurso_meta']) and check_admin_referer(__FILE__, '_video_recurso_meta_nonce') ){
+			update_post_meta($post_id, '_video_recurso_meta', $_POST['_video_recurso_meta']);
+		}
+		if ( isset($_POST['_lat_recurso_meta']) and check_admin_referer(__FILE__, '_lat_recurso_meta_nonce') ){
+			update_post_meta($post_id, '_lat_recurso_meta', $_POST['_lat_recurso_meta']);
+		}
+		if ( isset($_POST['_lon_recurso_meta']) and check_admin_referer(__FILE__, '_lon_recurso_meta_nonce') ){
+			update_post_meta($post_id, '_lon_recurso_meta', $_POST['_lon_recurso_meta']);
 		}
 
 		/*------------------------------------*\
 		    #PROYECTO
 		\*------------------------------------*/
-		if ( isset($_POST['_direccion3_meta']) and check_admin_referer(__FILE__, '_direccion3_meta_nonce') ){
-			update_post_meta($post_id, '_direccion3_meta', $_POST['_direccion3_meta']);
+		if ( isset($_POST['_direccion_proyecto_meta']) and check_admin_referer(__FILE__, '_direccion_proyecto_meta_nonce') ){
+			update_post_meta($post_id, '_direccion_proyecto_meta', $_POST['_direccion_proyecto_meta']);
 		}
-		if ( isset($_POST['_telefono2_meta']) and check_admin_referer(__FILE__, '_telefono2_meta_nonce') ){
-			update_post_meta($post_id, '_telefono2_meta', $_POST['_telefono2_meta']);
+		if ( isset($_POST['_telefono_proyecto_meta']) and check_admin_referer(__FILE__, '_telefono_proyecto_meta_nonce') ){
+			update_post_meta($post_id, '_telefono_proyecto_meta', $_POST['_telefono_proyecto_meta']);
 		}
-		if ( isset($_POST['_email2_meta']) and check_admin_referer(__FILE__, '_email2_meta_nonce') ){
-			update_post_meta($post_id, '_email2_meta', $_POST['_email2_meta']);
+		if ( isset($_POST['_email_proyecto_meta']) and check_admin_referer(__FILE__, '_email_proyecto_meta_nonce') ){
+			update_post_meta($post_id, '_email_proyecto_meta', $_POST['_email_proyecto_meta']);
 		}
-		if ( isset($_POST['_web2_meta']) and check_admin_referer(__FILE__, '_web2_meta_nonce') ){
-			update_post_meta($post_id, '_web2_meta', $_POST['_web2_meta']);
+		if ( isset($_POST['_web_proyecto_meta']) and check_admin_referer(__FILE__, '_web_proyecto_meta_nonce') ){
+			update_post_meta($post_id, '_web_proyecto_meta', $_POST['_web_proyecto_meta']);
 		}
-		if ( isset($_POST['_instructables2_meta']) and check_admin_referer(__FILE__, '_instructables2_meta_nonce') ){
-			update_post_meta($post_id, '_instructables2_meta', $_POST['_instructables2_meta']);
+		if ( isset($_POST['_instructables_proyecto_meta']) and check_admin_referer(__FILE__, '_instructables_proyecto_meta_nonce') ){
+			update_post_meta($post_id, '_instructables_proyecto_meta', $_POST['_instructables_proyecto_meta']);
 		}
-		if ( isset($_POST['_video2_meta']) and check_admin_referer(__FILE__, '_video2_meta_nonce') ){
-			update_post_meta($post_id, '_video2_meta', $_POST['_video2_meta']);
+		if ( isset($_POST['_video_proyecto_meta']) and check_admin_referer(__FILE__, '_video_proyecto_meta_nonce') ){
+			update_post_meta($post_id, '_video_proyecto_meta', $_POST['_video_proyecto_meta']);
+		}
+		if ( isset($_POST['_lat_proyecto_meta']) and check_admin_referer(__FILE__, '_lat_proyecto_meta_nonce') ){
+			update_post_meta($post_id, '_lat_proyecto_meta', $_POST['_lat_proyecto_meta']);
+		}
+		if ( isset($_POST['_lon_proyecto_meta']) and check_admin_referer(__FILE__, '_lon_proyecto_meta_nonce') ){
+			update_post_meta($post_id, '_lon_proyecto_meta', $_POST['_lon_proyecto_meta']);
 		}
 
 		/*------------------------------------*\
 		    #EVENTOS
 		\*------------------------------------*/
-		if ( isset($_POST['_direccion4_meta']) and check_admin_referer(__FILE__, '_direccion4_meta_nonce') ){
-			update_post_meta($post_id, '_direccion4_meta', $_POST['_direccion4_meta']);
+		if ( isset($_POST['_direccion_evento_meta']) and check_admin_referer(__FILE__, '_direccion_evento_meta_nonce') ){
+			update_post_meta($post_id, '_direccion_evento_meta', $_POST['_direccion_evento_meta']);
 		}
-		if ( isset($_POST['_dia_meta']) and check_admin_referer(__FILE__, '_dia_meta_nonce') ){
-			update_post_meta($post_id, '_dia_meta', $_POST['_dia_meta']);
+		if ( isset($_POST['_dia_evento_meta']) and check_admin_referer(__FILE__, '_dia_evento_meta_nonce') ){
+			update_post_meta($post_id, '_dia_evento_meta', $_POST['_dia_evento_meta']);
 		}
-		if ( isset($_POST['_hora_meta']) and check_admin_referer(__FILE__, '_hora_meta_nonce') ){
-			update_post_meta($post_id, '_hora_meta', $_POST['_hora_meta']);
+		if ( isset($_POST['_hora_evento_meta']) and check_admin_referer(__FILE__, '_hora_evento_meta_nonce') ){
+			update_post_meta($post_id, '_hora_evento_meta', $_POST['_hora_evento_meta']);
 		}
-		if ( isset($_POST['_telefono3_meta']) and check_admin_referer(__FILE__, '_telefono3_meta_nonce') ){
-			update_post_meta($post_id, '_telefono3_meta', $_POST['_telefono3_meta']);
+		if ( isset($_POST['_telefono_evento_meta']) and check_admin_referer(__FILE__, '_telefono_evento_meta_nonce') ){
+			update_post_meta($post_id, '_telefono_evento_meta', $_POST['_telefono_evento_meta']);
 		}
-		if ( isset($_POST['_contacto_meta']) and check_admin_referer(__FILE__, '_contacto_meta_nonce') ){
-			update_post_meta($post_id, '_contacto_meta', $_POST['_contacto_meta']);
+		if ( isset($_POST['_contacto_evento_meta']) and check_admin_referer(__FILE__, '_contacto_evento_meta_nonce') ){
+			update_post_meta($post_id, '_contacto_evento_meta', $_POST['_contacto_evento_meta']);
 		}
-		if ( isset($_POST['_web3_meta']) and check_admin_referer(__FILE__, '_web3_meta_nonce') ){
-			update_post_meta($post_id, '_web3_meta', $_POST['_web3_meta']);
+		if ( isset($_POST['_web_evento_meta']) and check_admin_referer(__FILE__, '_web_evento_meta_nonce') ){
+			update_post_meta($post_id, '_web_evento_meta', $_POST['_web_evento_meta']);
 		}
-		if ( isset($_POST['_facebook_meta']) and check_admin_referer(__FILE__, '_facebook_meta_nonce') ){
-			update_post_meta($post_id, '_facebook_meta', $_POST['_facebook_meta']);
+		if ( isset($_POST['_facebook_evento_meta']) and check_admin_referer(__FILE__, '_facebook_evento_meta_nonce') ){
+			update_post_meta($post_id, '_facebook_evento_meta', $_POST['_facebook_evento_meta']);
 		}
-		if ( isset($_POST['_twitter_meta']) and check_admin_referer(__FILE__, '_twitter_meta_nonce') ){
-			update_post_meta($post_id, '_twitter_meta', $_POST['_twitter_meta']);
+		if ( isset($_POST['_twitter_evento_meta']) and check_admin_referer(__FILE__, '_twitter_evento_meta_nonce') ){
+			update_post_meta($post_id, '_twitter_evento_meta', $_POST['_twitter_evento_meta']);
+		}
+		if ( isset($_POST['_lat_evento_meta']) and check_admin_referer(__FILE__, '_lat_evento_meta_nonce') ){
+			update_post_meta($post_id, '_lat_evento_meta', $_POST['_lat_evento_meta']);
+		}
+		if ( isset($_POST['_lon_evento_meta']) and check_admin_referer(__FILE__, '_lon_evento_meta_nonce') ){
+			update_post_meta($post_id, '_lon_evento_meta', $_POST['_lon_evento_meta']);
 		}
 
 

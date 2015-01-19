@@ -121,8 +121,8 @@
 												<li class="[ a ]">a</li>
 												<li class="[ b ]">b</li>
 											</ul>
-										<li class="[ proyectos ] [ trigger ]" data-rel="sub-proyectos">Proyectos</li>
-											<ul class="[ submenu-mapa ] [ sub-proyectos ] [ content ]">
+										<li class="[ proyecto ] [ trigger ]" data-rel="sub-proyecto">Proyectos</li>
+											<ul class="[ submenu-mapa ] [ sub-proyecto ] [ content ]">
 												<?php
 													$customPostTaxonomies = get_object_taxonomies('proyecto');
 													if(count($customPostTaxonomies) > 0){
@@ -145,8 +145,8 @@
 													}
 												?>
 											</ul>
-										<li class="[ espacios ] [ trigger ]" data-rel="sub-espacios">Espacios / Recursos</li>
-											<ul class="[ submenu-mapa ] [ sub-espacios ] [ content ]">
+										<li class="[ recurso ] [ trigger ]" data-rel="sub-recurso">Espacios / Recursos</li>
+											<ul class="[ submenu-mapa ] [ sub-recurso ] [ content ]">
 												<?php
 													$customPostTaxonomies = get_object_taxonomies('recurso');
 													if(count($customPostTaxonomies) > 0){
@@ -169,8 +169,8 @@
 													}
 												?>
 											</ul>
-										<li class="[ eventos ] [ trigger ]" data-rel="sub-eventos">Eventos</li>
-											<ul class="[ submenu-mapa ] [ sub-eventos ] [ content ]">
+										<li class="[ evento ] [ trigger ]" data-rel="sub-evento">Eventos</li>
+											<ul class="[ submenu-mapa ] [ sub-evento ] [ content ]">
 												<?php
 													$customPostTaxonomies = get_object_taxonomies('evento');
 													if(count($customPostTaxonomies) > 0){
