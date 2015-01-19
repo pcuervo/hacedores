@@ -142,79 +142,81 @@
 										<?php if ( is_home() || get_post_type() == 'proyecto' ) { ?>
 											<li class="[ proyecto ] [ trigger ]" data-rel="sub-proyecto">Proyectos</li>
 											<ul class="[ submenu-mapa ] [ sub-proyecto ] [ content ]">
-											<?php
-												$customPostTaxonomies = get_object_taxonomies('proyecto');
-												if(count($customPostTaxonomies) > 0){
-													foreach($customPostTaxonomies as $tax){
-														$args = array(
-															'orderby' 		=> 'name',
-															'show_count' 	=> 0,
-															'pad_counts' 	=> 0,
-															'hierarchical' 	=> 1,
-															'taxonomy' 		=> $tax,
-															'exclude' 		=> 1
-														);
-														$customPostCategories = get_categories( $args );
-														foreach ($customPostCategories as $customPostCategory) {
-															$customPostCategoryName = $customPostCategory->name;
-															$customPostCategorySlug = $customPostCategory->slug; ?>
-															<li class="[ <?php echo $customPostCategorySlug; ?> ]"><?php echo $customPostCategoryName; ?></li>
-														<?php }
+												<?php
+													$customPostTaxonomies = get_object_taxonomies('proyecto');
+													if(count($customPostTaxonomies) > 0){
+														foreach($customPostTaxonomies as $tax){
+															$args = array(
+																'orderby' 		=> 'name',
+																'show_count' 	=> 0,
+																'pad_counts' 	=> 0,
+																'hierarchical' 	=> 1,
+																'taxonomy' 		=> $tax,
+																'exclude' 		=> 1,
+																'hide_empty' 	=> 1
+															);
+															$customPostCategories = get_categories( $args );
+															foreach ($customPostCategories as $customPostCategory) {
+																$customPostCategoryName = $customPostCategory->name;
+																$customPostCategorySlug = $customPostCategory->slug; ?>
+																<li class="[ <?php echo $customPostCategorySlug; ?> ]"><?php echo $customPostCategoryName; ?></li>
+															<?php }
+														}
 													}
-												}
-											?>
+												?>
 											</ul>
 										<?php } ?>
 										<?php if ( is_home() || get_post_type() == 'recurso' ) { ?>
 											<li class="[ recurso ] [ trigger ]" data-rel="sub-recurso">Espacios / Recursos</li>
 											<ul class="[ submenu-mapa ] [ sub-recurso ] [ content ]">
-											<?php
-												$customPostTaxonomies = get_object_taxonomies('recurso');
-												if(count($customPostTaxonomies) > 0){
-													foreach($customPostTaxonomies as $tax){
-														$args = array(
-															'orderby' 		=> 'name',
-															'show_count' 	=> 0,
-															'pad_counts' 	=> 0,
-															'hierarchical' 	=> 1,
-															'taxonomy' 		=> $tax,
-															'exclude' 		=> 1
-														);
-														$customPostCategories = get_categories( $args );
-														foreach ($customPostCategories as $customPostCategory) {
-															$customPostCategoryName = $customPostCategory->name;
-															$customPostCategorySlug = $customPostCategory->slug; ?>
-															<li class="[ <?php echo $customPostCategorySlug; ?> ]"><?php echo $customPostCategoryName; ?></li>
-														<?php }
+												<?php
+													$customPostTaxonomies = get_object_taxonomies('recurso');
+													if(count($customPostTaxonomies) > 0){
+														foreach($customPostTaxonomies as $tax){
+															$args = array(
+																'orderby' 		=> 'name',
+																'show_count' 	=> 0,
+																'pad_counts' 	=> 0,
+																'hierarchical' 	=> 1,
+																'taxonomy' 		=> $tax,
+																'exclude' 		=> 1,
+																'hide_empty' 	=> 1
+															);
+															$customPostCategories = get_categories( $args );
+															foreach ($customPostCategories as $customPostCategory) {
+																$customPostCategoryName = $customPostCategory->name;
+																$customPostCategorySlug = $customPostCategory->slug; ?>
+																<li class="[ <?php echo $customPostCategorySlug; ?> ]"><?php echo $customPostCategoryName; ?></li>
+															<?php }
+														}
 													}
-												}
-											?>
+												?>
 											</ul>
 										<?php } ?>
 										<?php if ( is_home() || get_post_type() == 'evento' ) { ?>
 											<li class="[ evento ] [ trigger ]" data-rel="sub-evento">Eventos</li>
 											<ul class="[ submenu-mapa ] [ sub-evento ] [ content ]">
 												<?php
-												$customPostTaxonomies = get_object_taxonomies('evento');
-												if(count($customPostTaxonomies) > 0){
-													foreach($customPostTaxonomies as $tax){
-														$args = array(
-															'orderby' 		=> 'name',
-															'show_count' 	=> 0,
-															'pad_counts' 	=> 0,
-															'hierarchical' 	=> 1,
-															'taxonomy' 		=> $tax,
-															'exclude' 		=> 1,
-															'hide_empty' 	=> 0
-														);
-														$customPostCategories = get_categories( $args );
-														foreach ($customPostCategories as $customPostCategory) {
-															$customPostCategoryName = $customPostCategory->name;
-															$customPostCategorySlug = $customPostCategory->slug; ?>
-															<li class="[ <?php echo $customPostCategorySlug; ?> ]"><?php echo $customPostCategoryName; ?></li>
-														<?php }
+													$customPostTaxonomies = get_object_taxonomies('evento');
+													if(count($customPostTaxonomies) > 0){
+														foreach($customPostTaxonomies as $tax){
+															$args = array(
+																'orderby' 		=> 'name',
+																'show_count' 	=> 0,
+																'pad_counts' 	=> 0,
+																'hierarchical' 	=> 1,
+																'taxonomy' 		=> $tax,
+																'exclude' 		=> 1,
+																'hide_empty' 	=> 1
+															);
+															$customPostCategories = get_categories( $args );
+															foreach ($customPostCategories as $customPostCategory) {
+																$customPostCategoryName = $customPostCategory->name;
+																$customPostCategorySlug = $customPostCategory->slug; ?>
+																<li class="[ <?php echo $customPostCategorySlug; ?> ]"><?php echo $customPostCategoryName; ?></li>
+															<?php }
+														}
 													}
-												}
 												?>
 											</ul>
 										<?php } ?>
