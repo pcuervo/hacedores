@@ -116,12 +116,31 @@
 							<div class="[ menu-container ]">
 								<div class="[ menu-mapa ]">
 									<ul class="[ menu-titulos ]">
-										<li class="[ hacedores ] [ trigger ]" data-rel="sub-hacedores">Hacedores</li>
+										<?php if ( is_home() || is_page('hacedores') ) { ?>
+											<li class="[ hacedores ] [ trigger ]" data-rel="sub-hacedores">Hacedores</li>
 											<ul class="[ submenu-mapa ] [ sub-hacedores ] [ content ]">
-												<li class="[ a ]">a</li>
-												<li class="[ b ]">b</li>
+											<?php
+											$args = array(
+												'role' => 'Editor'
+											);
+											$queryHacedores = new WP_User_Query( $args );
+											if ( ! empty( $queryHacedores->results ) ) {
+												foreach ( $queryHacedores->results as $user ) {
+													$userNombre = $user->display_name;
+													$userID 	= $user->ID;
+													$userMeta 	= get_user_meta( $userID );
+													$userBio 	= $userMeta['description'][0];
+													$userAvatar = get_avatar_url(get_avatar( $userID, 150 ));
+													$userURL 	= get_author_posts_url($userID);
+													//echo $userURL;
+													?>
+													<li class="[ <?php echo $customPostCategorySlug; ?> ]"><?php echo $userNombre; ?></li>
+											<?php }
+											} ?>
 											</ul>
-										<li class="[ proyecto ] [ trigger ]" data-rel="sub-proyecto">Proyectos</li>
+										<?php } ?>
+										<?php if ( is_home() || get_post_type() == 'proyecto' ) { ?>
+											<li class="[ proyecto ] [ trigger ]" data-rel="sub-proyecto">Proyectos</li>
 											<ul class="[ submenu-mapa ] [ sub-proyecto ] [ content ]">
 												<?php
 													$customPostTaxonomies = get_object_taxonomies('proyecto');
@@ -144,9 +163,12 @@
 															<?php }
 														}
 													}
-												?>
+												}
+											?>
 											</ul>
-										<li class="[ recurso ] [ trigger ]" data-rel="sub-recurso">Espacios / Recursos</li>
+										<?php } ?>
+										<?php if ( is_home() || get_post_type() == 'recurso' ) { ?>
+											<li class="[ recurso ] [ trigger ]" data-rel="sub-recurso">Espacios / Recursos</li>
 											<ul class="[ submenu-mapa ] [ sub-recurso ] [ content ]">
 												<?php
 													$customPostTaxonomies = get_object_taxonomies('recurso');
@@ -169,9 +191,12 @@
 															<?php }
 														}
 													}
-												?>
+												}
+											?>
 											</ul>
-										<li class="[ evento ] [ trigger ]" data-rel="sub-evento">Eventos</li>
+										<?php } ?>
+										<?php if ( is_home() || get_post_type() == 'evento' ) { ?>
+											<li class="[ evento ] [ trigger ]" data-rel="sub-evento">Eventos</li>
 											<ul class="[ submenu-mapa ] [ sub-evento ] [ content ]">
 												<?php
 													$customPostTaxonomies = get_object_taxonomies('evento');
@@ -194,8 +219,10 @@
 															<?php }
 														}
 													}
+												}
 												?>
 											</ul>
+										<?php } ?>
 									</ul>
 								</div>
 							</div>

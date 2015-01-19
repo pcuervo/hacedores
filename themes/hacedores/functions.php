@@ -42,8 +42,8 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 		$queryProyecto = queryProyecto();
 		//wp_localize_script('functions', 'queryProyecto', $queryProyecto );
 
-		function arrayMapa($postTypes){
-			$arrayMapa = array();
+		function infoMapa($postTypes){
+			$infoMapa = array();
 			foreach( $postTypes as $postType ){
 				$customPostTaxonomies = get_object_taxonomies($postType);
 				if(count($customPostTaxonomies) > 0){
@@ -65,25 +65,33 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 								'posts_per_page' 	=> -1,
 								'category_name'		=> $customPostCategorySlug
 							);
-							$queryPosts = new WP_Query( $args );
-							$arrayMapa[$postType][] = $customPostCategoryName;
-							if ( $queryPosts->have_posts() ) : while ( $queryPosts->have_posts() ) : $queryPosts->the_post();
-								$lat = get_post_meta( get_the_ID(), '_lat_'.$postType.'_meta', true  );
-								$lon = get_post_meta( get_the_ID(), '_lon_'.$postType.'_meta', true  );
-								$arrayMapa[$postType][$customPostCategoryName][] = get_the_title();
-								$arrayMapa[$postType][$customPostCategoryName][] = $lat;
-								$arrayMapa[$postType][$customPostCategoryName][] = $lon;
-								$arrayMapa[$postType][$customPostCategoryName][] = $customPostCategorySlug;
+							$queryPosts = new WP_Query( $args ); 
+							$infoMapa[$postType][] = $customPostCategoryName;
+							if ( $queryPosts->have_posts() ) : while ( $queryPosts->have_posts() ) : $queryPosts->the_post(); 
+								$lat = get_post_meta( get_the_ID(), '_lat_'.$postType.'_meta', true  ); 
+								$lon = get_post_meta( get_the_ID(), '_lon_'.$postType.'_meta', true  ); 
+								$infoMapa[$postType][$customPostCategoryName][] = get_the_title(); 
+								$infoMapa[$postType][$customPostCategoryName][] = $lat; 
+								$infoMapa[$postType][$customPostCategoryName][] = $lon; 
+								$infoMapa[$postType][$customPostCategoryName][] = $customPostCategorySlug; 
 							endwhile; endif; wp_reset_query(); ?>
 						<?php }
 					}
 				}
 			}
-			return $arrayMapa;
+			return $infoMapa;
 		}
 		$postTypes = array('proyecto', 'evento', 'recurso');
-		$arrayMapaTodos = arrayMapa($postTypes);
-		wp_localize_script('functions', 'arrayMapaTodos', $arrayMapaTodos );
+		$infoMapaTodos = infoMapa($postTypes);
+		wp_localize_script('functions', 'infoMapaTodos', $infoMapaTodos );
+
+		$postTypeProyecto = array('proyecto');
+		$infoMapaProyectos = infoMapa($postTypeProyecto);
+		wp_localize_script('functions', 'infoMapaProyectos', $infoMapaProyectos );
+
+		$postTypeRecurso = array('recurso');
+		$infoMapaRecursos = infoMapa($postTypeRecurso);
+		wp_localize_script('functions', 'infoMapaRecursos', $infoMapaRecursos );
 
 		// styles
 		wp_enqueue_style( 'styles', get_stylesheet_uri() );
@@ -505,21 +513,38 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 		return $matches[1];
 	}
 
-
-
 	// FRONT END SCRIPTS FOOTER //////////////////////////////////////////////////////
 	function footerScripts() {
+		echo get_post_type();
 		if( wp_script_is( 'functions', 'done' ) ) {
 			if ( is_home() ) { ?>
 				<script type="text/javascript">
 					var mapa = creaMapa();
-					var markers = creaMarkers(mapa, arrayMapaTodos);
+					var markers = creaMarkers(mapa, infoMapaTodos);
 					// Muestra todos los marcadores centrados en el mapa
 					autoCenter(mapa, markers);
 					// Agrega los filtros para cada categoría y subcategoría
-					agregaFiltrosMarkers(mapa, markers);
+					agregaFiltrosMarkers(mapa, markers, infoMapaTodos);
 				</script>
-    		<?php }
+    		<?php } else if ( get_post_type() == 'proyecto')  { ?>
+				<script type="text/javascript">
+					var mapa = creaMapa();
+					var markers = creaMarkers(mapa, infoMapaProyectos);
+					// Muestra todos los marcadores centrados en el mapa
+					autoCenter(mapa, markers);
+					// Agrega los filtros para cada categoría y subcategoría
+					agregaFiltrosMarkers(mapa, markers, infoMapaProyectos);
+				</script>
+			<?php } else if ( get_post_type() == 'recurso')  { ?>
+				<script type="text/javascript">
+					var mapa = creaMapa();
+					var markers = creaMarkers(mapa, infoMapaRecursos);
+					// Muestra todos los marcadores centrados en el mapa
+					autoCenter(mapa, markers);
+					// Agrega los filtros para cada categoría y subcategoría
+					agregaFiltrosMarkers(mapa, markers, infoMapaRecursos);
+				</script>
+    		<?php } 
     	} // home
     }// footerScripts
 add_action( 'wp_footer', 'footerScripts', 21 );
