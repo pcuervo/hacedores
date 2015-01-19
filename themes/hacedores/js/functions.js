@@ -266,7 +266,7 @@
 	});
 
 	/*PAGINATION CALL*/
-	
+
 })(jQuery);
 
 var $=jQuery.noConflict();
