@@ -771,6 +771,7 @@ function fb_save_custom_user_profile_fields( $user_id ) {
 	update_user_meta( $user_id, 'celular', $_POST['celular'] );
 	update_user_meta( $user_id, 'direccion', $_POST['direccion']);
 	update_user_meta( $user_id, 'liga_instructable', $_POST['liga_instructable']);
+	update_user_meta( $user_id, 'liga_video', $_POST['liga_video']);
 	update_user_meta( $user_id, 'user_profile_img', $_POST['user_profile_img'] );
 
 	update_user_meta( $user_id, 'user_uno_img', $_POST['user_uno_img'] );
