@@ -669,7 +669,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 						<!-- Outputs the image after save -->
 						<img src="<?php echo esc_url( get_the_author_meta( 'user_profile_img', $user->ID ) ); ?>" style="width:150px;"><br />
 						<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
-						<input type="text" name="user_profile_img" id="user_profile_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_profile_img', $user->ID ) ); ?>" class="regular-text" />
+						<input type="hidden" name="user_profile_img" id="user_profile_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_profile_img', $user->ID ) ); ?>" class="regular-text" />
 						<!-- Outputs the save button -->
 						<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
 						<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
@@ -686,7 +686,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 						<!-- Outputs the image after save -->
 						<img src="<?php echo esc_url( get_the_author_meta( 'user_uno_img', $user->ID ) ); ?>" style="width:150px;"><br />
 						<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
-						<input type="text" name="user_uno_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_uno_img', $user->ID ) ); ?>" class="regular-text" />
+						<input type="hidden" name="user_uno_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_uno_img', $user->ID ) ); ?>" class="regular-text" />
 						<!-- Outputs the save button -->
 						<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
 						<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
@@ -703,7 +703,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 						<!-- Outputs the image after save -->
 						<img src="<?php echo esc_url( get_the_author_meta( 'user_dos_img', $user->ID ) ); ?>" style="width:150px;"><br />
 						<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
-						<input type="text" name="user_dos_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_dos_img', $user->ID ) ); ?>" class="regular-text" />
+						<input type="hidden" name="user_dos_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_dos_img', $user->ID ) ); ?>" class="regular-text" />
 						<!-- Outputs the save button -->
 						<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
 						<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
@@ -720,7 +720,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 						<!-- Outputs the image after save -->
 						<img src="<?php echo esc_url( get_the_author_meta( 'user_tres_img', $user->ID ) ); ?>" style="width:150px;"><br />
 						<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
-						<input type="text" name="user_tres_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_tres_img', $user->ID ) ); ?>" class="regular-text" />
+						<input type="hidden" name="user_tres_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_tres_img', $user->ID ) ); ?>" class="regular-text" />
 						<!-- Outputs the save button -->
 						<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
 						<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
@@ -737,7 +737,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 						<!-- Outputs the image after save -->
 						<img src="<?php echo esc_url( get_the_author_meta( 'user_cuatro_img', $user->ID ) ); ?>" style="width:150px;"><br />
 						<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
-						<input type="text" name="user_cuatro_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_cuatro_img', $user->ID ) ); ?>" class="regular-text" />
+						<input type="hidden" name="user_cuatro_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_cuatro_img', $user->ID ) ); ?>" class="regular-text" />
 						<!-- Outputs the save button -->
 						<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
 						<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
@@ -755,11 +755,14 @@ function fb_save_custom_user_profile_fields( $user_id ) {
 
 	if ( !current_user_can( 'edit_user', $user_id ) )
 		return FALSE;
-
+	
+	if( isset($_POST['user_categories']) ){
+		update_user_meta( $user_id, 'user_categories', $_POST['user_categories']);
+	}
 	update_user_meta( $user_id, 'celular', $_POST['celular'] );
-	update_user_meta( $user_id, 'user_categories', $_POST['user_categories']);
 	update_user_meta( $user_id, 'direccion', $_POST['direccion']);
 	update_user_meta( $user_id, 'liga_instructable', $_POST['liga_instructable']);
+	update_user_meta( $user_id, 'liga_video', $_POST['liga_video']);
 	update_user_meta( $user_id, 'user_profile_img', $_POST['user_profile_img'] );
 
 	update_user_meta( $user_id, 'user_uno_img', $_POST['user_uno_img'] );
