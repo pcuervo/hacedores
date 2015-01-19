@@ -288,11 +288,11 @@ function creaMapa(){
 	return map;
 }// crearMapa
 
-function creaMarkers(mapa){
+function creaMarkers(mapa, infoMapa){
 	var categorias_mapa = {};
 	var markers = [];
 	// Agrega todos los marcadores al mapa
-	$.each(arrayMapa, function(categoria, subcategorias){
+	$.each(infoMapa, function(categoria, subcategorias){
 		categorias_mapa[categoria] = {};		
 		$.each(subcategorias, function(i, subcategoria){
 			if(typeof subcategoria != 'object') return true;

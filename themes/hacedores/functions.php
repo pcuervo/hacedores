@@ -42,9 +42,8 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 		$queryProyecto = queryProyecto();
 		//wp_localize_script('functions', 'queryProyecto', $queryProyecto );
 
-		function arrayMapa(){
+		function arrayMapa($postTypes){
 			$arrayMapa = array();
-			$postTypes = array('proyecto', 'evento', 'recurso');
 			foreach( $postTypes as $postType ){
 				$customPostTaxonomies = get_object_taxonomies($postType);
 				if(count($customPostTaxonomies) > 0){
@@ -82,8 +81,9 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 			}
 			return $arrayMapa;
 		}
-		$arrayMapa = arrayMapa();
-		wp_localize_script('functions', 'arrayMapa', $arrayMapa );
+		$postTypes = array('proyecto', 'evento', 'recurso');
+		$arrayMapaTodos = arrayMapa($postTypes);
+		wp_localize_script('functions', 'arrayMapaTodos', $arrayMapaTodos );
 
 		// styles
 		wp_enqueue_style( 'styles', get_stylesheet_uri() );
@@ -513,7 +513,7 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 			if ( is_home() ) { ?>
 				<script type="text/javascript">
 					var mapa = creaMapa();
-					var markers = creaMarkers(mapa);
+					var markers = creaMarkers(mapa, arrayMapaTodos);
 					// Muestra todos los marcadores centrados en el mapa
 					autoCenter(mapa, markers);
 					// Agrega los filtros para cada categoría y subcategoría
