@@ -293,15 +293,21 @@ function dameMarkers(categoria, subcategorias, mapa){
 	var markers = new Array();
 	ubicaciones = [];
 
+	var infowindow = new google.maps.InfoWindow({
+		maxWidth: 400
+	});
 	$.each(subcategorias, function(i, subcategoria){
 		$.each(subcategoria, function(j, coordenadas){
 			var latLon = [];
+			var contenidoInfoWindow ='<h3>'+coordenadas.titulo+'</h3><p>' + coordenadas.url + '</p>';
 			latLon.push(i);
 			latLon.push(coordenadas.lat);
 			latLon.push(coordenadas.lon);
+			latLon.push(contenidoInfoWindow);
 			ubicaciones.push(latLon);
 		});
 	});
+	console.log(ubicaciones);
 
 	icon = dameIconPath(categoria);
 	for (var i = 0; i < ubicaciones.length; i++) {
@@ -313,16 +319,20 @@ function dameMarkers(categoria, subcategorias, mapa){
 			subcategory: ubicaciones[i][0]
 		});
 		markers.push(marker);
+		google.maps.event.addListener(marker, 'click', (function(marker, i) {
+			return function() {
+				infowindow.setContent(ubicaciones[i][3]);
+				infowindow.open(mapa, marker);
+			};
+		})(marker, i));
 	}
 	return markers;
 }// agregaMarkers
 
 function filtraMarkerCategoria(categoria, markers, mapa){
-	//console.log(markers);
 	var filteredResult = markers.filter(function(obj) {
     	return (obj.category == categoria)
    	});
-	console.log(filteredResult);
 	$.each(markers, function (index, marker) {
 		marker.setVisible(false);
 	});
@@ -333,11 +343,9 @@ function filtraMarkerCategoria(categoria, markers, mapa){
 }
 
 function filtraMarkerSubCategoria(categoria, subcategoria, markers, mapa){
-	//console.log(markers);
 	var filteredResult = markers.filter(function(obj) {
     	return (obj.subcategory == subcategoria && obj.category == categoria)
    	});
-	console.log(filteredResult);
 	$.each(markers, function (index, marker) {
 		marker.setVisible(false);
 	});

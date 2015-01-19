@@ -455,29 +455,41 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 							categorias_mapa['hacedores']['b'] = []; 
 							categorias_mapa['hacedores']['a'].push({
 								lat: 19.403510, 
-								lon: -99.174334
+								lon: -99.174334,
+								titulo: 'yo si',
+								url: 'link'
 							});
 							categorias_mapa['hacedores']['a'].push({
 								lat: 19.409510, 
-								lon: -99.174334
+								lon: -99.174334,
+								titulo: 'yo si',
+								url: 'link'
 							});
 							categorias_mapa['hacedores']['b'].push({
 								lat: 19.403510, 
-								lon: -99.179334
+								lon: -99.179334,
+								titulo: 'yo si',
+								url: 'link'
 							});
 							categorias_mapa['hacedores']['b'].push({
 								lat: 19.409510, 
-								lon: -99.179334
+								lon: -99.179334,
+								titulo: 'yo si',
+								url: 'link'
 							});
 							categorias_mapa['eventos']['a'] = []; 
 							categorias_mapa['eventos']['b'] = []; 
 							categorias_mapa['eventos']['a'].push({
 								lat: 19.405510, 
-								lon: -99.189334
+								lon: -99.189334,
+								titulo: 'yo si',
+								url: 'link'
 							});
 							categorias_mapa['eventos']['b'].push({
 								lat: 19.401510, 
-								lon: -99.179334
+								lon: -99.179334,
+								titulo: 'yo si',
+								url: 'link'
 							});
 							// categorias_mapa['proyectos'] = ['a', 'b', 'c']; 
 							// categorias_mapa['espacios'] = ['a', 'b', 'c']; 
@@ -485,7 +497,6 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 
 							var mapa = creaMapa();
 							var markers_hacedores = dameMarkers('hacedores',categorias_mapa['hacedores'], mapa);
-							console.log(markers_hacedores);
 							var markers_eventos = dameMarkers('eventos',categorias_mapa['eventos'], mapa);
 							var markers = markers_hacedores.concat(markers_eventos);
 							autoCenter(mapa, markers);
