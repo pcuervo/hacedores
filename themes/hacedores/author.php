@@ -1,53 +1,78 @@
 <?php
 	get_header();
-	//the_post();
+	$user = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : get_userdata(intval($author));
+
+	$userID 			= $user->ID;
+	$userName 			= $user->display_name;
+	$userEmail 			= $user->user_email;
+	$userURL 			= $user->user_url;
+	$userAvatar 		= get_user_meta($userID, 'user_profile_img', true);
+	$userFB 			= get_user_meta($userID, 'facebook', true);
+	$userTW 			= get_user_meta($userID, 'twitter', true);
+	$userInfo 			= get_user_meta($userID, 'description', true);
+	$userCategories 	= get_user_meta($userID, 'user_categories', true);
+	$userTel 			= get_user_meta($userID, 'celular', true);
+	$userDireccion 		= get_user_meta($userID, 'direccion', true);
+	$userInstructables 	= get_user_meta($userID, 'liga_instructable', true);
+	$userVideo 			= get_user_meta($userID, 'liga_video', true);
+	$userIMG1 			= get_user_meta($userID, 'user_uno_img', true);
+	$userIMG2 			= get_user_meta($userID, 'user_dos_img', true);
+	$userIMG3 			= get_user_meta($userID, 'user_tres_img', true);
+	$userIMG4 			= get_user_meta($userID, 'user_cuatro_img', true);
 ?>
 	<div class="[ columna xmall-12 medium-3 large-3 ] [ side-proyecto ]">
-		<h2><?php the_title(); ?></h2>
+		<h2><?php echo $userName; ?></h2>
 		<?php
-			$categoriasArgs = array(
-				'exclude' => '1'
-			);
-			$categorias = get_categories($categoriasArgs);
-			foreach($categorias as $category) {
-				echo '<p>'.$category->name.'</p> ';
+			foreach($userCategories as $userCategoryID) {
+				$userCategory = get_the_category_by_ID($userCategoryID);
+				echo '<p>'.$userCategory.'</p> ';
 			}
 		?>
-		<p><a target="_blank" href="<?php echo get_post_meta($post->ID, '_web2_meta', true); ?>"><?php echo get_post_meta($post->ID, '_web2_meta', true); ?></a></p>
+		<p><a target="_blank" href="<?php echo $userURL; ?>"><?php echo $userURL; ?></a></p>
 	</div>
 	<div class="[ columna xmall-12 medium-6 ] [ clearfix ]">
-		<?php
-			the_post_thumbnail('full', array('class' => '[ margin-bottom-medium ]'));
-			the_content();
-		?>
+		<img class="[ margin-bottom-small ]" src="<?php echo $userAvatar; ?>" alt="<?php echo $userName; ?>">
+		<p><?php echo $userInfo; ?></p>
 		<div class="[ clearfix ] [ margin-bottom-medium ]">
 			<ul class="[ clearfix ] [ margin-bottom-medium ] [ galeria ]">
-				<?php
-					$attachments = get_posts( array(
-						'post_type' 		=> 'attachment',
-						'posts_per_page' 	=> -1,
-						'post_parent' 		=> $post->ID,
-						'exclude' 			=> get_post_thumbnail_id()
-					) );
-					if ( $attachments ) {
-						foreach ( $attachments as $attachment ) {
-							$imageURLThumb = wp_get_attachment_image_src( $attachment->ID, 'thumbnail' );
-							$imageURLFull = wp_get_attachment_image_src( $attachment->ID, 'full' );
-							echo '<li class="[ columna xmall-6 medium-4 ]"><a href="' . $imageURLFull[0] . '" data-imagelightbox="f"><img src="' . $imageURLThumb[0] . '" alt="" /></a></li>';
-						}
-					}
-				?>
+				<?php if ( $userIMG1 ){ ?>
+					<li class="[ columna xmall-6 medium-4 ]">
+						<a href="<?php echo $userIMG1; ?>" data-imagelightbox="f">
+							<img src="<?php echo $userIMG1; ?>" alt="" />
+						</a>
+					</li>
+				<?php } ?>
+				<?php if ( $userIMG2 ){ ?>
+					<li class="[ columna xmall-6 medium-4 ]">
+						<a href="<?php echo $userIMG2; ?>" data-imagelightbox="f">
+							<img src="<?php echo $userIMG2; ?>" alt="" />
+						</a>
+					</li>
+				<?php } ?>
+				<?php if ( $userIMG3 ){ ?>
+					<li class="[ columna xmall-6 medium-4 ]">
+						<a href="<?php echo $userIMG3; ?>" data-imagelightbox="f">
+							<img src="<?php echo $userIMG3; ?>" alt="" />
+						</a>
+					</li>
+				<?php } ?>
+				<?php if ( $userIMG4 ){ ?>
+					<li class="[ columna xmall-6 medium-4 ]">
+						<a href="<?php echo $userIMG4; ?>" data-imagelightbox="f">
+							<img src="<?php echo $userIMG4; ?>" alt="" />
+						</a>
+					</li>
+				<?php } ?>
 			</ul>
 		</div>
 		<?php
-		$videoProyecto = get_post_meta($post->ID, '_video2_meta', true);
-		if (strpos($videoProyecto,'youtube') !== false) {
+		if (strpos($userVideo,'youtube') !== false) {
 			$videoHost = 'youtube';
 		}
-		if (strpos($videoProyecto,'vimeo') !== false) {
+		if (strpos($userVideo,'vimeo') !== false) {
 			$videoHost = 'vimeo';
 		}
-		$video_src = get_video_src($videoProyecto, $videoHost);
+		$video_src = get_video_src($userVideo, $videoHost);
 		if( $video_src ){ ?>
 			<div class="[ clearfix ] [ margin-bottom-medium ]">
 				<div class="[ margin-bottom-medium ]" id="thing-with-videos">

@@ -7,7 +7,8 @@
 					$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 					$args = array(
 						'post_type' 		=> 'recurso',
-						'posts_per_page' 	=> -1
+						'posts_per_page' 	=> 8,
+						'paged' 			=> $paged
 					);
 					$queryProyecto = new WP_Query( $args );
 					if ( $queryProyecto->have_posts() ) : while ( $queryProyecto->have_posts() ) : $queryProyecto->the_post(); ?>
