@@ -361,12 +361,12 @@ function dameMarkers(categoria, subcategorias, mapa){
 		});
 		markers.push(marker);
 		
-		// Agrega infoWindow para mostrar la información del post
-		var infowindow = new google.maps.InfoWindow({
-			maxWidth: 500
-		});
-		infowindow.setContent(ubicaciones[i][3]);
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
+			// Agrega infoWindow para mostrar la información del post
+			var infowindow = new google.maps.InfoWindow({
+				maxWidth: 500
+			});
+			infowindow.setContent(ubicaciones[i][3]);
 			return function() { infowindow.open(mapa, marker); };
 		})(marker, i));
 	}

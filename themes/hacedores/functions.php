@@ -112,6 +112,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 		$infoUsuarios = infoUsuarios();
 		$infoMapaTodos = array_merge(infoMapa($postTypes), $infoUsuarios);
 		wp_localize_script('functions', 'infoMapaTodos', $infoMapaTodos );
+		wp_localize_script('functions', 'infoMapaUsuarios', $infoUsuarios );
 
 		$postTypeProyecto = array('proyecto');
 		$infoMapaProyectos = infoMapa($postTypeProyecto);
@@ -537,7 +538,7 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 
 	function get_avatar_url($get_avatar){
 		preg_match("/src='(.*?)'/i", $get_avatar, $matches);
-		return $matchCes[1];
+		return $matches[1];
 	}
 
 	// FRONT END SCRIPTS FOOTER //////////////////////////////////////////////////////
@@ -551,7 +552,6 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 					autoCenter(mapa, markers);
 					// Agrega los filtros para cada categoría y subcategoría
 					agregaFiltrosMarkers(mapa, markers, infoMapaTodos);
-					console.log(infoMapaTodos);
 				</script>
 			<?php } else if ( is_post_type_archive( 'proyecto' ) )  { ?>
 				<script type="text/javascript">
@@ -576,7 +576,16 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 						agregaFiltrosMarkers(mapa, markers, infoMapaRecursos);
 					}
 				</script>
-			<?php }
+			<?php } else if ( is_page( 'hacedores' ) ) { ?>
+				<script type="text/javascript">
+					var mapa = creaMapa();
+					var markers = creaMarkers(mapa, infoMapaUsuarios);
+					// Muestra todos los marcadores centrados en el mapa
+					autoCenter(mapa, markers);
+					// Agrega los filtros para cada categoría y subcategoría
+					agregaFiltrosMarkers(mapa, markers, infoMapaUsuarios);
+				</script>
+			<?php } 
 		} // home
 	}// footerScripts
 add_action( 'wp_footer', 'footerScripts', 21 );
