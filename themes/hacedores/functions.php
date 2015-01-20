@@ -178,7 +178,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 		update_option( 'thumbnail_crop', true );
 
 		// cambiar el tamaño Medium
-		update_option( 'medium_size_h', 235 );
+		update_option( 'medium_size_h', 132 );
 		update_option( 'medium_size_w', 235 );
 		update_option( 'medium_crop', true );
 
@@ -514,7 +514,7 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 
 	function get_avatar_url($get_avatar){
 		preg_match("/src='(.*?)'/i", $get_avatar, $matches);
-		return $matches[1];
+		return $matchCes[1];
 	}
 
 	// FRONT END SCRIPTS FOOTER //////////////////////////////////////////////////////
@@ -595,7 +595,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</label></th>
 			<td>
 				<input type="text" name="celular" id="celular" value="<?php echo esc_attr( get_the_author_meta( 'celular', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingersa tu celular.', 'your_phone'); ?></span>
+				<span class="description"><?php _e('Ingresa tu celular.', 'your_phone'); ?></span>
 			</td>
 		</tr>
 	</table>
@@ -606,7 +606,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</th>
 			<td>
 				<input type="text" name="direccion" id="direccion" value="<?php echo esc_attr( get_the_author_meta( 'direccion', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingersa tu direccion.', 'your_adress'); ?></span>
+				<span class="description"><?php _e('Ingresa tu direccion.', 'your_adress'); ?></span>
 			</td>
 		</tr>
 	</table>
@@ -617,7 +617,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</th>
 			<td>
 				<input type="text" name="latitud" id="latitud" value="<?php echo esc_attr( get_the_author_meta( 'latitud', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingersa tu latitud.', 'your_adress'); ?></span>
+				<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span>
 			</td>
 		</tr>
 	</table>
@@ -628,7 +628,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</th>
 			<td>
 				<input type="text" name="longitud" id="longitud" value="<?php echo esc_attr( get_the_author_meta( 'longitud', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingersa tu longitud.', 'your_adress'); ?></span>
+				<span class="description"><?php _e('Ingresa tu longitud.', 'your_longitud'); ?></span>
 			</td>
 		</tr>
 	</table>
@@ -639,7 +639,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</th>
 			<td>
 				<input type="text" name="liga_instructable" id="liga_instructable" value="<?php echo esc_attr( get_the_author_meta( 'liga_instructable', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingersa tu liga,', 'your_liga'); ?></span>
+				<span class="description"><?php _e('Ingresa tu liga,', 'your_liga'); ?></span>
 			</td>
 		</tr>
 	</table>
@@ -820,4 +820,31 @@ function add_my_error() {
     $wp->add_query_var('my_error');
 }
 
+function get_attachment_id_from_url( $attachment_url = '' ) {
 
+	global $wpdb;
+	$attachment_id = false;
+
+	// If there is no url, return.
+	if ( '' == $attachment_url )
+		return;
+
+	// Get the upload directory paths
+	$upload_dir_paths = wp_upload_dir();
+
+	// Make sure the upload path base directory exists in the attachment URL, to verify that we're working with a media library image
+	if ( false !== strpos( $attachment_url, $upload_dir_paths['baseurl'] ) ) {
+
+		// If this is the URL of an auto-generated thumbnail, get the URL of the original image
+		$attachment_url = preg_replace( '/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '', $attachment_url );
+
+		// Remove the upload path base directory from the attachment URL
+		$attachment_url = str_replace( $upload_dir_paths['baseurl'] . '/', '', $attachment_url );
+
+		// Finally, run a custom database query to get the attachment ID from the modified attachment URL
+		$attachment_id = $wpdb->get_var( $wpdb->prepare( "SELECT wposts.ID FROM $wpdb->posts wposts, $wpdb->postmeta wpostmeta WHERE wposts.ID = wpostmeta.post_id AND wpostmeta.meta_key = '_wp_attached_file' AND wpostmeta.meta_value = '%s' AND wposts.post_type = 'attachment'", $attachment_url ) );
+
+	}
+
+	return $attachment_id;
+}
