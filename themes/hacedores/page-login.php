@@ -3,17 +3,21 @@
 	{ 
 		$username = $_POST['email'];
 		$password = $_POST['password'];
-
+		$error = null;
 		if ( site_login_post($username, $password) ){
 			header("Location: ".site_url()."/dashboard");
 			die();
 		}
 		else{
-			echo "Usuario y/o contraseña invalida";
+			$error = "Usuario y/o contraseña invalida";
 		}
 	}
 ?>
 <?php  get_header(); ?>
+
+<?php if($error) ?>
+	<div><?php echo $error; ?></div>
+
 <div class="container">
 			<div class="[ main ]">
 				<div class="[ width clearfix ]">
@@ -30,7 +34,7 @@
 									<label for="password" class="[ columna xmall-12 ]">Contraseña</label>
 									<input name="password" type="password" id="password">
 								</div>
-								<input type="submit" name="submit" value="Registrarse">
+								<input type="submit" name="submit" value="Ingresar">
 							</div>
 						</form>
 					</div>

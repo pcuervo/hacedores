@@ -23,9 +23,9 @@
 							<div class="campo">
 								<label for="usuario-password" class="[ columna xmall-12 ]">Contraseña</label>
 								<input name="password" type="password" id="password">
-								<p>¿Olvidaste tu contraseña? <a href="">click aquí</a></p>
+								<p>¿Olvidaste tu contraseña? <a href="<?php echo site_url().'/wp-login.php?action=lostpassword'; ?>">click aquí</a></p>
 							</div>
-							<input type="submit" name="submit" value="Registrarse">
+							<input type="submit" name="submit" value="Enviar">
 							<p>¿No estás registrado aún? <a href="<?php echo site_url('registro'); ?>">Click aquí</a></p>
 						</form>
 					</div>
