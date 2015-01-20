@@ -20,7 +20,7 @@
 		<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 		<?php wp_head(); ?>
 	</head>
-	<body>
+	<body <?php body_class(); ?>>
 		<!--[if lt IE 9]>
 			<p class="chromeframe">Estás usando una versión <strong>vieja</strong> de tu explorador. Por favor <a href="http://browsehappy.com/" target="_blank"> actualiza tu explorador</a> para tener una experiencia completa.</p>
 		<![endif]-->
@@ -44,6 +44,21 @@
 					</div>
 					<div class="[ columna xmall-6 medium-3 ]">
 						<h1><a href="<?php echo site_url(); ?>">Hacedores CDMX</a></h1>
+						<div class="[ clearfix ] [ nombre-seccion ]">
+							<?php if ( get_post_type() == 'informacion'){ ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-gray.gif" alt="">
+								<h3>Información</h3>
+							<?php } elseif ( is_page('hacedores') ) { ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-red.gif" alt="">
+								<h3>Hacedores</h3>
+							<?php } elseif ( get_post_type() == 'proyecto'){ ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-blue.gif" alt="">
+								<h3>Proyectos</h3>
+							<?php } elseif ( get_post_type() == 'recurso'){ ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-green.gif" alt="">
+								<h3>Espacios/Recursos</h3>
+							<?php } ?>
+						</div>
 					</div>
 					<div class="[ columna xmall-4 small-3 medium-2 large-2 ]">
 						<a href="http://labplc.mx/" target="_blank"><img src="<?php echo THEMEPATH; ?>images/logo-laboratorio-ciudad.png" alt=""></a>
@@ -116,12 +131,31 @@
 							<div class="[ menu-container ]">
 								<div class="[ menu-mapa ]">
 									<ul class="[ menu-titulos ]">
-										<li class="[ hacedores ] [ trigger ]" data-rel="sub-hacedores">Hacedores</li>
+										<?php if ( is_home() || is_page('hacedores') ) { ?>
+											<li class="[ hacedores ] [ trigger ]" data-rel="sub-hacedores">Hacedores</li>
 											<ul class="[ submenu-mapa ] [ sub-hacedores ] [ content ]">
-												<li class="[ a ]">a</li>
-												<li class="[ b ]">b</li>
+											<?php
+											$args = array(
+												'role' => 'Editor'
+											);
+											$queryHacedores = new WP_User_Query( $args );
+											if ( ! empty( $queryHacedores->results ) ) {
+												foreach ( $queryHacedores->results as $user ) {
+													$userNombre = $user->display_name;
+													$userID 	= $user->ID;
+													$userMeta 	= get_user_meta( $userID );
+													$userBio 	= $userMeta['description'][0];
+													$userAvatar = get_avatar_url(get_avatar( $userID, 150 ));
+													$userURL 	= get_author_posts_url($userID);
+													//echo $userURL;
+													?>
+													<li class="[ <?php echo $customPostCategorySlug; ?> ]"><?php echo $userNombre; ?></li>
+											<?php }
+											} ?>
 											</ul>
-										<li class="[ proyecto ] [ trigger ]" data-rel="sub-proyecto">Proyectos</li>
+										<?php } ?>
+										<?php if ( is_home() || get_post_type() == 'proyecto' ) { ?>
+											<li class="[ proyecto ] [ trigger ]" data-rel="sub-proyecto">Proyectos</li>
 											<ul class="[ submenu-mapa ] [ sub-proyecto ] [ content ]">
 												<?php
 													$customPostTaxonomies = get_object_taxonomies('proyecto');
@@ -133,7 +167,8 @@
 																'pad_counts' 	=> 0,
 																'hierarchical' 	=> 1,
 																'taxonomy' 		=> $tax,
-																'exclude' 		=> 1
+																'exclude' 		=> 1,
+																'hide_empty' 	=> 1
 															);
 															$customPostCategories = get_categories( $args );
 															foreach ($customPostCategories as $customPostCategory) {
@@ -145,7 +180,9 @@
 													}
 												?>
 											</ul>
-										<li class="[ recurso ] [ trigger ]" data-rel="sub-recurso">Espacios / Recursos</li>
+										<?php } ?>
+										<?php if ( is_home() || get_post_type() == 'recurso' ) { ?>
+											<li class="[ recurso ] [ trigger ]" data-rel="sub-recurso">Espacios / Recursos</li>
 											<ul class="[ submenu-mapa ] [ sub-recurso ] [ content ]">
 												<?php
 													$customPostTaxonomies = get_object_taxonomies('recurso');
@@ -157,7 +194,8 @@
 																'pad_counts' 	=> 0,
 																'hierarchical' 	=> 1,
 																'taxonomy' 		=> $tax,
-																'exclude' 		=> 1
+																'exclude' 		=> 1,
+																'hide_empty' 	=> 1
 															);
 															$customPostCategories = get_categories( $args );
 															foreach ($customPostCategories as $customPostCategory) {
@@ -169,7 +207,9 @@
 													}
 												?>
 											</ul>
-										<li class="[ evento ] [ trigger ]" data-rel="sub-evento">Eventos</li>
+										<?php } ?>
+										<?php if ( is_home() || get_post_type() == 'evento' ) { ?>
+											<li class="[ evento ] [ trigger ]" data-rel="sub-evento">Eventos</li>
 											<ul class="[ submenu-mapa ] [ sub-evento ] [ content ]">
 												<?php
 													$customPostTaxonomies = get_object_taxonomies('evento');
@@ -181,7 +221,8 @@
 																'pad_counts' 	=> 0,
 																'hierarchical' 	=> 1,
 																'taxonomy' 		=> $tax,
-																'exclude' 		=> 1
+																'exclude' 		=> 1,
+																'hide_empty' 	=> 1
 															);
 															$customPostCategories = get_categories( $args );
 															foreach ($customPostCategories as $customPostCategory) {
@@ -193,6 +234,7 @@
 													}
 												?>
 											</ul>
+										<?php } ?>
 									</ul>
 								</div>
 							</div>

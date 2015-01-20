@@ -274,7 +274,7 @@ var $=jQuery.noConflict();
 function creaMapa(){
 	// Crea Mapa
 	var map = new google.maps.Map(document.getElementById('mapa'), {
-		zoom: 15,
+		zoom: 18,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		mapTypeControl: false,
 		streetViewControl: false,
@@ -288,11 +288,11 @@ function creaMapa(){
 	return map;
 }// crearMapa
 
-function creaMarkers(mapa){
+function creaMarkers(mapa, infoMapa){
 	var categorias_mapa = {};
 	var markers = [];
 	// Agrega todos los marcadores al mapa
-	$.each(arrayMapa, function(categoria, subcategorias){
+	$.each(infoMapa, function(categoria, subcategorias){
 		categorias_mapa[categoria] = {};		
 		$.each(subcategorias, function(i, subcategoria){
 			if(typeof subcategoria != 'object') return true;
@@ -311,9 +311,9 @@ function creaMarkers(mapa){
 	return markers;
 }// creaMarkers
 
-function agregaFiltrosMarkers(mapa, markers){
-	$.each(arrayMapa, function(categoria, subcategorias){
-		
+function agregaFiltrosMarkers(mapa, markers, infoMapa){
+	$.each(infoMapa, function(categoria, subcategorias){
+
 		$('li.'+categoria).on('click', function(){
 			filtraMarkerCategoria(categoria, markers, mapa);
 		});	
@@ -379,10 +379,12 @@ function filtraMarkerCategoria(categoria, markers, mapa){
 	$.each(markers, function (index, marker) {
 		marker.setVisible(false);
 	});
+	var visible_markers = [];
 	$.each(filteredResult, function (index, marker) {
 		marker.setVisible(true);
+		visible_markers.push(marker);
 	});
-	autoCenter(mapa, markers);
+	autoCenter(mapa, visible_markers);
 }
 
 function filtraMarkerSubCategoria(categoria, subcategoria, markers, mapa){
@@ -392,20 +394,19 @@ function filtraMarkerSubCategoria(categoria, subcategoria, markers, mapa){
 	$.each(markers, function (index, marker) {
 		marker.setVisible(false);
 	});
+	var visible_markers = [];
 	$.each(filteredResult, function (index, marker) {
 		marker.setVisible(true);
+		visible_markers.push(marker);
 	});
-	autoCenter(mapa, markers);
-}
+	autoCenter(mapa, visible_markers);
+}// filtraMarkerSubCategoria
 
 function autoCenter(map, markers) {
 	//  Crea un nuevo limite
 	var bounds = new google.maps.LatLngBounds();
-
 	//  Itera todos los marcadores
-	$.each(markers, function (index, marker) {
-		bounds.extend(marker.position);
-	});
+	$.each(markers, function (index, marker) { bounds.extend(marker.position); });
 	//  Mete los límites en el mapa
 	map.fitBounds(bounds);
 	var listener = google.maps.event.addListener(map, "idle", function() {

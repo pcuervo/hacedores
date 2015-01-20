@@ -1,23 +1,23 @@
-<?php  
-	if(isset($_POST['submit'])) 
-	{ 
+<?php
+	if(isset($_POST['submit']))
+	{
 		$username = $_POST['email'];
 		$password = $_POST['password'];
-
 		if ( site_login_post($username, $password) ){
 			header("Location: ".site_url()."/dashboard");
 			die();
 		}
 		else{
-			echo "Usuario y/o contraseña invalida";
+			header("Location: ".site_url());
+			die();
 		}
 	}
 ?>
-<?php  get_header(); ?>
+<?php get_header(); ?>
 <div class="container">
+			<?php do_action('oa_social_login'); ?>
 			<div class="[ main ]">
 				<div class="[ width clearfix ]">
-					<?php do_action('oa_social_login'); ?>
 					<div class="[ columna xmall-12 medium-8 large-8 ] [ margin-bottom-medium ] [ clearfix ] [ form-user ]">
 						<form name="registro" method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 							<div class="[ registro-usuarios ] [ content ]">
