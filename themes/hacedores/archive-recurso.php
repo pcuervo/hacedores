@@ -21,7 +21,11 @@
 								<?php } ?>
 							</a>
 							<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
-							<?php the_content(); ?>
+							<?php 
+								$content = get_the_content();
+								$content = strip_tags($content);
+								echo trim_text($content, 200); 
+							?>
 						</div><!-- post -->
 					<?php endwhile; endif; wp_reset_query(); ?>
 				</div>

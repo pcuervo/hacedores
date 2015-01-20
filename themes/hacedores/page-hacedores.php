@@ -27,7 +27,7 @@
 					</a>
 					<a href="<?php echo $userURL; ?>">
 						<h2><?php echo $userNombre; ?></h2></a>
-					<p><?php echo $userBio; ?></p>
+					<p><?php echo trim_text($userBio, 200); ?></p>
 				</div><!-- post -->
 		<?php }
 		} ?>

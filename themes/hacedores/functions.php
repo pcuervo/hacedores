@@ -61,6 +61,8 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 					$infoUsuarios['hacedores'][$userNiceName][] = $latitud;
 					$infoUsuarios['hacedores'][$userNiceName][] = $longitud;
 					$infoUsuarios['hacedores'][$userNiceName][] = $userNiceName;
+					$infoUsuarios['hacedores'][$userNiceName][] = 'author';
+					$infoUsuarios['hacedores'][$userNiceName][] = $userNiceName;
 				}
 			}
 			return $infoUsuarios;
@@ -698,7 +700,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 				<!-- Outputs the image after save -->
 				<img src="<?php echo esc_url( get_the_author_meta( 'user_profile_img', $user->ID ) ); ?>" style="width:150px;"><br />
 				<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
-				<input type="hidden" name="user_profile_img" id="user_profile_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_profile_img', $user->ID ) ); ?>" class="regular-text" />
+				<input type="text" name="user_profile_img" id="user_profile_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_profile_img', $user->ID ) ); ?>" class="regular-text" />
 				<!-- Outputs the save button -->
 				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Subir imagen', 'textdomain' ); ?>" id="uploadimage"/><br />
 				<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
@@ -712,7 +714,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 				<!-- Outputs the image after save -->
 				<img src="<?php echo esc_url( get_the_author_meta( 'user_uno_img', $user->ID ) ); ?>" style="width:150px;"><br />
 				<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
-				<input type="hidden" name="user_uno_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_uno_img', $user->ID ) ); ?>" class="regular-text" />
+				<input type="text" name="user_uno_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_uno_img', $user->ID ) ); ?>" class="regular-text" />
 				<!-- Outputs the save button -->
 				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Subir imagen', 'textdomain' ); ?>" id="uploadimage"/><br />
 				<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
@@ -726,7 +728,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 				<!-- Outputs the image after save -->
 				<img src="<?php echo esc_url( get_the_author_meta( 'user_dos_img', $user->ID ) ); ?>" style="width:150px;"><br />
 				<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
-				<input type="hidden" name="user_dos_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_dos_img', $user->ID ) ); ?>" class="regular-text" />
+				<input type="text" name="user_dos_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_dos_img', $user->ID ) ); ?>" class="regular-text" />
 				<!-- Outputs the save button -->
 				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Subir imagen', 'textdomain' ); ?>" id="uploadimage"/><br />
 				<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
@@ -740,7 +742,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 				<!-- Outputs the image after save -->
 				<img src="<?php echo esc_url( get_the_author_meta( 'user_tres_img', $user->ID ) ); ?>" style="width:150px;"><br />
 				<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
-				<input type="hidden" name="user_tres_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_tres_img', $user->ID ) ); ?>" class="regular-text" />
+				<input type="readonly" name="user_tres_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_tres_img', $user->ID ) ); ?>" class="regular-text" />
 				<!-- Outputs the save button -->
 				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Subir imagen', 'textdomain' ); ?>" id="uploadimage"/><br />
 				<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
@@ -754,7 +756,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 				<!-- Outputs the image after save -->
 				<img src="<?php echo esc_url( get_the_author_meta( 'user_cuatro_img', $user->ID ) ); ?>" style="width:150px;"><br />
 				<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
-				<input type="hidden" name="user_cuatro_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_cuatro_img', $user->ID ) ); ?>" class="regular-text" />
+				<input type="text" name="user_cuatro_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_cuatro_img', $user->ID ) ); ?>" class="regular-text" />
 				<!-- Outputs the save button -->
 				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Subir imagen', 'textdomain' ); ?>" id="uploadimage"/><br />
 				<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
@@ -768,22 +770,33 @@ function fb_save_custom_user_profile_fields( $user_id ) {
 
 	if ( !current_user_can( 'edit_user', $user_id ) )
 		return FALSE;
-
-	if( isset($_POST['user_categories']) ){
+	
+	if( isset($_POST['user_categories']) )
 		update_user_meta( $user_id, 'user_categories', $_POST['user_categories']);
-	}
-	update_user_meta( $user_id, 'celular', $_POST['celular'] );
-	update_user_meta( $user_id, 'direccion', $_POST['direccion']);
-	update_user_meta( $user_id, 'latitud', $_POST['latitud']);
-	update_user_meta( $user_id, 'longitud', $_POST['longitud']);
-	update_user_meta( $user_id, 'liga_instructable', $_POST['liga_instructable']);
-	update_user_meta( $user_id, 'liga_video', $_POST['liga_video']);
-	update_user_meta( $user_id, 'user_profile_img', $_POST['user_profile_img'] );
+  if( isset($_POST['celular']) )
+		update_user_meta( $user_id, 'celular', $_POST['celular'] );
+	if( isset($_POST['direccion']) )
+		update_user_meta( $user_id, 'direccion', $_POST['direccion']);
+	if( isset($_POST['latitud']) )
+		update_user_meta( $user_id, 'latitud', $_POST['latitud']);
+	if( isset($_POST['longitud']) )
+		update_user_meta( $user_id, 'longitud', $_POST['longitud']);
+	if( isset($_POST['liga_instructable']) )
+		update_user_meta( $user_id, 'liga_instructable', $_POST['liga_instructable']);
+	if( isset($_POST['liga_video']) )
+		update_user_meta( $user_id, 'liga_video', $_POST['liga_video']);
+	
+	if( isset($_POST['user_profile_img']) )
+		update_user_meta( $user_id, 'user_profile_img', $_POST['user_profile_img'] );
 
-	update_user_meta( $user_id, 'user_uno_img', $_POST['user_uno_img'] );
-	update_user_meta( $user_id, 'user_dos_img', $_POST['user_dos_img'] );
-	update_user_meta( $user_id, 'user_tres_img', $_POST['user_tres_img'] );
-	update_user_meta( $user_id, 'user_cuatro_img', $_POST['user_cuatro_img'] );
+	if( isset($_POST['user_uno_img']) )
+		update_user_meta( $user_id, 'user_uno_img', $_POST['user_uno_img'] );
+	if( isset($_POST['user_dos_img']) )
+		update_user_meta( $user_id, 'user_dos_img', $_POST['user_dos_img'] );
+	if( isset($_POST['user_tres_img']) )
+		update_user_meta( $user_id, 'user_tres_img', $_POST['user_tres_img'] );
+	if( isset($_POST['user_cuatro_img']) )
+		update_user_meta( $user_id, 'user_cuatro_img', $_POST['user_cuatro_img'] );
 }
 
 add_action( 'show_user_profile', 'fb_add_custom_user_profile_fields' );
@@ -886,6 +899,36 @@ function get_attachment_id_from_url( $attachment_url = '' ) {
 	return $attachment_id;
 }
 
+/**
+ * trims text to a space then adds ellipses if desired
+ * @param string $input text to trim
+ * @param int $length in characters to trim to
+ * @param bool $ellipses if ellipses (...) are to be added
+ * @param bool $strip_html if html tags are to be stripped
+ * @return string 
+ */
+function trim_text($input, $length, $ellipses = true, $strip_html = true) {
+    //strip tags, if desired
+    if ($strip_html) {
+    	$input = strip_tags($input);
+    }
+
+    //no need to trim, already shorter than trim length
+    if (strlen($input) <= $length) {
+    	return $input;
+    }
+
+    //find last space within length
+    $last_space = strrpos(substr($input, 0, $length), ' ');
+    $trimmed_text = substr($input, 0, $last_space);
+
+    //add ellipses (...)
+    if ($ellipses) {
+    	$trimmed_text .= '...';
+    }
+
+    return $trimmed_text;
+}
 
 function move_meta_box(){
 

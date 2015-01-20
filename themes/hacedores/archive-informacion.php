@@ -19,7 +19,11 @@
 						<p><?php echo get_post_meta($post->ID, '_fechas_meta', true); ?></p>
 					</div>
 					<div class="[ columna xmall-12 medium-9 ]">
-						<?php the_content(); ?>
+						<?php 
+							$content = get_the_content();
+							$content = strip_tags($content);
+							echo trim_text($content, 200); 
+						?>
 					</div>
 				</div>
 			</section><!-- informacion -->

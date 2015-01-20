@@ -128,6 +128,7 @@
 				<div class="[ width clearfix ]">
 					<section class="[ mapa ] [ margin-bottom-big ] [ relative ]">
 						<div class="[ no-xmall medium ]">
+							<?php if( ! is_single() ) { ?>
 							<div class="[ menu-container ]">
 								<div class="[ menu-mapa ]">
 									<ul class="[ menu-titulos ]">
@@ -244,6 +245,7 @@
 									</ul>
 								</div>
 							</div>
+							<?php } ?>
 							<div id="mapa"></div>
 						</div>
 					</section><!-- mapa -->

@@ -11,6 +11,7 @@
 				echo '<p>'.$categoriaName.'</p>';
 			}
 		?>
+		<p>Dirección: <?php echo get_post_meta($post->ID, '_direccion_recurso_meta', true); ?></p>
 		<p><a target="_blank" href="<?php echo get_post_meta($post->ID, '_web2_meta', true); ?>"><?php echo get_post_meta($post->ID, '_web2_meta', true); ?></a></p>
 	</div>
 	<div class="[ columna xmall-12 medium-6 ] [ clearfix ]">
