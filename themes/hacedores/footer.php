@@ -25,7 +25,7 @@
 								<input name="password" type="password" id="password">
 								<p>¿Olvidaste tu contraseña? <a href="<?php echo site_url().'/wp-login.php?action=lostpassword'; ?>">click aquí</a></p>
 							</div>
-							<input type="submit" name="submit" value="Enviar">
+							<input type="submit" name="submit" value="Entrar" class="[ boton-entrar ]">
 							<p>¿No estás registrado aún? <a href="<?php echo site_url('registro'); ?>">Click aquí</a></p>
 						</form>
 					</div>

@@ -456,7 +456,15 @@ a{
 	overflow: hidden;
 }
 
-.post
+.post{ position: relative;
+	.post-texto{height: 80px; overflow: hidden; position: relative; padding-bottom: 20px; }
+}
+
+.screen{ width: 100%; position: absolute; bottom: 0; height: 40px; background: url("images/screen.png") repeat-x;  }
+
+.leer-mas{ width: 100%; margin: 0; color: #fff; font-family: 'trade 18'; text-transform: uppercase;
+			&.proyectos{ background-color: @programacion; }
+}
 
 .espacios{
 	   h2, h3{
@@ -628,7 +636,24 @@ input:checked{ background-color: @perfiles; }
 			input{ width: 100%; }
 		}
 		a:visited{ color: @primary }
+		.boton-entrar{ 
+			height: 50px; 
+			width: 100%; 
+			font-family: 'trade 18';
+			text-transform: uppercase;
+			padding: 15px;
+			color: #fff;
+			background-color: @informacion; 
+			border: none; 
+			cursor: pointer;
+			-webkit-appearance: none;
+			.transition
+			&:hover{ background-color: @programacion; }
+
+		}
 		.center-full
+
+
 
 	}
 

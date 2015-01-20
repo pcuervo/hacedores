@@ -352,9 +352,6 @@ function dameMarkers(categoria, subcategorias, mapa){
 
 	var icon = dameIconPath(categoria);
 	for (var i = 0; i < ubicaciones.length; i++) {
-		var infowindow = new google.maps.InfoWindow({
-			maxWidth: 500
-		});
 		marker = new google.maps.Marker({
 			position: new google.maps.LatLng(ubicaciones[i][1], ubicaciones[i][2]),
 			map: mapa,
@@ -365,7 +362,10 @@ function dameMarkers(categoria, subcategorias, mapa){
 		markers.push(marker);
 		
 		// Agrega infoWindow para mostrar la información del post
-		infowindow.setContent(ubicaciones[i][3].toString());
+		var infowindow = new google.maps.InfoWindow({
+			maxWidth: 500
+		});
+		infowindow.setContent(ubicaciones[i][3]);
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() { infowindow.open(mapa, marker); };
 		})(marker, i));

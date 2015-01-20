@@ -141,15 +141,18 @@
 											$queryHacedores = new WP_User_Query( $args );
 											if ( ! empty( $queryHacedores->results ) ) {
 												foreach ( $queryHacedores->results as $user ) {
-													$userNombre = $user->display_name;
-													$userID 	= $user->ID;
-													$userMeta 	= get_user_meta( $userID );
-													$userBio 	= $userMeta['description'][0];
-													$userAvatar = get_avatar_url(get_avatar( $userID, 150 ));
-													$userURL 	= get_author_posts_url($userID);
+													$userNombre 	= $user->display_name;
+													$userID 		= $user->ID;
+													$userMeta 		= get_user_meta( $userID );
+													$userBio 		= $userMeta['description'][0];
+													$userNiceName	= $user->user_nicename;
+													$userAvatar 	= get_avatar_url(get_avatar( $userID, 150 ));
+													$userURL 		= get_author_posts_url($userID);
+													//$latitud	= get_user_meta($userID, 'latitud', true);
+													//$longitud	= get_user_meta($userID, 'longitud', true);
 													//echo $userURL;
 													?>
-													<li class="[ <?php echo $customPostCategorySlug; ?> ]"><?php echo $userNombre; ?></li>
+													<li class="[ <?php echo $userNiceName; ?> ]"><?php echo $userNombre; ?></li>
 											<?php }
 											} ?>
 											</ul>

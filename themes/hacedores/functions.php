@@ -43,6 +43,28 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 		$queryProyecto = queryProyecto();
 		//wp_localize_script('functions', 'queryProyecto', $queryProyecto );
 
+		function infoUsuarios(){
+			$infoUsuarios = array();
+			$args = array(
+				'role' => 'Editor'
+			);
+			$queryHacedores = new WP_User_Query( $args );
+			if ( ! empty( $queryHacedores->results ) ) {
+				foreach ( $queryHacedores->results as $user ) {
+					$userNombre 	= $user->display_name;
+					$userID 		= $user->ID;
+					$userNiceName	= $user->user_nicename;
+					$latitud		= get_user_meta($userID, 'latitud', true);
+					$longitud		= get_user_meta($userID, 'longitud', true);
+					$infoUsuarios['hacedores'][$userNiceName][] = $userNombre;
+					$infoUsuarios['hacedores'][$userNiceName][] = $latitud;
+					$infoUsuarios['hacedores'][$userNiceName][] = $longitud;
+					$infoUsuarios['hacedores'][$userNiceName][] = $userNiceName;
+				}
+			}
+			return $infoUsuarios;
+		}// infoUsuarios
+
 		function infoMapa($postTypes){
 			$infoMapa = array();
 			foreach( $postTypes as $postType ){
@@ -84,10 +106,11 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 					}
 				}
 			}
-			return $infoMapa;
+			return array_merge($infoMapa);
 		}
 		$postTypes = array('proyecto', 'evento', 'recurso');
-		$infoMapaTodos = infoMapa($postTypes);
+		$infoUsuarios = infoUsuarios();
+		$infoMapaTodos = array_merge(infoMapa($postTypes), $infoUsuarios);
 		wp_localize_script('functions', 'infoMapaTodos', $infoMapaTodos );
 
 		$postTypeProyecto = array('proyecto');
@@ -528,10 +551,12 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 					autoCenter(mapa, markers);
 					// Agrega los filtros para cada categoría y subcategoría
 					agregaFiltrosMarkers(mapa, markers, infoMapaTodos);
+					console.log(infoMapaTodos);
 				</script>
 			<?php } else if ( is_post_type_archive( 'proyecto' ) )  { ?>
 				<script type="text/javascript">
-					if(infoMapaProyectos.length > 0) {
+					console.log(infoMapaProyectos);
+					if(typeof infoMapaProyectos == 'object'){
 						var mapa = creaMapa();
 						var markers = creaMarkers(mapa, infoMapaProyectos);
 						// Muestra todos los marcadores centrados en el mapa
