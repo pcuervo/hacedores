@@ -22,7 +22,11 @@
 							</a>
 							<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
 							<div class="[ post-texto ]">
-								<?php the_content(); ?>
+								<?php 
+									$content = get_the_content();
+									$content = strip_tags($content);
+									echo trim_text($content, 200); 
+								?>
 								<div class="[ screen ]"></div>
 							</div>
 							<button class="[ leer-mas proyectos ]">Leer más</button>

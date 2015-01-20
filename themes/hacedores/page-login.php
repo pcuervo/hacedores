@@ -15,14 +15,15 @@
 ?>
 <?php  get_header(); ?>
 
-<?php if($error) ?>
-	<div><?php echo $error; ?></div>
+
 
 <div class="container">
 			<div class="[ main ]">
 				<div class="[ width clearfix ]">
 					<?php do_action('oa_social_login'); ?>
 					<div class="[ columna xmall-12 medium-8 large-8 ] [ margin-bottom-medium ] [ clearfix ] [ form-user ]">
+						<?php if($error) ?>
+							<div><?php echo $error; ?></div>
 						<form name="registro" method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 							<div class="[ registro-usuarios ] [ content ]">
 								<h3>Login para el usuario</h3>
