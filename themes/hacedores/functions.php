@@ -515,7 +515,6 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 
 	// FRONT END SCRIPTS FOOTER //////////////////////////////////////////////////////
 	function footerScripts() {
-		//echo get_post_type();
 		if( wp_script_is( 'functions', 'done' ) ) {
 			if ( is_home() ) { ?>
 				<script type="text/javascript">
@@ -808,7 +807,7 @@ function get_additional_user_meta_thumb() {
  * Variables de URL
  */
 add_action('init','add_my_error');
-function add_my_error() { 
-    global $wp; 
-    $wp->add_query_var('my_error'); 
+function add_my_error() {
+    global $wp;
+    $wp->add_query_var('my_error');
 }
