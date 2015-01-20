@@ -28,7 +28,8 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 
 		// localize scripts
 		wp_localize_script( 'functions', 'ajax_url', admin_url('admin-ajax.php') );
-		wp_localize_script( 'functions', 'theme_path', THEMEPATH.'images/' );
+		wp_localize_script( 'functions', 'theme_path', THEMEPATH);
+		wp_localize_script( 'functions', 'site_url', site_url('/'));
 
 		function queryProyecto(){
 			$args = array(
@@ -75,6 +76,9 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 								$infoMapa[$postType][$customPostCategoryName][] = $lat;
 								$infoMapa[$postType][$customPostCategoryName][] = $lon;
 								$infoMapa[$postType][$customPostCategoryName][] = $customPostCategorySlug;
+								$infoMapa[$postType][$customPostCategoryName][] = $postType.'s';
+								$infoMapa[$postType][$customPostCategoryName][] = basename( get_permalink() );
+
 							endwhile; endif; wp_reset_query(); ?>
 						<?php }
 					}
@@ -516,7 +520,7 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 	// FRONT END SCRIPTS FOOTER //////////////////////////////////////////////////////
 	function footerScripts() {
 		if( wp_script_is( 'functions', 'done' ) ) {
-			if ( is_home() ) { ?>
+			if ( is_home() || is_post_type_archive( 'informacion' ) ) { ?>
 				<script type="text/javascript">
 					var mapa = creaMapa();
 					var markers = creaMarkers(mapa, infoMapaTodos);
@@ -525,24 +529,27 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 					// Agrega los filtros para cada categoría y subcategoría
 					agregaFiltrosMarkers(mapa, markers, infoMapaTodos);
 				</script>
-			<?php } else if ( get_post_type() == 'proyecto')  { ?>
+			<?php } else if ( is_post_type_archive( 'proyecto' ) )  { ?>
 				<script type="text/javascript">
-					var mapa = creaMapa();
-					var markers = creaMarkers(mapa, infoMapaProyectos);
-					console.log(infoMapaProyectos);
-					// Muestra todos los marcadores centrados en el mapa
-					autoCenter(mapa, markers);
-					// Agrega los filtros para cada categoría y subcategoría
-					agregaFiltrosMarkers(mapa, markers, infoMapaProyectos);
+					if(infoMapaProyectos.length > 0) {
+						var mapa = creaMapa();
+						var markers = creaMarkers(mapa, infoMapaProyectos);
+						// Muestra todos los marcadores centrados en el mapa
+						autoCenter(mapa, markers);
+						// Agrega los filtros para cada categoría y subcategoría
+						agregaFiltrosMarkers(mapa, markers, infoMapaProyectos);
+					}
 				</script>
-			<?php } else if ( get_post_type() == 'recurso')  { ?>
+			<?php } else if ( is_post_type_archive( 'recurso' ) )  { ?>
 				<script type="text/javascript">
-					var mapa = creaMapa();
-					var markers = creaMarkers(mapa, infoMapaRecursos);
-					// Muestra todos los marcadores centrados en el mapa
-					autoCenter(mapa, markers);
-					// Agrega los filtros para cada categoría y subcategoría
-					agregaFiltrosMarkers(mapa, markers, infoMapaRecursos);
+					if(infoMapaProyectos.length > 0) {
+						var mapa = creaMapa();
+						var markers = creaMarkers(mapa, infoMapaRecursos);
+						// Muestra todos los marcadores centrados en el mapa
+						autoCenter(mapa, markers);
+						// Agrega los filtros para cada categoría y subcategoría
+						agregaFiltrosMarkers(mapa, markers, infoMapaRecursos);
+					}
 				</script>
 			<?php }
 		} // home
