@@ -71,15 +71,14 @@ echo <<<END
 	<input type="text" class="widefat" id="web" name="_web_recurso_meta" value="$web" />
 	<label>URL instructables:</label>
 	<input type="text" class="widefat" id="instructables" name="_instructables_recurso_meta" value="$instructables" />
-	<label>URL v
-	<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span>ideo:</label>
+	<label>URL video:</label>
 	<input type="text" class="widefat" id="video" name="_video_recurso_meta" value="$video" />
 	<label>Latitud:</label>
 	<input type="text" class="widefat" id="lat_recurso" name="_lat_recurso_meta" value="$lat" />
-	<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span>
+	<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span><br/> <br/>
 	<label>Longitud:</label>
 	<input type="text" class="widefat" id="lon_recurso" name="_lon_recurso_meta" value="$lon" />
-	<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span>
+	<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span><br/> <br/>
 
 END;
 
@@ -120,10 +119,10 @@ echo <<<END
 	<input type="text" class="widefat" id="video" name="_video_proyecto_meta" value="$video" />
 	<label>Latitud:</label>
 	<input type="text" class="widefat" id="lat_proyecto" name="_lat_proyecto_meta" value="$lat" />
-	<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span>
+	<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span><br/> <br/>
 	<label>Longitud:</label>
 	<input type="text" class="widefat" id="lon_proyecto" name="_lon_proyecto_meta" value="$lon" />
-	<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span>
+	<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span><br/> <br/>
 
 END;
 
@@ -172,10 +171,10 @@ echo <<<END
 	<input type="text" class="widefat" id="twitter" name="_twitter_evento_meta" value="$twitter" />
 	<label>Latitud:</label>
 	<input type="text" class="widefat" id="lat_recurso" name="_lat_evento_meta" value="$lat" />
-	<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span>
+	<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span><br/> <br/>
 	<label>Longitud:</label>
 	<input type="text" class="widefat" id="lon_recurso" name="_lon_evento_meta" value="$lon" />
-	<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span>
+	<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span><br/> <br/>
 
 END;
 
