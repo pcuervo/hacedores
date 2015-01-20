@@ -5,12 +5,10 @@
 	<div class="[ columna xmall-12 medium-3 large-3 ] [ side-proyecto ]">
 		<h2><?php the_title(); ?></h2>
 		<?php
-			$categoriasArgs = array(
-				'exclude' => '1'
-			);
-			$categorias = get_categories($categoriasArgs);
-			foreach($categorias as $category) {
-				echo '<p>'.$category->name.'</p> ';
+			$categorias = wp_get_post_terms($post->ID, 'category-recursos');
+			foreach($categorias as $categoria) {
+				$categoriaName = $categoria->name;
+				echo '<p>'.$categoriaName.'</p>';
 			}
 		?>
 		<p><a target="_blank" href="<?php echo get_post_meta($post->ID, '_web2_meta', true); ?>"><?php echo get_post_meta($post->ID, '_web2_meta', true); ?></a></p>
