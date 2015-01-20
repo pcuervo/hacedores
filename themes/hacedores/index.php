@@ -36,7 +36,7 @@
 		if ( $queryProyecto->have_posts() ) : while ( $queryProyecto->have_posts() ) : $queryProyecto->the_post(); ?>
 			<div class="[ post ] [ margin-bottom-medium ] [ columna xmall-12 small-6 medium-4 ]">
 				<a href="<?php the_permalink(); ?>">
-					<?php if ( the_post_thumbnail() ) { ?>
+					<?php if ( has_post_thumbnail() ) { ?>
 						<?php the_post_thumbnail('medium', array('class' => '[ margin-bottom-small ]')); ?>
 					<?php } else { $userAvatar = THEMEPATH.'images/default-proyectos.png';?>
 						<img class="[ margin-bottom-medium ]" src="<?php echo $userAvatar; ?>" alt="<?php the_title(); ?>">
@@ -56,7 +56,7 @@
 		if ( $queryProyecto->have_posts() ) : while ( $queryProyecto->have_posts() ) : $queryProyecto->the_post(); ?>
 			<div class="[ post ] [ margin-bottom-medium ] [ columna xmall-12 small-6 medium-4 ]">
 				<a href="<?php the_permalink(); ?>">
-					<?php if ( the_post_thumbnail() ) { ?>
+					<?php if ( has_post_thumbnail() ) { ?>
 						<?php the_post_thumbnail('medium', array('class' => '[ margin-bottom-small ]')); ?>
 					<?php } else { $userAvatar = THEMEPATH.'images/default-recursos.png';?>
 						<img class="[ margin-bottom-medium ]" src="<?php echo $userAvatar; ?>" alt="<?php the_title(); ?>">

@@ -381,7 +381,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 
 				//TODO
 				//$mail_status = welcome_email($email);
-				login_user($username, $password);
+				site_login_post($username, $password);
 				$msg = array(
 					"msj" => "Usuario registrado",
 					"error"	  => false
@@ -800,4 +800,13 @@ function get_additional_user_meta_thumb() {
 	// return the image thumbnail
 	return $image_thumb[0];
 
+}
+
+/*
+ * Variables de URL
+ */
+add_action('init','add_my_error');
+function add_my_error() {
+    global $wp;
+    $wp->add_query_var('my_error');
 }

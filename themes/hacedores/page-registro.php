@@ -1,13 +1,9 @@
+
 <?php
-	if(isset($_POST['submit']))
+  $error = get_query_var( 'my_error', -1 );
+	if( $error >= 1 )
 	{
-		$response = register_user_new($_POST);
-		if (!$response['error']){
-			$location = site_url().'/wp-admin/profile.php';
-			wp_redirect( $location );
-		}else{
-			echo "El correo ya ha sido registrado";
-		}
+		echo "El mail ya a sido registrado";
 	}
 ?>
 <?php  get_header(); ?>
@@ -16,7 +12,7 @@
 			<div class="[ main ]">
 				<div class="[ width clearfix ]">
 					<div class="[ columna xmall-12 medium-8 large-8 ] [ margin-bottom-medium ] [ clearfix ] [ form-user ]">
-						<form name="registro" method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+						<form name="registro" method="post" action="<?php echo site_url().'/attempt-register'; ?>">
 							<div class="[ registro-usuarios ] [ content ]">
 								<h3>REGISTRO PARA USUARIOS</h3>
 								<div class="campo">

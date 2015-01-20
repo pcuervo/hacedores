@@ -307,8 +307,8 @@ p{ margin-bottom: 1em; .font(1em, 1.4em); color: @secondary; }
 /*** GENERAL ***/
 ::selection{ background: @informacion; color: @claro; }
 ::-moz-selection { background: @informacion; color: @claro; }
-html, body{ height: 100%; }
-body{ background: #fff; .font; }
+html { min-height: 100% !important; }
+body{ height: 100%; background: #fff; .font; }
 
 //Headers
 h1,
@@ -360,16 +360,16 @@ h3{ .font(1.4em, 1, 'trade 18'); color: @secondary; }
 }
 
 //Colores
-.body-informacion{
+body.post-type-archive-recurso{
 	h1{ color: @informacion; }
 }
-.body-perfiles{
+body.page{
 	h1{ color: @perfiles; }
 }
-.body-proyectos{
+body.post-type-archive-proyecto{
 	h1{ color: @programacion; }
 }
-.body-espacios{
+body.post-type-archive-recurso{
 	h1{ color: @recursos; }
 }
 

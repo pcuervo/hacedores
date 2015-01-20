@@ -20,7 +20,7 @@
 		<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 		<?php wp_head(); ?>
 	</head>
-	<body>
+	<body <?php body_class(); ?>>
 		<!--[if lt IE 9]>
 			<p class="chromeframe">Estás usando una versión <strong>vieja</strong> de tu explorador. Por favor <a href="http://browsehappy.com/" target="_blank"> actualiza tu explorador</a> para tener una experiencia completa.</p>
 		<![endif]-->
@@ -44,6 +44,21 @@
 					</div>
 					<div class="[ columna xmall-6 medium-3 ]">
 						<h1><a href="<?php echo site_url(); ?>">Hacedores CDMX</a></h1>
+						<div class="[ clearfix ] [ nombre-seccion ]">
+							<?php if ( get_post_type() == 'informacion'){ ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-gray.gif" alt="">
+								<h3>Información</h3>
+							<?php } elseif ( is_page('hacedores') ) { ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-red.gif" alt="">
+								<h3>Hacedores</h3>
+							<?php } elseif ( get_post_type() == 'proyecto'){ ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-blue.gif" alt="">
+								<h3>Proyectos</h3>
+							<?php } elseif ( get_post_type() == 'recurso'){ ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-green.gif" alt="">
+								<h3>Espacios/Recursos</h3>
+							<?php } ?>
+						</div>
 					</div>
 					<div class="[ columna xmall-4 small-3 medium-2 large-2 ]">
 						<a href="http://labplc.mx/" target="_blank"><img src="<?php echo THEMEPATH; ?>images/logo-laboratorio-ciudad.png" alt=""></a>
