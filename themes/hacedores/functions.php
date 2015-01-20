@@ -468,11 +468,13 @@ add_filter('oa_social_login_filter_new_user_role', 'oa_social_login_set_new_user
 function oa_social_login_set_custom_css($css_theme_uri)
 {
   //Replace the URL by an URL to your own CSS file
-  $css_theme_uri = 'http://public.oneallcdn.com/css/api/socialize/themes/buildin/connect/large-v1.css';
+  $css_theme_uri = THEMEPATH.'style-login.css';
 
   //Done
   return $css_theme_uri;
 }
+
+
 
 add_filter('oa_social_login_default_css', 'oa_social_login_set_custom_css');
 add_filter('oa_social_login_widget_css', 'oa_social_login_set_custom_css');

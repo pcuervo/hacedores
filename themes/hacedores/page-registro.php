@@ -12,9 +12,12 @@
 ?>
 <?php  get_header(); ?>
 <div class="container">
-			<?php do_action('oa_social_login'); ?>
+			
 			<div class="[ main ]">
 				<div class="[ width clearfix ]">
+					<div class="modal-contenido">
+						<?php do_action('oa_social_login'); ?>
+					</div>
 					<div class="[ columna xmall-12 medium-8 large-8 ] [ margin-bottom-medium ] [ clearfix ] [ form-user ]">
 						<form name="registro" method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 							<div class="[ registro-usuarios ] [ content ]">
