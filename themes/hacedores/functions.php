@@ -873,3 +873,31 @@ function get_attachment_id_from_url( $attachment_url = '' ) {
 
 	return $attachment_id;
 }
+
+
+function move_meta_box(){
+
+	/*------------------------------------*\
+		#PROYECTO
+	\*------------------------------------*/
+	/**
+	** Información proyecto
+	**/
+	// remove_meta_box( 'informacion_proyecto', 'post', 'side' );
+	// add_meta_box( 'informacion_proyecto', 'Información proyecto', 'metabox_informacion_proyecto', 'proyecto', 'advanced', 'high' );
+
+	/**
+	** Categorias
+	**/
+	// remove_meta_box( 'category-proyectosdiv', 'post', 'side' );
+	// add_meta_box( 'category-proyectosdiv', 'Información proyecto', 'metabox_informacion_proyecto', 'proyecto', 'advanced', 'high' );
+
+	/**
+	** Featured image
+	**/
+
+	/**
+	** Publicar
+	**/
+}
+add_action('do_meta_boxes', 'move_meta_box');
