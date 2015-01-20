@@ -25,9 +25,13 @@
 					<a href="<?php echo $userURL; ?>">
 						<img class="[ margin-bottom-small ]" src="<?php echo $userAvatar; ?>" alt="<?php echo $userNombre; ?>">
 					</a>
-					<a href="<?php echo $userURL; ?>">
-						<h2><?php echo $userNombre; ?></h2></a>
-					<p><?php echo trim_text($userBio, 200); ?></p>
+					<div class="[ post-texto ]">
+						<a href="<?php echo $userURL; ?>">
+							<h2><?php echo $userNombre; ?></h2></a>
+						<p><?php echo trim_text($userBio, 200); ?></p>
+						<div class="[ screen ]"></div>
+					</div>
+					<a href="<?php echo $userURL; ?>" class="[ block ][ boton ][ text-center ][ leer-mas hacedores ]">Leer más</a>
 				</div><!-- post -->
 		<?php }
 		} ?>

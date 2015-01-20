@@ -128,17 +128,15 @@
 				<div class="[ width clearfix ]">
 					<section class="[ mapa ] [ margin-bottom-big ] [ relative ]">
 						<div class="[ no-xmall medium ]">
-							<?php if( ! is_single() ) { ?>
+							<?php if( ! is_single() AND ! is_page('registro') ) { ?>
 							<div class="[ menu-container ]">
 								<div class="[ menu-mapa ]">
 									<ul class="[ menu-titulos ]">
-										
-										<?php if ( is_home() || is_page( 'hacedores' ) || is_post_type_archive( 'informacion' ) ) { 
-
+										<?php if ( is_home() || is_page( 'hacedores' ) || is_post_type_archive( 'informacion' ) ) {
 											if ( ! is_page( 'hacedores' ) ) { ?>
 												<li class="[ todos ] [ trigger ]">Ver todo</li>
 											<?php } ?>
-	
+
 											<li class="[ hacedores ] [ trigger ]" data-rel="sub-hacedores">Hacedores</li>
 											<ul class="[ submenu-mapa ] [ sub-hacedores ] [ content ]">
 											<?php
