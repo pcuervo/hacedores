@@ -64,7 +64,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 							$args = array(
 								'post_type' 		=> $postType,
 								'posts_per_page' 	=> -1,
-								'category_name'		=> $customPostCategorySlug
+								$tax				=> $customPostCategorySlug
 							);
 							$queryPosts = new WP_Query( $args );
 							$infoMapa[$postType][] = $customPostCategoryName;
@@ -96,10 +96,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 
 		// styles
 		wp_enqueue_style( 'styles', get_stylesheet_uri() );
-
 	});
-
-
 
 // ADMIN SCRIPTS AND STYLES //////////////////////////////////////////////////////////
 
@@ -516,13 +513,11 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 
 	// FRONT END SCRIPTS FOOTER //////////////////////////////////////////////////////
 	function footerScripts() {
-		echo get_post_type();
 		if( wp_script_is( 'functions', 'done' ) ) {
 			if ( is_home() ) { ?>
 				<script type="text/javascript">
 					var mapa = creaMapa();
 					var markers = creaMarkers(mapa, infoMapaTodos);
-					console.log(infoMapaTodos);
 					// Muestra todos los marcadores centrados en el mapa
 					autoCenter(mapa, markers);
 					// Agrega los filtros para cada categoría y subcategoría
@@ -532,6 +527,7 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 				<script type="text/javascript">
 					var mapa = creaMapa();
 					var markers = creaMarkers(mapa, infoMapaProyectos);
+					console.log(infoMapaProyectos);
 					// Muestra todos los marcadores centrados en el mapa
 					autoCenter(mapa, markers);
 					// Agrega los filtros para cada categoría y subcategoría
