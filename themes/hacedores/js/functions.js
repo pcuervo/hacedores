@@ -298,10 +298,12 @@ function creaMarkers(mapa, infoMapa){
 			if(typeof subcategoria != 'object') return true;
 
 			categorias_mapa[categoria][subcategoria] = []; 
+			var lat = (subcategoria[1] == '') ? '19.423325' : subcategoria[1];
+			var lon = (subcategoria[2] == '') ? '-99.134220' : subcategoria[2];
 			categorias_mapa[categoria][subcategoria].push({
 				titulo: subcategoria[0],
-				lat: subcategoria[1],
-				lon: subcategoria[2],
+				lat: lat,
+				lon: lon,
 				slug: subcategoria[3],
 				url: site_url + subcategoria[4] + '/' + subcategoria[5]
 			});

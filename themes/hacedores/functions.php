@@ -576,6 +576,7 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 						autoCenter(mapa, markers);
 						// Agrega los filtros para cada categoría y subcategoría
 						agregaFiltrosMarkers(mapa, markers, infoMapaRecursos);
+						console.log(infoMapaRecursos);
 					}
 				</script>
 			<?php } else if ( is_page( 'hacedores' ) ) { ?>
