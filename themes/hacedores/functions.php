@@ -56,6 +56,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 					$userNiceName	= $user->user_nicename;
 					$latitud		= get_user_meta($userID, 'latitud', true);
 					$longitud		= get_user_meta($userID, 'longitud', true);
+
 					$infoUsuarios['hacedores'][$userNiceName][] = $userNombre;
 					$infoUsuarios['hacedores'][$userNiceName][] = $latitud;
 					$infoUsuarios['hacedores'][$userNiceName][] = $longitud;
@@ -112,6 +113,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 		$infoUsuarios = infoUsuarios();
 		$infoMapaTodos = array_merge(infoMapa($postTypes), $infoUsuarios);
 		wp_localize_script('functions', 'infoMapaTodos', $infoMapaTodos );
+		wp_localize_script('functions', 'infoMapaUsuarios', $infoUsuarios );
 
 		$postTypeProyecto = array('proyecto');
 		$infoMapaProyectos = infoMapa($postTypeProyecto);
@@ -537,7 +539,7 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 
 	function get_avatar_url($get_avatar){
 		preg_match("/src='(.*?)'/i", $get_avatar, $matches);
-		return $matchCes[1];
+		return $matches[1];
 	}
 
 	// FRONT END SCRIPTS FOOTER //////////////////////////////////////////////////////
@@ -551,7 +553,7 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 					autoCenter(mapa, markers);
 					// Agrega los filtros para cada categoría y subcategoría
 					agregaFiltrosMarkers(mapa, markers, infoMapaTodos);
-					console.log(infoMapaTodos);
+					agregaFiltrosTodos(mapa, markers);
 				</script>
 			<?php } else if ( is_post_type_archive( 'proyecto' ) )  { ?>
 				<script type="text/javascript">
@@ -567,16 +569,26 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 				</script>
 			<?php } else if ( is_post_type_archive( 'recurso' ) )  { ?>
 				<script type="text/javascript">
-					if(infoMapaProyectos.length > 0) {
+					if(typeof infoMapaRecursos == 'object'){
 						var mapa = creaMapa();
 						var markers = creaMarkers(mapa, infoMapaRecursos);
 						// Muestra todos los marcadores centrados en el mapa
 						autoCenter(mapa, markers);
 						// Agrega los filtros para cada categoría y subcategoría
 						agregaFiltrosMarkers(mapa, markers, infoMapaRecursos);
+						console.log(infoMapaRecursos);
 					}
 				</script>
-			<?php }
+			<?php } else if ( is_page( 'hacedores' ) ) { ?>
+				<script type="text/javascript">
+					var mapa = creaMapa();
+					var markers = creaMarkers(mapa, infoMapaUsuarios);
+					// Muestra todos los marcadores centrados en el mapa
+					autoCenter(mapa, markers);
+					// Agrega los filtros para cada categoría y subcategoría
+					agregaFiltrosMarkers(mapa, markers, infoMapaUsuarios);
+				</script>
+			<?php } 
 		} // home
 	}// footerScripts
 add_action( 'wp_footer', 'footerScripts', 21 );
@@ -616,22 +628,22 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 	<table class="form-table">
 		<tr>
 			<th>
-				<label for="celular"><?php _e('Telefono', 'your_phone'); ?>
+				<label for="celular"><?php _e('Teléfono', 'your_phone'); ?>
 			</label></th>
 			<td>
 				<input type="text" name="celular" id="celular" value="<?php echo esc_attr( get_the_author_meta( 'celular', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingresa tu celular.', 'your_phone'); ?></span>
+				<span class="description"><?php _e('Ingresa tu teléfono.', 'your_phone'); ?></span>
 			</td>
 		</tr>
 	</table>
 	<table class="form-table">
 		<tr>
 			<th>
-				<label for="direccion"><?php _e('Direccion', 'your_adress'); ?></label>
+				<label for="direccion"><?php _e('Ingresa tu dirección', 'your_adress'); ?></label>
 			</th>
 			<td>
 				<input type="text" name="direccion" id="direccion" value="<?php echo esc_attr( get_the_author_meta( 'direccion', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingresa tu direccion.', 'your_adress'); ?></span>
+				<span class="description"><?php _e('Ingresa tu dirección.', 'your_adress'); ?></span>
 			</td>
 		</tr>
 	</table>
@@ -642,7 +654,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</th>
 			<td>
 				<input type="text" name="latitud" id="latitud" value="<?php echo esc_attr( get_the_author_meta( 'latitud', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span>
+				<span class="description">"Para obtener tu latitud: ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud."</span><br />
 			</td>
 		</tr>
 	</table>
@@ -653,18 +665,18 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</th>
 			<td>
 				<input type="text" name="longitud" id="longitud" value="<?php echo esc_attr( get_the_author_meta( 'longitud', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingresa tu longitud.', 'your_longitud'); ?></span>
+				<span class="description">"Para obtener tu longitud: ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud."</span><br />
 			</td>
 		</tr>
 	</table>
 	<table class="form-table">
 		<tr>
 			<th>
-				<label for="liga_instructable"><?php _e('Liga Instructable', 'your_liga'); ?></label>
+				<label for="liga_instructable"><?php _e('Liga Instructables', 'your_liga'); ?></label>
 			</th>
 			<td>
 				<input type="text" name="liga_instructable" id="liga_instructable" value="<?php echo esc_attr( get_the_author_meta( 'liga_instructable', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingresa tu liga,', 'your_liga'); ?></span>
+				<span class="description"><?php _e('Ingresa la liga de tu proyecto del portal de Instructables.', 'your_liga'); ?></span>
 			</td>
 		</tr>
 	</table>
@@ -675,20 +687,20 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</th>
 			<td>
 				<input type="text" name="liga_video" id="liga_video" value="<?php echo esc_attr( get_the_author_meta( 'liga_video', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('**El video debe ser redireccionado por medio de una liga de Youtube o Vimeo', 'your_video'); ?></span>
+				<span class="description"><?php _e('Ingresa la liga del video de tu proyecto. El video debe estar alojado en YouTube o Vimeo.', 'your_video'); ?></span>
 			</td>
 		</tr>
 	</table>
 	<table class="form-table">
 		<tr>
-			<th><label for="user_meta_image"><?php _e( 'Imagen pricnipal', 'textdomain' ); ?></label></th>
+			<th><label for="user_meta_image"><?php _e( 'Imagen principa', 'textdomain' ); ?></label></th>
 			<td>
 				<!-- Outputs the image after save -->
 				<img src="<?php echo esc_url( get_the_author_meta( 'user_profile_img', $user->ID ) ); ?>" style="width:150px;"><br />
 				<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
 				<input type="text" name="user_profile_img" id="user_profile_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_profile_img', $user->ID ) ); ?>" class="regular-text" />
 				<!-- Outputs the save button -->
-				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
+				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Subir imagen', 'textdomain' ); ?>" id="uploadimage"/><br />
 				<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
 			</td>
 		</tr>
@@ -702,7 +714,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 				<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
 				<input type="text" name="user_uno_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_uno_img', $user->ID ) ); ?>" class="regular-text" />
 				<!-- Outputs the save button -->
-				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
+				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Subir imagen', 'textdomain' ); ?>" id="uploadimage"/><br />
 				<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
 			</td>
 		</tr>
@@ -716,7 +728,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 				<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
 				<input type="text" name="user_dos_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_dos_img', $user->ID ) ); ?>" class="regular-text" />
 				<!-- Outputs the save button -->
-				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
+				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Subir imagen', 'textdomain' ); ?>" id="uploadimage"/><br />
 				<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
 			</td>
 		</tr>
@@ -730,7 +742,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 				<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
 				<input type="readonly" name="user_tres_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_tres_img', $user->ID ) ); ?>" class="regular-text" />
 				<!-- Outputs the save button -->
-				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
+				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Subir imagen', 'textdomain' ); ?>" id="uploadimage"/><br />
 				<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
 			</td>
 		</tr>
@@ -744,7 +756,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 				<!-- Outputs the text field and displays the URL of the image retrieved by the media uploader -->
 				<input type="text" name="user_cuatro_img" value="<?php echo esc_url_raw( get_the_author_meta( 'user_cuatro_img', $user->ID ) ); ?>" class="regular-text" />
 				<!-- Outputs the save button -->
-				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Upload Image', 'textdomain' ); ?>" id="uploadimage"/><br />
+				<input type='button' class="additional-user-image button-primary" value="<?php _e( 'Subir imagen', 'textdomain' ); ?>" id="uploadimage"/><br />
 				<span class="description"><?php _e( 'Agrega una imagen para tu perfil.', 'textdomain' ); ?></span>
 			</td>
 		</tr>
@@ -915,3 +927,30 @@ function trim_text($input, $length, $ellipses = true, $strip_html = true) {
 
     return $trimmed_text;
 }
+
+function move_meta_box(){
+
+	/*------------------------------------*\
+		#PROYECTO
+	\*------------------------------------*/
+	/**
+	** Información proyecto
+	**/
+	// remove_meta_box( 'informacion_proyecto', 'post', 'side' );
+	// add_meta_box( 'informacion_proyecto', 'Información proyecto', 'metabox_informacion_proyecto', 'proyecto', 'advanced', 'high' );
+
+	/**
+	** Categorias
+	**/
+	// remove_meta_box( 'category-proyectosdiv', 'post', 'side' );
+	// add_meta_box( 'category-proyectosdiv', 'Información proyecto', 'metabox_informacion_proyecto', 'proyecto', 'advanced', 'high' );
+
+	/**
+	** Featured image
+	**/
+
+	/**
+	** Publicar
+	**/
+}
+add_action('do_meta_boxes', 'move_meta_box');
