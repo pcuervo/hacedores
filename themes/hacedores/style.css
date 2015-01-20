@@ -820,20 +820,46 @@ a:hover {
 .detalles i {
   text-align: center;
 }
-.post .espacios h2.informacion,
-.post .espacios h3.informacion {
+.post {
+  position: relative;
+}
+.post .post-texto {
+  height: 80px;
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 20px;
+}
+.screen {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  height: 40px;
+  background: url("images/screen.png") repeat-x;
+}
+.leer-mas {
+  width: 100%;
+  margin: 0;
+  color: #fff;
+  font-family: 'trade 18';
+  text-transform: uppercase;
+}
+.leer-mas.proyectos {
+  background-color: #4f6190;
+}
+.espacios h2.informacion,
+.espacios h3.informacion {
   color: #bbbbbb;
 }
-.post .espacios h2.perfiles,
-.post .espacios h3.perfiles {
+.espacios h2.perfiles,
+.espacios h3.perfiles {
   color: #bd545c;
 }
-.post .espacios h2.programacion,
-.post .espacios h3.programacion {
+.espacios h2.programacion,
+.espacios h3.programacion {
   color: #4f6190;
 }
-.post .espacios h2.recursos,
-.post .espacios h3.recursos {
+.espacios h2.recursos,
+.espacios h3.recursos {
   color: #14868a;
 }
 /* MAPA */
