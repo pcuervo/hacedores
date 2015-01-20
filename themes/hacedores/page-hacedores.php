@@ -14,6 +14,10 @@
 				$userAvatar = get_user_meta($userID, 'user_profile_img', true);
 				if ( $userAvatar == '' ){
 					$userAvatar = THEMEPATH.'images/default-hacedores.png';
+				} else {
+					$userAvatarID 		= get_attachment_id_from_url($userAvatar);
+					$userAvatarMedium 	= wp_get_attachment_image_src($userAvatarID, 'medium');
+					$userAvatar 		= $userAvatarMedium[0];
 				}
 				$userURL 	= get_author_posts_url($userID);
 				?>
@@ -23,7 +27,7 @@
 					</a>
 					<a href="<?php echo $userURL; ?>">
 						<h2><?php echo $userNombre; ?></h2></a>
-					<p><?php echo $userBio; ?></p>
+					<p><?php echo trim_text($userBio, 200); ?></p>
 				</div><!-- post -->
 		<?php }
 		} ?>

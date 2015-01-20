@@ -22,13 +22,12 @@
 					$userAvatar 		= $userAvatarMedium[0];
 				}
 
-
 				$userURL 	= get_author_posts_url($userID);
 				?>
 				<div class="[ post ] [ margin-bottom-medium ] [ columna xmall-12 small-6 medium-4 ]">
 					<a href="<?php echo $userURL; ?>"><img class="[ margin-bottom-small ]" src="<?php echo $userAvatar; ?>" alt="<?php echo $userNombre; ?>"></a>
 					<a href="<?php echo $userURL; ?>"><h2><?php echo $userNombre; ?></h2></a>
-					<p><?php echo $userBio; ?></p>
+					<p><?php echo trim_text($userBio, 200); ?></p>
 				</div><!-- post -->
 		<?php }
 		}
@@ -49,7 +48,11 @@
 					<?php } ?>
 				</a>
 				<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
-				<?php the_content(); ?>
+				<?php 
+					$content = get_the_content();
+					$content = strip_tags($content);
+					echo trim_text($content, 200); 
+				?>
 			</div><!-- post -->
 		<?php endwhile; endif; wp_reset_query();
 
@@ -69,7 +72,11 @@
 					<?php } ?>
 				</a>
 				<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
-				<?php the_content(); ?>
+				<?php 
+					$content = get_the_content();
+					$content = strip_tags($content);
+					echo trim_text($content, 200); 
+				?>
 			</div><!-- post -->
 		<?php endwhile; endif; wp_reset_query(); ?>
 	</section>
