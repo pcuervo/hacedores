@@ -8,9 +8,9 @@
 			$categorias = wp_get_post_terms($post->ID, 'category-proyectos');
 			foreach($categorias as $categoria) {
 				$categoriaName = $categoria->name;
-				echo '<p>'.$categoriaName.'</p>';
 			}
 		?>
+		<p>Dirección: <?php echo get_post_meta($post->ID, '_direccion_proyecto_meta', true); ?></p>
 		<p><a target="_blank" href="<?php echo get_post_meta($post->ID, '_web2_meta', true); ?>"><?php echo get_post_meta($post->ID, '_web2_meta', true); ?></a></p>
 	</div>
 	<div class="[ columna xmall-12 medium-6 ] [ clearfix ]">

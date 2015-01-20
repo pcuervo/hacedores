@@ -61,6 +61,8 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 					$infoUsuarios['hacedores'][$userNiceName][] = $latitud;
 					$infoUsuarios['hacedores'][$userNiceName][] = $longitud;
 					$infoUsuarios['hacedores'][$userNiceName][] = $userNiceName;
+					$infoUsuarios['hacedores'][$userNiceName][] = 'author';
+					$infoUsuarios['hacedores'][$userNiceName][] = $userNiceName;
 				}
 			}
 			return $infoUsuarios;
