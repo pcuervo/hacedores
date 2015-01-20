@@ -613,12 +613,12 @@ input:checked{ background-color: @perfiles; }
 		height: 80%; width: auto; padding: 20px; min-width: 280px; background-color: #fff;
 		.cerrar-modal{ cursor: pointer; margin-bottom: 10px; }
 		.modal-contenido{ height: 90%; overflow-x: hidden; overflow-y: scroll; }
-		button{ width: 100%; height: 50px; margin-bottom: 10px; text-align: center; padding-left: 0; font-size: 18px; border: none; color: #fff; cursor: pointer;
-				i{ margin-right: 10px; }
-				&.sesion-facebook{ background-color: @facebook; }
-				&.sesion-twitter{ background-color: @twitter; }
-				&.sesion-gplus{ background-color: @gplus; }
-				&:hover{ opacity: .8; .transition }
+		button{
+			i{ margin-right: 10px; }
+			&.sesion-facebook{ background-color: @facebook; }
+			&.sesion-twitter{ background-color: @twitter; }
+			&.sesion-gplus{ background-color: @gplus; }
+			&:hover{ opacity: .8; .transition }
 		}
 		&.form-user{
 			input{ width: 100%; }

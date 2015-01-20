@@ -25,8 +25,10 @@
 								<input name="password" type="password" id="password">
 								<p>¿Olvidaste tu contraseña? <a href="">click aquí</a></p>
 							</div>
-							<input type="submit" name="submit" value="Registrarse">
-							<p>¿No estás registrado aún? <a href="registro.html">Click aquí</a></p>
+							<div class="[ text-center ]">
+								<button class="[ inline-block ]" type="submit">Registrarse</button>
+							</div>
+							<p>¿No estás registrado aún? <a href="<?php site_url('registro'); ?>">Click aquí</a></p>
 						</form>
 					</div>
 				</div>
