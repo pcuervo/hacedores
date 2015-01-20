@@ -34,7 +34,7 @@
 								Registrarse
 							</a> -->
 						<?php } else { ?>
-							<a href="<?php echo  esc_url( wp_logout_url(site_url()) ); ?>" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
+							<a href="<?php echo  site_url().'/wp-admin/profile.php'; ?>" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
 								Mi cuenta
 							</a>
 							<a href="<?php echo  esc_url( wp_logout_url(site_url()) ); ?>" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
@@ -131,7 +131,7 @@
 							<div class="[ menu-container ]">
 								<div class="[ menu-mapa ]">
 									<ul class="[ menu-titulos ]">
-										<?php if ( is_home() || is_page('hacedores') ) { ?>
+										<?php if ( is_home() || is_page( 'hacedores' ) || is_post_type_archive( 'informacion' ) ) { ?>
 											<li class="[ hacedores ] [ trigger ]" data-rel="sub-hacedores">Hacedores</li>
 											<ul class="[ submenu-mapa ] [ sub-hacedores ] [ content ]">
 											<?php
@@ -154,7 +154,7 @@
 											} ?>
 											</ul>
 										<?php } ?>
-										<?php if ( is_home() || get_post_type() == 'proyecto' ) { ?>
+										<?php if ( is_home() || is_post_type_archive( 'proyecto' ) || is_post_type_archive( 'informacion' ) ) { ?>
 											<li class="[ proyecto ] [ trigger ]" data-rel="sub-proyecto">Proyectos</li>
 											<ul class="[ submenu-mapa ] [ sub-proyecto ] [ content ]">
 												<?php
@@ -181,7 +181,7 @@
 												?>
 											</ul>
 										<?php } ?>
-										<?php if ( is_home() || get_post_type() == 'recurso' ) { ?>
+										<?php if ( is_home() || is_post_type_archive( 'recurso' ) || is_post_type_archive( 'informacion' ) ) { ?>
 											<li class="[ recurso ] [ trigger ]" data-rel="sub-recurso">Espacios / Recursos</li>
 											<ul class="[ submenu-mapa ] [ sub-recurso ] [ content ]">
 												<?php
@@ -208,7 +208,7 @@
 												?>
 											</ul>
 										<?php } ?>
-										<?php if ( is_home() || get_post_type() == 'evento' ) { ?>
+										<?php if ( is_home() || is_post_type_archive( 'informacion' ) ) { ?>
 											<li class="[ evento ] [ trigger ]" data-rel="sub-evento">Eventos</li>
 											<ul class="[ submenu-mapa ] [ sub-evento ] [ content ]">
 												<?php
