@@ -508,12 +508,13 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 
 	function get_avatar_url($get_avatar){
 		preg_match("/src='(.*?)'/i", $get_avatar, $matches);
-		return $matches[1];
+		return $matchCes[1];
 	}
 
 	// FRONT END SCRIPTS FOOTER //////////////////////////////////////////////////////
 	function footerScripts() {
 		if( wp_script_is( 'functions', 'done' ) ) {
+			//echo get_post_type();
 			if ( is_home() ) { ?>
 				<script type="text/javascript">
 					var mapa = creaMapa();
@@ -586,7 +587,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</label></th>
 			<td>
 				<input type="text" name="celular" id="celular" value="<?php echo esc_attr( get_the_author_meta( 'celular', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingersa tu celular.', 'your_phone'); ?></span>
+				<span class="description"><?php _e('Ingresa tu celular.', 'your_phone'); ?></span>
 			</td>
 		</tr>
 	</table>
@@ -597,7 +598,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</th>
 			<td>
 				<input type="text" name="direccion" id="direccion" value="<?php echo esc_attr( get_the_author_meta( 'direccion', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingersa tu direccion.', 'your_adress'); ?></span>
+				<span class="description"><?php _e('Ingresa tu direccion.', 'your_adress'); ?></span>
 			</td>
 		</tr>
 	</table>
@@ -608,7 +609,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</th>
 			<td>
 				<input type="text" name="latitud" id="latitud" value="<?php echo esc_attr( get_the_author_meta( 'latitud', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingersa tu latitud.', 'your_adress'); ?></span>
+				<span class="description">Ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud</span>
 			</td>
 		</tr>
 	</table>
@@ -619,7 +620,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</th>
 			<td>
 				<input type="text" name="longitud" id="longitud" value="<?php echo esc_attr( get_the_author_meta( 'longitud', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingersa tu longitud.', 'your_adress'); ?></span>
+				<span class="description"><?php _e('Ingresa tu longitud.', 'your_longitud'); ?></span>
 			</td>
 		</tr>
 	</table>
@@ -630,7 +631,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 			</th>
 			<td>
 				<input type="text" name="liga_instructable" id="liga_instructable" value="<?php echo esc_attr( get_the_author_meta( 'liga_instructable', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingersa tu liga,', 'your_liga'); ?></span>
+				<span class="description"><?php _e('Ingresa tu liga,', 'your_liga'); ?></span>
 			</td>
 		</tr>
 	</table>
