@@ -21,7 +21,11 @@
 								<?php } ?>
 							</a>
 							<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
-							<?php the_content(); ?>
+							<div class="[ post-texto ]">
+								<?php the_content(); ?>
+								<div class="[ screen ]"></div>
+							</div>
+							<button class="[ leer-mas proyectos ]">Leer más</button>
 						</div><!-- post -->
 					<?php endwhile; endif; wp_reset_query(); ?>
 				</div>
