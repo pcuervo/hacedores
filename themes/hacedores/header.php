@@ -30,9 +30,9 @@
 					<div class="[ columna xmall-12 ][ no-xmall no-small no-medium large ][ text-right ][ margin-bottom-small ]">
 						<?php if ( !is_user_logged_in() ) { ?>
 							<a class="[ boton ][ inline-block ][ login-entrar ][ js-abrir-modal ]">Entrar</a>
-							<a href="registro" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
+							<!-- <a href="registro" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
 								Registrarse
-							</a>
+							</a> -->
 						<?php } else { ?>
 							<a href="<?php echo  esc_url( wp_logout_url(site_url()) ); ?>" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
 								Mi cuenta
@@ -107,7 +107,7 @@
 						<a class="[ no-large ] [ informacion ] [ right ]" href="#menu-movil"><i class="fa fa-bars fa-2x"></i></a>
 						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu recursos ] [ right ]" href="<?php echo site_url('recursos'); ?>">
 							<h3 class="[ recursos ]">Espacios/Recursos</h3>
-							<i class="[ icon-icon_gubia ] [ icon recursos ] [ center block ]"></i>
+							<i class="[ icon-icon_tornillo ] [ icon recursos ] [ center block ]"></i>
 						</a>
 						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu programacion ] [ right ]" href="<?php echo site_url('proyectos'); ?>">
 							<h3 class="[ programacion ]">Proyectos</h3>
