@@ -6,7 +6,6 @@
 
 	add_action('init', function(){
 
-
 		// Registro
 		if( ! get_page_by_path('registro') ){
 			$page = array(
