@@ -20,7 +20,7 @@
 		<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 		<?php wp_head(); ?>
 	</head>
-	<body>
+	<body <?php body_class(); ?>>
 		<!--[if lt IE 9]>
 			<p class="chromeframe">Estás usando una versión <strong>vieja</strong> de tu explorador. Por favor <a href="http://browsehappy.com/" target="_blank"> actualiza tu explorador</a> para tener una experiencia completa.</p>
 		<![endif]-->
@@ -30,9 +30,9 @@
 					<div class="[ columna xmall-12 ][ no-xmall no-small no-medium large ][ text-right ][ margin-bottom-small ]">
 						<?php if ( !is_user_logged_in() ) { ?>
 							<a class="[ boton ][ inline-block ][ login-entrar ][ js-abrir-modal ]">Entrar</a>
-							<a href="registro" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
+							<!-- <a href="registro" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
 								Registrarse
-							</a>
+							</a> -->
 						<?php } else { ?>
 							<a href="<?php echo  site_url().'/wp-admin/profile.php'; ?>" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
 								Mi cuenta
@@ -44,6 +44,21 @@
 					</div>
 					<div class="[ columna xmall-6 medium-3 ]">
 						<h1><a href="<?php echo site_url(); ?>">Hacedores CDMX</a></h1>
+						<div class="[ clearfix ] [ nombre-seccion ]">
+							<?php if ( get_post_type() == 'informacion'){ ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-gray.gif" alt="">
+								<h3>Información</h3>
+							<?php } elseif ( is_page('hacedores') ) { ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-red.gif" alt="">
+								<h3>Hacedores</h3>
+							<?php } elseif ( get_post_type() == 'proyecto'){ ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-blue.gif" alt="">
+								<h3>Proyectos</h3>
+							<?php } elseif ( get_post_type() == 'recurso'){ ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-green.gif" alt="">
+								<h3>Espacios/Recursos</h3>
+							<?php } ?>
+						</div>
 					</div>
 					<div class="[ columna xmall-4 small-3 medium-2 large-2 ]">
 						<a href="http://labplc.mx/" target="_blank"><img src="<?php echo THEMEPATH; ?>images/logo-laboratorio-ciudad.png" alt=""></a>
@@ -92,7 +107,7 @@
 						<a class="[ no-large ] [ informacion ] [ right ]" href="#menu-movil"><i class="fa fa-bars fa-2x"></i></a>
 						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu recursos ] [ right ]" href="<?php echo site_url('recursos'); ?>">
 							<h3 class="[ recursos ]">Espacios/Recursos</h3>
-							<i class="[ icon-icon_gubia ] [ icon recursos ] [ center block ]"></i>
+							<i class="[ icon-icon_tornillo ] [ icon recursos ] [ center block ]"></i>
 						</a>
 						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu programacion ] [ right ]" href="<?php echo site_url('proyectos'); ?>">
 							<h3 class="[ programacion ]">Proyectos</h3>
@@ -116,7 +131,7 @@
 							<div class="[ menu-container ]">
 								<div class="[ menu-mapa ]">
 									<ul class="[ menu-titulos ]">
-										<?php if ( is_home() || is_page('hacedores') ) { ?>
+										<?php if ( is_home() || is_page( 'hacedores' ) || is_post_type_archive( 'informacion' ) ) { ?>
 											<li class="[ hacedores ] [ trigger ]" data-rel="sub-hacedores">Hacedores</li>
 											<ul class="[ submenu-mapa ] [ sub-hacedores ] [ content ]">
 											<?php
@@ -139,7 +154,7 @@
 											} ?>
 											</ul>
 										<?php } ?>
-										<?php if ( is_home() || get_post_type() == 'proyecto' ) { ?>
+										<?php if ( is_home() || is_post_type_archive( 'proyecto' ) || is_post_type_archive( 'informacion' ) ) { ?>
 											<li class="[ proyecto ] [ trigger ]" data-rel="sub-proyecto">Proyectos</li>
 											<ul class="[ submenu-mapa ] [ sub-proyecto ] [ content ]">
 												<?php
@@ -166,7 +181,7 @@
 												?>
 											</ul>
 										<?php } ?>
-										<?php if ( is_home() || get_post_type() == 'recurso' ) { ?>
+										<?php if ( is_home() || is_post_type_archive( 'recurso' ) || is_post_type_archive( 'informacion' ) ) { ?>
 											<li class="[ recurso ] [ trigger ]" data-rel="sub-recurso">Espacios / Recursos</li>
 											<ul class="[ submenu-mapa ] [ sub-recurso ] [ content ]">
 												<?php
@@ -193,7 +208,7 @@
 												?>
 											</ul>
 										<?php } ?>
-										<?php if ( is_home() || get_post_type() == 'evento' ) { ?>
+										<?php if ( is_home() || is_post_type_archive( 'informacion' ) ) { ?>
 											<li class="[ evento ] [ trigger ]" data-rel="sub-evento">Eventos</li>
 											<ul class="[ submenu-mapa ] [ sub-evento ] [ content ]">
 												<?php

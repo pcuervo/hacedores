@@ -26,7 +26,7 @@
 								<p>¿Olvidaste tu contraseña? <a href="">click aquí</a></p>
 							</div>
 							<input type="submit" name="submit" value="Registrarse">
-							<p>¿No estás registrado aún? <a href="registro.html">Click aquí</a></p>
+							<p>¿No estás registrado aún? <a href="<?php echo site_url('registro'); ?>">Click aquí</a></p>
 						</form>
 					</div>
 				</div>
@@ -50,8 +50,7 @@
 	</body>
 	<script>
 		(function($){
-
-		$('.first-container').simplePagination();
+			$('.first-container').simplePagination();
 		})(jQuery);
 	</script>
 </html>

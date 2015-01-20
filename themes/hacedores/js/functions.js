@@ -302,7 +302,8 @@ function creaMarkers(mapa, infoMapa){
 				titulo: subcategoria[0],
 				lat: subcategoria[1],
 				lon: subcategoria[2],
-				slug: subcategoria[3]
+				slug: subcategoria[3],
+				url: site_url + subcategoria[4] + '/' + subcategoria[5]
 			});
 		});		
 		var current_markers = dameMarkers(categoria,categorias_mapa[categoria], mapa);
@@ -336,24 +337,24 @@ function dameMarkers(categoria, subcategorias, mapa){
 	var markers = new Array();
 	ubicaciones = [];
 
-	var infowindow = new google.maps.InfoWindow({
-		maxWidth: 400
-	});
 	$.each(subcategorias, function(i, subcategoria){
 		$.each(subcategoria, function(j, coordenadas){
-			var latLon = [];
-			var contenidoInfoWindow ='<h3>'+coordenadas.titulo+'</h3>';
-			latLon.push(i);
-			latLon.push(coordenadas.lat);
-			latLon.push(coordenadas.lon);
-			latLon.push(contenidoInfoWindow);
-			latLon.push(coordenadas.slug);
-			ubicaciones.push(latLon);
+			var infoPost = [];
+			var contenidoInfoWindow ='<h3>'+coordenadas.titulo+'</h3><a href="'+coordenadas.url+'">Más info</a>';
+			infoPost.push(j);
+			infoPost.push(coordenadas.lat);
+			infoPost.push(coordenadas.lon);
+			infoPost.push(contenidoInfoWindow);
+			infoPost.push(coordenadas.slug);
+			ubicaciones.push(infoPost);
 		});
 	});
 
 	var icon = dameIconPath(categoria);
 	for (var i = 0; i < ubicaciones.length; i++) {
+		var infowindow = new google.maps.InfoWindow({
+			maxWidth: 500
+		});
 		marker = new google.maps.Marker({
 			position: new google.maps.LatLng(ubicaciones[i][1], ubicaciones[i][2]),
 			map: mapa,
@@ -362,11 +363,11 @@ function dameMarkers(categoria, subcategorias, mapa){
 			subcategory: ubicaciones[i][4]
 		});
 		markers.push(marker);
+		
+		// Agrega infoWindow para mostrar la información del post
+		infowindow.setContent(ubicaciones[i][3].toString());
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
-			return function() {
-				infowindow.setContent(ubicaciones[i][3]);
-				infowindow.open(mapa, marker);
-			};
+			return function() { infowindow.open(mapa, marker); };
 		})(marker, i));
 	}
 	return markers;
@@ -418,16 +419,16 @@ function autoCenter(map, markers) {
 function dameIconPath(categoria){
 	switch(categoria){
 		case 'hacedores':
-			icon_path = theme_path + 'marker-hacedores.png';
+			icon_path = theme_path + 'images/marker-hacedores.png';
 			break;
 		case 'evento':
-			icon_path = theme_path + 'marker-eventos.png';
+			icon_path = theme_path + 'images/marker-eventos.png';
 			break;
 		case 'recurso':
-			icon_path = theme_path + 'marker-espacios.png';
+			icon_path = theme_path + 'images/marker-espacios.png';
 			break;
 		case 'proyecto':
-			icon_path = theme_path + 'marker-proyectos.png';
+			icon_path = theme_path + 'images/marker-proyectos.png';
 			break;
 	}
 	return icon_path;
@@ -454,3 +455,5 @@ function isEmpty(obj) {
 
     return true;
 }
+
+
