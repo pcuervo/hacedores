@@ -330,6 +330,15 @@ function agregaFiltrosMarkers(mapa, markers, infoMapa){
 	});
 }// agregaFiltrosMarkers
 
+function agregaFiltrosTodos(mapa, markers){
+	$('li.todos').on('click', function(){
+		$.each(markers, function (index, marker) {
+			marker.setVisible(true);
+		});
+		autoCenter(mapa, markers);
+	});	
+}// agregaFiltrosMarkers
+
 function dameMarkers(categoria, subcategorias, mapa){
 	if(isEmpty(subcategorias)) return new Array();
 

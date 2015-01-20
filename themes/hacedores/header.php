@@ -131,7 +131,13 @@
 							<div class="[ menu-container ]">
 								<div class="[ menu-mapa ]">
 									<ul class="[ menu-titulos ]">
-										<?php if ( is_home() || is_page( 'hacedores' ) || is_post_type_archive( 'informacion' ) ) { ?>
+										
+										<?php if ( is_home() || is_page( 'hacedores' ) || is_post_type_archive( 'informacion' ) ) { 
+
+											if ( ! is_page( 'hacedores' ) ) { ?>
+												<li class="[ todos ] [ trigger ]">Ver todo</li>
+											<?php } ?>
+	
 											<li class="[ hacedores ] [ trigger ]" data-rel="sub-hacedores">Hacedores</li>
 											<ul class="[ submenu-mapa ] [ sub-hacedores ] [ content ]">
 											<?php
@@ -148,9 +154,6 @@
 													$userNiceName	= $user->user_nicename;
 													$userAvatar 	= get_avatar_url(get_avatar( $userID, 150 ));
 													$userURL 		= get_author_posts_url($userID);
-													//$latitud	= get_user_meta($userID, 'latitud', true);
-													//$longitud	= get_user_meta($userID, 'longitud', true);
-													//echo $userURL;
 													?>
 													<li class="[ <?php echo $userNiceName; ?> ]"><?php echo $userNombre; ?></li>
 											<?php }
