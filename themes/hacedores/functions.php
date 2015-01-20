@@ -450,12 +450,12 @@ function remove_menus(){
 	$role = get_current_user_role();
 	remove_menu_page( 'edit.php' ); //Posts
 	if($role != 'administrator'){
-		remove_menu_page( 'edit.php?post_type=page' );    //Pages
-		remove_menu_page( 'edit-comments.php' );          //Comments
-		remove_menu_page( 'tools.php' );                  //Tools
-		remove_menu_page( 'upload.php' );                 //Media
+		remove_menu_page( 'edit.php?post_type=page' );//Pages
+		remove_menu_page( 'edit-comments.php' ); //Comments
+		remove_menu_page( 'tools.php' ); //Tools
+		remove_menu_page( 'upload.php' );//Media
 		remove_menu_page( 'edit.php?post_type=informacion' );//Informacion
-		remove_menu_page( 'index.php' );                  //Dashboard
+		remove_menu_page( 'index.php' ); //Dashboard
 	}
 
 }
@@ -819,3 +819,5 @@ function add_my_error() {
     global $wp;
     $wp->add_query_var('my_error');
 }
+
+
