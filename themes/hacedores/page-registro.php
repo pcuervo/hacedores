@@ -1,11 +1,9 @@
 
 <?php
   $error = get_query_var( 'my_error', -1 );
-	if( $error >= 1 )
-	{
-		echo "El mail ya a sido registrado";
-	}
 ?>
+<?php if( $error >= 1 ) ?>
+	<div><?php echo "El mail ya a sido registrado"; ?></div>
 <?php  get_header(); ?>
 		<div class="container">
 			<div class="[ main ]">
