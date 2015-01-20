@@ -34,7 +34,7 @@
 								Registrarse
 							</a> -->
 						<?php } else { ?>
-							<a href="<?php echo  esc_url( wp_logout_url(site_url()) ); ?>" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
+							<a href="<?php echo  site_url().'/wp-admin/profile.php'; ?>" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
 								Mi cuenta
 							</a>
 							<a href="<?php echo  esc_url( wp_logout_url(site_url()) ); ?>" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
