@@ -1181,6 +1181,21 @@ a:hover {
 .login-container a:visited {
   color: #666666;
 }
+.login-container .boton-entrar {
+  height: 50px;
+  width: 100%;
+  font-family: 'trade 18';
+  text-transform: uppercase;
+  padding: 15px;
+  color: #fff;
+  background-color: #bbbbbb;
+  border: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+.transition .login-container .boton-entrar:hover {
+  background-color: #4f6190;
+}
 /*==========*/
 .cycle-slideshow a {
   display: block;
