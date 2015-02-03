@@ -549,6 +549,7 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 		if( wp_script_is( 'functions', 'done' ) ) {
 			if ( is_home() || is_post_type_archive( 'informacion' ) ) { ?>
 				<script type="text/javascript">
+					console.log('fuck them hoes');
 					var mapa = creaMapa();
 					var markers = creaMarkers(mapa, infoMapaTodos);
 					// Muestra todos los marcadores centrados en el mapa
