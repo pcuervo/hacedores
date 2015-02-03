@@ -1,5 +1,11 @@
 var file_frame;	
 (function( $ ) {
+
+	$('input#geo-autocomplete').geocomplete({
+		details: "#post",
+ 	 	detailsAttribute: "data-geo"
+	});
+
 	$('.additional-user-image').on('click', function( event ){
 
 		event.preventDefault();

@@ -137,6 +137,8 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 
 		// scripts
 		wp_enqueue_script( 'admin-js', JSPATH.'admin.js', array('jquery'), '1.0', true );
+		wp_enqueue_script( 'gmaps', JSPATH.'gmaps.min.js', array('jquery'), '1.0' );
+		wp_enqueue_script( 'geo-autocomplete', JSPATH.'geocomplete.min.js', array('gmaps'), '1.0' );
 
 		// localize scripts
 		wp_localize_script( 'admin-js', 'ajax_url', admin_url('admin-ajax.php') );
@@ -549,7 +551,6 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 		if( wp_script_is( 'functions', 'done' ) ) {
 			if ( is_home() || is_post_type_archive( 'informacion' ) ) { ?>
 				<script type="text/javascript">
-					console.log('fuck them hoes');
 					var mapa = creaMapa();
 					var markers = creaMarkers(mapa, infoMapaTodos);
 					// Muestra todos los marcadores centrados en el mapa
