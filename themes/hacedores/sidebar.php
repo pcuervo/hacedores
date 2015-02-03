@@ -13,6 +13,9 @@
 				$eventoDireccion = get_post_meta($post->ID, '_direccion_evento_meta', true);
 				$eventoDia = get_post_meta($post->ID, '_dia_evento_meta', true);
 				$eventoURL = get_post_meta($post->ID, '_web_evento_meta', true);
+				if ( $eventoURL !== '' AND strpos($eventoURL,'http://') === false) {
+					$eventoURL = 'http://'.$eventoURL;
+				}
 				$eventoFB = get_post_meta($post->ID, '_facebook_evento_meta', true);
 				$eventoTW = get_post_meta($post->ID, '_twitter_evento_meta', true);
 				if ( $eventoFB !== '' AND strpos($eventoFB,'http://') === false) {

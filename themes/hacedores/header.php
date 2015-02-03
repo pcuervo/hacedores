@@ -128,10 +128,15 @@
 				<div class="[ width clearfix ]">
 					<section class="[ mapa ] [ margin-bottom-big ] [ relative ]">
 						<div class="[ no-xmall medium ]">
+							<?php if( ! is_single() AND ! is_page('registro') ) { ?>
 							<div class="[ menu-container ]">
 								<div class="[ menu-mapa ]">
 									<ul class="[ menu-titulos ]">
-										<?php if ( is_home() || is_page( 'hacedores' ) || is_post_type_archive( 'informacion' ) ) { ?>
+										<?php if ( is_home() || is_page( 'hacedores' ) || is_post_type_archive( 'informacion' ) ) {
+											if ( ! is_page( 'hacedores' ) ) { ?>
+												<li class="[ todos ] [ trigger ]">Ver todo</li>
+											<?php } ?>
+
 											<li class="[ hacedores ] [ trigger ]" data-rel="sub-hacedores">Hacedores</li>
 											<ul class="[ submenu-mapa ] [ sub-hacedores ] [ content ]">
 											<?php
@@ -141,15 +146,15 @@
 											$queryHacedores = new WP_User_Query( $args );
 											if ( ! empty( $queryHacedores->results ) ) {
 												foreach ( $queryHacedores->results as $user ) {
-													$userNombre = $user->display_name;
-													$userID 	= $user->ID;
-													$userMeta 	= get_user_meta( $userID );
-													$userBio 	= $userMeta['description'][0];
-													$userAvatar = get_avatar_url(get_avatar( $userID, 150 ));
-													$userURL 	= get_author_posts_url($userID);
-													//echo $userURL;
+													$userNombre 	= $user->display_name;
+													$userID 		= $user->ID;
+													$userMeta 		= get_user_meta( $userID );
+													$userBio 		= $userMeta['description'][0];
+													$userNiceName	= $user->user_nicename;
+													$userAvatar 	= get_avatar_url(get_avatar( $userID, 150 ));
+													$userURL 		= get_author_posts_url($userID);
 													?>
-													<li class="[ <?php echo $customPostCategorySlug; ?> ]"><?php echo $userNombre; ?></li>
+													<li class="[ <?php echo $userNiceName; ?> ]"><?php echo $userNombre; ?></li>
 											<?php }
 											} ?>
 											</ul>
@@ -238,6 +243,7 @@
 									</ul>
 								</div>
 							</div>
+							<?php } ?>
 							<div id="mapa"></div>
 						</div>
 					</section><!-- mapa -->

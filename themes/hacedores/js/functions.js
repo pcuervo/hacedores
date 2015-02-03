@@ -298,10 +298,12 @@ function creaMarkers(mapa, infoMapa){
 			if(typeof subcategoria != 'object') return true;
 
 			categorias_mapa[categoria][subcategoria] = []; 
+			var lat = (subcategoria[1] == '') ? '19.423325' : subcategoria[1];
+			var lon = (subcategoria[2] == '') ? '-99.134220' : subcategoria[2];
 			categorias_mapa[categoria][subcategoria].push({
 				titulo: subcategoria[0],
-				lat: subcategoria[1],
-				lon: subcategoria[2],
+				lat: lat,
+				lon: lon,
 				slug: subcategoria[3],
 				url: site_url + subcategoria[4] + '/' + subcategoria[5]
 			});
@@ -330,6 +332,15 @@ function agregaFiltrosMarkers(mapa, markers, infoMapa){
 	});
 }// agregaFiltrosMarkers
 
+function agregaFiltrosTodos(mapa, markers){
+	$('li.todos').on('click', function(){
+		$.each(markers, function (index, marker) {
+			marker.setVisible(true);
+		});
+		autoCenter(mapa, markers);
+	});	
+}// agregaFiltrosMarkers
+
 function dameMarkers(categoria, subcategorias, mapa){
 	if(isEmpty(subcategorias)) return new Array();
 
@@ -352,9 +363,6 @@ function dameMarkers(categoria, subcategorias, mapa){
 
 	var icon = dameIconPath(categoria);
 	for (var i = 0; i < ubicaciones.length; i++) {
-		var infowindow = new google.maps.InfoWindow({
-			maxWidth: 500
-		});
 		marker = new google.maps.Marker({
 			position: new google.maps.LatLng(ubicaciones[i][1], ubicaciones[i][2]),
 			map: mapa,
@@ -364,9 +372,12 @@ function dameMarkers(categoria, subcategorias, mapa){
 		});
 		markers.push(marker);
 		
-		// Agrega infoWindow para mostrar la información del post
-		infowindow.setContent(ubicaciones[i][3].toString());
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
+			// Agrega infoWindow para mostrar la información del post
+			var infowindow = new google.maps.InfoWindow({
+				maxWidth: 500
+			});
+			infowindow.setContent(ubicaciones[i][3]);
 			return function() { infowindow.open(mapa, marker); };
 		})(marker, i));
 	}

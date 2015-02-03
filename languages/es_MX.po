@@ -1975,7 +1975,7 @@ msgstr "Orden inverso"
 
 #: wp-includes/media.php:2964
 msgid "Set featured image"
-msgstr "Asignar imagen destacada"
+msgstr "Asignar imagen destacada (mín. 235x235px)"
 
 #: wp-includes/media-template.php:458
 msgid "Deselect"

@@ -22,13 +22,17 @@
 					$userAvatar 		= $userAvatarMedium[0];
 				}
 
-
 				$userURL 	= get_author_posts_url($userID);
 				?>
 				<div class="[ post ] [ margin-bottom-medium ] [ columna xmall-12 small-6 medium-4 ]">
 					<a href="<?php echo $userURL; ?>"><img class="[ margin-bottom-small ]" src="<?php echo $userAvatar; ?>" alt="<?php echo $userNombre; ?>"></a>
 					<a href="<?php echo $userURL; ?>"><h2><?php echo $userNombre; ?></h2></a>
-					<p><?php echo $userBio; ?></p>
+					<div class="[ post-texto ]">
+						<p><?php echo trim_text($userBio, 200); ?></p>
+						<div class="[ screen ]"></div>
+					</div>
+					<a href="<?php echo $userURL; ?>" class="[ block ][ boton ][ text-center ][ leer-mas hacedores ]">Leer más</a>
+
 				</div><!-- post -->
 		<?php }
 		}
@@ -49,7 +53,17 @@
 					<?php } ?>
 				</a>
 				<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
-				<?php the_content(); ?>
+				<div class="[ post-texto ]">
+					<?php
+						$content = get_the_content();
+						$content = strip_tags($content);
+						echo '<p>';
+							echo trim_text($content, 200);
+						echo '</p>';
+					?>
+					<div class="[ screen ]"></div>
+				</div>
+				<a href="<?php the_permalink(); ?>" class="[ block ][ boton ][ text-center ][ leer-mas proyectos ]">Leer más</a>
 			</div><!-- post -->
 		<?php endwhile; endif; wp_reset_query();
 
@@ -65,11 +79,21 @@
 					<?php if ( has_post_thumbnail() ) { ?>
 						<?php the_post_thumbnail('medium', array('class' => '[ margin-bottom-small ]')); ?>
 					<?php } else { $userAvatar = THEMEPATH.'images/default-recursos.png';?>
-						<img class="[ margin-bottom-medium ]" src="<?php echo $userAvatar; ?>" alt="<?php the_title(); ?>">
+						<img class="[ margin-bottom-small ]" src="<?php echo $userAvatar; ?>" alt="<?php the_title(); ?>">
 					<?php } ?>
 				</a>
 				<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
-				<?php the_content(); ?>
+				<div class="[ post-texto ]">
+					<?php
+						$content = get_the_content();
+						$content = strip_tags($content);
+						echo '<p>';
+							echo trim_text($content, 200);
+						echo '</p>';
+					?>
+					<div class="[ screen ]"></div>
+				</div>
+				<a href="<?php the_permalink(); ?>" class="[ block ][ boton ][ text-center ][ leer-mas recursos ]">Leer más</a>
 			</div><!-- post -->
 		<?php endwhile; endif; wp_reset_query(); ?>
 	</section>
