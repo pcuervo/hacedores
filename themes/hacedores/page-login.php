@@ -30,7 +30,7 @@
 									<label for="password" class="[ columna xmall-12 ]">Contraseña</label>
 									<input name="password" type="password" id="password">
 								</div>
-								<input type="submit" name="submit" value="Registrarse">
+								<input type="submit" name="submit" value="Entrar" class="[ boton-entrar ]">
 							</div>
 						</form>
 					</div>
