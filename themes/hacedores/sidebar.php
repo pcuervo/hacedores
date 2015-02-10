@@ -1,4 +1,4 @@
-<aside class="[ columna xmall-11 medium-4 large-3 ] [ border ] [ eventos-home ]">
+<aside class="[ columna xmall-12 medium-4 large-3 ] [ border ] [ eventos-home ]">
 	<div class="[ eventos-titulo ]">
 		<h2>Eventos</h2>
 	</div>
