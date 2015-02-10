@@ -24,9 +24,9 @@
 		<h2><?php echo $userName; ?></h2>
 		<?php
 			foreach($userCategories as $userCategoryID) {
-				$userCategory = get_the_category_by_ID($userCategoryID);
-				echo '<p>'.$userCategory.'</p> ';
-			}
+				$userCategory = get_the_category_by_ID($userCategoryID); ?>
+				<h2 class="[ no-margin ]"><small><small><?php echo $userCategory; ?></small></small></h2>
+			<?php }
 		?>
 		<p><a target="_blank" href="<?php echo $userURL; ?>"><?php echo $userURL; ?></a></p>
 	</div>

@@ -7,9 +7,11 @@
 		<?php
 			$categorias = wp_get_post_terms($post->ID, 'category-proyectos');
 			foreach($categorias as $categoria) {
-				$categoriaName = $categoria->name;
-			}
+				$categoriaName = $categoria->name; ?>
+				<h2 class="[ no-margin ]"><small><small><?php echo $categoriaName; ?></small></small></h2>
+			<?php }
 		?>
+		<br />
 		<p>Dirección: <?php echo get_post_meta($post->ID, '_direccion_proyecto_meta', true); ?></p>
 		<p><a target="_blank" href="<?php echo get_post_meta($post->ID, '_web2_meta', true); ?>"><?php echo get_post_meta($post->ID, '_web2_meta', true); ?></a></p>
 	</div>

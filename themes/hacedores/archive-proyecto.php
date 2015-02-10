@@ -13,21 +13,28 @@
 					$queryProyecto = new WP_Query( $args );
 					if ( $queryProyecto->have_posts() ) : while ( $queryProyecto->have_posts() ) : $queryProyecto->the_post(); ?>
 						<div class="[ post ] [ margin-bottom-medium ] [ columna xmall-12 small-3 medium-3 ]">
-							<a href="<?php the_permalink(); ?>">
+							<a class="[ block ][ margin-bottom-small ]" href="<?php the_permalink(); ?>">
 								<?php if ( has_post_thumbnail() ) { ?>
-									<?php the_post_thumbnail('medium', array('class' => '[ margin-bottom-small ]')); ?>
+									<?php the_post_thumbnail('medium', array('class' => '[ block ]')); ?>
 								<?php } else { $userAvatar = THEMEPATH.'images/default-proyectos.png';?>
-									<img class="[ margin-bottom-small ]" src="<?php echo $userAvatar; ?>" alt="<?php the_title(); ?>">
+									<img class="[ margin-bottom-small ][ block ]" src="<?php echo $userAvatar; ?>" alt="<?php the_title(); ?>">
 								<?php } ?>
 							</a>
-							<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
 							<div class="[ post-texto ]">
+								<a href="<?php the_permalink(); ?>" class="[ block ]">
+									<h2 class="[ no-margin ]"><?php the_title(); ?></h2>
+								</a>
 								<?php
-									$content = get_the_content();
-									$content = strip_tags($content);
-									echo '<p>';
+								$categorias = wp_get_post_terms($post->ID, 'category-proyectos');
+								foreach($categorias as $categoria) {
+									$categoriaName = $categoria->name; ?>
+									<p class="[ subtitle-category ][ no-margin ]"><?php echo $categoriaName; ?></p>
+								<?php }
+								$content = get_the_content();
+								$content = strip_tags($content);
+								echo '<p>';
 										echo trim_text($content, 200);
-									echo '</p>';
+								echo '</p>';
 								?>
 								<div class="[ screen ]"></div>
 							</div>
