@@ -126,6 +126,10 @@
 							<h3 class="[ perfiles ]">Hacedores</h3>
 							<i class="[ icon-icon_zanahoria ] [ icon perfiles ] [ center block ]"></i>
 						</a>
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu informacion ][ right ] <?php echo ( get_post_type() == 'informacion' ? 'active' : ''); ?>" href="<?php echo site_url('informacion'); ?>">
+							<h3 class="[ informacion ]">Información</h3>
+							<i class="[ icon-icon_clavo2 ] [ icon informacion ] [ center block ]"></i>
+						</a>
 					</nav>
 				</div><!-- width -->
 			</header>
