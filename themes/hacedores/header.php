@@ -16,7 +16,7 @@
 			ga('create', 'UA-56741529-1', 'auto');
 			ga('send', 'pageview');
 		</script>
-		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+		<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&key=AIzaSyAjE9TVybKKQNNOa1g760xJ4y6b5YaZmq4"></script>
 		<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 		<?php wp_head(); ?>
 	</head>

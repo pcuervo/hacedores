@@ -6,6 +6,11 @@ var file_frame;
  	 	detailsAttribute: "data-geo"
 	});
 
+	$('input#geo-autocomplete-user').geocomplete({
+		details: "#your-profile",
+ 	 	detailsAttribute: "data-geo"
+	});
+
 	$('.additional-user-image').on('click', function( event ){
 
 		event.preventDefault();
@@ -19,7 +24,6 @@ var file_frame;
 			},
 			multiple: false  // Set to true to allow multiple files to be selected
 		});
-
 		// When an image is selected, run a callback.
 		file_frame.on( 'select', function() {
 			attachment = file_frame.state().get('selection').first().toJSON();
