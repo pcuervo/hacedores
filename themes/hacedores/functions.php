@@ -514,7 +514,6 @@ function oa_social_login_set_custom_css($css_theme_uri)
 }
 
 
-
 add_filter('oa_social_login_default_css', 'oa_social_login_set_custom_css');
 add_filter('oa_social_login_widget_css', 'oa_social_login_set_custom_css');
 add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
@@ -654,15 +653,20 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 	<table class="form-table">
 		<tr>
 			<th>
-				<label for="latitud"><?php _e('Latitud', 'latitud'); ?></label>
+				<label>Ingresa la dirección:</label>
 			</th>
 			<td>
-				<input type="text" name="latitud" id="latitud" value="<?php echo esc_attr( get_the_author_meta( 'latitud', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description">"Para obtener tu latitud: ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud."</span><br />
+				<!-- <input type="text" name="latitud" id="latitud" value="<?php echo esc_attr( get_the_author_meta( 'latitud', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description">"Para obtener tu latitud: ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud."</span><br /> -->
+				<input type="text" class="widefat" id="geo-autocomplete-user" placeholder="Ingresa la ubicación del recurso"><br />
+				<label>Latitud:</label>
+				<input type="text" class="widefat" id="latitud" name="latitud" value="<?php echo esc_attr( get_the_author_meta( 'latitud', $user->ID ) ); ?>" data-geo="lat" /><br/>
+				<label>Longitud:</label>
+				<input type="text" class="widefat" id="longitud" name="longitud" value="<?php echo esc_attr( get_the_author_meta( 'longitud', $user->ID ) ); ?>" data-geo="lng" />
 			</td>
 		</tr>
 	</table>
-	<table class="form-table">
+	<!-- <table class="form-table">
 		<tr>
 			<th>
 				<label for="longitud"><?php _e('Longitud', 'longitud'); ?></label>
@@ -672,7 +676,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 				<span class="description">"Para obtener tu longitud: ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud."</span><br />
 			</td>
 		</tr>
-	</table>
+	</table> -->
 	<table class="form-table">
 		<tr>
 			<th>
@@ -806,6 +810,11 @@ add_action( 'edit_user_profile', 'fb_add_custom_user_profile_fields' );
 
 add_action( 'personal_options_update', 'fb_save_custom_user_profile_fields' );
 add_action( 'edit_user_profile_update', 'fb_save_custom_user_profile_fields' );
+
+function echoSomething(){
+	echo 'Fuck you whale';
+}
+add_action('new_proyecto', 'echoSomething');
 
 /**
  * Return an ID of an attachment by searching the database with the file URL.

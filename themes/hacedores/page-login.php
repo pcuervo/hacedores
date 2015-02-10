@@ -35,7 +35,10 @@
 									<label for="password" class="[ columna xmall-12 ]">Contraseña</label>
 									<input name="password" type="password" id="password">
 								</div>
+								<input type="submit" name="submit" value="Entrar" class="[ boton-entrar ]">
+<!-- =======
 								<input type="submit" name="submit" value="Ingresar">
+>>>>>>> c243a7f650130fbb2e49b1d4a87258554a0628d0 -->
 							</div>
 						</form>
 					</div>
