@@ -467,4 +467,14 @@ function isEmpty(obj) {
     return true;
 }
 
+function displayMapMenu(section){
+	$('li.'+section+' + ul').css('display', 'block');
+	switch(section){
+		// case 'hacedores':
+			
+		// 	break;
+	}// switch
+
+} // displayMapMenu
+
 

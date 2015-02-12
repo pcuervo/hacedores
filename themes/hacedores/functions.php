@@ -568,6 +568,8 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 						autoCenter(mapa, markers);
 						// Agrega los filtros para cada categoría y subcategoría
 						agregaFiltrosMarkers(mapa, markers, infoMapaProyectos);
+
+						displayMapMenu('proyecto');
 					}
 				</script>
 			<?php } else if ( is_post_type_archive( 'recurso' ) )  { ?>
@@ -579,7 +581,8 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 						autoCenter(mapa, markers);
 						// Agrega los filtros para cada categoría y subcategoría
 						agregaFiltrosMarkers(mapa, markers, infoMapaRecursos);
-						console.log(infoMapaRecursos);
+
+						displayMapMenu('recurso');
 					}
 				</script>
 			<?php } else if ( is_page( 'hacedores' ) ) { ?>
@@ -590,6 +593,8 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 					autoCenter(mapa, markers);
 					// Agrega los filtros para cada categoría y subcategoría
 					agregaFiltrosMarkers(mapa, markers, infoMapaUsuarios);
+
+					displayMapMenu('hacedores');
 				</script>
 			<?php } 
 		} // home
@@ -811,10 +816,29 @@ add_action( 'edit_user_profile', 'fb_add_custom_user_profile_fields' );
 add_action( 'personal_options_update', 'fb_save_custom_user_profile_fields' );
 add_action( 'edit_user_profile_update', 'fb_save_custom_user_profile_fields' );
 
-function echoSomething(){
-	echo 'Fuck you whale';
+function addMetaboxesCustomPost(){
+	if( ! isset($_GET) ) return 0;
+
+	$post_type = $_GET['post_type'];
+	if($post_type == 'proyecto')
+		addMetaboxNewProyecto();	
 }
-add_action('new_proyecto', 'echoSomething');
+add_action('load-post-new.php', 'addMetaboxesCustomPost');
+add_action('load-post.php', 'addMetaboxEditProyecto');
+
+function addMetaboxNewProyecto(){
+	add_action('add_meta_boxes', function(){
+		add_meta_box( 'informacion_proyecto', 'Información proyecto', 'metabox_informacion_proyecto_new', 'proyecto', 'advanced', 'high' );
+	});
+}
+
+function addMetaboxEditProyecto(){
+	add_action('add_meta_boxes', function(){
+		add_meta_box( 'informacion_proyecto', 'Información proyecto', 'metabox_informacion_proyecto_edit', 'proyecto', 'advanced', 'high' );
+	});
+}
+
+
 
 /**
  * Return an ID of an attachment by searching the database with the file URL.

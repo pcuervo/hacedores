@@ -9,7 +9,7 @@
 
 		add_meta_box( 'detalles', 'Detalles', 'metabox_detalles', 'informacion', 'advanced', 'high' );
 		add_meta_box( 'informacion_recurso', 'Información recurso', 'metabox_informacion_recurso', 'recurso', 'advanced', 'high' );
-		add_meta_box( 'informacion_proyecto', 'Información proyecto', 'metabox_informacion_proyecto', 'proyecto', 'advanced', 'high' );
+		//add_meta_box( 'informacion_proyecto', 'Información proyecto', 'metabox_informacion_proyecto', 'proyecto', 'advanced', 'high' );
 		add_meta_box( 'informacion_evento', 'Información evento', 'metabox_informacion_evento', 'evento', 'advanced', 'high' );
 
 	});
@@ -60,7 +60,6 @@ END;
 		wp_nonce_field(__FILE__, '_lon_recurso_meta_nonce');
 
 echo <<<END
-
 	<label>Dirección:</label>
 	<input type="text" class="widefat" id="direccion" name="_direccion_recurso_meta" value="$direccion" />
 	<label>Teléfono:</label>
@@ -80,12 +79,67 @@ echo <<<END
 	<label>Longitud:</label>
 	<input type="text" class="widefat" id="lon_recurso" name="_lon_recurso_meta" value="$lon" data-geo="lng" />
 	<br/>
-
 END;
 
 	}
 
-	function metabox_informacion_proyecto($post){
+	function metabox_informacion_proyecto_new($post){
+		$direccion 		= get_post_meta($post->ID, '_direccion_proyecto_meta', true);
+		$telefono 		= get_post_meta($post->ID, '_telefono_proyecto_meta', true);
+		$email 			= get_post_meta($post->ID, '_email_proyecto_meta', true);
+		$web 			= get_post_meta($post->ID, '_web_proyecto_meta', true);
+		$instructables 	= get_post_meta($post->ID, '_instructables_proyecto_meta', true);
+		$video 			= get_post_meta($post->ID, '_video_proyecto_meta', true);
+		$lat 	 		= get_post_meta($post->ID, '_lat_proyecto_meta', true);
+		$lon 			= get_post_meta($post->ID, '_lon_proyecto_meta', true);
+
+		wp_nonce_field(__FILE__, '_direccion_proyecto_meta_nonce');
+		wp_nonce_field(__FILE__, '_telefono_proyecto_meta_nonce');
+		wp_nonce_field(__FILE__, '_email_proyecto_meta_nonce');
+		wp_nonce_field(__FILE__, '_web_proyecto_meta_nonce');
+		wp_nonce_field(__FILE__, '_instructables_proyecto_meta_nonce');
+		wp_nonce_field(__FILE__, '_video_proyecto_meta_nonce');
+		wp_nonce_field(__FILE__, '_lat_proyecto_meta_nonce');
+		wp_nonce_field(__FILE__, '_lon_proyecto_meta_nonce');
+
+		$user = wp_get_current_user();
+		$user_info = get_userdata( $user->ID );
+		// $usermeta = get_user_meta($user->ID);
+
+		// var_dump($usermeta['direccion']);
+		$direccion = get_user_meta( $user->ID, 'direccion', true );
+		$telefono = get_user_meta( $user->ID, 'celular', true );
+		$email = $user_info->user_email;
+		$web = $user_info->user_url;
+		$instructables = get_user_meta( $user->ID, 'liga_instructable', true );
+		$video = get_user_meta( $user->ID, 'liga_video', true );
+
+
+echo <<<END
+
+	<label>Dirección:</label>
+	<input type="text" class="widefat" id="direccion" name="_direccion_proyecto_meta" value="$direccion" />
+	<label>Teléfono:</label>
+	<input type="text" class="widefat" id="telefono" name="_telefono_proyecto_meta" value="$telefono" />
+	<label>E-mail:</label>
+	<input type="text" class="widefat" id="email" name="_email_proyecto_meta" value="$email" />
+	<label>Sitio Web:</label>
+	<input type="text" class="widefat" id="web" name="_web_proyecto_meta" value="$web" />
+	<label>URL instructables:</label>
+	<input type="text" class="widefat" id="instructables" name="_instructables_proyecto_meta" value="$instructables" />
+	<label>URL video:</label>
+	<input type="text" class="widefat" id="video" name="_video_proyecto_meta" value="$video" />
+	<label>Ingresa la dirección:</label>
+	<input type="text" class="widefat" id="geo-autocomplete" placeholder="Ingresa la ubicación del proyecto">
+	<label>Latitud:</label>
+	<input type="text" class="widefat" id="lat_proyecto" name="_lat_proyecto_meta" value="$lat" data-geo="lat" /><br/>
+	<label>Longitud:</label>
+	<input type="text" class="widefat" id="lon_proyecto" name="_lon_proyecto_meta" value="$lon" data-geo="lng" /><br/>
+
+END;
+	}
+
+	function metabox_informacion_proyecto_edit($post){
 		$direccion 		= get_post_meta($post->ID, '_direccion_proyecto_meta', true);
 		$telefono 		= get_post_meta($post->ID, '_telefono_proyecto_meta', true);
 		$email 			= get_post_meta($post->ID, '_email_proyecto_meta', true);
@@ -126,7 +180,6 @@ echo <<<END
 	<input type="text" class="widefat" id="lon_proyecto" name="_lon_proyecto_meta" value="$lon" data-geo="lng" /><br/>
 
 END;
-
 	}
 
 function metabox_informacion_evento($post){
