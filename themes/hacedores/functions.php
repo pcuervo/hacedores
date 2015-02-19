@@ -51,20 +51,45 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 			$queryHacedores = new WP_User_Query( $args );
 			if ( ! empty( $queryHacedores->results ) ) {
 				foreach ( $queryHacedores->results as $user ) {
+
 					$userNombre 	= $user->display_name;
 					$userID 		= $user->ID;
 					$userNiceName	= $user->user_nicename;
 					$latitud		= get_user_meta($userID, 'latitud', true);
 					$longitud		= get_user_meta($userID, 'longitud', true);
+					//$categories 	=  get_user_meta( $user->ID, 'user_categories', false );
 
-					$infoUsuarios['hacedores'][$userNiceName][] = $userNombre;
-					$infoUsuarios['hacedores'][$userNiceName][] = $latitud;
-					$infoUsuarios['hacedores'][$userNiceName][] = $longitud;
-					$infoUsuarios['hacedores'][$userNiceName][] = $userNiceName;
-					$infoUsuarios['hacedores'][$userNiceName][] = 'author';
-					$infoUsuarios['hacedores'][$userNiceName][] = $userNiceName;
+					$user_categories =  get_user_meta( $user->ID, 'user_categories', false );
+					$args = array( 'hide_empty' =>0, 'taxonomy'=> 'category');
+					$categories = get_categories($args);
+
+					if ($categories){
+						foreach ( $categories as $category ){
+
+							if(count($user_categories) <= 0) continue;
+
+							if(in_array($category->term_id,(array)$user_categories[0])) {
+								$sanitized_category = sanitize_title($category->name);
+								$infoUsuarios['hacedores'][$sanitized_category][] = $userNombre;
+								$infoUsuarios['hacedores'][$sanitized_category][] = $latitud;
+								$infoUsuarios['hacedores'][$sanitized_category][] = $longitud;
+								$infoUsuarios['hacedores'][$sanitized_category][] = $sanitized_category;
+								$infoUsuarios['hacedores'][$sanitized_category][] = 'author';
+								$infoUsuarios['hacedores'][$sanitized_category][] = $userNiceName;
+								$infoUsuarios['hacedores'][$sanitized_category][] = $sanitized_category;
+							}
+						}
+					}
+
+					// $infoUsuarios['hacedores'][$userNiceName][] = $userNombre;
+					// $infoUsuarios['hacedores'][$userNiceName][] = $latitud;
+					// $infoUsuarios['hacedores'][$userNiceName][] = $longitud;
+					// $infoUsuarios['hacedores'][$userNiceName][] = $userNiceName;
+					// $infoUsuarios['hacedores'][$userNiceName][] = 'author';
+					// $infoUsuarios['hacedores'][$userNiceName][] = $userNiceName;
 				}
 			}
+
 			return $infoUsuarios;
 		}// infoUsuarios
 
@@ -103,6 +128,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 								$infoMapa[$postType][$customPostCategoryName][] = $customPostCategorySlug;
 								$infoMapa[$postType][$customPostCategoryName][] = $postType.'s';
 								$infoMapa[$postType][$customPostCategoryName][] = basename( get_permalink() );
+								$infoMapa[$postType][$customPostCategoryName][] = $customPostCategorySlug;
 
 							endwhile; endif; wp_reset_query(); ?>
 						<?php }
@@ -560,7 +586,6 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 				</script>
 			<?php } else if ( is_post_type_archive( 'proyecto' ) )  { ?>
 				<script type="text/javascript">
-					console.log(infoMapaProyectos);
 					if(typeof infoMapaProyectos == 'object'){
 						var mapa = creaMapa();
 						var markers = creaMarkers(mapa, infoMapaProyectos);
@@ -593,7 +618,6 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 					autoCenter(mapa, markers);
 					// Agrega los filtros para cada categoría y subcategoría
 					agregaFiltrosMarkers(mapa, markers, infoMapaUsuarios);
-
 					displayMapMenu('hacedores');
 				</script>
 			<?php } 

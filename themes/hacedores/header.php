@@ -154,6 +154,7 @@
 											);
 											$queryHacedores = new WP_User_Query( $args );
 											if ( ! empty( $queryHacedores->results ) ) {
+												$infoCategoriaHacedores = array();
 												foreach ( $queryHacedores->results as $user ) {
 													$userNombre 	= $user->display_name;
 													$userID 		= $user->ID;
@@ -162,9 +163,30 @@
 													$userNiceName	= $user->user_nicename;
 													$userAvatar 	= get_avatar_url(get_avatar( $userID, 150 ));
 													$userURL 		= get_author_posts_url($userID);
-													?>
-													<li class="[ <?php echo $userNiceName; ?> ]"><?php echo $userNombre; ?></li>
-											<?php }
+
+													$user_categories =  get_user_meta( $user->ID, 'user_categories', false );
+													$args = array( 'hide_empty' =>0, 'taxonomy'=> 'category');
+													$categories = get_categories($args);
+													if ($categories){
+														foreach ( $categories as $category ){
+															if(count($user_categories) <= 0) continue;
+
+															if(in_array($category->term_id,(array)$user_categories[0])) {
+																$sanitized_category = sanitize_title($category->name);
+																$infoCategoriaHacedores[$sanitized_category][] = $category->name;
+															}
+														}
+													}
+												}
+
+												foreach ($infoCategoriaHacedores as $key => $value) {
+												?>
+													<li class="[ <?php echo $key ; ?> ]"><?php echo $value[0]; ?></li>
+												<?php
+												}
+												// echo '<pre>';
+												// print_r($infoCategoriaHacedores);
+												// echo '</pre>';
 											} ?>
 											</ul>
 										<?php } ?>
