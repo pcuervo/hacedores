@@ -137,11 +137,11 @@
 				<div class="[ width clearfix ]">
 					<section class="[ mapa ][ medium ][ margin-bottom-big ] [ relative ]">
 						<div class="[ no-xmall medium ]">
-							<?php if( ! is_single() AND ! is_page('registro') ) { ?>
+							<?php if( ! is_single() AND ! is_page('registro') AND ! is_author() ) { ?>
 							<div class="[ menu-container ]">
 								<div class="[ menu-mapa ]">
 									<ul class="[ menu-titulos ]">
-										<?php if ( is_home() || is_page( 'hacedores' ) || is_post_type_archive( 'informacion' ) ) {
+										<?php if ( is_home() || is_page( 'hacedores' ) || ( is_post_type_archive( 'informacion' ) ) ) {
 											if ( ! is_page( 'hacedores' ) ) { ?>
 												<li class="[ todos ] [ trigger ]">Ver todo</li>
 											<?php } ?>
@@ -274,7 +274,8 @@
 									</ul>
 								</div>
 							</div>
-							<?php } ?>
 							<div id="mapa"></div>
+							<?php } ?>
+							
 						</div>
 					</section><!-- mapa -->

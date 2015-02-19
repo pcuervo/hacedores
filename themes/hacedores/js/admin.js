@@ -3,6 +3,8 @@ var file_frame;
 
 	hidePeronalOptions();
 
+	$('.media-menu > a').css('display', 'none !important');
+
 	$('input#geo-autocomplete').geocomplete({
 		details: "#post",
 		detailsAttribute: "data-geo"
