@@ -1,6 +1,8 @@
 var file_frame;
 (function( $ ) {
 
+	hidePeronalOptions();
+
 	$('input#geo-autocomplete').geocomplete({
 		details: "#post",
 		detailsAttribute: "data-geo"
@@ -34,9 +36,11 @@ var file_frame;
 		file_frame.open();
 	});
 
-
 	$('.j-datetimepicker').datetimepicker();
 
+	function hidePeronalOptions(){
+		$('form#your-profile > h3:first').hide();
+		$('form#your-profile > table:first').hide();
+	}
+
 }(jQuery));
-
-
