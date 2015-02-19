@@ -1,14 +1,14 @@
-var file_frame;	
+var file_frame;
 (function( $ ) {
 
 	$('input#geo-autocomplete').geocomplete({
 		details: "#post",
- 	 	detailsAttribute: "data-geo"
+		detailsAttribute: "data-geo"
 	});
 
 	$('input#geo-autocomplete-user').geocomplete({
 		details: "#your-profile",
- 	 	detailsAttribute: "data-geo"
+		detailsAttribute: "data-geo"
 	});
 
 	$('.additional-user-image').on('click', function( event ){
@@ -33,6 +33,10 @@ var file_frame;
 		// Finally, open the modal
 		file_frame.open();
 	});
+
+
+	$('.j-datetimepicker').datetimepicker();
+
 }(jQuery));
 
 

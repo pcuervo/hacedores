@@ -136,6 +136,9 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 	add_action( 'admin_enqueue_scripts', function(){
 
 		// scripts
+
+		wp_enqueue_script( 'jquery-ui', JSPATH.'jquery-ui.js', array('jquery'), '1.0', true);
+		wp_enqueue_script( 'jquery-ui-timepicker', JSPATH.'jquery-ui-timepicker-addon.js', array('jquery-ui-datepicker'), '1.0');
 		wp_enqueue_script( 'admin-js', JSPATH.'admin.js', array('jquery'), '1.0', true );
 		wp_enqueue_script( 'gmaps', JSPATH.'gmaps.min.js', array('jquery'), '1.0' );
 		wp_enqueue_script( 'geo-autocomplete', JSPATH.'geocomplete.min.js', array('gmaps'), '1.0' );
@@ -145,6 +148,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 
 		// styles
 		wp_enqueue_style( 'admin-css', CSSPATH.'admin.css' );
+		wp_enqueue_style('jquery-ui-datepicker-css', CSSPATH.'jquery-ui.css' );
 
 	});
 
@@ -257,12 +261,32 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 
 // REMOVE ACCENTS AND THE LETTER Ñ FROM FILE NAMES ///////////////////////////////////
 
-
-
 	add_filter( 'sanitize_file_name', function ($filename) {
 		$filename = str_replace('ñ', 'n', $filename);
 		return remove_accents($filename);
 	});
+
+
+// ADD HTTP TO A URL STRING IF NEEDED ///////////////////////////////////
+
+	function addhttp($url) {
+		if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+			$url = "http://" . $url;
+		}
+		return $url;
+	}
+
+// ADD HTTP TO A URL STRING IF NEEDED ///////////////////////////////////
+
+	function get_attachment_id_from_src ($image_src) {
+
+		global $wpdb;
+		$query = "SELECT ID FROM {$wpdb->posts} WHERE guid='$image_src'";
+		$id = $wpdb->get_var($query);
+		return $id;
+
+	}
+
 
 
 
@@ -647,27 +671,16 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 	<table class="form-table">
 		<tr>
 			<th>
-				<label for="direccion"><?php _e('Ingresa tu dirección', 'your_adress'); ?></label>
-			</th>
-			<td>
-				<input type="text" name="direccion" id="direccion" value="<?php echo esc_attr( get_the_author_meta( 'direccion', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingresa tu dirección.', 'your_adress'); ?></span>
-			</td>
-		</tr>
-	</table>
-	<table class="form-table">
-		<tr>
-			<th>
 				<label>Ingresa la dirección:</label>
 			</th>
 			<td>
 				<!-- <input type="text" name="latitud" id="latitud" value="<?php echo esc_attr( get_the_author_meta( 'latitud', $user->ID ) ); ?>" class="regular-text" /><br />
 				<span class="description">"Para obtener tu latitud: ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud."</span><br /> -->
-				<input type="text" class="widefat" id="geo-autocomplete-user" placeholder="Ingresa la ubicación del recurso"><br />
+				<input type="text" class="widefat" id="geo-autocomplete-user" name="direccion" placeholder="Ingresa la ubicación del recurso" value="<?php echo esc_attr( get_the_author_meta( 'direccion', $user->ID ) ); ?>"><br /><br/>
 				<label>Latitud:</label>
-				<input type="text" class="widefat" id="latitud" name="latitud" value="<?php echo esc_attr( get_the_author_meta( 'latitud', $user->ID ) ); ?>" data-geo="lat" /><br/>
+				<input type="text" class="widefat" id="latitud" name="latitud" value="<?php echo esc_attr( get_the_author_meta( 'latitud', $user->ID ) ); ?>" data-geo="lat" /><br/><br/>
 				<label>Longitud:</label>
-				<input type="text" class="widefat" id="longitud" name="longitud" value="<?php echo esc_attr( get_the_author_meta( 'longitud', $user->ID ) ); ?>" data-geo="lng" />
+				<input type="text" class="widefat" id="longitud" name="longitud" value="<?php echo esc_attr( get_the_author_meta( 'longitud', $user->ID ) ); ?>" data-geo="lng" /><br/><br/>
 			</td>
 		</tr>
 	</table>

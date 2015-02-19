@@ -6,63 +6,71 @@
 	<div class="[ columna xmall-12 medium-3 large-3 ] [ side-proyecto ]">
 		<h2><?php the_title(); ?></h2>
 		<?php
-			$categorias = wp_get_post_terms($post->ID, 'category-proyectos');
+			$categorias 	= wp_get_post_terms($post->ID, 'category-proyectos');
 			$categoriasIDArray = array();
-
 			foreach($categorias as $categoria) {
 				$categoriaName = $categoria->name;
 				$categoriasIDArray[] = $categoria->term_id;
 				?>
 				<h2 class="[ no-margin ]"><small><small><?php echo $categoriaName; ?></small></small></h2>
 			<?php }
+
+			$direccion 		= get_post_meta($post->ID, '_direccion_proyecto_meta', true);
+
+			$web 			= get_post_meta($post->ID, '_web_proyecto_meta', true);
+			if ( $web ){
+				$web 		= addhttp($web);
+			}
+
+			$video 			= get_post_meta($post->ID, '_video_proyecto_meta', true);
+			$videoHost 		= NULL;
+			if (strpos($video,'youtube') !== false) {
+				$videoHost = 'youtube';
+			}
+			if (strpos($video,'vimeo') !== false) {
+				$videoHost = 'vimeo';
+			}
+			if( $videoHost ){
+				$video_src = get_video_src($video, $videoHost);
+			}
+
+			$instructables 	= get_post_meta($post->ID, '_instructables_proyecto_meta', true);
+			if ( $instructables ){
+				$instructables 		= addhttp($instructables);
+			}
+
+
+
 		?>
 		<br />
-		<p>Dirección: <?php echo get_post_meta($post->ID, '_direccion_proyecto_meta', true); ?></p>
-		<p><a target="_blank" href="<?php echo get_post_meta($post->ID, '_web2_meta', true); ?>"><?php echo get_post_meta($post->ID, '_web2_meta', true); ?></a></p>
+		<?php if ( $direccion ){ ?>
+			<p>Dirección: <?php echo $direccion; ?></p>
+		<?php } ?>
+
+		<?php if ( $web ){ ?>
+			<p><a target="_blank" href="<?php echo $web; ?>"><?php echo $web; ?></a></p>
+		<?php } ?>
+
+		<?php if ( $instructables ){ ?>
+			<p><a target="_blank" href="<?php echo $instructables; ?>"><?php echo $instructables; ?></a></p>
+		<?php } ?>
+
+
 	</div>
 	<div class="[ columna xmall-12 medium-6 ] [ clearfix ]">
-		<?php
-			the_post_thumbnail('full', array('class' => '[ margin-bottom-medium ]'));
-			the_content();
-		?>
-		<div class="[ clearfix ] [ margin-bottom-medium ]">
-			<ul class="[ clearfix ] [ margin-bottom-medium ] [ galeria ]">
-				<?php
-					$attachments = get_posts( array(
-						'post_type' 		=> 'attachment',
-						'posts_per_page' 	=> -1,
-						'post_parent' 		=> $post->ID,
-						'exclude' 			=> get_post_thumbnail_id()
-					) );
-					if ( $attachments ) {
-						foreach ( $attachments as $attachment ) {
-							$imageURLThumb = wp_get_attachment_image_src( $attachment->ID, 'thumbnail' );
-							$imageURLFull = wp_get_attachment_image_src( $attachment->ID, 'full' );
-							echo '<li class="[ columna xmall-6 medium-4 ]"><a href="' . $imageURLFull[0] . '" data-imagelightbox="f"><img src="' . $imageURLThumb[0] . '" alt="" /></a></li>';
-						}
-					}
-				?>
-			</ul>
+		<?php the_post_thumbnail('full', array('class' => '[ margin-bottom-medium ]')); ?>
+
+		<div class="the-content">
+			<?php the_content(); ?>
 		</div>
-		<?php
-		$videoProyecto = get_post_meta($post->ID, '_video2_meta', true);
-		$videoHost = '';
-		if (strpos($videoProyecto,'youtube') !== false) {
-			$videoHost = 'youtube';
-		}
-		if (strpos($videoProyecto,'vimeo') !== false) {
-			$videoHost = 'vimeo';
-		}
-		if ( $videoHost !== '' ){
-			$video_src = get_video_src($videoProyecto, $videoHost);
-			if( $video_src ){ ?>
+
+		<?php if( $video_src ){ ?>
 				<div class="[ clearfix ] [ margin-bottom-medium ]">
 					<div class="[ margin-bottom-medium ]" id="thing-with-videos">
 						<iframe src="<?php echo $video_src ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 					</div>
 				</div>
-		<?php }
-		} ?>
+		<?php } ?>
 	</div>
 	<?php get_sidebar(); ?>
 	<section class="[ clearfix ] [ columna xmall-12 medium-8 large-9 ]">
