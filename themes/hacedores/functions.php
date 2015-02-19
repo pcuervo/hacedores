@@ -620,7 +620,7 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 					agregaFiltrosMarkers(mapa, markers, infoMapaUsuarios);
 					displayMapMenu('hacedores');
 				</script>
-			<?php } 
+			<?php }
 		} // home
 	}// footerScripts
 add_action( 'wp_footer', 'footerScripts', 21 );
@@ -730,7 +730,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 	</table>
 	<table class="form-table">
 		<tr>
-			<th><label for="user_meta_image"><?php _e( 'Imagen principa', 'textdomain' ); ?></label></th>
+			<th><label for="user_meta_image"><?php _e( 'Imagen principal', 'textdomain' ); ?></label></th>
 			<td>
 				<!-- Outputs the image after save -->
 				<img src="<?php echo esc_url( get_the_author_meta( 'user_profile_img', $user->ID ) ); ?>" style="width:150px;"><br />
@@ -805,7 +805,7 @@ function fb_save_custom_user_profile_fields( $user_id ) {
 
 	if ( !current_user_can( 'edit_user', $user_id ) )
 		return FALSE;
-	
+
 	if( isset($_POST['user_categories']) )
 		update_user_meta( $user_id, 'user_categories', $_POST['user_categories']);
   if( isset($_POST['celular']) )
@@ -820,7 +820,7 @@ function fb_save_custom_user_profile_fields( $user_id ) {
 		update_user_meta( $user_id, 'liga_instructable', $_POST['liga_instructable']);
 	if( isset($_POST['liga_video']) )
 		update_user_meta( $user_id, 'liga_video', $_POST['liga_video']);
-	
+
 	if( isset($_POST['user_profile_img']) )
 		update_user_meta( $user_id, 'user_profile_img', $_POST['user_profile_img'] );
 
@@ -845,7 +845,7 @@ function addMetaboxesCustomPost(){
 
 	$post_type = $_GET['post_type'];
 	if($post_type == 'proyecto')
-		addMetaboxNewProyecto();	
+		addMetaboxNewProyecto();
 }
 add_action('load-post-new.php', 'addMetaboxesCustomPost');
 add_action('load-post.php', 'addMetaboxEditProyecto');
@@ -975,7 +975,7 @@ function get_attachment_id_from_url( $attachment_url = '' ) {
  * @param int $length in characters to trim to
  * @param bool $ellipses if ellipses (...) are to be added
  * @param bool $strip_html if html tags are to be stripped
- * @return string 
+ * @return string
  */
 function trim_text($input, $length, $ellipses = true, $strip_html = true) {
     //strip tags, if desired

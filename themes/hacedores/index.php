@@ -4,7 +4,9 @@
 		//HACEDORES
 		$args = array(
 			'role' 		=> 'Editor',
-			'number' 	=> 1
+			'number' 	=> 1,
+			'orderby' 	=> 'registered',
+			'order'		=> 'DESC'
 		);
 		$queryHacedores = new WP_User_Query( $args );
 		if ( ! empty( $queryHacedores->results ) ) {
@@ -25,7 +27,9 @@
 				$userURL 	= get_author_posts_url($userID);
 				?>
 				<div class="[ post ] [ margin-bottom-medium ] [ columna xmall-12 small-6 medium-4 ]">
-					<a href="<?php echo $userURL; ?>"><img class="[ margin-bottom-small ]" src="<?php echo $userAvatar; ?>" alt="<?php echo $userNombre; ?>"></a>
+					<a class="[ block ]" href="<?php echo $userURL; ?>">
+						<img class="[ block ][ margin-bottom-small ]" src="<?php echo $userAvatar; ?>" alt="<?php echo $userNombre; ?>">
+					</a>
 					<div class="[ post-texto ]">
 						<a href="<?php echo $userURL; ?>"><h2><?php echo $userNombre; ?></h2></a>
 						<p><?php echo trim_text($userBio, 200); ?></p>
@@ -45,11 +49,11 @@
 		$queryProyecto = new WP_Query( $args );
 		if ( $queryProyecto->have_posts() ) : while ( $queryProyecto->have_posts() ) : $queryProyecto->the_post(); ?>
 			<div class="[ post ] [ margin-bottom-medium ] [ columna xmall-12 small-6 medium-4 ]">
-				<a class="[ block ][ margin-bottom-small ]" href="<?php the_permalink(); ?>">
+				<a class="[ block ]" href="<?php the_permalink(); ?>">
 					<?php if ( has_post_thumbnail() ) { ?>
-						<?php the_post_thumbnail('medium', array('class' => '[ block ]')); ?>
+						<?php the_post_thumbnail('medium', array('class' => '[ block ][ margin-bottom-small ]')); ?>
 					<?php } else { $userAvatar = THEMEPATH.'images/default-proyectos.png';?>
-						<img class="[ margin-bottom-small ][ block ]" src="<?php echo $userAvatar; ?>" alt="<?php the_title(); ?>">
+						<img class="[ block ][ margin-bottom-small ]" src="<?php echo $userAvatar; ?>" alt="<?php the_title(); ?>">
 					<?php } ?>
 				</a>
 				<div class="[ post-texto ]">
@@ -82,11 +86,11 @@
 		$queryProyecto = new WP_Query( $args );
 		if ( $queryProyecto->have_posts() ) : while ( $queryProyecto->have_posts() ) : $queryProyecto->the_post(); ?>
 			<div class="[ post ] [ margin-bottom-medium ] [ columna xmall-12 small-6 medium-4 ]">
-				<a href="<?php the_permalink(); ?>">
+				<a class="[ block ]" href="<?php the_permalink(); ?>">
 					<?php if ( has_post_thumbnail() ) { ?>
-						<?php the_post_thumbnail('medium', array('class' => '[ margin-bottom-small ]')); ?>
+						<?php the_post_thumbnail('medium', array('class' => '[ block ][ margin-bottom-small ]')); ?>
 					<?php } else { $userAvatar = THEMEPATH.'images/default-recursos.png';?>
-						<img class="[ margin-bottom-small ]" src="<?php echo $userAvatar; ?>" alt="<?php the_title(); ?>">
+						<img class="[ block ][ margin-bottom-small ]" src="<?php echo $userAvatar; ?>" alt="<?php the_title(); ?>">
 					<?php } ?>
 				</a>
 				<div class="[ post-texto ]">

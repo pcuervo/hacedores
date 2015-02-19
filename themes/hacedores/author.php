@@ -6,7 +6,16 @@
 	$userName 			= $user->display_name;
 	$userEmail 			= $user->user_email;
 	$userURL 			= $user->user_url;
+
 	$userAvatar 		= get_user_meta($userID, 'user_profile_img', true);
+	if ( $userAvatar == '' ){
+		$userAvatar = THEMEPATH.'images/default-hacedores.png';
+	} else {
+		$userAvatarID 		= get_attachment_id_from_url($userAvatar);
+		$userAvatarMedium 	= wp_get_attachment_image_src($userAvatarID, 'medium');
+		$userAvatar 		= $userAvatarMedium[0];
+	}
+
 	$userFB 			= get_user_meta($userID, 'facebook', true);
 	$userTW 			= get_user_meta($userID, 'twitter', true);
 	$userInfo 			= get_user_meta($userID, 'description', true);
@@ -23,10 +32,12 @@
 	<div class="[ columna xmall-12 medium-3 large-3 ] [ side-proyecto ]">
 		<h2><?php echo $userName; ?></h2>
 		<?php
-			foreach($userCategories as $userCategoryID) {
-				$userCategory = get_the_category_by_ID($userCategoryID); ?>
-				<h2 class="[ no-margin ]"><small><small><?php echo $userCategory; ?></small></small></h2>
-			<?php }
+			if ( $userCategories ){
+				foreach($userCategories as $userCategoryID) {
+					$userCategory = get_the_category_by_ID($userCategoryID); ?>
+					<h2 class="[ no-margin ]"><small><small><?php echo $userCategory; ?></small></small></h2>
+				<?php }
+			}
 		?>
 		<p><a target="_blank" href="<?php echo $userURL; ?>"><?php echo $userURL; ?></a></p>
 	</div>
@@ -66,6 +77,7 @@
 			</ul>
 		</div>
 		<?php
+		$videoHost = NULL;
 		if (strpos($userVideo,'youtube') !== false) {
 			$videoHost = 'youtube';
 		}

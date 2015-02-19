@@ -10,7 +10,6 @@
 			$categoriasIDArray = array();
 
 			foreach($categorias as $categoria) {
-
 				$categoriaName = $categoria->name;
 				$categoriasIDArray[] = $categoria->term_id;
 				?>
@@ -71,10 +70,19 @@
 		$args = array(
 			'post_type' 		=> 'proyecto',
 			'posts_per_page' 	=> 3,
-			'category__in' 		=> $categoriasIDArray,
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'category-proyectos',
+					'field'    => 'term_id',
+					'terms'    => $categoriasIDArray
+				),
+			),
 			'post__not_in' 		=> array($postID)
 		);
 		$queryProyecto = new WP_Query( $args );
+		// echo '<pre>';
+		// 	print_r($queryProyecto);
+		// echo '</pre>';
 		if ( $queryProyecto->have_posts() ) : while ( $queryProyecto->have_posts() ) : $queryProyecto->the_post(); ?>
 			<div class="[ post ] [ margin-bottom-medium ] [ columna xmall-12 small-4 ]">
 				<a class="[ block ][ margin-bottom-small ]" href="<?php the_permalink(); ?>">

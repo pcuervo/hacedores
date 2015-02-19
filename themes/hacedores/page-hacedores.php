@@ -2,7 +2,9 @@
 	<section class="[ clearfix ]">
 		<?php
 		$args = array(
-			'role' => 'Editor'
+			'role' 		=> 'Editor',
+			'orderby' 	=> 'registered',
+			'order'		=> 'DESC'
 		);
 		$queryHacedores = new WP_User_Query( $args );
 		if ( ! empty( $queryHacedores->results ) ) {

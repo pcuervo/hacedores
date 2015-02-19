@@ -127,3 +127,15 @@ a{ color: #bd545c; }
 #wpadminbar #wp-admin-bar-wp-logo.hover > .ab-item .ab-icon {
 	background-position: 0 0;
 }
+
+/*------------------------------------*\
+    #Seccion de listado
+\*------------------------------------*/
+
+.subsubsub {
+    display: none;
+}
+
+.wp-editor-tools {
+    display: none;
+}
