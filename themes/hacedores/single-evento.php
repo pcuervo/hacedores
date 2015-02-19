@@ -11,30 +11,20 @@
 				<h2 class="[ no-margin ]"><small><small><?php echo $categoriaName; ?></small></small></h2>
 			<?php }
 
-			$direccion 		= get_post_meta($post->ID, '_direccion_recurso_meta', true);
+			$direccion 		= get_post_meta($post->ID, '_direccion_evento_meta', true);
 
-			$web 			= get_post_meta($post->ID, '_web_recurso_meta', true);
+			$diaHora 		= get_post_meta($post->ID, '_dia_hora_evento_meta', true);
+
+			$web 			= get_post_meta($post->ID, '_web_evento_meta', true);
 			if ( $web ){
-				$web 		= addhttp($web);
+				$web = addhttp($web);
 			}
 
-			$email 			= get_post_meta($post->ID, '_email_recurso_meta', true);
+			$email 			= get_post_meta($post->ID, '_email_evento_meta', true);
 
-			$video 			= get_post_meta($post->ID, '_video_recurso_meta', true);
-			$videoHost 		= NULL;
-			if (strpos($video,'youtube') !== false) {
-				$videoHost = 'youtube';
-			}
-			if (strpos($video,'vimeo') !== false) {
-				$videoHost = 'vimeo';
-			}
-			if( $videoHost ){
-				$video_src = get_video_src($video, $videoHost);
-			}
-
-			$instructables 	= get_post_meta($post->ID, '_instructables_recurso_meta', true);
-			if ( $instructables ){
-				$instructables 		= addhttp($instructables);
+			$facebook 		= get_post_meta($post->ID, '_facebook_evento_meta', true);
+			if ( $facebook ){
+				$facebook = addhttp($facebook);
 			}
 
 
@@ -42,6 +32,10 @@
 		<br />
 		<?php if ( $direccion ){ ?>
 			<p>Dirección: <?php echo $direccion; ?></p>
+		<?php } ?>
+
+		<?php if ( $diaHora ){ ?>
+			<p>Fecha: <?php echo $diaHora; ?></p>
 		<?php } ?>
 
 		<?php if ( $web ){ ?>
@@ -52,8 +46,8 @@
 			<p><a target="_blank" href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></p>
 		<?php } ?>
 
-		<?php if ( $instructables ){ ?>
-			<p><a target="_blank" href="<?php echo $instructables; ?>"><?php echo $instructables; ?></a></p>
+		<?php if ( $facebook ){ ?>
+			<p><a target="_blank" href="<?php echo $facebook; ?>">Evento en Facebook</a></p>
 		<?php } ?>
 
 	</div>
@@ -81,13 +75,6 @@
 				?>
 			</ul>
 		</div>
-		<?php if( $video_src ){ ?>
-			<div class="[ clearfix ] [ margin-bottom-medium ]">
-				<div class="[ margin-bottom-medium ]" id="thing-with-videos">
-					<iframe src="<?php echo $video_src ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-				</div>
-			</div>
-		<?php } ?>
 	</div>
 	<?php get_sidebar(); ?>
 <?php get_footer(); ?>
