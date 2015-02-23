@@ -5,6 +5,7 @@
 ?>
 	<div class="[ columna xmall-12 medium-3 large-3 ] [ side-proyecto ]">
 		<h2><?php the_title(); ?></h2>
+		<p>Hacedor: <?php the_author() ?></p>
 		<?php
 			$categorias 	= wp_get_post_terms($post->ID, 'category-proyectos');
 			$categoriasIDArray = array();
@@ -24,6 +25,7 @@
 
 			$video 			= get_post_meta($post->ID, '_video_proyecto_meta', true);
 			$videoHost 		= NULL;
+			$video_src 		= '';
 			if (strpos($video,'youtube') !== false) {
 				$videoHost = 'youtube';
 			}
@@ -64,7 +66,7 @@
 			<?php the_content(); ?>
 		</div>
 
-		<?php if( $video_src ){ ?>
+		<?php if( $video_src != ''){ ?>
 				<div class="[ clearfix ] [ margin-bottom-medium ]">
 					<div class="[ margin-bottom-medium ]" id="thing-with-videos">
 						<iframe src="<?php echo $video_src ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>

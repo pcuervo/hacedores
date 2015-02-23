@@ -35,8 +35,9 @@
 		$userInstructables 		= addhttp($userInstructables);
 	}
 
-	$userVideo 			= get_user_meta($userID, 'liga_video', true);
-	$videoHost 		= NULL;
+	$userVideo = get_user_meta($userID, 'liga_video', true);
+	$videoHost = NULL;
+	$video_src = '';
 	if (strpos($userVideo,'youtube') !== false) {
 		$videoHost = 'youtube';
 	}
@@ -126,7 +127,7 @@
 				<?php } ?>
 			</ul>
 		</div>
-		<?php if( $video_src ){ ?>
+		<?php if( $video_src != '' ){ ?>
 				<div class="[ clearfix ] [ margin-bottom-medium ]">
 					<div class="[ margin-bottom-medium ]" id="thing-with-videos">
 						<iframe src="<?php echo $video_src ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>

@@ -658,7 +658,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 	<table class="form-table">
 		<tr>
 			<th>
-				<label for="user_categories"><?php _e('Categoria', 'your_category'); ?>
+				<label for="user_categories"><?php _e('Categorias (debes agregar al menos una para aparecer en el mapa)', 'your_category'); ?>
 			</label></th>
 			<td>
 				<?php

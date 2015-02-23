@@ -24,6 +24,7 @@
 								<a href="<?php the_permalink(); ?>" class="[ block ]">
 									<h2 class="[ no-margin ]"><?php the_title(); ?></h2>
 								</a>
+								<p>Hacedor: <?php the_author() ?></p>
 								<?php
 								$categorias = wp_get_post_terms($post->ID, 'category-proyectos');
 								foreach($categorias as $categoria) {
@@ -36,6 +37,7 @@
 										echo trim_text($content, 200);
 								echo '</p>';
 								?>
+
 								<div class="[ screen ]"></div>
 							</div>
 							<a href="<?php the_permalink(); ?>" class="[ block ][ boton ][ text-center ][ leer-mas proyectos ]">Leer más</a>
