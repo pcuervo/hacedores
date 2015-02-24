@@ -59,7 +59,7 @@ END;
 		wp_nonce_field(__FILE__, '_lat_recurso_meta_nonce');
 		wp_nonce_field(__FILE__, '_lon_recurso_meta_nonce');
 
-echo <<<END
+echo <END
 
 	<label>Dirección:</label>
 	<input type="text" class="widefat" id="direccion" name="_direccion_recurso_meta" value="$direccion" />
