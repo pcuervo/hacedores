@@ -7,12 +7,55 @@
 		<?php
 			$categorias = wp_get_post_terms($post->ID, 'category-recursos');
 			foreach($categorias as $categoria) {
-				$categoriaName = $categoria->name;
-				echo '<p>'.$categoriaName.'</p>';
+				$categoriaName = $categoria->name; ?>
+				<h2 class="[ no-margin ]"><small><small><?php echo $categoriaName; ?></small></small></h2>
+			<?php }
+
+			$direccion 		= get_post_meta($post->ID, '_direccion_recurso_meta', true);
+
+			$web 			= get_post_meta($post->ID, '_web_recurso_meta', true);
+			if ( $web ){
+				$web 		= addhttp($web);
 			}
+
+			$email 			= get_post_meta($post->ID, '_email_recurso_meta', true);
+
+			$video 			= get_post_meta($post->ID, '_video_recurso_meta', true);
+			$videoHost 		= NULL;
+			if (strpos($video,'youtube') !== false) {
+				$videoHost = 'youtube';
+			}
+			if (strpos($video,'vimeo') !== false) {
+				$videoHost = 'vimeo';
+			}
+			if( $videoHost ){
+				$video_src = get_video_src($video, $videoHost);
+			}
+
+			$instructables 	= get_post_meta($post->ID, '_instructables_recurso_meta', true);
+			if ( $instructables ){
+				$instructables 		= addhttp($instructables);
+			}
+
+
 		?>
-		<p>Dirección: <?php echo get_post_meta($post->ID, '_direccion_recurso_meta', true); ?></p>
-		<p><a target="_blank" href="<?php echo get_post_meta($post->ID, '_web2_meta', true); ?>"><?php echo get_post_meta($post->ID, '_web2_meta', true); ?></a></p>
+		<br />
+		<?php if ( $direccion ){ ?>
+			<p>Dirección: <?php echo $direccion; ?></p>
+		<?php } ?>
+
+		<?php if ( $web ){ ?>
+			<p><a target="_blank" href="<?php echo $web; ?>"><?php echo $web; ?></a></p>
+		<?php } ?>
+
+		<?php if ( $email ){ ?>
+			<p><a target="_blank" href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></p>
+		<?php } ?>
+
+		<?php if ( $instructables ){ ?>
+			<p><a target="_blank" href="<?php echo $instructables; ?>"><?php echo $instructables; ?></a></p>
+		<?php } ?>
+
 	</div>
 	<div class="[ columna xmall-12 medium-6 ] [ clearfix ]">
 		<?php
@@ -38,25 +81,13 @@
 				?>
 			</ul>
 		</div>
-		<?php
-			$videoHost = false;
-			$videoProyecto = get_post_meta($post->ID, '_video_meta', true);
-			if (strpos($videoProyecto,'youtube') !== false) {
-				$videoHost = 'youtube';
-			} else if (strpos($videoProyecto,'vimeo') !== false) {
-				$videoHost = 'vimeo';
-			}
-			if ( $videoHost ){
-				$video_src = get_video_src($videoProyecto, $videoHost);
-				if( $video_src ){ ?>
-					<div class="[ clearfix ] [ margin-bottom-medium ]">
-						<div class="[ margin-bottom-medium ]" id="thing-with-videos">
-							<iframe src="<?php echo $video_src ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-						</div>
-					</div>
-				<?php }
-			}
-		?>
+		<?php if( $video_src ){ ?>
+			<div class="[ clearfix ] [ margin-bottom-medium ]">
+				<div class="[ margin-bottom-medium ]" id="thing-with-videos">
+					<iframe src="<?php echo $video_src ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				</div>
+			</div>
+		<?php } ?>
 	</div>
 	<?php get_sidebar(); ?>
 <?php get_footer(); ?>

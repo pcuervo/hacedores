@@ -34,15 +34,23 @@
 		</div>
 		<footer class="[ clearfix ]">
 			<div class="width clearfix">
-				<div class="columna xmall-8 medium-6 clearfix right">
-					<div class="columna xmall-6 medium-4 large-3 right">
-						<a href="#"><p>Aviso de Privacidad</p></a>
-						<a href=""><img src="<?php echo THEMEPATH; ?>images/logo-instructables.png" alt=""></a>
-					</div>
-					<div class="columna xmall-6 medium-4 large-3 right">
-						<a href="#" target="_blank"><p>Términos y Condiciones</p></a>
-						<a href="http://labplc.mx/" target="_blank"><img src="<?php echo THEMEPATH; ?>images/logo-laboratorio-ciudad.png" alt=""></a>
-					</div>
+				<div class="columna xmall-12 medium-3">
+					<a href="http://labplc.mx/" target="_blank">
+						<img src="<?php echo THEMEPATH; ?>images/logo-laboratorio-ciudad.png" alt="">
+					</a>
+				</div>
+				<div class="columna xmall-12 medium-6">
+					<p class="[ text-center ]">El laboratorio para la Ciudad es la nueva área experimental del Gobierno del Distrito Federal</p>
+				</div>
+				<div class="columna xmall-12 medium-3">
+					<a href="http://labplc.mx/" target="_blank">
+						<img src="<?php echo THEMEPATH; ?>images/cdmx.png" alt="">
+					</a>
+				</div>
+				<div class="[ clear ][ margin-bottom ]">&nbsp;</div>
+				<div class="[ text-center ]">
+					<p><a href="#">Aviso de Privacidad</a></p>
+					<p><a href="#" target="_blank">Términos y Condiciones</a></p>
 				</div>
 			</div>
 		</footer>

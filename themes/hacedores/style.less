@@ -284,6 +284,7 @@ p{ margin-bottom: 1em; .font(1em, 1.4em); color: @secondary; }
 	background: transparent;
 	color: @primary;
 	cursor: pointer;
+	.transition;
 	&:hover{
 		color: inherit;
 		text-decoration: underline;
@@ -311,14 +312,32 @@ html { min-height: 100% !important; }
 body{ height: 100%; background: #fff; .font; }
 
 //Headers
-h1,
-h2,
-{ margin: 0; }
-h2{ margin-bottom: @unidad; text-transform: uppercase; }
-h1{ text-transform: uppercase; color: #939597; .font(1.7em, 1, 'trade 20'); }
+h1, h2{
+	margin: 0;
+}
+h2{
+	width: 100%;
+	margin-bottom: @unidad;
+	text-transform: uppercase;
+}
+
+h1{ text-transform: uppercase; color: #939597; .font(1.7em, 38px, 'trade 20'); }
 h1 a{ color: inherit; text-decoration: none; }
-h2{ .font(1.6em, 1, 'trade 20'); color: @primary; }
+
+h2{ .font(1.6em, 30px, 'trade 20'); color: @primary; }
 h3{ .font(1.4em, 1, 'trade 18'); color: @secondary; }
+
+.subtitle{
+	color: @informacion;
+	.font(11px, 12px, 'trade 18'); text-transform: uppercase;
+	position: relative;
+	top: -10px;
+}
+
+.subtitle-category{
+	.font(1em, 20px, 'trade 20'); color: @primary;
+	text-transform: uppercase;
+}
 
 //Hacedores Icons
 [class^="icon-"], [class*=" icon-"] {
@@ -423,12 +442,12 @@ a{
 .menu{  padding: 10px; .transition;
 		a{ padding-top: 10px; }
 		h3{ margin: 0; text-align: center; }
-		&:hover, &:active{ opacity: 1; .transition;
-				 a,h3,i{ color: @claro; opacity: 1; }
-				 &.informacion{ background-color: @informacion; }
-				 &.perfiles{ background-color: @perfiles; }
-				 &.programacion{ background-color: @programacion; }
-				 &.recursos{ background-color: @recursos; }
+		&:hover, &.active{ opacity: 1; .transition;
+			a,h3,i{ color: @claro; opacity: 1; }
+			&.informacion{ background-color: @informacion; }
+			&.perfiles{ background-color: @perfiles; }
+			&.programacion{ background-color: @programacion; }
+			&.recursos{ background-color: @recursos; }
 		}
 }
 
@@ -458,15 +477,33 @@ a{
 }
 
 .post{ position: relative;
-	.post-texto{height: 80px; overflow: hidden; position: relative; padding-bottom: 20px; }
+	.post-texto{
+		height: 120px; overflow: hidden; position: relative; padding-bottom: 20px;
+	}
+	h2{
+		width: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 }
 
 .screen{ width: 100%; position: absolute; bottom: 0; height: 40px; background: url("images/screen.png") repeat-x;  }
 
 .leer-mas{ width: 100%; margin: 0; color: #fff; font-family: 'trade 18'; text-transform: uppercase;
-	&.hacedores{ background-color: @perfiles; }
-	&.proyectos{ background-color: @programacion; }
-	&.recursos{ background-color: @recursos; color: #fff; }
+	&.hacedores{ background-color: @perfiles;
+		&:hover{ background: darken( @perfiles, 10%); }
+	}
+	&.proyectos{ background-color: @programacion;
+		&:hover{ background: darken( @programacion, 10%); }
+	}
+	&.recursos{ background-color: @recursos; color: #fff;
+		&:hover{ background: darken( @recursos, 10%); }
+	}
+	&:hover{
+		color: @claro;
+		text-decoration: none;
+	}
 }
 
 .espacios{
@@ -524,6 +561,7 @@ a{
 /**/
 
 .side-proyecto{
+	overflow: hidden;
 	a{ color: @primary; }
 	a:hover{ text-decoration: underline; }
 	a:visited{ color: @primary; }
@@ -678,7 +716,33 @@ nav{
 
 
 /*** FOOTER ***/
-footer{ background-color: @claro; padding: 15px; }
+footer{
+	background-color: @claro; padding: 15px;
+	img{
+		display: block;
+		width: 50% !important;
+		margin: 0 auto !important;
+	}
+	a{
+		color: @informacion; text-decoration: underline;
+	}
+}
+
+
+
+
+
+/*** CONTENT ***/
+
+.the-content{}
+.the-content img{
+	width: auto;
+}
+
+
+
+
+
 
 /*** MEDIA QUERIES ***/
 
@@ -755,7 +819,7 @@ footer{ background-color: @claro; padding: 15px; }
 	.no-medium{ display: none; }
 	//========================//
 
-	.icon-gif{ width:20% !important; height: auto; vertical-align: middle; display: inline-block; }
+	.icon-gif{ width:12% !important; height: auto; vertical-align: middle; display: inline-block; }
 
 	// .detalles{
 	// 	h3,p,i{ text-align: left; }

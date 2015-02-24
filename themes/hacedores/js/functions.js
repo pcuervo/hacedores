@@ -293,21 +293,31 @@ function creaMarkers(mapa, infoMapa){
 	var markers = [];
 	// Agrega todos los marcadores al mapa
 	$.each(infoMapa, function(categoria, subcategorias){
-		categorias_mapa[categoria] = {};		
+		categorias_mapa[categoria] = {};	
+
 		$.each(subcategorias, function(i, subcategoria){
+
 			if(typeof subcategoria != 'object') return true;
 
 			categorias_mapa[categoria][subcategoria] = []; 
-			var lat = (subcategoria[1] == '') ? '19.423325' : subcategoria[1];
-			var lon = (subcategoria[2] == '') ? '-99.134220' : subcategoria[2];
-			categorias_mapa[categoria][subcategoria].push({
-				titulo: subcategoria[0],
-				lat: lat,
-				lon: lon,
-				slug: subcategoria[3],
-				url: site_url + subcategoria[4] + '/' + subcategoria[5]
+			$.each(subcategoria, function(i, val){
+				
+				current = i+1;
+				if(current%7==0) {
+					
+					var lat = (subcategoria[current-6] == '') ? '19.423325' : subcategoria[current-6];
+					var lon = (subcategoria[current-5] == '') ? '-99.134220' : subcategoria[current-5];
+					categorias_mapa[categoria][subcategoria].push({
+						titulo: subcategoria[current-7],
+						lat: lat,
+						lon: lon,
+						slug: subcategoria[current-4],
+						url: site_url + subcategoria[current-3] + '/' + subcategoria[current-2]
+					});
+				}
 			});
 		});		
+
 		var current_markers = dameMarkers(categoria,categorias_mapa[categoria], mapa);
 		markers = markers.concat(current_markers);
 	});
@@ -315,8 +325,8 @@ function creaMarkers(mapa, infoMapa){
 }// creaMarkers
 
 function agregaFiltrosMarkers(mapa, markers, infoMapa){
-	$.each(infoMapa, function(categoria, subcategorias){
 
+	$.each(infoMapa, function(categoria, subcategorias){
 		$('li.'+categoria).on('click', function(){
 			filtraMarkerCategoria(categoria, markers, mapa);
 		});	
@@ -324,8 +334,8 @@ function agregaFiltrosMarkers(mapa, markers, infoMapa){
 		$.each(subcategorias, function(i, subcategoria){
 			if(typeof subcategoria != 'object') return true;
 			
-			$('ul.sub-'+categoria+' li.'+subcategoria[3]).on('click', function(){
-				filtraMarkerSubCategoria(categoria, subcategoria[3], markers, mapa);
+			$('ul.sub-'+categoria+' li.'+subcategoria[6]).on('click', function(){
+				filtraMarkerSubCategoria(categoria, subcategoria[6], markers, mapa);
 			});	
 		});
 
@@ -350,6 +360,7 @@ function dameMarkers(categoria, subcategorias, mapa){
 
 	$.each(subcategorias, function(i, subcategoria){
 		$.each(subcategoria, function(j, coordenadas){
+
 			var infoPost = [];
 			var contenidoInfoWindow ='<h3>'+coordenadas.titulo+'</h3><a href="'+coordenadas.url+'">Más info</a>';
 			infoPost.push(j);
@@ -400,9 +411,11 @@ function filtraMarkerCategoria(categoria, markers, mapa){
 }
 
 function filtraMarkerSubCategoria(categoria, subcategoria, markers, mapa){
+
 	var filteredResult = markers.filter(function(obj) {
     	return (obj.subcategory == subcategoria && obj.category == categoria)
    	});
+
 	$.each(markers, function (index, marker) {
 		marker.setVisible(false);
 	});
@@ -466,5 +479,15 @@ function isEmpty(obj) {
 
     return true;
 }
+
+function displayMapMenu(section){
+	$('li.'+section+' + ul').css('display', 'block');
+	switch(section){
+		// case 'hacedores':
+			
+		// 	break;
+	}// switch
+
+} // displayMapMenu
 
 

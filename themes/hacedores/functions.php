@@ -51,20 +51,45 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 			$queryHacedores = new WP_User_Query( $args );
 			if ( ! empty( $queryHacedores->results ) ) {
 				foreach ( $queryHacedores->results as $user ) {
+
 					$userNombre 	= $user->display_name;
 					$userID 		= $user->ID;
 					$userNiceName	= $user->user_nicename;
 					$latitud		= get_user_meta($userID, 'latitud', true);
 					$longitud		= get_user_meta($userID, 'longitud', true);
+					//$categories 	=  get_user_meta( $user->ID, 'user_categories', false );
 
-					$infoUsuarios['hacedores'][$userNiceName][] = $userNombre;
-					$infoUsuarios['hacedores'][$userNiceName][] = $latitud;
-					$infoUsuarios['hacedores'][$userNiceName][] = $longitud;
-					$infoUsuarios['hacedores'][$userNiceName][] = $userNiceName;
-					$infoUsuarios['hacedores'][$userNiceName][] = 'author';
-					$infoUsuarios['hacedores'][$userNiceName][] = $userNiceName;
+					$user_categories =  get_user_meta( $user->ID, 'user_categories', false );
+					$args = array( 'hide_empty' =>0, 'taxonomy'=> 'category');
+					$categories = get_categories($args);
+
+					if ($categories){
+						foreach ( $categories as $category ){
+
+							if(count($user_categories) <= 0) continue;
+
+							if(in_array($category->term_id,(array)$user_categories[0])) {
+								$sanitized_category = sanitize_title($category->name);
+								$infoUsuarios['hacedores'][$sanitized_category][] = $userNombre;
+								$infoUsuarios['hacedores'][$sanitized_category][] = $latitud;
+								$infoUsuarios['hacedores'][$sanitized_category][] = $longitud;
+								$infoUsuarios['hacedores'][$sanitized_category][] = $sanitized_category;
+								$infoUsuarios['hacedores'][$sanitized_category][] = 'author';
+								$infoUsuarios['hacedores'][$sanitized_category][] = $userNiceName;
+								$infoUsuarios['hacedores'][$sanitized_category][] = $sanitized_category;
+							}
+						}
+					}
+
+					// $infoUsuarios['hacedores'][$userNiceName][] = $userNombre;
+					// $infoUsuarios['hacedores'][$userNiceName][] = $latitud;
+					// $infoUsuarios['hacedores'][$userNiceName][] = $longitud;
+					// $infoUsuarios['hacedores'][$userNiceName][] = $userNiceName;
+					// $infoUsuarios['hacedores'][$userNiceName][] = 'author';
+					// $infoUsuarios['hacedores'][$userNiceName][] = $userNiceName;
 				}
 			}
+
 			return $infoUsuarios;
 		}// infoUsuarios
 
@@ -103,6 +128,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 								$infoMapa[$postType][$customPostCategoryName][] = $customPostCategorySlug;
 								$infoMapa[$postType][$customPostCategoryName][] = $postType.'s';
 								$infoMapa[$postType][$customPostCategoryName][] = basename( get_permalink() );
+								$infoMapa[$postType][$customPostCategoryName][] = $customPostCategorySlug;
 
 							endwhile; endif; wp_reset_query(); ?>
 						<?php }
@@ -136,6 +162,9 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 	add_action( 'admin_enqueue_scripts', function(){
 
 		// scripts
+
+		wp_enqueue_script( 'jquery-ui', JSPATH.'jquery-ui.js', array('jquery'), '1.0', true);
+		wp_enqueue_script( 'jquery-ui-timepicker', JSPATH.'jquery-ui-timepicker-addon.js', array('jquery-ui-datepicker'), '1.0');
 		wp_enqueue_script( 'admin-js', JSPATH.'admin.js', array('jquery'), '1.0', true );
 		wp_enqueue_script( 'gmaps', JSPATH.'gmaps.min.js', array('jquery'), '1.0' );
 		wp_enqueue_script( 'geo-autocomplete', JSPATH.'geocomplete.min.js', array('gmaps'), '1.0' );
@@ -145,6 +174,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 
 		// styles
 		wp_enqueue_style( 'admin-css', CSSPATH.'admin.css' );
+		wp_enqueue_style('jquery-ui-datepicker-css', CSSPATH.'jquery-ui.css' );
 
 	});
 
@@ -257,12 +287,32 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 
 // REMOVE ACCENTS AND THE LETTER Ñ FROM FILE NAMES ///////////////////////////////////
 
-
-
 	add_filter( 'sanitize_file_name', function ($filename) {
 		$filename = str_replace('ñ', 'n', $filename);
 		return remove_accents($filename);
 	});
+
+
+// ADD HTTP TO A URL STRING IF NEEDED ///////////////////////////////////
+
+	function addhttp($url) {
+		if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+			$url = "http://" . $url;
+		}
+		return $url;
+	}
+
+// ADD HTTP TO A URL STRING IF NEEDED ///////////////////////////////////
+
+	function get_attachment_id_from_src ($image_src) {
+
+		global $wpdb;
+		$query = "SELECT ID FROM {$wpdb->posts} WHERE guid='$image_src'";
+		$id = $wpdb->get_var($query);
+		return $id;
+
+	}
+
 
 
 
@@ -514,7 +564,6 @@ function oa_social_login_set_custom_css($css_theme_uri)
 }
 
 
-
 add_filter('oa_social_login_default_css', 'oa_social_login_set_custom_css');
 add_filter('oa_social_login_widget_css', 'oa_social_login_set_custom_css');
 add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
@@ -561,7 +610,6 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 				</script>
 			<?php } else if ( is_post_type_archive( 'proyecto' ) )  { ?>
 				<script type="text/javascript">
-					console.log(infoMapaProyectos);
 					if(typeof infoMapaProyectos == 'object'){
 						var mapa = creaMapa();
 						var markers = creaMarkers(mapa, infoMapaProyectos);
@@ -569,6 +617,8 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 						autoCenter(mapa, markers);
 						// Agrega los filtros para cada categoría y subcategoría
 						agregaFiltrosMarkers(mapa, markers, infoMapaProyectos);
+
+						displayMapMenu('proyecto');
 					}
 				</script>
 			<?php } else if ( is_post_type_archive( 'recurso' ) )  { ?>
@@ -580,7 +630,8 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 						autoCenter(mapa, markers);
 						// Agrega los filtros para cada categoría y subcategoría
 						agregaFiltrosMarkers(mapa, markers, infoMapaRecursos);
-						console.log(infoMapaRecursos);
+
+						displayMapMenu('recurso');
 					}
 				</script>
 			<?php } else if ( is_page( 'hacedores' ) ) { ?>
@@ -591,8 +642,9 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 					autoCenter(mapa, markers);
 					// Agrega los filtros para cada categoría y subcategoría
 					agregaFiltrosMarkers(mapa, markers, infoMapaUsuarios);
+					displayMapMenu('hacedores');
 				</script>
-			<?php } 
+			<?php }
 		} // home
 	}// footerScripts
 add_action( 'wp_footer', 'footerScripts', 21 );
@@ -606,7 +658,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 	<table class="form-table">
 		<tr>
 			<th>
-				<label for="user_categories"><?php _e('Categoria', 'your_category'); ?>
+				<label for="user_categories"><?php _e('Categorias (debes agregar al menos una para aparecer en el mapa)', 'your_category'); ?>
 			</label></th>
 			<td>
 				<?php
@@ -643,26 +695,20 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 	<table class="form-table">
 		<tr>
 			<th>
-				<label for="direccion"><?php _e('Ingresa tu dirección', 'your_adress'); ?></label>
+				<label>Ingresa la dirección:</label>
 			</th>
 			<td>
-				<input type="text" name="direccion" id="direccion" value="<?php echo esc_attr( get_the_author_meta( 'direccion', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Ingresa tu dirección.', 'your_adress'); ?></span>
+				<!-- <input type="text" name="latitud" id="latitud" value="<?php echo esc_attr( get_the_author_meta( 'latitud', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description">"Para obtener tu latitud: ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud."</span><br /> -->
+				<input type="text" class="widefat" id="geo-autocomplete-user" name="direccion" placeholder="Ingresa la ubicación del recurso" value="<?php echo esc_attr( get_the_author_meta( 'direccion', $user->ID ) ); ?>"><br /><br/>
+				<label>Latitud:</label>
+				<input type="text" class="widefat" id="latitud" name="latitud" value="<?php echo esc_attr( get_the_author_meta( 'latitud', $user->ID ) ); ?>" data-geo="lat" /><br/><br/>
+				<label>Longitud:</label>
+				<input type="text" class="widefat" id="longitud" name="longitud" value="<?php echo esc_attr( get_the_author_meta( 'longitud', $user->ID ) ); ?>" data-geo="lng" /><br/><br/>
 			</td>
 		</tr>
 	</table>
-	<table class="form-table">
-		<tr>
-			<th>
-				<label for="latitud"><?php _e('Latitud', 'latitud'); ?></label>
-			</th>
-			<td>
-				<input type="text" name="latitud" id="latitud" value="<?php echo esc_attr( get_the_author_meta( 'latitud', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description">"Para obtener tu latitud: ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud."</span><br />
-			</td>
-		</tr>
-	</table>
-	<table class="form-table">
+	<!-- <table class="form-table">
 		<tr>
 			<th>
 				<label for="longitud"><?php _e('Longitud', 'longitud'); ?></label>
@@ -672,7 +718,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 				<span class="description">"Para obtener tu longitud: ingresa a <a href="https://www.google.com.mx/" targer="_blank">Google Maps</a> y haz click derecho en tu ubicación, selecciona la opción "¿Qué hay aquí?" y debajo de la barra de búsqueda aparecerá un número como este "19.405951, -99.164163", el primero es la longitud y el segundo la latitud."</span><br />
 			</td>
 		</tr>
-	</table>
+	</table> -->
 	<table class="form-table">
 		<tr>
 			<th>
@@ -697,7 +743,7 @@ add_action( 'wp_footer', 'footerScripts', 21 );
 	</table>
 	<table class="form-table">
 		<tr>
-			<th><label for="user_meta_image"><?php _e( 'Imagen principa', 'textdomain' ); ?></label></th>
+			<th><label for="user_meta_image"><?php _e( 'Imagen principal', 'textdomain' ); ?></label></th>
 			<td>
 				<!-- Outputs the image after save -->
 				<img src="<?php echo esc_url( get_the_author_meta( 'user_profile_img', $user->ID ) ); ?>" style="width:150px;"><br />
@@ -772,7 +818,7 @@ function fb_save_custom_user_profile_fields( $user_id ) {
 
 	if ( !current_user_can( 'edit_user', $user_id ) )
 		return FALSE;
-	
+
 	if( isset($_POST['user_categories']) )
 		update_user_meta( $user_id, 'user_categories', $_POST['user_categories']);
   if( isset($_POST['celular']) )
@@ -787,7 +833,7 @@ function fb_save_custom_user_profile_fields( $user_id ) {
 		update_user_meta( $user_id, 'liga_instructable', $_POST['liga_instructable']);
 	if( isset($_POST['liga_video']) )
 		update_user_meta( $user_id, 'liga_video', $_POST['liga_video']);
-	
+
 	if( isset($_POST['user_profile_img']) )
 		update_user_meta( $user_id, 'user_profile_img', $_POST['user_profile_img'] );
 
@@ -806,6 +852,41 @@ add_action( 'edit_user_profile', 'fb_add_custom_user_profile_fields' );
 
 add_action( 'personal_options_update', 'fb_save_custom_user_profile_fields' );
 add_action( 'edit_user_profile_update', 'fb_save_custom_user_profile_fields' );
+
+function addMetaboxesCustomPost(){
+	if( ! isset($_GET) ) return 0;
+
+	$post_type = $_GET['post_type'];
+	if($post_type == 'proyecto')
+		addMetaboxNewProyecto();
+}
+add_action('load-post-new.php', 'addMetaboxesCustomPost');
+add_action('load-post.php', 'addMetaboxEditProyecto');
+
+function addMetaboxNewProyecto(){
+	add_action('add_meta_boxes', function(){
+		add_meta_box( 'informacion_proyecto', 'Información proyecto', 'metabox_informacion_proyecto_new', 'proyecto', 'advanced', 'high' );
+	});
+}
+
+function addMetaboxEditProyecto(){
+	add_action('add_meta_boxes', function(){
+		add_meta_box( 'informacion_proyecto', 'Información proyecto', 'metabox_informacion_proyecto_edit', 'proyecto', 'advanced', 'high' );
+	});
+}
+
+/*Forzamos a que sea solamente una columna*/
+function so_screen_layout_columns( $columns ) {
+    $columns['post'] = 1;
+    return $columns;
+}
+add_filter( 'screen_layout_columns', 'so_screen_layout_columns' );
+
+function so_screen_layout_post() {
+    return 1;
+}
+add_filter( 'get_user_option_screen_layout_post', 'so_screen_layout_post' );
+/*Fin de una columna*/
 
 /**
  * Return an ID of an attachment by searching the database with the file URL.
@@ -907,7 +988,7 @@ function get_attachment_id_from_url( $attachment_url = '' ) {
  * @param int $length in characters to trim to
  * @param bool $ellipses if ellipses (...) are to be added
  * @param bool $strip_html if html tags are to be stripped
- * @return string 
+ * @return string
  */
 function trim_text($input, $length, $ellipses = true, $strip_html = true) {
     //strip tags, if desired

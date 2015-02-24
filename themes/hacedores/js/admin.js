@@ -1,9 +1,18 @@
-var file_frame;	
+var file_frame;
 (function( $ ) {
+
+	hidePeronalOptions();
+
+	$('.media-menu > a').css('display', 'none !important');
 
 	$('input#geo-autocomplete').geocomplete({
 		details: "#post",
- 	 	detailsAttribute: "data-geo"
+		detailsAttribute: "data-geo"
+	});
+
+	$('input#geo-autocomplete-user').geocomplete({
+		details: "#your-profile",
+		detailsAttribute: "data-geo"
 	});
 
 	$('.additional-user-image').on('click', function( event ){
@@ -19,7 +28,6 @@ var file_frame;
 			},
 			multiple: false  // Set to true to allow multiple files to be selected
 		});
-
 		// When an image is selected, run a callback.
 		file_frame.on( 'select', function() {
 			attachment = file_frame.state().get('selection').first().toJSON();
@@ -29,6 +37,12 @@ var file_frame;
 		// Finally, open the modal
 		file_frame.open();
 	});
+
+	$('.j-datetimepicker').datetimepicker();
+
+	function hidePeronalOptions(){
+		$('form#your-profile > h3:first').hide();
+		$('form#your-profile > table:first').hide();
+	}
+
 }(jQuery));
-
-

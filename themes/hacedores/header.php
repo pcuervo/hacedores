@@ -16,7 +16,7 @@
 			ga('create', 'UA-56741529-1', 'auto');
 			ga('send', 'pageview');
 		</script>
-		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+		<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&key=AIzaSyAjE9TVybKKQNNOa1g760xJ4y6b5YaZmq4"></script>
 		<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 		<?php wp_head(); ?>
 	</head>
@@ -27,12 +27,18 @@
 		<div class="container">
 			<header>
 				<div class="[ width clearfix ]">
-					<div class="[ columna xmall-12 ][ no-xmall no-small no-medium large ][ text-right ][ margin-bottom-small ]">
+					<div class="[ columna xmall-6 ][ margin-bottom-small ]">
+						<h1><a href="<?php echo site_url(); ?>">Hacedores CDMX</a></h1>
+						<span class="subtitle">Un proyecto del Laboratorio para la Ciudad</span>
+					</div>
+					<div class="[ columna xmall-6 ][ no-xmall no-small no-medium large ][ text-right ][ margin-bottom-small ]">
 						<?php if ( !is_user_logged_in() ) { ?>
-							<a class="[ boton ][ inline-block ][ login-entrar ][ js-abrir-modal ]">Entrar</a>
-							<!-- <a href="registro" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
+							<a class="[ boton ][ inline-block ][ login-entrar ][ js-abrir-modal ]">
+								Entrar
+							</a>
+							<a href="registro" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
 								Registrarse
-							</a> -->
+							</a>
 						<?php } else { ?>
 							<a href="<?php echo  site_url().'/wp-admin/profile.php'; ?>" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
 								Mi cuenta
@@ -42,27 +48,7 @@
 							</a>
 						<?php } ?>
 					</div>
-					<div class="[ columna xmall-6 medium-3 ]">
-						<h1><a href="<?php echo site_url(); ?>">Hacedores CDMX</a></h1>
-						<div class="[ clearfix ] [ nombre-seccion ]">
-							<?php if ( get_post_type() == 'informacion'){ ?>
-								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-gray.gif" alt="">
-								<h3>Información</h3>
-							<?php } elseif ( is_page('hacedores') ) { ?>
-								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-red.gif" alt="">
-								<h3>Hacedores</h3>
-							<?php } elseif ( get_post_type() == 'proyecto'){ ?>
-								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-blue.gif" alt="">
-								<h3>Proyectos</h3>
-							<?php } elseif ( get_post_type() == 'recurso'){ ?>
-								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-green.gif" alt="">
-								<h3>Espacios/Recursos</h3>
-							<?php } ?>
-						</div>
-					</div>
-					<div class="[ columna xmall-4 small-3 medium-2 large-2 ]">
-						<a href="http://labplc.mx/" target="_blank"><img src="<?php echo THEMEPATH; ?>images/logo-laboratorio-ciudad.png" alt=""></a>
-					</div>
+
 					<nav id="menu-movil" class="[ no-large ]">
 						<ul>
 							<?php if ( ! is_user_logged_in() ) { ?>
@@ -92,7 +78,7 @@
 							</li>
 							<li class="[ clearfix ]">
 								<a class="[ no-xmall medium ] [ inline-block middle ] [ menu recursos ]" href="<?php echo site_url('informacion'); ?>">
-									<h3 class="[ recursos ]">Espacios/Recuros</h3>
+									<h3 class="[ recursos ]">Recursos</h3>
 									<i class="[ icon-icon_tornillo ] [ icon recursos ] [ center block ]"></i>
 								</a>
 							</li>
@@ -103,21 +89,44 @@
 							</li>
 						</ul>
 					</nav><!-- MENU MOVIL -->
-					<nav class="[ columna xmall-2 medium-7 large-7 ] [ right ]">
+
+					<div class="[ columna xmall-6 ][ no-large ][ right ]">
 						<a class="[ no-large ] [ informacion ] [ right ]" href="#menu-movil"><i class="fa fa-bars fa-2x"></i></a>
-						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu recursos ] [ right ]" href="<?php echo site_url('recursos'); ?>">
-							<h3 class="[ recursos ]">Espacios/Recursos</h3>
+					</div>
+
+					<div class="clear"></div>
+
+					<div class="[ columna xmall-6 ]">
+						<div class="[ clearfix ] [ nombre-seccion ]">
+							<?php if ( get_post_type() == 'informacion'){ ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-gray.gif" alt="">
+								<h3>Información</h3>
+							<?php } elseif ( is_page('hacedores') OR is_author() ) { ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-red.gif" alt="">
+								<h3>Hacedores</h3>
+							<?php } elseif ( get_post_type() == 'proyecto'){ ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-blue.gif" alt="">
+								<h3>Proyectos</h3>
+							<?php } elseif ( get_post_type() == 'recurso'){ ?>
+								<img class="icon-gif" src="<?php echo THEMEPATH; ?>images/icon-green.gif" alt="">
+								<h3>Recursos</h3>
+							<?php } ?>
+						</div>
+					</div>
+					<nav class="[ columna medium medium-6 ][ medium ][ right ]">
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu recursos ] [ right ] <?php echo ( get_post_type() == 'recurso' ? 'active' : ''); ?>" href="<?php echo site_url('recursos'); ?>">
+							<h3 class="[ recursos ]">Recursos</h3>
 							<i class="[ icon-icon_tornillo ] [ icon recursos ] [ center block ]"></i>
 						</a>
-						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu programacion ] [ right ]" href="<?php echo site_url('proyectos'); ?>">
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu programacion ] [ right ] <?php if( get_post_type() == 'proyecto' AND ! is_author() ){ echo 'active'; } ?>" href="<?php echo site_url('proyectos'); ?>">
 							<h3 class="[ programacion ]">Proyectos</h3>
 							<i class="[ icon-icon_gubia ] [ icon programacion ] [ center block ]"></i>
 						</a>
-						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu perfiles ] [ right ]" href="<?php echo site_url('hacedores'); ?>">
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu perfiles ] [ right ] <?php echo ( is_page('hacedores') ? 'active' : ''); echo ( is_author() ? 'active' : ''); ?>" href="<?php echo site_url('hacedores'); ?>">
 							<h3 class="[ perfiles ]">Hacedores</h3>
 							<i class="[ icon-icon_zanahoria ] [ icon perfiles ] [ center block ]"></i>
 						</a>
-						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu informacion ] [ right ]" href="<?php echo site_url('informacion'); ?>">
+						<a class="[ no-xmall no-medium large ] [ inline-block middle ] [ menu informacion ][ right ] <?php echo ( get_post_type() == 'informacion' ? 'active' : ''); ?>" href="<?php echo site_url('informacion'); ?>">
 							<h3 class="[ informacion ]">Información</h3>
 							<i class="[ icon-icon_clavo2 ] [ icon informacion ] [ center block ]"></i>
 						</a>
@@ -126,13 +135,13 @@
 			</header>
 			<div class="[ main ]">
 				<div class="[ width clearfix ]">
-					<section class="[ mapa ] [ margin-bottom-big ] [ relative ]">
+					<section class="[ mapa ][ medium ][ margin-bottom-big ] [ relative ]">
 						<div class="[ no-xmall medium ]">
-							<?php if( ! is_single() AND ! is_page('registro') ) { ?>
+							<?php if( ! is_single() AND ! is_page('registro') AND ! is_author() ) { ?>
 							<div class="[ menu-container ]">
 								<div class="[ menu-mapa ]">
 									<ul class="[ menu-titulos ]">
-										<?php if ( is_home() || is_page( 'hacedores' ) || is_post_type_archive( 'informacion' ) ) {
+										<?php if ( is_home() || is_page( 'hacedores' ) || ( is_post_type_archive( 'informacion' ) ) ) {
 											if ( ! is_page( 'hacedores' ) ) { ?>
 												<li class="[ todos ] [ trigger ]">Ver todo</li>
 											<?php } ?>
@@ -145,6 +154,7 @@
 											);
 											$queryHacedores = new WP_User_Query( $args );
 											if ( ! empty( $queryHacedores->results ) ) {
+												$infoCategoriaHacedores = array();
 												foreach ( $queryHacedores->results as $user ) {
 													$userNombre 	= $user->display_name;
 													$userID 		= $user->ID;
@@ -153,9 +163,30 @@
 													$userNiceName	= $user->user_nicename;
 													$userAvatar 	= get_avatar_url(get_avatar( $userID, 150 ));
 													$userURL 		= get_author_posts_url($userID);
-													?>
-													<li class="[ <?php echo $userNiceName; ?> ]"><?php echo $userNombre; ?></li>
-											<?php }
+
+													$user_categories =  get_user_meta( $user->ID, 'user_categories', false );
+													$args = array( 'hide_empty' =>0, 'taxonomy'=> 'category');
+													$categories = get_categories($args);
+													if ($categories){
+														foreach ( $categories as $category ){
+															if(count($user_categories) <= 0) continue;
+
+															if(in_array($category->term_id,(array)$user_categories[0])) {
+																$sanitized_category = sanitize_title($category->name);
+																$infoCategoriaHacedores[$sanitized_category][] = $category->name;
+															}
+														}
+													}
+												}
+
+												foreach ($infoCategoriaHacedores as $key => $value) {
+												?>
+													<li class="[ <?php echo $key ; ?> ]"><?php echo $value[0]; ?></li>
+												<?php
+												}
+												// echo '<pre>';
+												// print_r($infoCategoriaHacedores);
+												// echo '</pre>';
 											} ?>
 											</ul>
 										<?php } ?>
@@ -187,7 +218,7 @@
 											</ul>
 										<?php } ?>
 										<?php if ( is_home() || is_post_type_archive( 'recurso' ) || is_post_type_archive( 'informacion' ) ) { ?>
-											<li class="[ recurso ] [ trigger ]" data-rel="sub-recurso">Espacios / Recursos</li>
+											<li class="[ recurso ] [ trigger ]" data-rel="sub-recurso">Recursos</li>
 											<ul class="[ submenu-mapa ] [ sub-recurso ] [ content ]">
 												<?php
 													$customPostTaxonomies = get_object_taxonomies('recurso');
@@ -243,7 +274,8 @@
 									</ul>
 								</div>
 							</div>
-							<?php } ?>
 							<div id="mapa"></div>
+							<?php } ?>
+							
 						</div>
 					</section><!-- mapa -->
