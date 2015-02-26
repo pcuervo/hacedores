@@ -218,6 +218,13 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 	});
 
 
+// Límite de media a 1 MB ///////////////////////////////////
+
+	add_filter( 'upload_size_limit', 'decrease_upload_size' );
+	function decrease_upload_size( $bytes ) {
+		return 1048576; // 1 megabyte
+	}
+
 
 // POST THUMBNAILS SUPPORT ///////////////////////////////////////////////////////////
 

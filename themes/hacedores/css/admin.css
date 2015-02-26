@@ -137,12 +137,17 @@ a{ color: #bd545c; }
 \*------------------------------------*/
 
 .subsubsub {
-    display: none;
+	display: none;
 }
 
 /*.wp-editor-tools {
     display: none;
 }*/
+
+#wp-content-media-buttons:after{
+	content: 'Máximo 1MB';
+	display: inline; vertical-align: bottom;
+}
 
 
 
