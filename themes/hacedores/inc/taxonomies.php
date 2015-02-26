@@ -11,7 +11,7 @@
 		// PROYECTOS
 		if( ! taxonomy_exists('category-proyectos')){
 			$labels = array(
-				'name'              => 'Categorias',
+				'name'              => 'Categorias (debes agregar al menos una para aparecer en el mapa)',
 				'singular_name'     => 'Categoría',
 				'search_items'      => 'Buscar',
 				'all_items'         => 'Todos',
@@ -37,7 +37,7 @@
 		// PROYECTOS
 		if( ! taxonomy_exists('category-recursos')){
 			$labels = array(
-				'name'              => 'Categorias',
+				'name'              => 'Categorias (debes agregar al menos una para aparecer en el mapa)',
 				'singular_name'     => 'Categoría',
 				'search_items'      => 'Buscar',
 				'all_items'         => 'Todos',
@@ -63,7 +63,7 @@
 		// PROYECTOS
 		if( ! taxonomy_exists('category-eventos')){
 			$labels = array(
-				'name'              => 'Categorias',
+				'name'              => 'Categorias (debes agregar al menos una para aparecer en el mapa)',
 				'singular_name'     => 'Categoría',
 				'search_items'      => 'Buscar',
 				'all_items'         => 'Todos',

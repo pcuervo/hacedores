@@ -58,7 +58,7 @@ END;
 		wp_nonce_field(__FILE__, '_instructables_recurso_meta_nonce');
 
 
-echo <<<END
+echo <END
 
 	<label>Ingresa la dirección:</label>
 	<input type="text" class="widefat" id="geo-autocomplete" name="_direccion_recurso_meta" value="$direccion" placeholder="Ingresa la ubicación del recurso"><br/><br/>

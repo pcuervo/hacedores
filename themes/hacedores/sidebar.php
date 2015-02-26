@@ -32,7 +32,7 @@
 					<p><a href="<?php echo $web; ?>" target="_blank"><?php echo $web; ?></a></p>
 					<p class="[ text-center ] [ redes-eventos ]">
 						<?php if ( $facebook !== '') { ?>
-							<a href="<?php echo $facebook; ?>"><i class="fa fa-facebook fa-2x"></i></a>
+							<a href="<?php echo $facebook; ?>" target="_blank"><i class="fa fa-facebook fa-2x"></i></a>
 						<?php } ?>
 					</p>
 				</article>
