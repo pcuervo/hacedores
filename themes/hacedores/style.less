@@ -309,7 +309,7 @@ p{ margin-bottom: 1em; .font(1em, 1.4em); color: @secondary; }
 ::selection{ background: @informacion; color: @claro; }
 ::-moz-selection { background: @informacion; color: @claro; }
 html { min-height: 100% !important; }
-body{ height: 100%; background: #fff; .font; }
+body{ height: 100%; background: #fff; .font; overflow-x: hidden; }
 
 //Headers
 h1, h2{
@@ -1475,6 +1475,13 @@ html.mm-opening .mm-slideout {
 		{
 			right: 2%; /* 40 */
 			text-align: right;
+		}
+
+		.main-content{ overflow-x: hidden; }
+
+		dl{ margin-left: 0; width: 100px !important;
+			dt{ width: 100px !important; } 
+			img{ width: 100px !important;}
 		}
 
 
