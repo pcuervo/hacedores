@@ -2252,13 +2252,18 @@ html.mm-opening .mm-slideout {
 .main-content {
   overflow-x: hidden;
 }
+.gallery-item {
+  width: 50% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.gallery-item img {
+  width: 80%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 dl {
-  margin-left: 0;
-  width: 100px !important;
-}
-dl dt {
-  width: 100px !important;
-}
-dl img {
-  width: 100px !important;
+  width: 50% !important;
 }
