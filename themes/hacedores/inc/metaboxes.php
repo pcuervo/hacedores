@@ -41,6 +41,7 @@ END;
 	}
 
 	function metabox_informacion_recurso($post){
+		
 		$direccion 		= get_post_meta($post->ID, '_direccion_recurso_meta', true);
 		$lat 	 		= get_post_meta($post->ID, '_lat_recurso_meta', true);
 		$lon 			= get_post_meta($post->ID, '_lon_recurso_meta', true);

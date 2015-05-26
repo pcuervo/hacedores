@@ -162,16 +162,13 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 	add_action( 'admin_enqueue_scripts', function(){
 
 		// scripts
-
 		wp_enqueue_script( 'jquery-ui', JSPATH.'jquery-ui.js', array('jquery'), '1.0', true);
 		wp_enqueue_script( 'jquery-ui-timepicker', JSPATH.'jquery-ui-timepicker-addon.js', array('jquery-ui-datepicker'), '1.0');
 		wp_enqueue_script( 'admin-js', JSPATH.'admin.js', array('jquery'), '1.0', true );
 		wp_enqueue_script( 'gmaps', JSPATH.'gmaps.min.js', array('jquery'), '1.0' );
 		wp_enqueue_script( 'geo-autocomplete', JSPATH.'geocomplete.min.js', array('gmaps'), '1.0' );
-
 		// localize scripts
 		wp_localize_script( 'admin-js', 'ajax_url', admin_url('admin-ajax.php') );
-
 		// styles
 		wp_enqueue_style( 'admin-css', CSSPATH.'admin.css' );
 		wp_enqueue_style('jquery-ui-datepicker-css', CSSPATH.'jquery-ui.css' );
