@@ -57,8 +57,8 @@
 			<p><a target="_blank" href="<?php echo $instructables; ?>"><?php echo $instructables; ?></a></p>
 		<?php } ?>
 
-
 	</div>
+
 	<div class="[ columna xmall-12 medium-6 ] [ clearfix ]">
 		<?php the_post_thumbnail('full', array('class' => '[ margin-bottom-medium ]')); ?>
 
