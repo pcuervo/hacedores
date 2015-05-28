@@ -295,7 +295,7 @@ function oa_social_login_render_link_form ($source, $user)
 						}
 
 						//Custom CSS
-						$css_theme_uri = apply_filters ('oa_social_login_link_css', $css_theme_uri);
+						//$css_theme_uri = apply_filters ('oa_social_login_link_css', $css_theme_uri);
 
 						//OneAll user_token
 						$token = strval (oa_social_login_get_token_by_userid ($userid));

@@ -59,7 +59,7 @@
 
 	</div>
 
-	<div class="[ columna xmall-12 medium-6 ] [ clearfix ]">
+	<div class="[ columna xmall-12 medium-6 ] [ clearfix ]"> <!-- [ main-content ] -->
 		<?php the_post_thumbnail('full', array('class' => '[ margin-bottom-medium ]')); ?>
 
 		<div class="the-content">

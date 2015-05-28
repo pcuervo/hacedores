@@ -86,6 +86,32 @@
 			register_taxonomy( 'category-eventos', 'eventos', $args );
 		}
 
+		// PROYECTOS
+		if( ! taxonomy_exists('tax-hacedores')){
+			$labels = array(
+				'name'              => 'Hacedores',
+				'singular_name'     => 'Hacedor',
+				'search_items'      => 'Buscar',
+				'all_items'         => 'Todos',
+				'edit_item'         => 'Editar Hacedor',
+				'update_item'       => 'Actualizar Hacedor',
+				'add_new_item'      => 'Nuevo Hacedor',
+				'new_item_name'     => 'Nombre Nuevo Hacedor',
+				'menu_name'         => 'Hacedores'
+			);
+
+			$args = array(
+				'hierarchical'      => true,
+				'labels'            => $labels,
+				'show_ui'           => true,
+				'show_admin_column' => true,
+				'show_in_nav_menus' => true,
+				'query_var'         => true,
+				'rewrite'           => array( 'slug' => 'tax-hacedores' ),
+			);
+			register_taxonomy( 'tax-hacedores', 'proyecto', $args );
+		}
+
 
 		// TERMS PROYECTO
 		if ( ! term_exists( 'Urbanismo', 'category-proyectos' ) ){
@@ -182,4 +208,36 @@
 		if ( ! term_exists( 'Sustentabilidad y reciclaje', 'category-eventos' ) ){
 			wp_insert_term( 'Sustentabilidad y reciclaje', 'category-eventos' );
 		}
+
 	}
+
+	/*
+	 * Insert dynamic taxonomy terms after a new user has been added.
+	 */
+	function update_hacedor_taxonomy(){
+
+		insert_hacedor_taxonomy_term();
+		
+	}// update_hacedor_taxonomy
+	add_action('user_register', 'update_hacedor_taxonomy');
+
+	/*
+	 * Insert hacedor as taxonomy term.
+	 */
+	function insert_hacedor_taxonomy_term(){
+
+		$user_query = new WP_User_Query( array( 'role' => 'Editor' ) );
+		if ( empty( $user_query->results ) ) {
+			return 0;
+		}
+		
+		foreach ( $user_query->results as $user ) {
+			$hacedor = $user->display_name;
+			$term = term_exists( $hacedor, 'tax-hacedores' );
+			
+			if ($term !== 0 && $term !== null) continue;
+
+			wp_insert_term( $hacedor, 'tax-hacedores' );
+		} 
+
+	}// insert_hacedor_taxonomy_term
