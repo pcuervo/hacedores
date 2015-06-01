@@ -14,12 +14,20 @@
 				$userMeta 	= get_user_meta( $userID );
 				$userBio 	= $userMeta['description'][0];
 				$userAvatar = get_user_meta($userID, 'user_profile_img', true);
+
 				if ( $userAvatar == '' ){
 					$userAvatar = THEMEPATH.'images/default-hacedores.png';
 				} else {
 					$userAvatarID 		= get_attachment_id_from_url($userAvatar);
 					$userAvatarMedium 	= wp_get_attachment_image_src($userAvatarID, 'medium');
 					$userAvatar 		= $userAvatarMedium[0];
+
+					echo '<pre>';
+						// echo 'test';
+						// print_r($userAvatarID);
+						// print_r($userAvatarMedium);
+						// print_r($userAvatar);
+					echo '</pre>';
 				}
 				$userURL 	= get_author_posts_url($userID);
 				?>

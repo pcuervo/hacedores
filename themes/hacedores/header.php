@@ -161,7 +161,8 @@
 													$userMeta 		= get_user_meta( $userID );
 													$userBio 		= $userMeta['description'][0];
 													$userNiceName	= $user->user_nicename;
-													$userAvatar 	= get_avatar_url(get_avatar( $userID, 150 ));
+													//$userAvatar 	= get_avatar_url(get_avatar( $userID, 150 ));
+													$userAvatar 	= get_user_meta($userID, 'user_profile_img', true);
 													$userURL 		= get_author_posts_url($userID);
 
 													$user_categories =  get_user_meta( $user->ID, 'user_categories', false );
@@ -276,6 +277,6 @@
 							</div>
 							<div id="mapa"></div>
 							<?php } ?>
-							
+
 						</div>
 					</section><!-- mapa -->

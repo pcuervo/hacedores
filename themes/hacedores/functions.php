@@ -256,6 +256,7 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 	require_once('inc/post-types.php');
 	require_once('inc/metaboxes.php');
 	require_once('inc/taxonomies.php');
+	require_once('inc/galleries.php');
 	require_once('inc/categories.php');
 	require_once('inc/pages.php');
 	require_once('inc/users.php');
@@ -594,10 +595,10 @@ add_filter('oa_social_login_link_css', 'oa_social_login_set_custom_css');
 		return '//www.youtube.com/embed/'.$id;
 	}// get_video_src
 
-	function get_avatar_url($get_avatar){
-		preg_match("/src='(.*?)'/i", $get_avatar, $matches);
-		return $matches[1];
-	}
+	// function get_avatar_url($get_avatar){
+	// 	preg_match("/src='(.*?)'/i", $get_avatar, $matches);
+	// 	return $matches[1];
+	// }
 
 	// FRONT END SCRIPTS FOOTER //////////////////////////////////////////////////////
 	function footerScripts() {

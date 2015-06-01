@@ -1166,6 +1166,11 @@ a:hover {
   margin: 0;
   list-style: none;
 }
+.galeria img {
+  display: block;
+  width: 100% !important;
+  height: auto;
+}
 .pagination-controls div {
   display: inline-block;
 }

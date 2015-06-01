@@ -81,8 +81,9 @@
 			captionOn = function()
 			{
 				var description = $( 'a[href="' + $( '#imagelightbox' ).attr( 'src' ) + '"] img' ).attr( 'alt' );
-				if( description.length > 0 )
-					$( '<div id="imagelightbox-caption">' + description + '</div>' ).appendTo( 'body' );
+				if ( description )
+					if( description.length > 0 )
+						$( '<div id="imagelightbox-caption">' + description + '</div>' ).appendTo( 'body' );
 			},
 			captionOff = function()
 			{
@@ -293,18 +294,18 @@ function creaMarkers(mapa, infoMapa){
 	var markers = [];
 	// Agrega todos los marcadores al mapa
 	$.each(infoMapa, function(categoria, subcategorias){
-		categorias_mapa[categoria] = {};	
+		categorias_mapa[categoria] = {};
 
 		$.each(subcategorias, function(i, subcategoria){
 
 			if(typeof subcategoria != 'object') return true;
 
-			categorias_mapa[categoria][subcategoria] = []; 
+			categorias_mapa[categoria][subcategoria] = [];
 			$.each(subcategoria, function(i, val){
-				
+
 				current = i+1;
 				if(current%7==0) {
-					
+
 					var lat = (subcategoria[current-6] == '') ? '19.423325' : subcategoria[current-6];
 					var lon = (subcategoria[current-5] == '') ? '-99.134220' : subcategoria[current-5];
 					categorias_mapa[categoria][subcategoria].push({
@@ -316,7 +317,7 @@ function creaMarkers(mapa, infoMapa){
 					});
 				}
 			});
-		});		
+		});
 
 		var current_markers = dameMarkers(categoria,categorias_mapa[categoria], mapa);
 		markers = markers.concat(current_markers);
@@ -329,14 +330,14 @@ function agregaFiltrosMarkers(mapa, markers, infoMapa){
 	$.each(infoMapa, function(categoria, subcategorias){
 		$('li.'+categoria).on('click', function(){
 			filtraMarkerCategoria(categoria, markers, mapa);
-		});	
-		
+		});
+
 		$.each(subcategorias, function(i, subcategoria){
 			if(typeof subcategoria != 'object') return true;
-			
+
 			$('ul.sub-'+categoria+' li.'+subcategoria[6]).on('click', function(){
 				filtraMarkerSubCategoria(categoria, subcategoria[6], markers, mapa);
-			});	
+			});
 		});
 
 	});
@@ -348,7 +349,7 @@ function agregaFiltrosTodos(mapa, markers){
 			marker.setVisible(true);
 		});
 		autoCenter(mapa, markers);
-	});	
+	});
 }// agregaFiltrosMarkers
 
 function dameMarkers(categoria, subcategorias, mapa){
@@ -382,7 +383,7 @@ function dameMarkers(categoria, subcategorias, mapa){
 			subcategory: ubicaciones[i][4]
 		});
 		markers.push(marker);
-		
+
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			// Agrega infoWindow para mostrar la información del post
 			var infowindow = new google.maps.InfoWindow({
@@ -484,7 +485,7 @@ function displayMapMenu(section){
 	$('li.'+section+' + ul').css('display', 'block');
 	switch(section){
 		// case 'hacedores':
-			
+
 		// 	break;
 	}// switch
 

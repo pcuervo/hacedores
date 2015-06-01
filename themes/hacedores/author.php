@@ -1,13 +1,9 @@
 <?php
 	get_header();
 	$user = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : get_userdata(intval($author));
-
 	$userID 			= $user->ID;
-
 	$userName 			= $user->display_name;
-
 	$userEmail 			= $user->user_email;
-
 	$userURL 			= $user->user_url;
 	if ( $userURL ){
 		$userURL 		= addhttp($userURL);
