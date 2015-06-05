@@ -317,14 +317,14 @@ h1, h2{
 }
 h2{
 	width: 100%;
-	margin-bottom: @unidad;
+	margin-bottom: 0;
 	text-transform: uppercase;
 }
 
 h1{ text-transform: uppercase; color: #939597; .font(1.7em, 38px, 'trade 20'); }
 h1 a{ color: inherit; text-decoration: none; }
 
-h2{ .font(1.6em, 30px, 'trade 20'); color: @primary; }
+h2{ .font(1.6em, 1.6em, 'trade 20'); color: @primary; }
 h3{ .font(1.4em, 1, 'trade 18'); color: @secondary; }
 
 .subtitle{
@@ -400,7 +400,6 @@ h2,h3, p, a, li, span{
 	&.primary{ color: @primary; }
 	&.secondary{ color: @secondary; }
 }
-h2{ margin-bottom: 0.5em; }
 
 hr{ border: solid 1px;
 	&.informacion{ border-color: @informacion; }
@@ -581,8 +580,8 @@ a{
 	h2{ margin: 0; }
 }
 .eventos-contenido{
-	height: 332px;
-	padding: 20px;
+	height: 318px;
+	padding: 20px 20px 0 20px;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }

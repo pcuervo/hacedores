@@ -545,7 +545,7 @@ h2 {
 }
 h2 {
   width: 100%;
-  margin-bottom: 1em;
+  margin-bottom: 0;
   text-transform: uppercase;
 }
 h1 {
@@ -558,7 +558,7 @@ h1 a {
   text-decoration: none;
 }
 h2 {
-  font: 1.6em / 30px 'trade 20';
+  font: 1.6em / 1.6em 'trade 20';
   color: #666666;
 }
 h3 {
@@ -670,9 +670,6 @@ a.secondary,
 li.secondary,
 span.secondary {
   color: #777777;
-}
-h2 {
-  margin-bottom: 0.5em;
 }
 hr {
   border: solid 1px;
@@ -1014,8 +1011,8 @@ a:hover {
   margin: 0;
 }
 .eventos-contenido {
-  height: 332px;
-  padding: 20px;
+  height: 318px;
+  padding: 20px 20px 0 20px;
   overflow-y: scroll;
   overflow-x: hidden;
 }

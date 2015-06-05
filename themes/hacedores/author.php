@@ -14,23 +14,18 @@
 		$userAvatar = THEMEPATH.'images/default-hacedores.png';
 	} else {
 		$userAvatarID 		= get_attachment_id_from_url($userAvatar);
-		$userAvatarMedium 	= wp_get_attachment_image_src($userAvatarID, 'medium');
+		$userAvatarMedium 	= wp_get_attachment_image_src($userAvatarID, 'full');
 		$userAvatar 		= $userAvatarMedium[0];
 	}
 
 	$userFB 			= get_user_meta($userID, 'facebook', true);
-
 	$userTW 			= get_user_meta($userID, 'twitter', true);
-
 	$userInfo 			= get_user_meta($userID, 'description', true);
-
 	$userCategories 	= get_user_meta($userID, 'user_categories', true);
-
 	$userInstructables 	= get_user_meta($userID, 'liga_instructable', true);
 	if ( $userInstructables ){
 		$userInstructables 		= addhttp($userInstructables);
 	}
-
 	$userVideo = get_user_meta($userID, 'liga_video', true);
 	$videoHost = NULL;
 	$video_src = '';
@@ -45,20 +40,16 @@
 	}
 
 	$userImg1 			= get_user_meta($userID, 'user_uno_img', true);
-	$userImg1ID 		= get_attachment_id_from_src($userImg1);
-	$userImg1URL 		= wp_get_attachment_image_src( $userImg1ID, 'thumbnail' );
+	$userImg1URL 		= wp_get_attachment_image_src( get_attachment_id_from_src ($userImg1), 'thumbnail' );
 
 	$userImg2 			= get_user_meta($userID, 'user_dos_img', true);
-	$userImg2ID 		= get_attachment_id_from_src($userImg2);
-	$userImg2URL 		= wp_get_attachment_image_src( $userImg2ID, 'thumbnail' );
+	$userImg2URL 		= wp_get_attachment_image_src( get_attachment_id_from_src ($userImg2), 'thumbnail' );
 
 	$userImg3 			= get_user_meta($userID, 'user_tres_img', true);
-	$userImg3ID 		= get_attachment_id_from_src($userImg3);
-	$userImg3URL 		= wp_get_attachment_image_src( $userImg3ID, 'thumbnail' );
+	$userImg3URL 		= wp_get_attachment_image_src( get_attachment_id_from_src ($userImg3), 'thumbnail' );
 
 	$userImg4 			= get_user_meta($userID, 'user_cuatro_img', true);
-	$userImg4ID 		= get_attachment_id_from_src($userImg4);
-	$userImg4URL 		= wp_get_attachment_image_src( $userImg4ID, 'thumbnail' );
+	$userImg4URL 		= wp_get_attachment_image_src( get_attachment_id_from_src ($userImg4), 'thumbnail' );
 
 ?>
 	<div class="[ columna xmall-12 medium-3 large-3 ] [ side-proyecto ]">

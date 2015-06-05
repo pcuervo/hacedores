@@ -309,13 +309,17 @@ wp_admin_css_color( 'classic', _x( 'Default', 'admin color scheme' ),
 
 // ADD HTTP TO A URL STRING IF NEEDED ///////////////////////////////////
 
-	function get_attachment_id_from_src ($image_src) {
-
+	function get_attachment_id_from_src ($src) {
 		global $wpdb;
-		$query = "SELECT ID FROM {$wpdb->posts} WHERE guid='$image_src'";
+		$reg = "/-[0-9]+x[0-9]+?.(jpg|jpeg|png|gif)$/i";
+		$src1 = preg_replace($reg,'',$src);
+		if($src1 != $src){
+			$ext = pathinfo($src, PATHINFO_EXTENSION);
+			$src = $src1 . '.' .$ext;
+		}
+		$query = "SELECT ID FROM {$wpdb->posts} WHERE guid='$src'";
 		$id = $wpdb->get_var($query);
 		return $id;
-
 	}
 
 

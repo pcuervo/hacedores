@@ -36,7 +36,7 @@
 							<a class="[ boton ][ inline-block ][ login-entrar ][ js-abrir-modal ]">
 								Entrar
 							</a>
-							<a href="registro" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
+							<a href="<?php echo site_url('registro'); ?>" class="[ boton ][ inline-block ][ no-xmall medium ][ menu ]">
 								Registrarse
 							</a>
 						<?php } else { ?>
@@ -55,6 +55,11 @@
 								<li class="[ clearfix ]">
 									<a class="[ no-xmall medium ] [ inline-block middle ] [ menu entrar ] [ js-abrir-modal ]">
 										<h3><span class="">Entrar</span></h3>
+									</a>
+								</li>
+								<li class="[ clearfix ]">
+									<a href="<?php echo site_url('registro'); ?>"  class="[ no-xmall medium ] [ inline-block middle ] [ menu entrar ]">
+										<h3><span class="">Registrarse</span></h3>
 									</a>
 								</li>
 							<?php } ?>
