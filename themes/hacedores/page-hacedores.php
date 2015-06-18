@@ -13,7 +13,7 @@
 		$total_users = $user_count ? count($user_count) : 1;
 
 		// grab the current page number and set to 1 if no page number is set
-		$page = isset($_GET['p']) ? $_GET['p'] : 1;
+		$page = isset($_GET['pa']) ? $_GET['pa'] : 1;
 		//echo $_GET['p'];
 
 		// how many users to show per page
@@ -28,8 +28,8 @@
 			'orderby' 	=> 'registered',
 			'order'		=> 'DESC',
 			'fields'    => 'all_with_meta',
-		    'number'    => $users_per_page,
-		    'offset'    => $offset // skip the number of users that we have per page
+			'number'    => $users_per_page,
+			'offset'    => $offset // skip the number of users that we have per page
 		);
 		$wp_user_query = new WP_User_Query($args);
 
@@ -77,11 +77,15 @@
 		<div class="[ pagination-controls ] [ right ]">
 			<?php
 				$query_string = $_SERVER['QUERY_STRING'];
-				$base = get_permalink( get_the_ID() ) . '?' . add_query_arg('p', $query_string) . '%_%';
+				$base = get_permalink( get_the_ID() ) . '?' . remove_query_arg('pa', $query_string) . '%_%';
+
+
+				//add_query_arg( 'variable', 'whatever', 'http://www.example.com/somepage' )
+
 
 				echo paginate_links( array(
 				    'base' => $base, // the base URL, including query arg
-				    'format' => '=%#%', // this defines the query parameter that will be used, in this case "p"
+				    'format' => 'pa=%#%', // this defines the query parameter that will be used, in this case "p"
 				    'prev_text' => __('&laquo; Previous'), // text for previous page
 				    'next_text' => __('Next &raquo;'), // text for next page
 				    'total' => $total_pages, // the total number of pages we have
